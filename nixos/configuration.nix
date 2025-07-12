@@ -12,6 +12,9 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  ## Setting Things not to load
+  hardware.pulseaudio.enable = false;   # Disable Pulse audio Explicitly
+
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -62,8 +65,8 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  sound.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -80,10 +83,15 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+
+  ########## Define User accounts
+  users.groups.users = {}; 
+  
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
     description = "tarobutter";
+    group = "users";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     #  thunderbird

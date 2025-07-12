@@ -8,6 +8,7 @@
       url = "github:nix-community/home-manager/release-25.05"; # IMPORTANT: Match your NixOS version
       inputs.nixpkgs.follows = "nixpkgs"; 
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {

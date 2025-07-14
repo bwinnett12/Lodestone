@@ -1,25 +1,28 @@
-inputs = {
-  nixpkgs.url = "github:NixOS/nixpkgs/master";
-  home-manager = {
-    url = "github:nix-community/home-manager/master";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-  nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-};
+{
+  description = "A minimal NixOS flake";
 
-outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }: {
-  nixosConfigurations = {
-    Loom = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+  inputs = {
+    # Nixpkgs provides all the packages and modules for NixOS.
+    # We'll use the 'nixos-unstable' branch for the latest features,
+    # but you could change this to a specific stable release like "nixos-24.05".
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  };
+
+  outputs = { self, nixpkgs, ... }: {
+    # Define a NixOS configuration for a host named 'my-nixos-machine'.
+    # You should change 'my-nixos-machine' to your desired hostname.
+    nixosConfigurations.Loom = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux"; # Set your system architecture (e.g., "aarch64-linux" for ARM)
+
+      # 'modules' is a list of Nix expressions that define your system.
+      # Right now, it's empty, so this system will be extremely barebones.
       modules = [
-        ./nixos/configuration.nix # Point to the correct path
-        home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.tarobutter = import ./home.nix;
-        }
-        nixos-hardware.nixosModules.microsoft-surface-book2
+        ./nixos/configuration.nix
+        ./nixos/hardware-configuration.nix
       ];
+
+      # You can pass additional arguments to your modules here if needed.
+      specialArgs = { };
     };
   };
-};
+}

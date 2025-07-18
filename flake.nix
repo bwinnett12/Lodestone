@@ -17,8 +17,8 @@
       # 'modules' is a list of Nix expressions that define your system.
       # Right now, it's empty, so this system will be extremely barebones.
       modules = [
-        ./nixos/configuration.nix
-        ./nixos/hardware-configuration.nix
+        ./my-new-config/configuration.nix
+        ./my-new-config/hardware-configuration.nix
       ];
 
       # You can pass additional arguments to your modules here if needed.

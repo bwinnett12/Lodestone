@@ -2,7 +2,6 @@
 
 {
   imports = [
-    # ESSENTIAL: Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -66,7 +65,16 @@
     vim
     wget
     git
+    vlc
   ];
+
+  # Enable NTFS support for all drives
+  boot.supportedFilesystems = [ "ntfs" ];
+
+  # These services are crucial for automounting in desktop environments
+  services.udisks2.enable = true; # Handles disk management and mounting
+  services.gvfs.enable = true;   # GNOME Virtual File System, enables file manager integration
+
 
   # For your Surface hardware (ensure nixos-hardware input is in flake.nix)
   # This line is handled in flake.nix's modules section, so it's not needed here.

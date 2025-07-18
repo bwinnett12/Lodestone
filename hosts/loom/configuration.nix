@@ -2,12 +2,12 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
-      #./hardware-configuration.nix
+      inputs.nixos-cosmic.nixosModules.default
     ];
 
   # Enable NTFS support
@@ -43,10 +43,14 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-
+  #### Desktop Environments
   # Enable the GNOME Desktop Environment.
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true; 
   services.displayManager.gdm.enable = true;
+
+  # Enable the Cosmic Desktop Environment
+  services.desktopManager.cosmic.enable = true;
+  services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
@@ -61,6 +65,8 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
+    alsa.enable = true;
+    jack.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).

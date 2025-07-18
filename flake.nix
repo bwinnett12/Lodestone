@@ -6,9 +6,14 @@
     # We'll use the 'nixos-unstable' branch for the latest features,
     # but you could change this to a specific stable release like "nixos-24.05".
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+     # Add the nixos-cosmic flake here
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs"; # Crucial for consistency
+    };
   };
 
-  outputs = { self, nixpkgs, ... }: {
+  outputs = { self, nixpkgs, nixos-cosmic, ... }: {
     # Define a NixOS configuration for a host named 'my-nixos-machine'.
     # You should change 'my-nixos-machine' to your desired hostname.
     nixosConfigurations.Loom = nixpkgs.lib.nixosSystem {

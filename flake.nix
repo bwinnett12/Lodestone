@@ -9,7 +9,7 @@
      # Add the nixos-cosmic flake here
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs"; # Crucial for consistency
+      inputs.nixpkgs.url = "github:NixOS/nixpkgs/9807714d6944a957c2e036f84b0ff8caf9930bc0";
     };
   };
 
@@ -27,7 +27,10 @@
       ];
 
       # You can pass additional arguments to your modules here if needed.
-      specialArgs = { };
+      specialArgs = {
+        inherit self; # Good practice to inherit self if you use it in modules
+        nixosCosmicModule = nixos-cosmic.nixosModules.default; # <--- ADD THIS LINE
+      };
     };
   };
 }

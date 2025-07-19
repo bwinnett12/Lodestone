@@ -2,12 +2,12 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, nixosCosmicModule, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      inputs.nixos-cosmic.nixosModules.default
+    [ 
+      nixosCosmicModule
     ];
 
   # Enable NTFS support
@@ -50,7 +50,7 @@
 
   # Enable the Cosmic Desktop Environment
   services.desktopManager.cosmic.enable = true;
-  services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
+  # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";

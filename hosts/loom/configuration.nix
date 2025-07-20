@@ -10,13 +10,23 @@
     
     ];
 
-  # Correct way to set Surface-specific options
-  hardware.surface = { # This is the main attribute set for Surface hardware
-    enable = true; # Enables the core Surface hardware support (kernel patches etc.)
-    ipts.enable = true; # Enables touch and pen support
-  };
 
-  services.surface-control.enable = true; # This remains a separate service
+
+  ## Cosmic Desktop Environment
+  services.desktopManager.cosmic.enable = true;
+  ## Crucial for lilyinstarlight/nixos-cosmic for faster builds:
+  nix.settings = {
+    substituters = [ "https://cosmic.cachix.org/" ];
+    trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+   };
+
+  # Correct way to set Surface-specific options
+  #hardware.surface = { # This is the main attribute set for Surface hardware
+  #  enable = true; # Enables the core Surface hardware support (kernel patches etc.)
+  #  ipts.enable = true; # Enables touch and pen support
+  #};
+
+  # services.surface-control.enable = true; # This remains a separate service
     # Keep your increased swap and zramSwap settings
   swapDevices = [
     { device = "/swapfile"; size = 8192; } # Or 16384 for 16GB
@@ -64,7 +74,7 @@
 
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.desktopManager.gnome.enable = false;
   services.displayManager.gdm.enable = true;
 
   # Configure keymap in X11

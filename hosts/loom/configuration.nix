@@ -2,13 +2,41 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
-      #./hardware-configuration.nix
+    
     ];
+
+  # Surface-specific settings
+    microsoft-surface = {
+    # Enable IPTS if your Surface Book 2 uses it (most likely)
+    # This enables touch and pen support
+    # Check the nixos-hardware Surface README for specific models if unsure
+    # Generally, for SB2, this is needed.
+    ipts.enable = true;
+
+    # Enable surface-control for fan, power, etc. management
+    surface-control.enable = true;
+
+    # You might want to specify the kernel version (optional, default is often good)
+    # kernel = {
+    #   version = "longterm"; # or "stable"
+    # };
+
+  };
+
+    # Keep your increased swap and zramSwap settings
+  swapDevices = [
+    { device = "/swapfile"; size = 8192; } # Or 16384 for 16GB
+  ];
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+    priority = 100;
+  };
 
   # Enable NTFS support
   boot.kernelModules = [ "ntfs3" ];

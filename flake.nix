@@ -6,9 +6,11 @@
     # We'll use the 'nixos-unstable' branch for the latest features,
     # but you could change this to a specific stable release like "nixos-24.05".
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, ... }: {
+  outputs = { self, nixpkgs, nixos-hardware, ... }: {
     # Define a NixOS configuration for a host named 'my-nixos-machine'.
     # You should change 'my-nixos-machine' to your desired hostname.
     nixosConfigurations.Loom = nixpkgs.lib.nixosSystem {
@@ -19,10 +21,23 @@
       modules = [
         ./hosts/loom/configuration.nix
         ./hosts/loom/hardware-configuration.nix
+        nixos-hardware.nixosModules.microsoft-surface.common
       ];
 
       # You can pass additional arguments to your modules here if needed.
       specialArgs = { };
+    };
+
+    devShells.x86_64-linux.video-tools = nixpkgs.mkShell {
+      packages = with nixpkgs; [
+        handbrake
+        makemkv
+        mkvtoolnix
+      ];
+      shellHook = ''
+        echo "Entering video transcoding shell from flake."
+        echo "HandBrake, MakeMKV, and MKVToolNix are available."
+      '';
     };
   };
 }

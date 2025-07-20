@@ -21,7 +21,8 @@
       modules = [
         ./hosts/loom/configuration.nix
         ./hosts/loom/hardware-configuration.nix
-        "${nixos-hardware}/microsoft/surface/common"
+        nixos-hardware.nixosModules.microsoft-surface-common
+
       ];
 
       # You can pass additional arguments to your modules here if needed.

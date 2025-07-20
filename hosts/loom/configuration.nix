@@ -17,7 +17,6 @@
   };
 
   services.surface-control.enable = true; # This remains a separate service
-
     # Keep your increased swap and zramSwap settings
   swapDevices = [
     { device = "/swapfile"; size = 8192; } # Or 16384 for 16GB

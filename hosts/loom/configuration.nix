@@ -10,23 +10,9 @@
     
     ];
 
-  # Surface-specific settings
-    microsoft-surface = {
-    # Enable IPTS if your Surface Book 2 uses it (most likely)
-    # This enables touch and pen support
-    # Check the nixos-hardware Surface README for specific models if unsure
-    # Generally, for SB2, this is needed.
-    ipts.enable = true;
-
-    # Enable surface-control for fan, power, etc. management
-    surface-control.enable = true;
-
-    # You might want to specify the kernel version (optional, default is often good)
-    # kernel = {
-    #   version = "longterm"; # or "stable"
-    # };
-
-  };
+  hardware.surface.enable = true; # Enable the core Surface hardware support
+  hardware.surface.ipts.enable = true; # For touch and pen
+  services.surface-control.enable = true; # For fan and power management
 
     # Keep your increased swap and zramSwap settings
   swapDevices = [

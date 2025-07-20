@@ -37,7 +37,7 @@
     priority = 100;
   };
 
-  nix.maxJobs = 1; # Only allow one build job at a time
+  # nix.maxJobs = 1; # Only allow one build job at a time
 
   # Enable NTFS support
   boot.kernelModules = [ "ntfs3" ];

@@ -10,9 +10,13 @@
     
     ];
 
-  hardware.surface.enable = true; # Enable the core Surface hardware support
-  hardware.surface.ipts.enable = true; # For touch and pen
-  services.surface-control.enable = true; # For fan and power management
+  # Correct way to set Surface-specific options
+  hardware.surface = { # This is the main attribute set for Surface hardware
+    enable = true; # Enables the core Surface hardware support (kernel patches etc.)
+    ipts.enable = true; # Enables touch and pen support
+  };
+
+  services.surface-control.enable = true; # This remains a separate service
 
     # Keep your increased swap and zramSwap settings
   swapDevices = [

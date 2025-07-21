@@ -13,7 +13,22 @@
     cosmic.url = "github:lilyinstarlight/nixos-cosmic";    
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, cosmic, ... }: {
+  outputs = { self, nixpkgs, nixos-hardware, cosmic, ... }@inputs: 
+   
+
+   let 
+         # Define the system architecture
+      # We take the system from the nixpkgs input for consistency
+      system = "x86_64-linux"
+
+      # Define pkgs for the current system using the system variable
+      pkgs = nixpkgs.legacyPackages.${system};
+
+      # Explicitly get mkShell from the pkgs set
+      mkShell = pkgs.mkShell;
+
+   in
+   {
     # Define a NixOS configuration for a host named 'my-nixos-machine'.
     # You should change 'my-nixos-machine' to your desired hostname.
     nixosConfigurations.Loom = nixpkgs.lib.nixosSystem {
@@ -39,9 +54,10 @@
       # You can pass additional arguments to your modules here if needed.
       specialArgs = { inherit self cosmic; };
     };
-
-    devShells.x86_64-linux.video-tools = nixpkgs.mkShell {
-      packages = with nixpkgs; [
+       # Define your devShells here
+    # Use the 'system' variable here as well for the attribute name
+    devShells.${system}.video-tools = mkShell { # Correctly use the 'mkShell' defined in the let block
+      packages = with pkgs; [ # Correctly use 'pkgs' defined in the let block
         handbrake
         makemkv
         mkvtoolnix

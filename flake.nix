@@ -17,12 +17,17 @@
    
 
    let 
-         # Define the system architecture
+      # Define the system architecture
       # We take the system from the nixpkgs input for consistency
-      system = "x86_64-linux"
+      system = "x86_64-linux";
 
       # Define pkgs for the current system using the system variable
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+         inherit system;
+         config = {
+           allowUnfree = true;
+         };
+      };  
 
       # Explicitly get mkShell from the pkgs set
       mkShell = pkgs.mkShell;

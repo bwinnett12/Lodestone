@@ -81,6 +81,46 @@
   services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
+  # NVIDIA
+  # --- NVIDIA Driver Configuration ---
+  # Enable the proprietary NVIDIA drivers
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  # Configure the NVIDIA driver details
+  hardware.nvidia = {
+    # This ensures that the NVIDIA kernel module is built against your
+    # currently active kernel (which is linux-surface).
+    # NixOS will automatically try to compile the proprietary driver
+    # for your current kernel unless you specify a different one.
+    # boot.kernelPackages = config.boot.kernelPackages.nvidiaPackages.stable; # DO NOT UNCOMMENT THIS for Surface, as it might override the Surface kernel
+
+    # Enable modesetting for better Wayland support and overall display.
+    # Essential for modern NVIDIA setups.
+    modesetting.enable = true;
+
+    # Enable NVIDIA power management settings for better power efficiency.
+    # This might require some tuning or might not work perfectly on all laptops.
+    powerManagement.enable = true;
+
+    # Set to false to use the proprietary (closed-source) driver.
+    # Set to true to attempt to use the open-source NVIDIA kernel modules (new, might not work on GTX 1050 yet).
+    # For stability and performance with GTX 1050, keep false.
+    open = false;
+
+    # Enable the NVIDIA settings utility for fine-tuning your GPU.
+    nvidiaSettings = true;
+  };
+
+  # Allow unfree packages for NVIDIA drivers (if not already done in flake.nix)
+  # If you already have `pkgs = import nixpkgs { config = { allowUnfree = true; }; };` in your flake.nix,
+  # you might not strictly need this here, but it acts as a safeguard.
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+      "cuda" # If you plan to use CUDA
+      # Add other unfree NVIDIA related packages if encountered
+    ];
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

@@ -130,8 +130,8 @@
     openFirewall = true;
 
     # Specify the user and group Jellyfin will run as.
-    user = "jellyfin";
-    group = "jellyfin";
+    user = "tarobutter";
+    group = "users";
 
     # dataDir = "/var/lib/jellyfin"; # Default is fine, uncomment if you want to change it
   };
@@ -139,7 +139,6 @@
   # Make sure the 'jellyfin' user is part of the 'video' group
   # This grants it necessary permissions to access GPU devices.
   users.groups.video.members = [ "jellyfin" ];
-
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -157,7 +156,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "jellyfin" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];

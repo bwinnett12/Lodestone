@@ -122,6 +122,62 @@
       # Add other unfree NVIDIA related packages if encountered
     ];
 
+  #### Jellyfin server
+    # Enable the Jellyfin service
+  services.jellyfin = {
+    enable = true;
+    # By default, Jellyfin runs on port 8096. This opens it in your firewall.
+    openFirewall = true;
+
+    # Specify the user and group Jellyfin will run as.
+    # The default 'jellyfin' user/group is usually fine and recommended.
+    # If you need it to access media on specific user-owned directories,
+    # you might need to add the 'jellyfin' user to your user's group,
+    # or change permissions of your media directories, or mount your media
+    # in a way that the 'jellyfin' user can read them.
+    user = "jellyfin";
+    group = "jellyfin";
+
+    # The data directory where Jellyfin stores its configuration, library metadata, etc.
+    # Default is "/var/lib/jellyfin", which is good.
+    # dataDir = "/var/lib/jellyfin";
+
+    # Hardware acceleration setup for NVIDIA (NVENC/NVDEC)
+    # This is crucial for efficient transcoding.
+    # The `jellyfin-ffmpeg` package is specifically compiled with support for these.
+    # This automatically adds the necessary /dev/nvidia* devices to the service's cgroup.
+    # You also need to ensure the 'jellyfin' user is part of the 'video' group.
+    hardwareAcceleration = {
+      enable = true;
+      # For NVIDIA, the method is "cuda" (for NVENC/NVDEC)
+      # Other options include "vaapi" (for Intel/AMD integrated GPUs)
+      # and "rkmpp" (for some ARM devices like Rockchip).
+      # "cuda" will enable NVENC/NVDEC for your GTX 1050.
+      method = "cuda"; # For NVIDIA GPUs
+    };
+
+    # You might also need to ensure the Jellyfin user has access to the GPU devices.
+    # This is often handled automatically by `hardwareAcceleration.method = "cuda";`
+    # and ensuring the 'jellyfin' user is in the 'video' group.
+    # If you encounter issues, you might need to add custom systemd overrides
+    # to allow access to /dev/nvidia* devices, but try without first.
+    # systemd.services.jellyfin.serviceConfig = {
+    #   DeviceAllow = lib.mkForce [
+    #     "char-drm rw" # General DRM devices
+    #     "char-nvidia-frontend rw" # NVIDIA specific devices
+    #     "char-nvidia-uvm rw"
+    #     "char-nvidia-uvm-tools rw"
+    #     "char-nvidia-modeset rw"
+    #   ];
+    #   PrivateDevices = lib.mkForce false; # Important: Don't restrict device access if you need GPU access
+    # };
+  };
+
+  # Make sure the 'jellyfin' user is part of the 'video' group
+  # This grants it necessary permissions to access GPU devices.
+  users.groups.video.members = [ "jellyfin" ];
+
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -152,6 +208,8 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     git
+    jellyfin
+    jellyfin-ffmpeg
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

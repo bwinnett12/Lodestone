@@ -89,8 +89,6 @@
   services.logind = {
     lidSwitchExternalPower = "ignore";
     lidSwitchBattery = "ignore";
-    idleAction = "ignore";
-    idleActionSec = "0";
   };
 
   # Configure keymap in X11

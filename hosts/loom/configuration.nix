@@ -77,6 +77,22 @@
   services.xserver.desktopManager.gnome.enable = false;
   services.displayManager.gdm.enable = true;
 
+  ## Systemd configuration for disabling auto sleep
+  systemd.targets = {
+    sleep.enable = false;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
+  };
+
+  ## Systemd login configuration
+  services.logind. = {
+    lidSwitchExternalPower = "ignore";
+    lidSwitchBattery = "ignore";
+    idleAction = "ignore";
+    idleActionSec = "0";
+  };
+
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";

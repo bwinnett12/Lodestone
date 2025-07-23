@@ -86,7 +86,7 @@
   };
 
   ## Systemd login configuration
-  services.logind. = {
+  services.logind = {
     lidSwitchExternalPower = "ignore";
     lidSwitchBattery = "ignore";
     idleAction = "ignore";

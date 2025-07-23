@@ -86,10 +86,10 @@
   };
 
   ## Systemd login configuration
-  services.logind = {
-    lidSwitchExternalPower = "ignore";
-    lidSwitchBattery = "ignore";
-  };
+  #services.logind = {
+  #  lidSwitchExternalPower = "ignore";
+  #  lidSwitchBattery = "ignore";
+  #};
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";

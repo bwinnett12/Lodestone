@@ -1,0 +1,24 @@
+[0;1;32m●[0m suwayomi-server.service - A free and open source manga reader server that runs extensions built for Tachiyomi.
+     Loaded: loaded (]8;;file://Loom/etc/systemd/system/suwayomi-server.service\/etc/systemd/system/suwayomi-server.service]8;;\; [0;1;32menabled[0m; preset: ignored)
+     Active: [0;1;32mactive (running)[0m since Thu 2025-07-24 17:45:17 AKDT; 12min ago
+ Invocation: 5ba615939fba4f2887052f124b01750e
+   Main PID: 32867 (suwayomi-server)
+         IP: 7.3K in, 1.9K out
+         IO: 4K read, 15.1M written
+      Tasks: 54[0;38;5;245m (limit: 18977)[0m
+     Memory: 456.7M (peak: 460.2M)
+        CPU: 1min 1.950s
+     CGroup: /system.slice/suwayomi-server.service
+             ├─[0;38;5;245m32867 /nix/store/00zrahbb32nzawrmv9sjxn36h7qk9vrs-bash-5.2p37/bin/bash /nix/store/8w6j7891caz5d1m0cmxbkhnqwi9fnk7n-unit-script-suwayomi-server-start/bin/suwayomi-server-start[0m
+             └─[0;38;5;245m32879 /nix/store/791phpdz2j4n3bp0f1595zcjzvwahrki-openjdk-headless-17.0.15+6/bin/java -Dsuwayomi.tachidesk.config.server.initialOpenInBrowserEnabled=false -jar /nix/store/1i1yn65yxbzwy0n3lns05ps03bydqfxy-Suwayomi-Server-v1.1.1-r1535.jar -Dsuwayomi.tachidesk.config.server.rootDir=/var/lib/suwayomi[0m
+
+Jul 24 17:55:58 Loom suwayomi-server-start[32879]: Jul 24, 2025 5:55:58 PM java.util.prefs.FileSystemPreferences syncWorld
+Jul 24 17:55:58 Loom suwayomi-server-start[32879]: WARNING: Couldn't flush user prefs: java.util.prefs.BackingStoreException: Couldn't get file lock.
+Jul 24 17:56:28 Loom suwayomi-server-start[32879]: Jul 24, 2025 5:56:28 PM java.util.prefs.FileSystemPreferences checkLockFile0ErrorCode
+Jul 24 17:56:28 Loom suwayomi-server-start[32879]: WARNING: Could not lock User prefs.  Unix error code 2.
+Jul 24 17:56:28 Loom suwayomi-server-start[32879]: Jul 24, 2025 5:56:28 PM java.util.prefs.FileSystemPreferences syncWorld
+Jul 24 17:56:28 Loom suwayomi-server-start[32879]: WARNING: Couldn't flush user prefs: java.util.prefs.BackingStoreException: Couldn't get file lock.
+Jul 24 17:56:58 Loom suwayomi-server-start[32879]: Jul 24, 2025 5:56:58 PM java.util.prefs.FileSystemPreferences checkLockFile0ErrorCode
+Jul 24 17:56:58 Loom suwayomi-server-start[32879]: WARNING: Could not lock User prefs.  Unix error code 2.
+Jul 24 17:56:58 Loom suwayomi-server-start[32879]: Jul 24, 2025 5:56:58 PM java.util.prefs.FileSystemPreferences syncWorld
+Jul 24 17:56:58 Loom suwayomi-server-start[32879]: WARNING: Couldn't flush user prefs: java.util.prefs.BackingStoreException: Couldn't get file lock.

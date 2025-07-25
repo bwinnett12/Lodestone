@@ -168,8 +168,8 @@
       server.port = 4567;
       server.enableSystemTray = true;
       server.autoDownloadNewChapters = true;
-      server.downloadsPath = "~/Media/Manga/";
-      server.backupPath = "~/Media/Manga_backup/";
+      server.downloadsPath = "/run/media/tarobutter/'Library of Doom'/Media/Manga/";
+      server.backupPath = "/run/media/tarobutter/'Library of Doom'/Media/Manga_backup/";
       server.debugLogsEnable = true;
     };
   };

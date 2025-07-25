@@ -154,6 +154,25 @@
   # This grants it necessary permissions to access GPU devices.
   users.groups.video.members = [ "jellyfin" ];
 
+
+
+  ##### Suwayomi server
+  ###  
+  services.suwayomi-server = {
+    enable = true;
+
+    dataDir = "/var/lib/suwayomi"; # Default is "/var/lib/suwayomi-server"
+    openFirewall = true;
+
+    settings = {
+      server.port = 4567;
+      server.enableSystemTray = true;
+    };
+  };
+
+
+
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 

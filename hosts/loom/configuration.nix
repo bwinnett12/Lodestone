@@ -161,7 +161,7 @@
   services.suwayomi-server = {
     enable = true;
 
-    dataDir = "/var/lib/suwayomi"; # Default is "/var/lib/suwayomi-server"
+    dataDir = "/var/lib/suwayomi/"; # Default is "/var/lib/suwayomi-server"
     openFirewall = true;
 
     settings = {

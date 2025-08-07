@@ -60,7 +60,7 @@
         
 
         ## Sonarr
-        ./modules/docker_image/sonarr.nix
+        ./modules/docker_images/sonarr.nix
 
       ];
 

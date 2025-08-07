@@ -1,12 +1,30 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  # Importing the types from the lib
+  types = lib.types;
+in
 {
-  # Ensure Docker is enabled
-  services.docker.enable = true;
+  options = {
+    pullImage = lib.mkOption {  # Use lib.mkOption instead of mkOption
+      type = types.str;
+      default = "";
+      description = "The name of the Docker image to pull.";
+    };
+  };
 
-  # Pull the Sonarr Docker image
-  systemd.services.docker.serviceConfig.ExecStartPre = ''
-    docker pull ghcr.io/linuxserver/sonarr:4.0.15.2941-ls289
-  '';
+  config = {
+
+    # Ensure the Docker image is pulled
+    systemd.services.sonarr = {
+      description = "Sonarr Service";
+      after = [ "docker.service" ];
+      wants = [ "docker.service" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.docker}/bin/docker run --rm --name sonarr ${config.pullImage}";
+      };
+      wantedBy = [ "multi-user.target" ];
+    };
+  };
 }
 

@@ -57,6 +57,11 @@
 
         ## Base Docker
         ./modules/docker.nix
+        
+
+        ## Sonarr
+        ./modules/docker_image/sonarr.nix
+
       ];
 
       # You can pass additional arguments to your modules here if needed.

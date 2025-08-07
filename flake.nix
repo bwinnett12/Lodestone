@@ -54,12 +54,17 @@
         
 	## Cosmic Desktop environment
         cosmic.nixosModules.default
+
+        ## Base Docker
+        ./modules/docker.nix
       ];
 
       # You can pass additional arguments to your modules here if needed.
       specialArgs = { inherit self cosmic; };
     };
-       # Define your devShells here
+    
+
+
     # Use the 'system' variable here as well for the attribute name
     devShells.${system}.video-tools = mkShell { # Correctly use the 'mkShell' defined in the let block
       packages = with pkgs; [ # Correctly use 'pkgs' defined in the let block

@@ -34,13 +34,9 @@
 
    in
    {
-    # Define a NixOS configuration for a host named 'my-nixos-machine'.
-    # You should change 'my-nixos-machine' to your desired hostname.
     nixosConfigurations.Loom = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux"; # Set your system architecture (e.g., "aarch64-linux" for ARM)
 
-      # 'modules' is a list of Nix expressions that define your system.
-      # Right now, it's empty, so this system will be extremely barebones.
       modules = [
         ## Base configuration
         ./hosts/loom/configuration.nix
@@ -60,17 +56,16 @@
         
 
         ## Sonarr
-        ./modules/docker_images/sonarr.nix
+        #./modules/docker_images/sonarr.nix
 
       ];
 
-      # You can pass additional arguments to your modules here if needed.
       specialArgs = { inherit self cosmic; };
     };
     
 
 
-    # Use the 'system' variable here as well for the attribute name
+    # devshells for video editing tools 
     devShells.${system}.video-tools = mkShell { # Correctly use the 'mkShell' defined in the let block
       packages = with pkgs; [ # Correctly use 'pkgs' defined in the let block
         handbrake

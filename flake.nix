@@ -71,6 +71,9 @@
         handbrake
         makemkv
         mkvtoolnix
+        flac
+        cdparanoia
+        abcde
       ];
       shellHook = ''
         echo "Entering video transcoding shell from flake."

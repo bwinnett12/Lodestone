@@ -53,7 +53,9 @@
 
         ## Base Docker
         ./modules/docker.nix
-        
+      
+        ## Load Logseq
+        modules/tools/logseq/main.nix  
 
         ## Sonarr
         #./modules/docker_images/sonarr.nix

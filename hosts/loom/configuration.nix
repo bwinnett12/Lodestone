@@ -42,6 +42,11 @@
   # Enable NTFS support
   boot.kernelModules = [ "ntfs3" ];
 
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/4A39-7CF4";
+      fsType = "vfat";
+    };
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

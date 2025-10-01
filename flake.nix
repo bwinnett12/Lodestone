@@ -59,6 +59,11 @@
         ## Story:
         ## There is none
         ./modules/The-Big-Frog/main.nix
+
+        ##### Storage
+        ## Hard drives
+        # Yarrow
+        ./hardware/storage/yarrow.nix
         
         ## Additional Modules
 

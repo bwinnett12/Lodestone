@@ -5,8 +5,8 @@
   # This option merges the configurations from the two sub-modules.
   # The Nix evaluator handles the merging of all options (services, environment.systemPackages, etc.).
   imports = [
-    ./gpt-neo.nix
-    ./tutor-lang.nix
+    #./gpt-neo.nix
+    #./tutor-lang.nix
     ./jellyfin.nix
   ];
 

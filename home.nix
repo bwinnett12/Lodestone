@@ -7,6 +7,7 @@
   home.packages = with pkgs; [
     htop
     neofetch
+    exfatprogs
   ];
 
   programs.bash.enable = true;

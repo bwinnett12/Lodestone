@@ -53,7 +53,7 @@
         ## Machine Specific Configuration
         ./hosts/island/configuration.nix
         ./hosts/island/hardware-configuration.nix
-
+        #./home.nix
 
         ### The Big Frog
         ## Story:

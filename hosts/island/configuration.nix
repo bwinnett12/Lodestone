@@ -36,7 +36,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  boot.loader.efi.efiSysMountPoint = "/boot";
 
 
 
@@ -70,7 +70,7 @@
   services.displayManager.gdm.enable = true;
 
   # Enable the Cosmic Desktop Environment
-  services.desktopManager.cosmic.enable = true;
+  # services.desktopManager.cosmic.enable = true;
   # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
 
   ## Crucial for lilyinstarlight/nixos-cosmic for faster builds:
@@ -142,6 +142,8 @@
     git
     vlc
     coreutils
+    exfatprogs
+    parted
   ];
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

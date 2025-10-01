@@ -8,7 +8,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  fileSystems."/media/storage-media" = {
+  fileSystems."/media/Yarrow" = {
 
 	### UUID
     device = "UUID=6EFF-B51B";

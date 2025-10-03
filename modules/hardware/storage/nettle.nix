@@ -8,7 +8,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  fileSystems."/storage/Nettle/" = {
+  fileSystems."/storage/Nettle" = {
 
 	### UUID
     device = "UUID=10ba586f-c9b7-48ce-a8e5-7f5adbb34ab9";

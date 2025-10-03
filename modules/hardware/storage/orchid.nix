@@ -8,7 +8,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  fileSystems."/storage/Orchid/" = {
+  fileSystems."/storage/Orchid" = {
 
 	### UUID
     device = "UUID=805F-1092";

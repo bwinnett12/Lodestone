@@ -114,7 +114,6 @@
     # Power management set to false. 
     powerManagement.enable = false;
   };
-}
 
 
 
@@ -124,7 +123,7 @@
 
 
   ## Docker
-  virtualisation.docker = true;
+  virtualisation.docker.enable = true;
 
 
   # Enable touchpad support (enabled default in most desktopManager).

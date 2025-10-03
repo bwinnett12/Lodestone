@@ -92,8 +92,6 @@
   # Enable OpenGL and 32-bit support (important for WINE/Proton)
   hardware.opengl = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
   };
 
   # Configure the NVIDIA module

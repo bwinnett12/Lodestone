@@ -9,13 +9,13 @@
         ##### Storage
         ## Hard drives
         # Yarrow
-        ./modules/hardware/storage/yarrow.nix
+        ./../../modules/hardware/storage/yarrow.nix
 
         # Orchid
-        ./modules/hardware/storage/orchid.nix
+        ./../../modules/hardware/storage/orchid.nix
 
         # Nettle
-        ./modules/hardware/storage/nettle.nix
+        ./../../modules/hardware/storage/nettle.nix
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];

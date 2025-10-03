@@ -15,6 +15,7 @@
   networking.hostName = "Island";
   time.timeZone = "America/Anchorage";
   i18n.defaultLocale = "en_US.UTF-8";
+  nixpkgs.config.allowUnfree = true;
 
 
 
@@ -78,6 +79,43 @@
     substituters = [ "https://cosmic.cachix.org/" ];
     trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
    };
+
+
+
+
+  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+  #### Nvidia settings
+
+  ## Enable the NVIDIA driver for Xorg and load the kernel module
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  # Enable OpenGL and 32-bit support (important for WINE/Proton)
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  # Configure the NVIDIA module
+  hardware.nvidia = {
+
+    # Use the stable driver package
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+    # Enable modesetting for better Wayland support
+    modesetting.enable = true;
+
+    # Open-source drivers are for RTX 20-series and newer
+    open = false;
+
+    # Enable the NVIDIA settings application
+    nvidiaSettings = true;
+
+    # Power management set to false. 
+    powerManagement.enable = false;
+  };
+}
+
 
 
 

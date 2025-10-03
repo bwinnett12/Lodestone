@@ -1,17 +1,17 @@
-### Name: Yarrow
-### Storage: 10TB
-### Type: Western Digital Red
-### UUID: 6EFF-B51B
-### ./Lodestone/hardware/storage/yarrow.nix
+### Name: Orchid
+### Storage: 3TB
+### Type: 
+### UUID: 805F-1092
+### ./modules/hardware/storage/orchid.nix
 
 
 { config, pkgs, lib, ... }:
 
 {
-  fileSystems."/media/Yarrow" = {
+  fileSystems."/storage/Orchid/" = {
 
 	### UUID
-    device = "UUID=6EFF-B51B";
+    device = "UUID=805F-1092";
     
     fsType = "exfat";
     

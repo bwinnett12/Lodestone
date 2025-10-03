@@ -124,7 +124,7 @@
 
 
   ## Docker
-  virtualisation.docker.enable = true;
+  virtualisation.docker = true;
 
 
   # Enable touchpad support (enabled default in most desktopManager).

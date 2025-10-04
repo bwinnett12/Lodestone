@@ -25,7 +25,7 @@
 
     # Optional: If you need to ensure a specific user/group owns the files at the root
     # needed for some NTFS/exFAT drives, but often good practice:
-    user = "tarobutter";
+    #user = "tarobutter";
     # group = "users";
   };
 }

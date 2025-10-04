@@ -19,7 +19,7 @@
       "defaults"
       "nofail"
       "x-systemd.automount"
-      "uid=1000,9400"
+      "uid=1000"
       "gid=100"
     ];
 

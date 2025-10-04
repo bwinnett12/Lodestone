@@ -19,8 +19,6 @@
       "defaults"
       "nofail"
       "x-systemd.automount"
-      "uid=1000,9400"
-      "gid=100"
     ];
 
     # Optional: If you need to ensure a specific user/group owns the files at the root

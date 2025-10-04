@@ -102,6 +102,7 @@ in
         createHome = true;
         home = "/var/lib/localai";
         description = "LocalAI service user";
+        group = "localai";
       };
     };
 

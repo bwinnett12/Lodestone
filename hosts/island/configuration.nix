@@ -156,7 +156,7 @@
   # Group for using localAI
   users.groups.localaiModels = {
     gid = 9400;
-    description = "Group for LocalAI model/drive access";
+    #description = "Group for LocalAI model/drive access";
   };
 
 

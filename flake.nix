@@ -61,6 +61,7 @@
         ./modules/The-Big-Frog/main.nix
         
         ## Additional Modules
+        ./modules/localai/main.nix
 
       ];
 

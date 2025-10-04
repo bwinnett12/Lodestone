@@ -89,10 +89,8 @@
   ## Enable the NVIDIA driver for Xorg and load the kernel module
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  # Enable OpenGL and 32-bit support (important for WINE/Proton)
-  hardware.opengl = {
-    enable = true;
-  };
+  # Enable graphic card
+  hardware.graphics.enable = true;
 
   # Configure the NVIDIA module
   hardware.nvidia = {

@@ -147,7 +147,7 @@
   services.localai.enable = true;
   services.localai.version = "v3.6.0";
   services.localai.tarballSha256 = "d9c5a8697f365922cf61c69e20f4504aefd4fedcdda8ac6876ae5892f6015e63";
-  services.localai.binaryPath = "/storage/Orchid/shortstack/localai/"
+  services.localai.binaryPath = "/storage/Orchid/shortstack/localai/";
 
 
 

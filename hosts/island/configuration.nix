@@ -147,7 +147,32 @@
   services.localai.enable = true;
   services.localai.version = "v3.6.0";
   services.localai.tarballSha256 = "d9c5a8697f365922cf61c69e20f4504aefd4fedcdda8ac6876ae5892f6015e63";
-  services.localai.binaryPath = "/storage/Orchid/shortstack/localai/";
+  services.localai.binaryPath = "/storage/Orchid/shortstack/localai/binary";
+  services.localai.listenAddr = "127.0.0.1";
+  services.localai.listenPort = 8080;
+  services.localai.extraArgs = [ "--log-level=info" ];
+  services.localai.modelDir = "/var/lib/localai/models";
+
+  # Group for using localAI
+  users.groups.localaiModels = {
+    gid = 9400;
+    description = "Group for LocalAI model/drive access";
+  };
+
+
+  # Ensure model dir exists with desired ownership and permissions.
+  systemd.tmpfiles.rules = [
+    "d /storage/Orchid/shortstack/localai/models 0750 localai localaiModels - -"
+  ];
+
+  # Optionally ensure the working directory itself is owned appropriately.
+  # This runs at activation time to correct ownership (safe during rebuilds).
+  system.activationScripts.fixLocalaiOwnership.text = ''
+    mkdir -p /storage/Orchid/shortstack/localai /storage/Orchid/shortstack/localai/models
+    chown -R localai:localaiModels /storage/Orchid/shortstack/localai /storage/Orchid/shortstack/localai/models
+    chmod 750 /storage/Orchid/shortstack/localai/models
+  '';
+
 
 
 
@@ -170,11 +195,29 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "localai"];
     packages = with pkgs; [
       tree
     ];
   };
+
+  users.users.localai = {
+    isSystemUser = true;
+    uid = 9300;
+    createHome = true;
+    home = "/storage/Orchid/shortstack/localai/";
+    description = "A generic localAI user";
+    extraGroups = [ "localaiModels" ];
+  };
+
+
+
+
+
+
+
+
+
 
 
 

@@ -154,7 +154,7 @@
   services.localai.modelDir = "/var/lib/localai/models";
 
   # Group for using localAI
-  users.groups.localaiModels = {
+  users.groups.localai = {
     gid = 9400;
     #description = "Group for LocalAI model/drive access";
   };
@@ -207,18 +207,8 @@
     createHome = true;
     home = "/storage/Orchid/shortstack/localai/";
     description = "A generic localAI user";
-    extraGroups = [ "localaiModels" ];
+    extraGroups = [ "localai" ];
   };
-
-
-
-
-
-
-
-
-
-
 
 
 

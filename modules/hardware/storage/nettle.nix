@@ -13,7 +13,7 @@
 	### UUID
     device = "UUID=10ba586f-c9b7-48ce-a8e5-7f5adbb34ab9";
     
-    fsType = "exfat";
+    fsType = "ext4";
     
     options = [
       "defaults"
@@ -25,7 +25,7 @@
 
     # Optional: If you need to ensure a specific user/group owns the files at the root
     # needed for some NTFS/exFAT drives, but often good practice:
-    #user = "tarobutter";
+    # user = "tarobutter";
     # group = "users";
   };
 }

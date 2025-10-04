@@ -17,6 +17,11 @@ in
       default = "v0.11.1";
       description = "LocalAI release tag or version string to download/build.";
     };
+    tarballSha256 = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "sha256 of the release tarball (set to null to use the fetching helper to find it during first build).";
+    };
     modelDir = mkOption {
       type = types.str;
       default = "/var/lib/localai/models";
@@ -45,7 +50,7 @@ in
     binaryPath = mkOption {
       type = types.nullOr types.str;
       default = null;
-      description = "Optional path to a prebuilt LocalAI binary. If null, module downloads a released binary.";
+      description = "Optional path to a prebuilt LocalAI binary. If null, module will fetch a released binary at build time.";
     };
     extraArgs = mkOption {
       type = types.listOf types.str;
@@ -54,7 +59,42 @@ in
     };
   };
 
-  config = mkIf cfg.enable ({
+  config = mkIf cfg.enable (let
+
+    tarballUrl = "https://github.com/mudler/LocalAI/releases/download/${cfg.version}/localai-linux-amd64.tar.gz";
+
+    # Use fetchurl for a reproducible download.
+    # If cfg.tarballSha256 is null, we use a placeholder (lib.fakeSha256) so the build fails
+    # and prints the correct hash to put in configuration.
+    src = if cfg.tarballSha256 != null then
+      pkgs.fetchurl {
+        url = tarballUrl;
+        sha256 = cfg.tarballSha256;
+      }
+    else
+      pkgs.fetchurl {
+        url = tarballUrl;
+        sha256 = lib.fakeSha256;
+      };
+
+    # Derivation to extract the binary from the fetched tarball
+    localai-bin = pkgs.runCommand "localai-binary-${cfg.version}" { } ''
+      mkdir -p $out/bin
+      tmpdir=$(mktemp -d)
+      cd $tmpdir
+      tar xzf ${src}
+      if [ ! -x ./localai ]; then
+        echo "expected ./localai to be executable in the tarball"
+        exit 1
+      fi
+      install -m755 ./localai $out/bin/localai
+    '';
+
+    localaiStorePath = "${localai-bin}/bin/localai";
+    execStartCmd = if cfg.binaryPath != null then cfg.binaryPath else localaiStorePath;
+    argsList = ["--host" cfg.listenAddr "--port" (toString cfg.listenPort)] ++ cfg.extraArgs;
+
+  in {
     users.users = {
       "${cfg.user}" = {
         isSystemUser = true;
@@ -66,13 +106,12 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-      pkgs.curl
-      pkgs.wget
-      pkgs.unzip
-      pkgs.jq
+      curl
+      wget
+      unzip
+      jq
     ];
 
-    # Create model dir
     environment.etc."localai/.placeholder".text = "localai placeholder";
 
     systemd.services.localai = {
@@ -84,9 +123,7 @@ in
         User = cfg.user;
         WorkingDirectory = "/var/lib/localai";
         ExecStart = ''
-          ${if cfg.binaryPath != null then cfg.binaryPath else "${pkgs.curl}/bin/curl"} \
-            ${if cfg.binaryPath != null then "" else "-sSfL https://github.com/mudler/LocalAI/releases/download/${cfg.version}/localai-linux-amd64.tar.gz | tar xz -C /var/lib/localai --strip-components=1 && /var/lib/localai/localai"} \
-            ${concatStringsSep " " (map (s: " " + builtins.toString s) (["--host", cfg.listenAddr, "--port", toString cfg.listenPort] ++ cfg.extraArgs))}
+          ${execStartCmd} ${concatStringsSep " " argsList}
         '';
         Restart = "on-failure";
         RestartSec = "5s";
@@ -98,10 +135,8 @@ in
       '';
     };
 
-    # Put a simple systemd tmpfile to ensure model dir exists
     systemd.tmpfiles.rules = [
       "d ${cfg.modelDir} 0755 ${cfg.user} ${cfg.user} - -"
     ];
   });
 }
-

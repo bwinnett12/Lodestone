@@ -63,6 +63,10 @@
         ## Additional Modules
         ./modules/localai/main.nix
 
+        ./modules/hardware/storage/nettle.nix
+        ./modules/hardware/storage/orchid.nix
+        ./modules/hardware/storage/yarrow.nix
+
       ];
 
 

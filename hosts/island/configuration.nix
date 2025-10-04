@@ -206,7 +206,7 @@
     uid = 9300;
     createHome = true;
     home = "/storage/Orchid/shortstack/localai/";
-    description = "A generic localAI user";
+    #description = "A generic localAI user";
     group = "localai";
     extraGroups = [ "localai" ];
   };

@@ -163,7 +163,7 @@
 
   # Ensure model dir exists with desired ownership and permissions.
   systemd.tmpfiles.rules = [
-    "d /storage/Orchid/shortstack/localai/models 0750 localai localaiModels - -"
+    "d /storage/Orchid/shortstack/localai/models 0750 localai localai - -"
   ];
 
   # Optionally ensure the working directory itself is owned appropriately.

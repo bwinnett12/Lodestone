@@ -67,6 +67,9 @@
         ./modules/hardware/storage/orchid.nix
         ./modules/hardware/storage/yarrow.nix
 
+        ## Academic
+        ./modules/academic/zotero/main.nix
+
       ];
 
 

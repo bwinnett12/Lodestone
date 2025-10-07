@@ -156,6 +156,7 @@
   # Group for using localAI
   users.groups.localai = {
     gid = 9400;
+    name = "localai"; 
     #description = "Group for LocalAI model/drive access";
   };
 
@@ -195,7 +196,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "localai"];
+    extraGroups = [ "wheel" "localai" ];
     packages = with pkgs; [
       tree
     ];

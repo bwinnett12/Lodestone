@@ -11,7 +11,7 @@ let
   # 1. Define the URL for the desired pre-built binary.
   # CRITICAL FIX 1: Change to the URL that is more likely to include all C++ backends, 
   # and set the version higher to avoid known bugs.
-  binaryUrl = "https://github.com/mudler/LocalAI/releases/download/${cfg.version}/local-ai-${cfg.version}-linux-amd64"; 
+  binaryUrl = "https://github.com/mudler/LocalAI/releases/download/${cfg.version}/local-ai-${cfg.version}-linux-amd64";  
 
   # 2. Use fetchurl for a reproducible download.
   # If tarballSha256 is null, it uses a placeholder to force a hash to be printed.
@@ -54,7 +54,7 @@ in
     };
     tarballSha256 = mkOption {
       type = types.nullOr types.str;
-      default = "sha256-2cWoaX82WSLPYcaeIPRQSu/U/tzdqKxodq5YkvYBXmM=";
+      default = "sha256:d9c5a8697f365922cf61c69e20f4504aefd4fedcdda8ac6876ae5892f6015e63";
       description = "sha256 of the release tarball (set to null to use the fetching helper to find it during first build).";
     };
     modelDir = mkOption {

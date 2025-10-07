@@ -5,7 +5,7 @@ with lib;
 let
   cfg = config.services.localai;
   localaiBasePath = builtins.substring 0 (builtins.stringLength cfg.modelDir - builtins.stringLength "/models") cfg.modelDir;
-in
+  in
 {
   options.services.localai = {
     enable = mkOption {
@@ -62,20 +62,20 @@ in
 
   config = mkIf cfg.enable (let
 
-    tarballUrl = "https://github.com/mudler/LocalAI/releases/download/${cfg.version}/local-ai-${cfg.version}-linux-amd64";
+    binaryUrl = "https://github.com/mudler/LocalAI/releases/download/${cfg.version}/local-ai-${cfg.version}-linux-amd64";
 
 
     # Use fetchurl for a reproducible download.
     # If cfg.tarballSha256 is null, we use a placeholder (lib.fakeSha256) so the build fails
     # and prints the correct hash to put in configuration.
-    src = if cfg.tarballSha256 != null then
+    binarySrc = if cfg.tarballSha256 != null then
       pkgs.fetchurl {
-        url = tarballUrl;
+        url = binaryUrl;
         sha256 = cfg.tarballSha256;
       }
     else
       pkgs.fetchurl {
-        url = tarballUrl;
+        url = binaryUrl;
         sha256 = lib.fakeSha256;
       };
 

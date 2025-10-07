@@ -62,14 +62,14 @@ let
 
   config = mkIf cfg.enable (let
 
-  localai-bin = pkgs.buildGoModule rec {
+  localai-bin = pkgs.buildGoModule rec {  
     pname = "localai";
     version = cfg.version;
     src = pkgs.fetchFromGitHub {
       owner = "mudler";
       repo = "LocalAI";
       rev = cfg.version;
-      sha256 = "sha256-6RhWMFGL61BtAGXZqv4+bChbOjyBhvEqSqdYA61pVTU="; 
+      sha256 = "sha256:f92f5360e8839c988e54f46cf4e35d5ea7dd700c49d7330e048245f1eff42a18; 
     };
 
     buildInputs = [

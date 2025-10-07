@@ -79,17 +79,9 @@ in
         sha256 = lib.fakeSha256;
       };
 
-    # Derivation to extract the binary from the fetched tarball
     localai-bin = pkgs.runCommand "localai-binary-${cfg.version}" { } ''
       mkdir -p $out/bin
-      tmpdir=$(mktemp -d)
-      cd $tmpdir
-      tar xzf ${src}
-      if [ ! -x ./localai ]; then
-        echo "expected ./localai to be executable in the tarball"
-        exit 1
-      fi
-      install -m755 ./localai $out/bin/localai
+      install -m755 ${binarySrc} $out/bin/localai
     '';
 
     localaiStorePath = "${localai-bin}/bin/localai";

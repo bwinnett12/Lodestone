@@ -86,8 +86,10 @@ let
 
     localaiStorePath = "${localai-bin}/bin/localai";
     execStartCmd = if cfg.binaryPath != null then cfg.binaryPath else localaiStorePath;
-  argsList = ["run" "--port" (toString cfg.listenPort)] ++ cfg.extraArgs;
-  
+
+    argsList = ["run"] ++ cfg.extraArgs;  
+
+
   in {
     users.users = {
       "${cfg.user}" = {
@@ -116,18 +118,25 @@ let
       # The mount unit name is based on the path: /storage/Orchid -> storage-Orchid.mount
       after = [ "network.target" /* "storage-Orchid.mount" */ ]; 
       wants = [ "network.target" /* "storage-Orchid.mount" */ ];
-      # requires = [ "storage-Orchid.mount" ]; # Use requires if the mount is absolutely critical for the service to function
 
       serviceConfig = {
         Type = "simple";
         User = cfg.user;
-        # CHANGE: Use the calculated base path as the WorkingDirectory
         WorkingDirectory = localaiBasePath; 
+        ExecStartPre = "";
         ExecStart = ''
           ${execStartCmd} ${concatStringsSep " " argsList}
         '';
         Restart = "on-failure";
         RestartSec = "5s";
+        Environment = [
+          # Port configuration for LocalAI is usually set via this variable:
+          "PORT=8080"
+          
+          # Address configuration is often LOCALAI_ADDR or just ADDR.
+          # We'll use the most common one, or you can try LOCALAI_ADDR=127.0.0.1 if PORT fails.
+          "LOCALAI_ADDR=127.0.0.1"
+        ];
       };
       wantedBy = [ "multi-user.target" ];
       preStart = ''

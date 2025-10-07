@@ -169,6 +169,17 @@
     # Note: The 'localai' user/group names are automatically translated to UID 9300/GID 9400.
   ];
 
+  systemd.services.localai.serviceConfig = {
+    # CRITICAL FIX: The base LocalAI NixOS module often generates a pre-start
+    # script (localai-pre-start) that includes a chown command.
+    # Since the ExFAT mount options (uid/gid) handle permissions, this chown fails.
+    # We override the ExecStartPre to be empty to disable it.
+    ExecStartPre = "";
+    
+    # You may also want to explicitly ensure the working directory is set to the home/model dir
+    # WorkingDirectory = "/storage/Orchid/shortstack/localai"; 
+  };
+
 
 
 

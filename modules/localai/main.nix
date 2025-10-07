@@ -62,7 +62,8 @@ in
 
   config = mkIf cfg.enable (let
 
-    tarballUrl = "https://github.com/mudler/LocalAI/releases/download/${cfg.version}/local-ai-linux-${cfg.version}-amd64";
+    tarballUrl = "https://github.com/mudler/LocalAI/releases/download/${cfg.version}/local-ai-${cfg.version}-linux-amd64";
+
 
     # Use fetchurl for a reproducible download.
     # If cfg.tarballSha256 is null, we use a placeholder (lib.fakeSha256) so the build fails

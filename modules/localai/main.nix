@@ -86,8 +86,8 @@ let
 
     localaiStorePath = "${localai-bin}/bin/localai";
     execStartCmd = if cfg.binaryPath != null then cfg.binaryPath else localaiStorePath;
-    argsList = ["--port" (toString cfg.listenPort)] ++ cfg.extraArgs;
-
+  argsList = ["run" "--port" (toString cfg.listenPort)] ++ cfg.extraArgs;
+  
   in {
     users.users = {
       "${cfg.user}" = {

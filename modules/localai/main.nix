@@ -62,32 +62,22 @@ let
 
   config = mkIf cfg.enable (let
 
-    binaryUrl = "https://github.com/mudler/LocalAI/releases/download/${cfg.version}/local-ai-${cfg.version}-linux-amd64";
+  localai-bin = pkgs.buildGoModule rec {
+    pname = "localai";
+    version = cfg.version;
+    src = pkgs.fetchFromGitHub {
+      owner = "mudler";
+      repo = "LocalAI";
+      rev = cfg.version;
+      sha256 = "sha256-YOUR-SOURCE-HASH"; 
+    };
 
+    buildInputs = [
+      pkgs.llama-cpp # Dependency for GGUF support
+    ];
 
-    # Use fetchurl for a reproducible download.
-    # If cfg.tarballSha256 is null, we use a placeholder (lib.fakeSha256) so the build fails
-    # and prints the correct hash to put in configuration.
-    binarySrc = if cfg.tarballSha256 != null then
-      pkgs.fetchurl {
-        url = binaryUrl;
-        sha256 = cfg.tarballSha256;
-      }
-    else
-      pkgs.fetchurl {
-        url = binaryUrl;
-        sha256 = lib.fakeSha256;
-      };
-
-    localai-bin = pkgs.runCommand "localai-binary-${cfg.version}" { } ''
-      mkdir -p $out/bin
-      install -m755 ${binarySrc} $out/bin/localai
-    '';
-
-    localaiStorePath = "${localai-bin}/bin/localai";
-    execStartCmd = if cfg.binaryPath != null then cfg.binaryPath else localaiStorePath;
-
-    argsList = ["run"] ++ cfg.extraArgs;  
+    buildFlagsArray = [ "-tags" "llama-cpp,gpt4all" ]; 
+  };
 
 
   in {

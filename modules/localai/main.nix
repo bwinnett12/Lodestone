@@ -101,6 +101,7 @@ in
       wget
       unzip
       jq
+      llama-cpp
     ];
 
     environment.etc."localai/.placeholder".text = "localai placeholder";

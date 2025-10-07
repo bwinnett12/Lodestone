@@ -22,10 +22,5 @@
       "uid=1000"
       "gid=100"
     ];
-
-    # Optional: If you need to ensure a specific user/group owns the files at the root
-    # needed for some NTFS/exFAT drives, but often good practice:
-    # user = "tarobutter";
-    # group = "users";
   };
 }

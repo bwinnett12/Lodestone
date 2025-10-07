@@ -136,11 +136,5 @@ let
         chown -R ${cfg.user}:${cfg.user} ${localaiBasePath} ${cfg.modelDir}
       '';
     };
-
-    systemd.tmpfiles.rules = [
-      # This rule should be REMOVED if you manage ownership via the activation script
-      # and home directory definition, as it is now redundant and possibly conflicting.
-      # "d ${cfg.modelDir} 0755 ${cfg.user} ${cfg.user} - -"
-    ];
   });
 }

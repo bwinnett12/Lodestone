@@ -21,6 +21,7 @@
       "x-systemd.automount"
       "uid=9300"
       "gid=9400"
+      "umask=007"
     ];
   };
 }

@@ -163,15 +163,11 @@
 
   # Ensure model dir exists with desired ownership and permissions.
   systemd.tmpfiles.rules = [
-    "d /storage/Orchid/shortstack/localai/models 0750 localai localai - -"
+    # Type | Path | Mode | UID | GID | Age | Argument
+    "d /storage/Orchid/shortstack/localai 0755 localai localai - -"
+    "d /storage/Orchid/shortstack/localai/models 0755 localai localai - -"
+    # Note: The 'localai' user/group names are automatically translated to UID 9300/GID 9400.
   ];
-
-
-  system.activationScripts.fixLocalaiOwnership.text = ''
-    mkdir -p /storage/Orchid/shortstack/localai /storage/Orchid/shortstack/localai/models
-    chown -R localai:localai /storage/Orchid/shortstack/localai /storage/Orchid/shortstack/localai/models
-    chmod 750 /storage/Orchid/shortstack/localai/models
-  '';
 
 
 

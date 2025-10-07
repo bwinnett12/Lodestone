@@ -5,7 +5,40 @@ with lib;
 let
   cfg = config.services.localai;
   localaiBasePath = builtins.substring 0 (builtins.stringLength cfg.modelDir - builtins.stringLength "/models") cfg.modelDir;
-  in
+
+  # --- START OF REINSTATED DOWNLOAD/BUILD LOGIC (Replaced pkgs.buildGoModule) ---
+
+  # 1. Define the URL for the desired pre-built binary.
+  # Use the standard URL. You may need to change this to a *-full binary if needed.
+  binaryUrl = "https://github.com/mudler/LocalAI/releases/download/${cfg.version}/local-ai-${cfg.version}-linux-amd64";
+
+  # 2. Use fetchurl for a reproducible download.
+  # If tarballSha256 is null, it uses a placeholder to force a hash to be printed.
+  binarySrc = if cfg.tarballSha256 != null then
+    pkgs.fetchurl {
+      url = binaryUrl;
+      sha256 = cfg.tarballSha256;
+    }
+  else
+    pkgs.fetchurl {
+      url = binaryUrl;
+      sha256 = lib.fakeSha256;
+    };
+
+  # 3. Package the downloaded binary into the Nix store.
+  localai-bin = pkgs.runCommand "localai-binary-${cfg.version}" { } ''
+    mkdir -p $out/bin
+    install -m755 ${binarySrc} $out/bin/localai
+  '';
+
+  # 4. Define variables needed by the service configuration (Moved from internal 'config' let block)
+  localaiStorePath = "${localai-bin}/bin/localai";
+  execStartCmd = if cfg.binaryPath != null then cfg.binaryPath else localaiStorePath;
+  argsList = ["run"] ++ cfg.extraArgs;
+
+  # --- END OF REINSTATED DOWNLOAD/BUILD LOGIC ---
+
+in
 {
   options.services.localai = {
     enable = mkOption {
@@ -60,32 +93,7 @@ let
     };
   };
 
-  config = mkIf cfg.enable (let
-
-  localai-bin = pkgs.buildGoModule rec {  
-    pname = "localai";
-    version = cfg.version;
-    src = pkgs.fetchFromGitHub {
-      owner = "mudler";
-      repo = "LocalAI";
-      rev = cfg.version;
-      sha256 = "sha256-GRNPdsrbXdIOp/NFTvrjokLuqLMeBmFsSvSup/aMHcA=";
-    };
-
-    buildInputs = [
-      pkgs.llama-cpp # Dependency for GGUF support
-    ];
-
-    buildFlagsArray = [ "-tags" "llama-cpp,gpt4all" ]; 
-    vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; 
-  };
-
-  localaiStorePath = "${localai-bin}/bin/localai";
-  execStartCmd = if cfg.binaryPath != null then cfg.binaryPath else localaiStorePath;
-  argsList = ["run"] ++ cfg.extraArgs;
-
-
-  in {
+  config = mkIf cfg.enable {
     users.users = {
       "${cfg.user}" = {
         isSystemUser = true;
@@ -108,16 +116,13 @@ let
 
     systemd.services.localai = {
       description = "LocalAI inference server";
-      # ADD dependencies on the mount point if /storage/Orchid is a separate drive
-      # This requires the fileSystems mount to be configured in configuration.nix
-      # The mount unit name is based on the path: /storage/Orchid -> storage-Orchid.mount
-      after = [ "network.target" /* "storage-Orchid.mount" */ ]; 
+      after = [ "network.target" /* "storage-Orchid.mount" */ ];
       wants = [ "network.target" /* "storage-Orchid.mount" */ ];
 
       serviceConfig = {
         Type = "simple";
         User = cfg.user;
-        WorkingDirectory = localaiBasePath; 
+        WorkingDirectory = localaiBasePath;
         ExecStartPre = "";
         ExecStart = ''
           ${execStartCmd} ${concatStringsSep " " argsList}
@@ -125,20 +130,15 @@ let
         Restart = "on-failure";
         RestartSec = "5s";
         Environment = [
-          # Port configuration for LocalAI is usually set via this variable:
           "PORT=8080"
-          
-          # Address configuration is often LOCALAI_ADDR or just ADDR.
-          # We'll use the most common one, or you can try LOCALAI_ADDR=127.0.0.1 if PORT fails.
           "LOCALAI_ADDR=127.0.0.1"
         ];
       };
       wantedBy = [ "multi-user.target" ];
       preStart = ''
-        # This will now create and ensure ownership on the new path
         mkdir -p ${cfg.modelDir}
         chown -R ${cfg.user}:${cfg.user} ${localaiBasePath} ${cfg.modelDir}
       '';
     };
-  });
+  };
 }

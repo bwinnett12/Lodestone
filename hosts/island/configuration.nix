@@ -166,11 +166,10 @@
     "d /storage/Orchid/shortstack/localai/models 0750 localai localai - -"
   ];
 
-  # Optionally ensure the working directory itself is owned appropriately.
-  # This runs at activation time to correct ownership (safe during rebuilds).
+
   system.activationScripts.fixLocalaiOwnership.text = ''
     mkdir -p /storage/Orchid/shortstack/localai /storage/Orchid/shortstack/localai/models
-    chown -R localai:localaiModels /storage/Orchid/shortstack/localai /storage/Orchid/shortstack/localai/models
+    chown -R localai:localai /storage/Orchid/shortstack/localai /storage/Orchid/shortstack/localai/models
     chmod 750 /storage/Orchid/shortstack/localai/models
   '';
 

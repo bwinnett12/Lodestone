@@ -6,16 +6,7 @@
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
-        ##### Storage
-        ## Hard drives
-        # Yarrow
-        ./../../modules/hardware/storage/yarrow.nix
-
-        # Orchid
-        ./../../modules/hardware/storage/orchid.nix
-
-        # Nettle
-        ./../../modules/hardware/storage/nettle.nix
+    
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];

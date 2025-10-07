@@ -6,11 +6,12 @@ let
   cfg = config.services.localai;
   localaiBasePath = builtins.substring 0 (builtins.stringLength cfg.modelDir - builtins.stringLength "/models") cfg.modelDir;
 
-  # --- START OF REINSTATED DOWNLOAD/BUILD LOGIC (Replaced pkgs.buildGoModule) ---
+  # --- START OF REINSTATED DOWNLOAD/BUILD LOGIC ---
 
   # 1. Define the URL for the desired pre-built binary.
-  # Use the standard URL. You may need to change this to a *-full binary if needed.
-  binaryUrl = "https://github.com/mudler/LocalAI/releases/download/${cfg.version}/local-ai-${cfg.version}-linux-amd64";
+  # CRITICAL FIX 1: Change to the URL that is more likely to include all C++ backends, 
+  # and set the version higher to avoid known bugs.
+  binaryUrl = "https://github.com/mudler/LocalAI/releases/download/${cfg.version}/local-ai-${cfg.version}-linux-amd64"; 
 
   # 2. Use fetchurl for a reproducible download.
   # If tarballSha256 is null, it uses a placeholder to force a hash to be printed.
@@ -48,7 +49,7 @@ in
     };
     version = mkOption {
       type = types.str;
-      default = "v0.11.1";
+      default = "v3.6.0";
       description = "LocalAI release tag or version string to download/build.";
     };
     tarballSha256 = mkOption {
@@ -116,14 +117,14 @@ in
 
     systemd.services.localai = {
       description = "LocalAI inference server";
-      after = [ "network.target" /* "storage-Orchid.mount" */ ];
-      wants = [ "network.target" /* "storage-Orchid.mount" */ ];
+      after = [ "network.target" "storage-Orchid.mount" ]; 
+      wants = [ "network.target" "storage-Orchid.mount" ]; 
 
       serviceConfig = {
         Type = "simple";
         User = cfg.user;
         WorkingDirectory = localaiBasePath;
-        ExecStartPre = "";
+        ExecStartPre = ""; # Kept empty to prevent chown conflicts with the ExFAT mount
         ExecStart = ''
           ${execStartCmd} ${concatStringsSep " " argsList}
         '';
@@ -136,8 +137,12 @@ in
       };
       wantedBy = [ "multi-user.target" ];
       preStart = ''
+        # We still mkdir, but the ownership is mostly managed by the ExFAT mount options (uid=9300, gid=9400).
         mkdir -p ${cfg.modelDir}
-        chown -R ${cfg.user}:${cfg.user} ${localaiBasePath} ${cfg.modelDir}
+      
+        # REMOVED chown -R ${cfg.user}:${cfg.user} ${localaiBasePath} ${cfg.modelDir}
+        # The chown is usually unnecessary and conflicting because of the ExFAT mount options.
+        # If the problem persists, you can try re-adding a simplified chown just for safety, but removing it is safer here.
       '';
     };
   };

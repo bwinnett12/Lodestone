@@ -95,16 +95,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    users.users = {
-      "${cfg.user}" = {
-        isSystemUser = true;
-        uid = cfg.uid;
-        createHome = true;
-        home = localaiBasePath;
-        description = "LocalAI service user";
-        group = "localai";
-      };
-    };
 
     environment.systemPackages = with pkgs; [
       curl
@@ -139,10 +129,6 @@ in
       preStart = ''
         # We still mkdir, but the ownership is mostly managed by the ExFAT mount options (uid=9300, gid=9400).
         mkdir -p ${cfg.modelDir}
-      
-        # REMOVED chown -R ${cfg.user}:${cfg.user} ${localaiBasePath} ${cfg.modelDir}
-        # The chown is usually unnecessary and conflicting because of the ExFAT mount options.
-        # If the problem persists, you can try re-adding a simplified chown just for safety, but removing it is safer here.
       '';
     };
   };

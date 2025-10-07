@@ -4,6 +4,7 @@ with lib;
 
 let
   cfg = config.services.localai;
+  localaiBasePath = builtins.substring 0 (builtins.stringLength cfg.modelDir - builtins.stringLength "/models") cfg.modelDir;
 in
 {
   options.services.localai = {
@@ -100,7 +101,7 @@ in
         isSystemUser = true;
         uid = cfg.uid;
         createHome = true;
-        home = "/var/lib/localai";
+        home = localaiBasePath;
         description = "LocalAI service user";
         group = "localai";
       };
@@ -117,12 +118,18 @@ in
 
     systemd.services.localai = {
       description = "LocalAI inference server";
-      wants = [ "network.target" ];
-      after = [ "network.target" ];
+      # ADD dependencies on the mount point if /storage/Orchid is a separate drive
+      # This requires the fileSystems mount to be configured in configuration.nix
+      # The mount unit name is based on the path: /storage/Orchid -> storage-Orchid.mount
+      after = [ "network.target" /* "storage-Orchid.mount" */ ]; 
+      wants = [ "network.target" /* "storage-Orchid.mount" */ ];
+      # requires = [ "storage-Orchid.mount" ]; # Use requires if the mount is absolutely critical for the service to function
+
       serviceConfig = {
         Type = "simple";
         User = cfg.user;
-        WorkingDirectory = "/var/lib/localai";
+        # CHANGE: Use the calculated base path as the WorkingDirectory
+        WorkingDirectory = localaiBasePath; 
         ExecStart = ''
           ${execStartCmd} ${concatStringsSep " " argsList}
         '';
@@ -131,13 +138,16 @@ in
       };
       wantedBy = [ "multi-user.target" ];
       preStart = ''
+        # This will now create and ensure ownership on the new path
         mkdir -p ${cfg.modelDir}
-        chown -R ${cfg.user}:${cfg.user} /var/lib/localai ${cfg.modelDir}
+        chown -R ${cfg.user}:${cfg.user} ${localaiBasePath} ${cfg.modelDir}
       '';
     };
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.modelDir} 0755 ${cfg.user} ${cfg.user} - -"
+      # This rule should be REMOVED if you manage ownership via the activation script
+      # and home directory definition, as it is now redundant and possibly conflicting.
+      # "d ${cfg.modelDir} 0755 ${cfg.user} ${cfg.user} - -"
     ];
   });
 }

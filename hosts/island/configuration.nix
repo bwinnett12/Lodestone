@@ -148,11 +148,10 @@
   services.localai.enable = true;
   services.localai.version = "v3.6.0";
   services.localai.tarballSha256 = "d9c5a8697f365922cf61c69e20f4504aefd4fedcdda8ac6876ae5892f6015e63";
-  services.localai.binaryPath = "/storage/Orchid/shortstack/localai/binary";
   services.localai.listenAddr = "127.0.0.1";
   services.localai.listenPort = 8080;
   services.localai.extraArgs = [ "--log-level=info" ];
-  services.localai.modelDir = "/var/lib/localai/models";
+  services.localai.modelDir = "/storage/Orchid/shortstack/localai/models";
 
   # Group for using localAI
   users.groups.localai = {

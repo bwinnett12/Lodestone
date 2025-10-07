@@ -115,9 +115,12 @@ in
         User = cfg.user;
         WorkingDirectory = localaiBasePath;
         ExecStartPre = ""; # Kept empty to prevent chown conflicts with the ExFAT mount
+
+        
         ExecStart = ''
           ${execStartCmd} ${concatStringsSep " " argsList}
         '';
+        PermissionsStartOnly = true;
         Restart = "on-failure";
         RestartSec = "5s";
         Environment = [
@@ -127,8 +130,9 @@ in
       };
       wantedBy = [ "multi-user.target" ];
       preStart = ''
-        # We still mkdir, but the ownership is mostly managed by the ExFAT mount options (uid=9300, gid=9400).
-        mkdir -p ${cfg.modelDir}
+        ${pkgs.coreutils}/bin/mkdir -p /storage/Orchid/shortstack/localai/backends
+        ${pkgs.coreutils}/bin/mkdir -p /storage/Orchid/shortstack/localai/configuration
+        ${pkgs.coreutils}/bin/chown -R localai:localai /storage/Orchid/shortstack/localai
       '';
     };
   };

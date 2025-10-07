@@ -79,6 +79,10 @@ let
     buildFlagsArray = [ "-tags" "llama-cpp,gpt4all" ]; 
   };
 
+  localaiStorePath = "${localai-bin}/bin/localai";
+  execStartCmd = if cfg.binaryPath != null then cfg.binaryPath else localaiStorePath;
+  argsList = ["run"] ++ cfg.extraArgs;
+
 
   in {
     users.users = {

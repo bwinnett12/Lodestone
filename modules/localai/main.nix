@@ -69,7 +69,7 @@ let
       owner = "mudler";
       repo = "LocalAI";
       rev = cfg.version;
-      sha256 = "sha256:f92f5360e8839c988e54f46cf4e35d5ea7dd700c49d7330e048245f1eff42a18";
+      sha256 = "sha256-+S9TYOiDnJiOVPRs9ONdXqfdcAxJ1zMOBIJF8e/0Khg=";
     };
 
     buildInputs = [

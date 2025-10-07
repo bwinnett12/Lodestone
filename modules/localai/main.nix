@@ -77,7 +77,7 @@ let
     ];
 
     buildFlagsArray = [ "-tags" "llama-cpp,gpt4all" ]; 
-    vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; 
   };
 
   localaiStorePath = "${localai-bin}/bin/localai";

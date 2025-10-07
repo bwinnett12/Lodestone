@@ -54,7 +54,7 @@ in
     };
     tarballSha256 = mkOption {
       type = types.nullOr types.str;
-      default = null;
+      default = "sha256-2cWoaX82WSLPYcaeIPRQSu/U/tzdqKxodq5YkvYBXmM=";
       description = "sha256 of the release tarball (set to null to use the fetching helper to find it during first build).";
     };
     modelDir = mkOption {

@@ -3,17 +3,32 @@
 
   #### Inputs
   inputs = {
+
+    #### Package repository sources
+    ## Nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     
-    ### Cosmic flake
+    ## Home manager
+    home-manager.url = "github:nix-community/home-manager/release-24.05"; # Match your stateVersion
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+
+    ### Desktop sources
+    ## Cosmic flake
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.url = "github:NixOS/nixpkgs/9807714d6944a957c2e036f84b0ff8caf9930bc0";
     };
+
+
   };
 
   #### Outputs
-  outputs = { self, nixpkgs, nixos-cosmic, ... }: {
+  outputs = { self, nixpkgs, nixos-cosmic, home-manager, ... }: {
+
+
+
+
 
 
     ####### Machines available
@@ -40,6 +55,10 @@
     # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
 
 
+
+
+
+
     ### Island
     ## A basic desktop PC
     nixosConfigurations.Island = nixpkgs.lib.nixosSystem {
@@ -55,7 +74,18 @@
         ./hosts/island/hardware-configuration.nix
         #./home.nix
 
-        ### The Big Frog
+        ### Home manager
+        home-manager.nixosModules.home-manager
+
+        {
+          # Replace 'yourusername' with your actual username
+          home-manager.users.tarobutter = import ./home.nix; 
+        }
+
+
+
+
+        ### Shortstack
         ## Story:
         ## There is none
         ./modules/The-Big-Frog/main.nix
@@ -63,6 +93,7 @@
         ## Additional Modules
         ./modules/localai/main.nix
 
+        ### Storage options
         ./modules/hardware/storage/nettle.nix
         ./modules/hardware/storage/orchid.nix
         ./modules/hardware/storage/yarrow.nix

@@ -218,7 +218,7 @@
     home = "/storage/Orchid/shortstack/localai/";
     #description = "A generic localAI user";
     group = "localai";
-    extraGroups = [ "localai" ];
+    extraGroups = [ "localai" "users" ];
   };
 
 

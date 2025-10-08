@@ -16,12 +16,26 @@
   time.timeZone = "America/Anchorage";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ]; 
+
+    ## Settings for cosmic
+    # substituters = [ "https://cosmic.cachix.org/" ];
+    # trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+  };
+
 
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Build modifiers
   # nix.maxJobs = 1; # Only allow one build job at a time
+
+  systemd.tmpfiles.rules = [
+    "d /storage/Orchid/shortstack/localai 0755 localai localai - -"
+    "d /storage/Orchid/shortstack/localai/models 0755 localai localai - -"
+    # ... include backends and configuration if you want to be thorough
+  ];
 
 
 
@@ -78,11 +92,16 @@
   # services.desktopManager.cosmic.enable = true;
   # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
 
-  ## Crucial for lilyinstarlight/nixos-cosmic for faster builds:
-  #nix.settings = {
-  #  substituters = [ "https://cosmic.cachix.org/" ];
-  #  trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-  # };
+
+  #### Sleep schedule
+  ## Systemd configuration for disabling auto sleep
+  systemd.targets = {
+    sleep.enable = false;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
+  };
+
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -266,6 +285,8 @@
     coreutils
     exfatprogs
     parted
+    btrfs-progs
+    lsof
   ];
 
 

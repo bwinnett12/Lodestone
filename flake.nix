@@ -1,18 +1,25 @@
+## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+## Flakes are fun
+## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
 {
   description = "a NixOS Flake for Me";
 
   #### Inputs
   inputs = {
 
+    ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
     #### Package repository sources
     ## Nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     
+
+    ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
     ## Home manager
-    home-manager.url = "github:nix-community/home-manager/release-24.05"; # Match your stateVersion
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
 
+    ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
     ### Desktop sources
     ## Cosmic flake
     nixos-cosmic = {
@@ -20,31 +27,35 @@
       inputs.nixpkgs.url = "github:NixOS/nixpkgs/9807714d6944a957c2e036f84b0ff8caf9930bc0";
     };
 
-
+    ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   };
+
+
 
   #### Outputs
   outputs = { self, nixpkgs, nixos-cosmic, home-manager, ... }: {
 
 
-
-
-
-
+    ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ #
     ####### Machines available
-
     # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
 
     ### Loom
     ## Originally a A Microsoft Surface Book 2 
     nixosConfigurations.Loom = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux"; 
 
+      ## System Architecture
+      system = "x86_64-linux";
+
+
+      ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
       modules = [
         ./hosts/loom/configuration.nix
         ./hosts/loom/hardware-configuration.nix
       ];
 
+
+      ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
       ### Additional Arguments 
       specialArgs = {
         inherit self; 
@@ -58,7 +69,6 @@
 
 
 
-
     ### Island
     ## A basic desktop PC
     nixosConfigurations.Island = nixpkgs.lib.nixosSystem {
@@ -66,14 +76,14 @@
       ## System Architecture
       system = "x86_64-linux";
 
+
+      ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
       ## Import modules
       modules = [
 
         ## Machine Specific Configuration
         ./hosts/island/configuration.nix
         ./hosts/island/hardware-configuration.nix
-        #./home.nix
-
 
 
         ### Home manager

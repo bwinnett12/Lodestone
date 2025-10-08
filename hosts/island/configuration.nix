@@ -15,7 +15,6 @@
   networking.hostName = "Island";
   time.timeZone = "America/Anchorage";
   i18n.defaultLocale = "en_US.UTF-8";
-  nixpkgs.config.allowUnfree = true;
 
 
 
@@ -41,7 +40,6 @@
 
 
 
-
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ######## Network settings
 
@@ -56,6 +54,11 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # networking.firewall.enable = false;  ## To disable the firewall altogether.
 
 
 
@@ -82,6 +85,16 @@
   # };
 
 
+  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+  ## Sound
+  # Enable sound.
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
+    jack.enable = true;
+  };
+
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -99,10 +112,14 @@
     # Use the stable driver package
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-    # Enable modesetting for better Wayland support
+    # Enable modesetting for better Wayland support and overall display.
+    # Essential for modern NVIDIA setups.
     modesetting.enable = true;
 
     # Open-source drivers are for RTX 20-series and newer
+    # Set to false to use the proprietary (closed-source) driver.
+    # Set to true to attempt to use the open-source NVIDIA kernel modules (new, might not work on GTX 1050 yet).
+    # For stability and performance with GTX 1050, keep false.
     open = false;
 
     # Enable the NVIDIA settings application
@@ -111,6 +128,7 @@
     # Power management set to false. 
     powerManagement.enable = false;
   };
+
 
 
 
@@ -186,14 +204,24 @@
 
 
 
+
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## Sound
-  # Enable sound.
-  services.pipewire = {
+  ##### Suwayomi server
+  ###  
+  services.suwayomi-server = {
     enable = true;
-    pulse.enable = true;
-    alsa.enable = true;
-    jack.enable = true;
+
+    dataDir = "/storage/Orchid/shortstack/suwayomi-server"; # Default is "/var/lib/suwayomi-server"
+    # openFirewall = true;
+
+    settings = {
+      server.port = 4567;
+      server.enableSystemTray = true;
+      server.autoDownloadNewChapters = true;
+      server.downloadsPath = "/storage/Yarrow/Media/Manga_1";
+      server.backupPath = "/storage/Yarrow/Media/Manga_2";
+      server.debugLogsEnable = true;
+    };
   };
 
 
@@ -239,6 +267,11 @@
     exfatprogs
     parted
   ];
+
+
+  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+  ## Unfree packages
+  nixpkgs.config.allowUnfree = true;
 
 
 

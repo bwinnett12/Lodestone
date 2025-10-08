@@ -11,7 +11,7 @@
   fileSystems."/storage/Orchid" = {
 
 	### UUID
-    device = "UUID=bc36d5da-5b76-4ef1-9751-c9773c24d08e";
+    device = "UUID=0d360bd2-a774-4d26-91c4-def6d9fd9ce7";
     
     fsType = "btrfs";
     

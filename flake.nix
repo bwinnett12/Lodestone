@@ -74,31 +74,31 @@
         ./hosts/island/hardware-configuration.nix
         #./home.nix
 
+
+
         ### Home manager
         home-manager.nixosModules.home-manager
 
         {
-          # Replace 'yourusername' with your actual username
           home-manager.users.tarobutter = import ./home.nix; 
         }
 
 
 
-
         ### Shortstack
-        ## Story:
-        ## There is none
         ./modules/The-Big-Frog/main.nix
-        
-        ## Additional Modules
         ./modules/localai/main.nix
+        
+        
 
         ### Storage options
         ./modules/hardware/storage/nettle.nix
         ./modules/hardware/storage/orchid.nix
         ./modules/hardware/storage/yarrow.nix
 
-        ## Academic
+
+
+        ### Academic
         ./modules/academic/zotero/main.nix
 
       ];

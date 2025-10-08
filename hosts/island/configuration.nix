@@ -197,15 +197,6 @@
     #description = "Group for LocalAI model/drive access";
   };
 
-
-  # Ensure model dir exists with desired ownership and permissions.
-  systemd.tmpfiles.rules = [
-    # Type | Path | Mode | UID | GID | Age | Argument
-    "d /storage/Orchid/shortstack/localai 0755 localai localai - -"
-    "d /storage/Orchid/shortstack/localai/models 0755 localai localai - -"
-    # Note: The 'localai' user/group names are automatically translated to UID 9300/GID 9400.
-  ];
-
   systemd.services.localai.serviceConfig = {
     # CRITICAL FIX: The base LocalAI NixOS module often generates a pre-start
     # script (localai-pre-start) that includes a chown command.

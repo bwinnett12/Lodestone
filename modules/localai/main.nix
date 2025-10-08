@@ -127,6 +127,7 @@ in
         Environment = [
           "PORT=8080"
           "LOCALAI_ADDR=127.0.0.1"
+          "PATH=${pkgs.llama-cpp}/bin"
         ];
       };
       wantedBy = [ "multi-user.target" ];

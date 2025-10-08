@@ -147,7 +147,7 @@
   ## LocalAI Server
   services.localai.enable = true;
   services.localai.version = "v3.6.0";
-  services.localai.tarballSha256 = "sha256-2cWoaX82WSLPYcaeIPRQSu/U/tzdqKxodq5YkvYBXmM=";
+  services.localai.tarballSha256 = "sha256:d9c5a8697f365922cf61c69e20f4504aefd4fedcdda8ac6876ae5892f6015e63";
   services.localai.listenAddr = "127.0.0.1";
   services.localai.listenPort = 8080;
   services.localai.extraArgs = [ "--log-level=info" ];

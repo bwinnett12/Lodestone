@@ -33,7 +33,6 @@ let
 
   llama-cpp-wrapper = pkgs.writeScriptBin "llama-cpp-grpc" ''
     #!${pkgs.stdenv.shell}
-    # Pass all arguments ($@) to the actual llama-server binary
     exec ${pkgs.llama-cpp}/bin/llama-server "$@"
   '';
 
@@ -123,7 +122,7 @@ in
         PermissionsStartOnly = true;
         Restart = "on-failure";
         RestartSec = "5s";
-        Environment = [
+        Environment = [ 
           "PORT=${toString cfg.listenPort}"
           "LOCALAI_ADDR=${cfg.listenAddr}"
           "PATH=${llama-cpp-wrapper}/bin:$PATH" 

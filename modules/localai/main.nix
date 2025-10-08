@@ -6,15 +6,10 @@ let
   cfg = config.services.localai;
   localaiBasePath = builtins.substring 0 (builtins.stringLength cfg.modelDir - builtins.stringLength "/models") cfg.modelDir;
 
-  # --- START OF REINSTATED DOWNLOAD/BUILD LOGIC ---
-
-  # 1. Define the URL for the desired pre-built binary.
-  # CRITICAL FIX 1: Change to the URL that is more likely to include all C++ backends, 
-  # and set the version higher to avoid known bugs.
+  ## Define binary to retrieve
   binaryUrl = "https://github.com/mudler/LocalAI/releases/download/${cfg.version}/local-ai-${cfg.version}-linux-amd64";  
 
-  # 2. Use fetchurl for a reproducible download.
-  # If tarballSha256 is null, it uses a placeholder to force a hash to be printed.
+  ## Retrieve tarballsha from config
   binarySrc = if cfg.tarballSha256 != null then
     pkgs.fetchurl {
       url = binaryUrl;
@@ -26,18 +21,21 @@ let
       sha256 = lib.fakeSha256;
     };
 
-  # 3. Package the downloaded binary into the Nix store.
+  ## Retrieve binary from nix store
   localai-bin = pkgs.runCommand "localai-binary-${cfg.version}" { } ''
     mkdir -p $out/bin
     install -m755 ${binarySrc} $out/bin/localai
   '';
 
-  # 4. Define variables needed by the service configuration (Moved from internal 'config' let block)
   localaiStorePath = "${localai-bin}/bin/localai";
   execStartCmd = if cfg.binaryPath != null then cfg.binaryPath else localaiStorePath;
   argsList = ["run"] ++ cfg.extraArgs;
 
-  # --- END OF REINSTATED DOWNLOAD/BUILD LOGIC ---
+  llama-cpp-wrapper = pkgs.writeScriptBin "llama-cpp-grpc" ''
+    #!${pkgs.stdenv.shell}
+    # Pass all arguments ($@) to the actual llama-server binary
+    exec ${pkgs.llama-cpp}/bin/llama-server "$@"
+  '';
 
 in
 {
@@ -101,7 +99,6 @@ in
       wget
       unzip
       jq
-      llama-cpp
     ];
 
     environment.etc."localai/.placeholder".text = "localai placeholder";
@@ -110,6 +107,8 @@ in
       description = "LocalAI inference server";
       after = [ "network.target" "storage-Orchid.mount" ]; 
       wants = [ "network.target" "storage-Orchid.mount" ]; 
+
+      path = [ pkgs.llama-cpp llama-cpp-wrapper ];
 
       serviceConfig = {
         Type = "simple";
@@ -125,9 +124,9 @@ in
         Restart = "on-failure";
         RestartSec = "5s";
         Environment = [
-          "PORT=8080"
-          "LOCALAI_ADDR=127.0.0.1"
-          "PATH=${pkgs.llama-cpp}/bin"
+          "PORT=${toString cfg.listenPort}"
+          "LOCALAI_ADDR=${cfg.listenAddr}"
+          "PATH=${llama-cpp-wrapper}/bin:$PATH" 
         ];
       };
       wantedBy = [ "multi-user.target" ];

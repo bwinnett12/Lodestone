@@ -38,6 +38,12 @@
   ];
 
 
+  ## Hard drive access.. Fix this later
+  users.groups.storage-orchid = {
+    # optional: gid = 1001; # You can set a specific GID if desired
+  };
+
+
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

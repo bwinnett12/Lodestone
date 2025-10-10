@@ -23,9 +23,9 @@
     ];
 
     # This is the standard, documented way for the directory attributes:
-    owner = "root";
-    group = "storage-orchid";
-    mode = "0775";
+    #owner = "root";
+    #group = "storage-orchid";
+    #mode = "0775";
   };
 }
 

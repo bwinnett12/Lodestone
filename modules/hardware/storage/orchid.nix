@@ -23,10 +23,10 @@
       "x-systemd.automount"
       "noatime"
     ];
-    
-    owner = "root";
-    group = "storage-orchid";
-    mode = "0775";
+
+    mountPoint.owner = "root";
+    mountPoint.group = "storage-orchid";
+    mountPoint.mode = "0775";
 
 
     # Note: Btrfs usually uses standard ACLs, but you can set defaults here.

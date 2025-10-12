@@ -34,13 +34,6 @@
 
 
 
-  ## Hard drive access.. Fix this later
-  users.groups.storage-orchid = {
-    # optional: gid = 1001; # You can set a specific GID if desired
-  };
-
-
-
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ####### Boot settings
@@ -132,7 +125,7 @@
 
   virtualisation.docker.rootless.daemon.settings.features.cdi = true;
   #virtualisation.docker.enableNvidia = true;
-  hardware.nvidia-container-toolkit.enable = true;
+  hardware.nvidia-container-toolkit.enable = true;  
 
   # Configure the NVIDIA module
   hardware.nvidia = {

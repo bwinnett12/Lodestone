@@ -22,10 +22,8 @@
       "noatime"
     ];
 
-    #owner = "root";
-    #group = "storage-orchid";
-    #mode = "0775";
+    owner = "root";
+    group = "storage-orchid";
+    mode = "0775";
   };
 }
-
-

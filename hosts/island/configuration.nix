@@ -124,11 +124,11 @@
   ## Enable the NVIDIA driver for Xorg and load the kernel module
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  # Enable graphic card
-  hardware.graphics.enable = true;
-
   # Configure the NVIDIA module
   hardware.nvidia = {
+
+    ## Enabled
+    graphics.enable = true;
 
     # Use the stable driver package
     package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -148,6 +148,9 @@
 
     # Power management set to false. 
     powerManagement.enable = false;
+
+    ## Nvidia toolkit for docker
+    nvidia-container-toolkit.enable = true;
   };
 
 
@@ -257,7 +260,9 @@
   services.suwayomi-server = {
     enable = true;
 
-    dataDir = "/storage/Orchid/shortstack/suwayomi-server"; # Default is "/var/lib/suwayomi-server"
+    dataDir = "/storage/Orchid/shortstack/suwayomi-server"; 
+    # dataDir = "/var/lib/suwayomi-server" # Default
+
     # openFirewall = true;
 
     settings = {

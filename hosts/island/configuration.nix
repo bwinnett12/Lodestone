@@ -31,11 +31,7 @@
   ## Build modifiers
   # nix.maxJobs = 1; # Only allow one build job at a time
 
-  systemd.tmpfiles.rules = [
-    "d /storage/Orchid/shortstack/localai 0755 localai localai - -"
-    "d /storage/Orchid/shortstack/localai/models 0755 localai localai - -"
-    # ... include backends and configuration if you want to be thorough
-  ];
+
 
 
   ## Hard drive access.. Fix this later
@@ -188,34 +184,34 @@
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## LocalAI Server
-  services.localai.enable = true;
-  services.localai.version = "v3.6.0";
-  services.localai.tarballSha256 = "sha256:d9c5a8697f365922cf61c69e20f4504aefd4fedcdda8ac6876ae5892f6015e63";
-  services.localai.listenAddr = "127.0.0.1";
-  services.localai.listenPort = 8080;
-  services.localai.extraArgs = [ "--log-level=info" ];
-  services.localai.modelDir = "/storage/Orchid/shortstack/localai/models";
+  #services.localai.enable = true;
+  #services.localai.version = "v3.6.0";
+  #services.localai.tarballSha256 = "sha256:d9c5a8697f365922cf61c69e20f4504aefd4fedcdda8ac6876ae5892f6015e63";
+  #services.localai.listenAddr = "127.0.0.1";
+  #services.localai.listenPort = 8080;
+  #services.localai.extraArgs = [ "--log-level=info" ];
+  #services.localai.modelDir = "/storage/Orchid/shortstack/localai/models";
 
   # Group for using localAI
-  users.groups.localai = {
-    gid = 9400;
-    name = "localai"; 
-    #description = "Group for LocalAI model/drive access";
-  };
+  #users.groups.localai = {
+  #  gid = 9400;
+  #  name = "localai"; 
+  #  #description = "Group for LocalAI model/drive access";
+  #};
 
-  systemd.services.localai.serviceConfig = {
+  #systemd.services.localai.serviceConfig = {
     # CRITICAL FIX: The base LocalAI NixOS module often generates a pre-start
     # script (localai-pre-start) that includes a chown command.
     # Since the ExFAT mount options (uid/gid) handle permissions, this chown fails.
     # We override the ExecStartPre to be empty to disable it.
-    ExecStartPre = "";
-    
+  #  ExecStartPre = "";
+  #  
     # You may also want to explicitly ensure the working directory is set to the home/model dir
     # WorkingDirectory = "/storage/Orchid/shortstack/localai"; 
-  };
+  #};
 
-  systemd.services.localai.after = [ "storage-Orchid.mount" ];
-  systemd.services.localai.wants = [ "storage-Orchid.mount" ];
+  #systemd.services.localai.after = [ "storage-Orchid.mount" ];
+  #systemd.services.localai.wants = [ "storage-Orchid.mount" ];
 
 
 
@@ -247,21 +243,21 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "localai" "storage-orchid" ];
+    extraGroups = [ "wheel" "docker" "storage-orchid" ];
     packages = with pkgs; [
       tree
     ];
   };
 
-  users.users.localai = {
-    isSystemUser = true;
-    uid = 9300;
-    createHome = true;
-    home = "/storage/Orchid/shortstack/localai/";
-    #description = "A generic localAI user";
-    group = "localai";
-    extraGroups = [ "localai" "users" "storage-orchid"];
-  };
+  #users.users.localai = {
+  #  isSystemUser = true;
+  #  uid = 9300;
+   # createHome = true;
+  #  home = "/storage/Orchid/shortstack/localai/";
+  #  #description = "A generic localAI user";
+  #  group = "localai";
+  #  extraGroups = ["users" "storage-orchid"];
+  #};
 
 
 
@@ -282,6 +278,7 @@
     parted
     btrfs-progs
     lsof
+    docker-compose
   ];
 
 

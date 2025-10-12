@@ -97,7 +97,6 @@
 
         ### Shortstack
         ./modules/The-Big-Frog/main.nix
-        ./modules/localai/main.nix
         
         
 

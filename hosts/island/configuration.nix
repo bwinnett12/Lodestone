@@ -317,6 +317,7 @@
     btrfs-progs
     lsof
     docker-compose
+    nvidia-ctk
   ];
 
 

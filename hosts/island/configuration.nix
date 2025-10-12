@@ -128,6 +128,7 @@
   services.xserver.videoDrivers = [ "nvidia" ];
 
   virtualisation.docker.rootless.daemon.settings.features.cdi = true;
+  virtualisation.docker.enableNvidia = true;
 
   # Configure the NVIDIA module
   hardware.nvidia = {

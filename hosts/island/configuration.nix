@@ -217,6 +217,40 @@
 
 
 
+  systemd.services.localai-docker-compose = {
+  description = "LocalAI via Docker Compose";
+  # Wait for network and your storage mount to be ready
+  after = [ "network.target" "docker.service" "storage-Orchid.mount" ];
+  requires = [ "docker.service" ];
+  wantedBy = [ "multi-user.target" ];
+  serviceConfig = {
+    # Replace the path with wherever you put your docker-compose.yml
+    ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml up --build --force-recreate";
+    ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml down";
+    # Run as your user if you want to manage it outside of NixOS config
+    # or as root (default) for system-level control.
+    User = "root"; # Keep as root or switch to 'tarobutter' if you use rootless docker/user systemd
+    # Set the working directory to the directory of the compose file
+    WorkingDirectory = "/etc/localai"; 
+    Restart = "on-failure";
+    RestartSec = "5s";
+  };
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ##### Suwayomi server
   ###  

@@ -241,15 +241,13 @@
   };
 
 
-
-
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## User groups
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "localai" ];
+    extraGroups = [ "wheel" "localai" "storage-orchid" ];
     packages = with pkgs; [
       tree
     ];
@@ -262,7 +260,7 @@
     home = "/storage/Orchid/shortstack/localai/";
     #description = "A generic localAI user";
     group = "localai";
-    extraGroups = [ "localai" "users" ];
+    extraGroups = [ "localai" "users" "storage-orchid" ];
   };
 
 

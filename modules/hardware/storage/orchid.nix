@@ -9,7 +9,7 @@
 
 {
   ### Permissions - Add "storage-orchid" as a group for access
-  users.groups.storage-orchid = { };
+  #users.groups.storage-orchid = { };
 
 
   fileSystems."/storage/Orchid" = {
@@ -22,8 +22,5 @@
       "noatime"
     ];
 
-    #owner = "root";
-    #group = "storage-orchid";
-    #mode = "0775";
   };
 }

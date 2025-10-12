@@ -220,7 +220,7 @@
   systemd.services.localai-docker-compose = {
   description = "LocalAI via Docker Compose";
   # Wait for network and your storage mount to be ready
-  after = [ "network.target" "docker.service" "storage-Orchid.mount" ];
+  # after = [ "network.target" "docker.service" "storage-Orchid.mount" ];
   requires = [ "docker.service" ];
   wantedBy = [ "multi-user.target" ];
   serviceConfig = {
@@ -279,7 +279,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "storage-orchid" ];
+    extraGroups = [ "wheel" "docker" ];
     packages = with pkgs; [
       tree
     ];
@@ -292,7 +292,7 @@
   #  home = "/storage/Orchid/shortstack/localai/";
   #  #description = "A generic localAI user";
   #  group = "localai";
-  #  extraGroups = ["users" "storage-orchid"];
+  #  extraGroups = ["users"];
   #};
 
 

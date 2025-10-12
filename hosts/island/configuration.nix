@@ -121,11 +121,13 @@
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   #### Nvidia settings
 
+  # Enable graphic card
+  hardware.graphics.enable = true;
+
   ## Enable the NVIDIA driver for Xorg and load the kernel module
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  # Enable graphic card
-  hardware.graphics.enable = true;
+  virtualisation.docker.rootless.daemon.settings.features.cdi = true;
 
   # Configure the NVIDIA module
   hardware.nvidia = {
@@ -148,9 +150,6 @@
 
     # Power management set to false. 
     powerManagement.enable = false;
-
-    ## Nvidia toolkit for docker
-    nvidia-container-toolkit.enable = true;
   };
 
 

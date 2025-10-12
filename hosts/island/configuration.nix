@@ -124,11 +124,13 @@
   ## Enable the NVIDIA driver for Xorg and load the kernel module
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  hardware.nvidia.graphics.enable = true;
+
   # Configure the NVIDIA module
   hardware.nvidia = {
 
     ## Enabled
-    graphics.enable = true;
+    
 
     # Use the stable driver package
     package = config.boot.kernelPackages.nvidiaPackages.stable;

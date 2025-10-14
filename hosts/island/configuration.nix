@@ -225,8 +225,10 @@
   wantedBy = [ "multi-user.target" ];
   serviceConfig = {
     # Replace the path with wherever you put your docker-compose.yml
-    ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml up --build --force-recreate";
+    ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml up --debug"; 
     ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml down";
+
+    
     # Run as your user if you want to manage it outside of NixOS config
     # or as root (default) for system-level control.
     User = "root"; # Keep as root or switch to 'tarobutter' if you use rootless docker/user systemd

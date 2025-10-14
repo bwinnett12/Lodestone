@@ -96,7 +96,7 @@
 
 
         ### Shortstack
-        ./modules/The-Big-Frog/main.nix
+        ./modules/shortstack/main.nix
         
         
 

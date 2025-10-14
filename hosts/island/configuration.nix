@@ -292,7 +292,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "suwayomi" ];
     packages = with pkgs; [
       tree
     ];

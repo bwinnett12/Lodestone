@@ -19,8 +19,10 @@
       "defaults"
       "nofail"
       "x-systemd.automount"
-      "uid=1000"
-      "gid=100"
+      "x-systemd.device-timeout=5s"
+      "uid=suwayomi"        # <-- ADD THIS: Treats all files as owned by the user 'suwayomi'
+      "gid=suwayomi"        # <-- ADD THIS: Treats all files as owned by the group 'suwayomi'
+      "umask=0002"          # Recommended for permissions
     ];
   };
 }

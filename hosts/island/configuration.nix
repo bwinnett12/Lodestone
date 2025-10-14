@@ -65,7 +65,7 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [4567];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # networking.firewall.enable = false;  ## To disable the firewall altogether.
 
@@ -259,6 +259,8 @@
   services.suwayomi-server = {
     enable = true;
 
+    user = "eluned";
+
     dataDir = "/storage/Orchid/shortstack/suwayomi-server"; 
     # dataDir = "/var/lib/suwayomi-server" # Default
 
@@ -287,15 +289,13 @@
     ];
   };
 
-  #users.users.localai = {
-  #  isSystemUser = true;
-  #  uid = 9300;
-   # createHome = true;
-  #  home = "/storage/Orchid/shortstack/localai/";
-  #  #description = "A generic localAI user";
-  #  group = "localai";
-  #  extraGroups = ["users"];
-  #};
+  users.users.eluned = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "docker" ];
+    packages = with pkgs; [
+      tree
+    ];
+  };
 
 
 

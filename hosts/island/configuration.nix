@@ -259,7 +259,7 @@
   services.suwayomi-server = {
     enable = true;
 
-    user = "eluned";
+    #user = "eluned";
 
     dataDir = "/storage/Orchid/shortstack/suwayomi-server"; 
     # dataDir = "/var/lib/suwayomi-server" # Default

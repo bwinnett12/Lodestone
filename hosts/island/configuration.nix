@@ -270,8 +270,8 @@
       server.port = 4567;
       server.enableSystemTray = true;
       server.autoDownloadNewChapters = true;
-      server.downloadsPath = "/storage/Yarrow/Media/Manga_1";
-      server.backupPath = "/storage/Yarrow/Media/Manga_2";
+      server.downloadsPath = "/storage/Orchid/Manga_1";
+      server.backupPath = "/storage/Orchid/Manga_2";
       server.debugLogsEnable = true;
     };
   };

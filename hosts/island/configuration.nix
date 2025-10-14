@@ -271,11 +271,15 @@
       server.port = 4567;
       server.enableSystemTray = true;
       server.autoDownloadNewChapters = true;
-      server.downloadsPath = "/storage/Orchid/Manga_1";
-      server.backupPath = "/storage/Orchid/Manga_2";
+      server.downloadsPath = "/storage/Yarrow/Manga_1";
+      server.backupPath = "/storage/Yarrow/Manga_2";
       server.debugLogsEnable = true;
     };
   };
+
+
+
+
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -291,8 +295,8 @@
   };
 
   users.users.eluned = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
+    isSystemUser = true;
+    extraGroups = [ "wheel" "docker" "users" ];
     packages = with pkgs; [
       tree
     ];

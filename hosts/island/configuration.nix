@@ -302,7 +302,6 @@
     isSystemUser = true;
     group = "suwayomi";
     extraGroups = [ "media" "wheel" "docker" ];
-    description = "Suwayomi Service User";
   };
 
 

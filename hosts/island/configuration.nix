@@ -253,14 +253,15 @@
 
 
 
+
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ##### Suwayomi server
   ###  
   services.suwayomi-server = {
     enable = true;
 
-    user = "eluned";
-    group = "users";
+    user = "suwayomi";
+    group = "suwayomi";
 
     dataDir = "/storage/Orchid/shortstack/suwayomi-server"; 
     # dataDir = "/var/lib/suwayomi-server" # Default
@@ -282,6 +283,9 @@
 
 
 
+
+
+
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## User groups
 
@@ -294,14 +298,12 @@
     ];
   };
 
-  users.users.eluned = {
+  users.users.suwayomi = {
     isSystemUser = true;
-    extraGroups = [ "wheel" "docker" "users" ];
-    packages = with pkgs; [
-      tree
-    ];
+    group = "suwayomi";
+    extraGroups = [ "media" "wheel" "docker" ];
+    description = "Suwayomi Service User";
   };
-
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

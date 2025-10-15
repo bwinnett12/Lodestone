@@ -20,9 +20,11 @@
       "nofail"
       "x-systemd.automount"
       "x-systemd.device-timeout=5s"
-      "uid=suwayomi"        # <-- ADD THIS: Treats all files as owned by the user 'suwayomi'
-      "gid=suwayomi"        # <-- ADD THIS: Treats all files as owned by the group 'suwayomi'
-      "umask=0002"          # Recommended for permissions
+
+      ## Todo - Set permissions on drive
+      "uid=suwayomi"
+      "gid=suwayomi"
+      "umask=0002"
     ];
   };
 }

@@ -10,12 +10,14 @@
     ];
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ####### System Information
+  ### System Information
 
   networking.hostName = "Island";
   time.timeZone = "America/Anchorage";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+  ### Nix settings
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ]; 
 
@@ -23,6 +25,28 @@
     # substituters = [ "https://cosmic.cachix.org/" ];
     # trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
   };
+
+  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+  ### General settings
+  virtualisation.docker.enable = true;
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  services.libinput.enable = true;
+
+  ## Key mapping
+  # Configure keymap in X11
+  services.xserver.xkb.layout = "us";
+  # services.xserver.xkb.options = "eurosign:e,caps:escape";
+
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # console = {
+  #  font = "Lat2-Terminus16";
+  #  keyMap = "us";
+  #  useXkbConfig = true; # use xkb.options in tty.
+  #};
 
 
 
@@ -153,35 +177,6 @@
 
 
 
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-
-
-
-  ## Docker
-  virtualisation.docker.enable = true;
-
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-
-  ####### Key mapping
-  # Configure keymap in X11
-  services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # console = {
-  #  font = "Lat2-Terminus16";
-  #  keyMap = "us";
-  #  useXkbConfig = true; # use xkb.options in tty.
-  #};
-
-
-
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## LocalAI Server
   #services.localai.enable = true;
@@ -216,22 +211,33 @@
 
 
 
+  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+  ## Local AI by docker-compose
+
+
 
   systemd.services.localai-docker-compose = {
+
+    ### LocalAI
     description = "LocalAI via Docker Compose";
+
+
     # Wait for network and your storage mount to be ready
     # after = [ "network.target" "docker.service" "storage-Orchid.mount" ];
+    
     requires = [ "docker.service" ];
     wantedBy = [ "multi-user.target" ];
+
+
     serviceConfig = {
       # Replace the path with wherever you put your docker-compose.yml
       ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml up"; 
       ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml down";
 
-      
-      # Run as your user if you want to manage it outside of NixOS config
-      # or as root (default) for system-level control.
-      User = "root"; # Keep as root or switch to 'tarobutter' if you use rootless docker/user systemd
+      ## Currently using root
+      ## #todo - Switch to localai or shortstack user
+      ## Currently root
+      User = "root";
       # Set the working directory to the directory of the compose file
       WorkingDirectory = "/etc/localai"; 
       Restart = "on-failure";

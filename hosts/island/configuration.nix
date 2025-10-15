@@ -259,8 +259,14 @@
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Komga
-  services.komga.enable = true;
+  services.komga = {
+    openFirewall = true; # Open the firewall for the selected port
 
+    # Configuration for the internal Komga Spring Boot application
+    settings = {
+      server.port = 8081; # Set a port like 8081 (or your preferred port)
+    };
+  };
 
 
 

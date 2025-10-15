@@ -75,7 +75,7 @@
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ######## Network settings
-
+  
   services.openssh.enable = true;
 
   ### Networking mechanism
@@ -260,32 +260,6 @@
 
 
 
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ##### Suwayomi server
-  ###  
-  services.suwayomi-server = {
-    enable = true;
-
-    user = "suwayomi";
-    group = "suwayomi";
-
-    dataDir = "/storage/Orchid/shortstack/suwayomi-server"; 
-    # dataDir = "/var/lib/suwayomi-server" # Default
-
-    # openFirewall = true;
-
-    settings = {
-      server.port = 4567;
-      server.enableSystemTray = true;
-      server.autoDownloadNewChapters = true;
-      server.downloadsPath = "/storage/Yarrow/Manga_1";
-      server.backupPath = "/storage/Yarrow/Manga_2";
-      server.debugLogsEnable = true;
-    };
-  };
-
-
-
 
 
 
@@ -298,17 +272,12 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "suwayomi" ];
+    extraGroups = [ "wheel" "docker" ];
     packages = with pkgs; [
       tree
     ];
   };
 
-  users.users.suwayomi = {
-    isSystemUser = true;
-    group = "suwayomi";
-    extraGroups = [ "media" "wheel" "docker" ];
-  };
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

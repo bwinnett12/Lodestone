@@ -268,6 +268,9 @@
     };
   };
 
+  users.users.komga.groups = [
+    "users"
+  ];
 
 
 

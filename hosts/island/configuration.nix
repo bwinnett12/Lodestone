@@ -84,12 +84,32 @@
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
 
+  ### Caddy for HTTPS Proxy
+  services.caddy = {
+    enable = true;
+    email = "bwinnett12@gmail.com";  # Required for Let's Encrypt registration
+    virtualHosts."localhost:8443" = { # Replace with your public domain
+      extraConfig = ''
+        # Caddy automatically generates a self-signed certificate for localhost
+        reverse_proxy 127.0.0.1:8081
+      '';
+      # Automatically opens ports 80/443 in the firewall.
+      # If you want to use a specific port, you must configure Caddy's listen addresses.
+    };
+  };
+
+  # Ensure ports 80 and 443 are open for Caddy to get certificates and serve HTTPS
+  networking.firewall.allowedTCPPorts = [];
+
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [4567];
+  ## 80 - Caddy
+  ## 443 - Caddy
+  networking.firewall.allowedTCPPorts = [ 8443 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # networking.firewall.enable = false;  ## To disable the firewall altogether.
 
@@ -180,6 +200,7 @@
 
 
 
+
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## LocalAI Server
   #services.localai.enable = true;
@@ -262,11 +283,12 @@
   services.komga.enable = true;
 
   services.komga = {
-    openFirewall = true; # Open the firewall for the selected port
+    openFirewall = false;
 
     # Configuration for the internal Komga Spring Boot application
     settings = {
       server.port = 8081; # Set a port like 8081 (or your preferred port)
+      address = "127.0.0.1";
     };
   };
 

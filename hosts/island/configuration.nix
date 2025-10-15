@@ -270,7 +270,7 @@
     };
   };
 
-  users.group.komga = "users";
+  users.groups.komga = "users";
 
 
 

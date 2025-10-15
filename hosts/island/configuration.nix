@@ -268,7 +268,7 @@
     };
   };
 
-  users.users.komga.groups = [
+  users.users.komga.group = [
     "users"
   ];
 

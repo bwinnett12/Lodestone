@@ -259,6 +259,8 @@
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Komga
+  services.komga.enable = true;
+
   services.komga = {
     openFirewall = true; # Open the firewall for the selected port
 
@@ -268,9 +270,7 @@
     };
   };
 
-  users.users.komga.group = [
-    "users"
-  ];
+  users.group.komga = "users";
 
 
 

@@ -98,8 +98,6 @@
     };
   };
 
-  # Ensure ports 80 and 443 are open for Caddy to get certificates and serve HTTPS
-  networking.firewall.allowedTCPPorts = [];
 
 
   # Configure network proxy if necessary

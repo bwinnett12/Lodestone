@@ -110,14 +110,13 @@
   
   
   networking.firewall.allowedTCPPorts = [ 
-   # 80  ## 80 - Caddy
-   # 443   ## 443 - Caddy
-   # 443   ## 8443 - Caddy
-    80801  ## 8081 - Komga
+    # 80  ## 80 - Caddy
+    # 443  ## 443 - Caddy
+    # 8443  ## 8443 - Caddy
+    8081  ## 8081 - Komga
   ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # networking.firewall.enable = false;  ## To disable the firewall altogether.
-
 
 
 

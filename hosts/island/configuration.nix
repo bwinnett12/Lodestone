@@ -85,18 +85,18 @@
 
 
   ### Caddy for HTTPS Proxy
-  services.caddy = {
-    enable = true;
-    email = "bwinnett12@gmail.com";  # Required for Let's Encrypt registration
-    virtualHosts."localhost:8443" = { # Replace with your public domain
-      extraConfig = ''
-        # Caddy automatically generates a self-signed certificate for localhost
-        reverse_proxy 127.0.0.1:8081
-      '';
-      # Automatically opens ports 80/443 in the firewall.
-      # If you want to use a specific port, you must configure Caddy's listen addresses.
-    };
-  };
+#  services.caddy = {
+#    enable = true;
+#    email = "bwinnett12@gmail.com";  # Required for Let's Encrypt registration
+#    virtualHosts."komga.platatoo.com" = { # Replace with your public domain
+#      extraConfig = ''
+#        # Caddy automatically generates a self-signed certificate for localhost
+#        reverse_proxy 127.0.0.1:8081
+#      '';
+#     # Automatically opens ports 80/443 in the firewall.
+#      # If you want to use a specific port, you must configure Caddy's listen addresses.
+#    };
+#  };
 
 
 
@@ -105,9 +105,16 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Open ports in the firewall.
-  ## 80 - Caddy
-  ## 443 - Caddy
-  networking.firewall.allowedTCPPorts = [ 8443 ];
+  
+  
+  
+  
+  networking.firewall.allowedTCPPorts = [ 
+   # 80  ## 80 - Caddy
+   # 443   ## 443 - Caddy
+   # 443   ## 8443 - Caddy
+    80801  ## 8081 - Komga
+  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # networking.firewall.enable = false;  ## To disable the firewall altogether.
 

@@ -20,11 +20,6 @@
       "nofail"
       "x-systemd.automount"
       "x-systemd.device-timeout=5s"
-
-      ## Todo - Set permissions on drive
-      "uid=suwayomi"
-      "gid=suwayomi"
-      "umask=0002"
     ];
   };
 }

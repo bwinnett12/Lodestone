@@ -113,7 +113,10 @@
     # 80  ## 80 - Caddy
     # 443  ## 443 - Caddy
     # 8443  ## 8443 - Caddy
-    8081  ## 8081 - Komga
+    8080  ## 8081 - LocalAI
+    2104  ## 2104 - Komga
+    2108  ## 2108 - Suwayomi Server
+
   ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # networking.firewall.enable = false;  ## To disable the firewall altogether.
@@ -295,7 +298,7 @@
     # openFirewall = true;
 
     settings = {
-      server.port = 4567;
+      server.port = 2108;
       server.enableSystemTray = true;
       server.autoDownloadNewChapters = true;
       server.downloadsPath = "/storage/Yarrow/Manga_1";
@@ -316,7 +319,7 @@
 
     # Configuration for the internal Komga Spring Boot application
     settings = {
-      server.port = 8081; # Set a port like 8081 (or your preferred port)
+      server.port = 2104; # Set a port like 8081 (or your preferred port)
       address = "127.0.0.1";
     };
   };
@@ -383,12 +386,8 @@
   #   enableSSHSupport = true;
   # };
 
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  ### Beyond here lies nothin'
+  ### Nothin' we can call our own
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

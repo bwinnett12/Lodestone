@@ -293,16 +293,15 @@
     group = "suwayomi";
 
     dataDir = "/storage/Orchid/shortstack/suwayomi-server"; 
-    # dataDir = "/var/lib/suwayomi-server" # Default
-
-    # openFirewall = true;
+    #openFirewall = true;
 
     settings = {
       server.port = 2108;
+      server.address = "0.0.0.0";
       server.enableSystemTray = true;
       server.autoDownloadNewChapters = true;
       server.downloadsPath = "/storage/Yarrow/Manga_1";
-      server.backupPath = "/storage/Yarrow/Manga_2";
+      server.backupPath = "/storage/Yarrow/Manga_backup";
       server.debugLogsEnable = true;
     };
   };
@@ -319,7 +318,7 @@
 
     # Configuration for the internal Komga Spring Boot application
     settings = {
-      server.port = 2104; # Set a port like 8081 (or your preferred port)
+      server.port = 2104;
       address = "127.0.0.1";
     };
   };

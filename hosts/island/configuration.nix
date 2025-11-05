@@ -303,7 +303,7 @@
       server.address = "0.0.0.0";
       server.enableSystemTray = true;
       server.autoDownloadNewChapters = true;
-      server.downloadsPath = "/storage/Yarrow/Manga_1";
+      server.downloadsPath = "/storage/Orchid/Manga";
       server.backupPath = "/var/lib/suwayomi/backups";
       server.debugLogsEnable = true;
     };

@@ -368,6 +368,7 @@
     parted
     btrfs-progs
     lsof
+    efibootmgr
     docker-compose
     nvidia-container-toolkit
   ];

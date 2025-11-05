@@ -9,8 +9,7 @@
 
 {
   ### Permissions - Add "storage-orchid" as a group for access
-  #users.groups.storage-orchid = { };
-
+  users.groups.storage-orchid = { };
 
   fileSystems."/storage/Orchid" = {
 
@@ -24,3 +23,5 @@
 
   };
 }
+
+

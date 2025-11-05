@@ -242,6 +242,9 @@
 
 
 
+
+
+
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Local AI by docker-compose
 
@@ -301,7 +304,7 @@
       server.enableSystemTray = true;
       server.autoDownloadNewChapters = true;
       server.downloadsPath = "/storage/Yarrow/Manga_1";
-      server.backupPath = "/storage/Yarrow/Manga_backup";
+      server.backupPath = "/var/lib/suwayomi/backups";
       server.debugLogsEnable = true;
     };
   };
@@ -340,7 +343,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "storage-yarrow" ];
+    extraGroups = [ "wheel" "docker" "storage-yarrow" "storage-orchid"];
     packages = with pkgs; [
       tree
     ];

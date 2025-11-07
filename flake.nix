@@ -120,6 +120,21 @@
       };
     };
 
+    devShells.${system}.video-tools = mkShell { # Correctly use the 'mkShell' defined in the let block
+      packages = with pkgs; [ # Correctly use 'pkgs' defined in the let block
+        handbrake
+        makemkv
+        mkvtoolnix
+        flac
+        cdparanoia
+        abcde
+      ];
+      shellHook = ''
+        echo "Entering video transcoding shell from flake."
+        echo "HandBrake, MakeMKV, and MKVToolNix are available."
+      '';
+    };
+
 
     # ~~!~~~~~~!~~~~~~!~~!~~~~~~!~~~~~~!~~~~~~!~~!~~x~x~~!~~!~~~~~! # 
 

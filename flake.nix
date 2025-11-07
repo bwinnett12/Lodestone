@@ -46,6 +46,7 @@
 
       ## System Architecture
       system = "x86_64-linux";
+      config = { allowUnfree = true; };
 
 
       ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -75,6 +76,7 @@
     
       ## System Architecture
       system = "x86_64-linux";
+      config = { allowUnfree = true; };
 
 
       ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

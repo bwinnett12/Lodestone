@@ -120,7 +120,7 @@
       };
     };
 
-    devShells.${system}.video-tools = mkShell { # Correctly use the 'mkShell' defined in the let block
+    devShells."x86_64-linux".video-tools = mkShell { # Correctly use the 'mkShell' defined in the let block
       packages = with pkgs; [ # Correctly use 'pkgs' defined in the let block
         handbrake
         makemkv

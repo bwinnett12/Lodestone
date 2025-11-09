@@ -364,6 +364,7 @@
     git
     vlc
     nettools
+    rustscan
     coreutils
     exfatprogs
     parted

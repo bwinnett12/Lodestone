@@ -363,6 +363,7 @@
     wget
     git
     vlc
+    arp
     coreutils
     exfatprogs
     parted

@@ -1,6 +1,7 @@
 ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
 ## Flakes are fun
 ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+
 {
   description = "a NixOS Flake for Me";
 
@@ -46,7 +47,6 @@
 
       ## System Architecture
       system = "x86_64-linux";
-      config = { allowUnfree = true; };
 
 
       ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -76,7 +76,6 @@
     
       ## System Architecture
       system = "x86_64-linux";
-      config = { allowUnfree = true; };
 
 
       ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -121,6 +120,42 @@
         nixosCosmicModule = nixos-cosmic.nixosModules.default;
       };
     };
+
+    # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
+
+
+
+
+
+
+    ### Locomotive
+    ## A raspberry pi 4
+    nixosConfigurations.Locomotive = nixpkgs.lib.nixosSystem {
+    
+      ## System Architecture
+      system = "x86_64-linux";  ## Fix this
+
+
+      ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+      ## Import modules
+      modules = [
+
+        ## Machine Specific Configuration
+        ./hosts/locomotive/configuration.nix
+
+
+        ### Home manager
+        home-manager.nixosModules.home-manager
+
+        {
+          home-manager.users.tarobutter = import ./home.nix; 
+        }
+
+      ]
+    };
+
+   # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
+
 
     devShells."x86_64-linux".video-tools = nixpkgs.legacyPackages."x86_64-linux".mkShell {
       packages = with nixpkgs.legacyPackages."x86_64-linux".pkgs; [ handbrake makemkv mkvtoolnix flac cdparanoia abcde ];

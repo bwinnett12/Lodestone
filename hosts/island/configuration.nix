@@ -213,7 +213,7 @@
   services.guacamole-server = {
     enable = true;
     host = "127.0.0.1";
-    userMappingXml = /var/lib/guacamole/user-mapping.xml;
+    userMappingXml = /etc/guacamole/user-mapping.xml;
     # package = pkgs.unstable.guacamole-server; # Optional, use only when you want to use the unstable channel
   };
 

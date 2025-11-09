@@ -207,6 +207,48 @@
 
 
 
+  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+  #### Nvidia settings
+  ### Guacamole
+  services.guacamole-server = {
+    enable = true;
+    host = "127.0.0.1";
+    userMappingXml = ./guacamole/user-mapping.xml;
+    # package = pkgs.unstable.guacamole-server; # Optional, use only when you want to use the unstable channel
+  };
+
+  services.guacamole-client = {
+    enable = true;
+    enableWebserver = true;
+    settings = {
+      guacd-port = 4822;
+      guacd-hostname = "127.0.0.1";
+    };
+    # package = pkgs.unstable.guacamole-client; # Optional, use only when you want to use the unstable channel
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## LocalAI Server

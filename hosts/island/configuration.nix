@@ -116,6 +116,7 @@
     8080  ## 8081 - LocalAI
     2104  ## 2104 - Komga
     2108  ## 2108 - Suwayomi Server
+    4822  ## 4822 - Guacamole
 
   ];
   # networking.firewall.allowedUDPPorts = [ ... ];

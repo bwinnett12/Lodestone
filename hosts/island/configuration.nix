@@ -406,14 +406,20 @@
     wget
     git
     vlc
+
+    openssl
     nettools
     rustscan
+
     coreutils
+
     exfatprogs
     parted
     btrfs-progs
     lsof
+
     docker-compose
+    
     nvidia-container-toolkit
   ];
 

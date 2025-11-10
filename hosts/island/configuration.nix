@@ -231,7 +231,6 @@
       guacd-port = 4822;
       guacd-hostname = "127.0.0.1";
     };
-    # package = pkgs.unstable.guacamole-client; # Optional, use only when you want to use the unstable channel
   };
 
 
@@ -423,6 +422,8 @@
     parted
     btrfs-progs
     lsof
+
+    guacamole-client
 
     docker-compose
 

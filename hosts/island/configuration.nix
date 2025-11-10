@@ -113,11 +113,10 @@
     # 80  ## 80 - Caddy
     # 443  ## 443 - Caddy
     # 8443  ## 8443 - Caddy
-    8080  ## 8081 - LocalAI
+    8080  ## 8080 - LocalAI
     2104  ## 2104 - Komga
     2108  ## 2108 - Suwayomi Server
     4822  ## 4822 - Guacamole
-    8888  ## 8888 - Guacamole Temp
 
   ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -229,13 +228,6 @@
     enable = true;
     enableWebserver = true;
 
-    webserver = {
-      listenPort = 8888;
-      enableTls = false;     # set true and provide certs if you want HTTPS
-      # tlsCertificate = /path/to/fullchain.pem;
-      # tlsCertificateKey = /path/to/privkey.pem;
-    };
-
     settings = {
       guacd-port = 4822;
       guacd-hostname = "127.0.0.1";
@@ -257,44 +249,6 @@
 
 
 
-
-
-
-
-
-
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## LocalAI Server
-  #services.localai.enable = true;
-  #services.localai.version = "v3.6.0";
-  #services.localai.tarballSha256 = "sha256:d9c5a8697f365922cf61c69e20f4504aefd4fedcdda8ac6876ae5892f6015e63";
-  #services.localai.listenAddr = "127.0.0.1";
-  #services.localai.listenPort = 8080;
-  #services.localai.extraArgs = [ "--log-level=info" ];
-  #services.localai.modelDir = "/storage/Orchid/shortstack/localai/models";
-
-  # Group for using localAI
-  #users.groups.localai = {
-  #  gid = 9400;
-  #  name = "localai"; 
-  #  #description = "Group for LocalAI model/drive access";
-  #};
-
-  #systemd.services.localai.serviceConfig = {
-    # CRITICAL FIX: The base LocalAI NixOS module often generates a pre-start
-    # script (localai-pre-start) that includes a chown command.
-    # Since the ExFAT mount options (uid/gid) handle permissions, this chown fails.
-    # We override the ExecStartPre to be empty to disable it.
-  #  ExecStartPre = "";
-  #  
-    # You may also want to explicitly ensure the working directory is set to the home/model dir
-    # WorkingDirectory = "/storage/Orchid/shortstack/localai"; 
-  #};
-
-  #systemd.services.localai.after = [ "storage-Orchid.mount" ];
-  #systemd.services.localai.wants = [ "storage-Orchid.mount" ];
 
 
 

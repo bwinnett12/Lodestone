@@ -114,6 +114,7 @@
     # 443  ## 443 - Caddy
     # 8443  ## 8443 - Caddy
     8080  ## 8080 - LocalAI
+    8081  ## 8081 - LocalAI
     2104  ## 2104 - Komga
     2108  ## 2108 - Suwayomi Server
     4822  ## 4822 - Guacamole

@@ -208,6 +208,12 @@
 
 
 
+
+
+
+
+
+
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   #### Nvidia settings
   ### Guacamole
@@ -419,7 +425,7 @@
     lsof
 
     docker-compose
-    
+
     nvidia-container-toolkit
   ];
 

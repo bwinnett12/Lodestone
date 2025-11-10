@@ -117,6 +117,7 @@
     2104  ## 2104 - Komga
     2108  ## 2108 - Suwayomi Server
     4822  ## 4822 - Guacamole
+    8888  ## 8888 - Guacamole Temp
 
   ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -215,7 +216,7 @@
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  #### Nvidia settings
+  #### Guacamole
   ### Guacamole
   services.guacamole-server = {
     enable = true;
@@ -227,6 +228,14 @@
   services.guacamole-client = {
     enable = true;
     enableWebserver = true;
+
+    webserver = {
+      listenPort = 8888;
+      enableTls = false;     # set true and provide certs if you want HTTPS
+      # tlsCertificate = /path/to/fullchain.pem;
+      # tlsCertificateKey = /path/to/privkey.pem;
+    };
+
     settings = {
       guacd-port = 4822;
       guacd-hostname = "127.0.0.1";

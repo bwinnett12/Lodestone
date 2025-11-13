@@ -145,7 +145,7 @@
         home-manager.nixosModules.home-manager
 
         {
-          home-manager.users.tarobutter = import ./home.nix; 
+          home-manager.users.tarobutter = import ./home ; 
         }
 
       ];

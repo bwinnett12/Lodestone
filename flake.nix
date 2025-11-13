@@ -38,12 +38,11 @@
 
     homeConfigurations = {
       tarobutter = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
         configuration = import ./modules/home.nix { 
-          inherit pkgs; 
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
           config = {}; 
         };
-        # set user and hostname
+        
         username = "tarobutter";
         homeDirectory = "/home/tarobutter";
       };

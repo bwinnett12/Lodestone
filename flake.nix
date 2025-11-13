@@ -38,8 +38,7 @@
 
     homeConfigurations = {
       tarobutter = home-manager.lib.homeManagerConfiguration {
-        inherit system;
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
         configuration = import ./modules/home.nix { 
           inherit pkgs; 
           config = {}; 

@@ -84,20 +84,6 @@
         ## Machine Specific Configuration
         ./machines/island/configuration.nix
 
-        let
-         hm = home-manager.lib;
-        in
-        {
-          home-manager.nixosModules.home-manager
-          (hm.homeManagerConfiguration {
-          pkgs = pkgs;
-          modules = [ ./home ];
-          # optional:
-          # username = "tarobutter";
-          # homeDirectory = "/home/tarobutter";
-          })
-        }
-
 
 
         ### Shortstack
@@ -112,6 +98,20 @@
 
 
       ];
+
+      let
+         hm = home-manager.lib;
+        in
+        {
+          home-manager.nixosModules.home-manager
+          (hm.homeManagerConfiguration {
+          pkgs = pkgs;
+          modules = [ ./home ];
+          # optional:
+          # username = "tarobutter";
+          # homeDirectory = "/home/tarobutter";
+          })
+        }
 
 
       ### Additional Arguments
@@ -136,6 +136,20 @@
       system = "x86_64-linux";  ## Fix this
 
 
+      let
+          hm = home-manager.lib;
+          in
+          {
+            home-manager.nixosModules.home-manager
+            (hm.homeManagerConfiguration {
+            pkgs = pkgs;
+            modules = [ ./home ];
+            # optional:
+            # username = "tarobutter";
+            # homeDirectory = "/home/tarobutter";
+            })
+          }
+
       ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
       ## Import modules
       modules = [
@@ -143,20 +157,6 @@
         ## Machine Specific Configuration
         ./hosts/locomotive/configuration.nix
 
-
-        let
-         hm = home-manager.lib;
-        in
-        {
-          home-manager.nixosModules.home-manager
-          (hm.homeManagerConfiguration {
-          pkgs = pkgs;
-          modules = [ ./home ];
-          # optional:
-          # username = "tarobutter";
-          # homeDirectory = "/home/tarobutter";
-          })
-        }
 
       ];
     };

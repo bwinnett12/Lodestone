@@ -99,19 +99,7 @@
 
       ];
 
-      let
-         hm = home-manager.lib;
-        in
-        {
-          home-manager.nixosModules.home-manager
-          (hm.homeManagerConfiguration {
-          pkgs = pkgs;
-          modules = [ ./home ];
-          # optional:
-          # username = "tarobutter";
-          # homeDirectory = "/home/tarobutter";
-          })
-        }
+
 
 
       ### Additional Arguments
@@ -135,20 +123,6 @@
       ## System Architecture
       system = "x86_64-linux";  ## Fix this
 
-
-      let
-          hm = home-manager.lib;
-          in
-          {
-            home-manager.nixosModules.home-manager
-            (hm.homeManagerConfiguration {
-            pkgs = pkgs;
-            modules = [ ./home ];
-            # optional:
-            # username = "tarobutter";
-            # homeDirectory = "/home/tarobutter";
-            })
-          }
 
       ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
       ## Import modules

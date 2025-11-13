@@ -6,6 +6,7 @@
   ### Import Mechanism
   imports =
     [ 
+      ./hardware-configuration.nix
       nixosCosmicModule
     ];
 
@@ -254,10 +255,6 @@
 
 
 
-
-
-
-
 #  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
 #  ## Local AI by docker-compose
 #
@@ -406,6 +403,7 @@
     lsof
 
     guacamole-client
+    guacamole-server
 
     docker-compose
 

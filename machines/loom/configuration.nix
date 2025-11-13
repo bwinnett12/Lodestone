@@ -6,7 +6,9 @@
 {
   imports =
     [ 
+      ./hardware-configuration.nix
       nixosCosmicModule
+      
     ];
 
 

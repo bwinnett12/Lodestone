@@ -51,8 +51,7 @@
 
       ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
       modules = [
-        ./hosts/loom/configuration.nix
-        ./hosts/loom/hardware-configuration.nix
+        ./machines/loom/configuration.nix
       ];
 
 
@@ -83,15 +82,13 @@
       modules = [
 
         ## Machine Specific Configuration
-        ./hosts/island/configuration.nix
-        ./hosts/island/hardware-configuration.nix
-
+        ./machines/island/configuration.nix
 
         ### Home manager
         home-manager.nixosModules.home-manager
 
         {
-          home-manager.users.tarobutter = import ./home.nix; 
+          home-manager.users.tarobutter = import ./home ; 
         }
 
 

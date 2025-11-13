@@ -106,7 +106,7 @@
 
 
         ### Academic
-        ./modules/academic/zotero/main.nix
+        #./modules/academic/zotero/main.nix
 
       ];
 

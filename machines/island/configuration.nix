@@ -408,6 +408,8 @@
     docker-compose
 
     nvidia-container-toolkit
+
+    efibootmgr
   ];
 
 

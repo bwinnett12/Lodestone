@@ -36,6 +36,20 @@
   #### Outputs
   outputs = { self, nixpkgs, nixos-cosmic, home-manager, ... }: {
 
+    homeConfigurations = {
+      tarobutter = home-manager.lib.homeManagerConfiguration {
+        inherit system;
+        pkgs = nixpkgs.legacyPackages.${system};
+        configuration = import ./modules/home.nix { 
+          inherit pkgs; 
+          config = {}; 
+        };
+        # set user and hostname
+        username = "tarobutter";
+        homeDirectory = "/home/tarobutter";
+      };
+
+
 
     ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ #
     ####### Machines available

@@ -84,11 +84,18 @@
         ## Machine Specific Configuration
         ./machines/island/configuration.nix
 
-        ### Home manager
-        home-manager.nixosModules.home-manager
-
+        let
+         hm = home-manager.lib;
+        in
         {
-          home-manager.users.tarobutter = import ./home ; 
+          home-manager.nixosModules.home-manager
+          (hm.homeManagerConfiguration {
+          pkgs = pkgs;
+          modules = [ ./home ];
+          # optional:
+          # username = "tarobutter";
+          # homeDirectory = "/home/tarobutter";
+          })
         }
 
 
@@ -103,10 +110,6 @@
         ./modules/hardware/storage/orchid.nix
         ./modules/hardware/storage/yarrow.nix
 
-
-
-        ### Academic
-        #./modules/academic/zotero/main.nix
 
       ];
 
@@ -141,11 +144,18 @@
         ./hosts/locomotive/configuration.nix
 
 
-        ### Home manager
-        home-manager.nixosModules.home-manager
-
+        let
+         hm = home-manager.lib;
+        in
         {
-          home-manager.users.tarobutter = import ./home ; 
+          home-manager.nixosModules.home-manager
+          (hm.homeManagerConfiguration {
+          pkgs = pkgs;
+          modules = [ ./home ];
+          # optional:
+          # username = "tarobutter";
+          # homeDirectory = "/home/tarobutter";
+          })
         }
 
       ];

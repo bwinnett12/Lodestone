@@ -15,19 +15,19 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/745867b1-4e74-440b-b378-25b6bbb484e6";
+    { device = "/dev/disk/by-uuid/cc52c0f2-0420-474b-9f73-75c13af17b75";
       fsType = "ext4";
     };
 
 # In ~/Lodestone/hosts/island/hardware-configuration.nix
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/4A39-7CF4"; 
+    device = "/dev/disk/by-uuid/37EF-3F7E"; 
     fsType = "vfat";
   };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/4a2799a1-8b55-41b2-ba67-8082fe858f85"; }
-    ];
+#  swapDevices =
+#    [ { device = "/dev/disk/by-uuid/4a2799a1-8b55-41b2-ba67-8082fe858f85"; }
+#    ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

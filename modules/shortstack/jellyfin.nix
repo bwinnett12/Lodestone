@@ -1,4 +1,3 @@
-# ./modules/The-Big-Frog/jellyfin.nix
 #### Jellyfin server
 { config, pkgs, ... }:
 

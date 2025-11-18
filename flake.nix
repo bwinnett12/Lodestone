@@ -90,6 +90,10 @@
       ## System Architecture
       system = "x86_64-linux";
 
+      flake.homeModules.modules.communications.professional.enable = true;
+      flake.homeModules.modules.academic.enable = true;
+
+
 
       ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
       ## Import modules

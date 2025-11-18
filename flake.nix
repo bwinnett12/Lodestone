@@ -36,19 +36,18 @@
   #### Outputs
   outputs = { self, nixpkgs, nixos-cosmic, home-manager, ... }: {
 
-    homeConfigurations = {
-      tarobutter = home-manager.lib.homeManagerConfiguration {
-        configuration = import ./modules/home.nix { 
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          config = {}; 
-        };
-        
-        username = "tarobutter";
-        homeDirectory = "/home/tarobutter";
+    let
+      system = "x86_64-linux"; # Adjust as necessary
+      homeConfigurations = home-manager.lib;
+    in {
+      homeConfigurations = {
+        tarobutter = homeConfigurations.fromImport (import ./home.nix // {
+          profiles = {
+            academic = { enable = true; };
+            professional = { enable = true; };
+          };
+        });
       };
-
-    };
-
 
 
     ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ #
@@ -90,8 +89,8 @@
       ## System Architecture
       system = "x86_64-linux";
 
-      flake.homeModules.modules.communications.professional.enable = true;
-      flake.homeModules.modules.academic.enable = true;
+      # flake.homeModules.modules.communications.professional.enable = true;
+      # flake.homeModules.modules.academic.enable = true;
 
       #options.profiles.communication-professional.enable = true;
       #options.profiles.communication-personal.enable = true;

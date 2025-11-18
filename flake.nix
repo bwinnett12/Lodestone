@@ -106,6 +106,8 @@
         ## Machine Specific Configuration
         ./machines/island/configuration.nix
 
+        home-manager.nixosModules.home-manager
+
 
 
         ### Shortstack

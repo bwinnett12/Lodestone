@@ -36,18 +36,13 @@
   #### Outputs
   outputs = { self, nixpkgs, nixos-cosmic, home-manager, ... }: {
 
-    let
-      system = "x86_64-linux"; # Adjust as necessary
-      homeConfigurations = home-manager.lib;
-    in {
-      homeConfigurations = {
-        tarobutter = homeConfigurations.fromImport (import ./home.nix // {
-          profiles = {
-            academic = { enable = true; };
-            professional = { enable = true; };
-          };
-        });
-      };
+    homeConfigurations = {
+      tarobutter = homeConfigurations.fromImport (import ./home.nix // {
+        profiles = {
+          academic = { enable = true; };
+          professional = { enable = true; };
+        };
+      });
 
 
     ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ #

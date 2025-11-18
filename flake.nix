@@ -35,6 +35,7 @@
 
   #### Outputs
   outputs = { self, nixpkgs, nixos-cosmic, home-manager, ... }: {
+    
 
     homeConfigurations = {
       tarobutter = home-manager.lib.homeManagerConfiguration {

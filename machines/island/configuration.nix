@@ -1,6 +1,6 @@
 # https://search.nixos.org/options: NixOS manual (`nixos-help`)
 
-{ config, lib, pkgs, inputs, nixosCosmicModule, ... }:
+{ config, lib, pkgs, inputs, nixosCosmicModule, home-manager, ... }:
 
 {
   ### Import Mechanism

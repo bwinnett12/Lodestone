@@ -93,9 +93,9 @@
       #flake.homeModules.modules.communications.professional.enable = true;
       #flake.homeModules.modules.academic.enable = true;
 
-      options.profiles.communication-professional.enable = true;
-      options.profiles.communication-personal.enable = true;
-      options.profiles.academic = true;
+      #options.profiles.communication-professional.enable = true;
+      #options.profiles.communication-personal.enable = true;
+      #options.profiles.academic = true;
       
 
 

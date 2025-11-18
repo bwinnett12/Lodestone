@@ -1,3 +1,4 @@
+
 { config, pkgs, ... }:
 
 {
@@ -15,9 +16,11 @@
 
 
 
+
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Programming
   programs.bash.enable = true;
+
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -39,10 +42,12 @@
   ];
 
 
-
-
-
-
+  flake.homeModules = {
+    "modules/" = ./modules;
+    "modules/academic" = ./modules;
+    "modules/communications/personal" = ./modules/communications/personal;
+    "modules/communications/professional" = ./modules/communications/professional;
+  };
 
 
   #### ~~~~~~~~~

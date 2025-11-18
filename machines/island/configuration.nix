@@ -27,6 +27,12 @@
     # trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
   };
 
+
+
+  programs.home-manager.enable = true;
+
+
+
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ### General settings
   virtualisation.docker.enable = true;

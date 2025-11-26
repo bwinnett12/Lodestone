@@ -28,10 +28,7 @@
   };
 
 
-
-  programs.home-manager.enable = true;
-
-
+  home-manager.useUserPackages = true;
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ### General settings
@@ -416,6 +413,8 @@
     nvidia-container-toolkit
 
     efibootmgr
+
+    tmux
   ];
 
 

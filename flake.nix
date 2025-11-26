@@ -106,12 +106,10 @@
         ## Machine Specific Configuration
         ./machines/island/configuration.nix
 
-        home-manager.nixosModules.home-manager
-
-
 
         ### Shortstack
-        ./modules/shortstack/main.nix
+        ## Placeholder Jellyfin for now
+        ./modules/media/jellyfin.nix
         
         
 
@@ -119,6 +117,8 @@
         ./modules/hardware/storage/nettle.nix
         ./modules/hardware/storage/orchid.nix
         ./modules/hardware/storage/yarrow.nix
+
+        
 
 
       ];

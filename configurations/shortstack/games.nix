@@ -17,21 +17,9 @@ in {
       pkgs.runelite
       pkgs.teamspeak_client
       # see https://github.com/NixOS/nixpkgs/issues/78961
-      (pkgs.vesktop.override {
-        withSystemVencord = false;
-      })
       pkgs.warzone2100
       pkgs.winetricks
     ];
 
-    # add a .Desktop entry for Vesktop called "Discord"
-    xdg.desktopEntries = {
-      discord = {
-        name = "Discord";
-        exec = "vesktop";
-        genericName = "Discord";
-        terminal = false;
-      };
-    };
   };
 }

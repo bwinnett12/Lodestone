@@ -39,7 +39,7 @@
 
     homeConfigurations = {
       "tarobutter" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+        inherit nixpkgs;
         configuration = import ./home.nix // {
           profiles = {
             academic = { enable = true; };

@@ -12,7 +12,7 @@ services:
     environment:
       - DEBUG=true
     volumes:
-      - /storage/yarrow/localai/models:/storage/yarrow/localai/models:cached
+      - /storage/Yarrow/localai/models:/storage/Yarrow/localai/models:cached
     # For NVIDIA GPUs, uncomment:
     deploy:
       resources:

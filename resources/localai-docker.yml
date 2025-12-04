@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   api:
     # For GPU support, use one of:
@@ -13,7 +12,7 @@ services:
     environment:
       - DEBUG=true
     volumes:
-      - ./models:/models:cached
+      - /etc/localai/models:/etc/localai/models:cached
     # For NVIDIA GPUs, uncomment:
     deploy:
       resources:

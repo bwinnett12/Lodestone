@@ -37,9 +37,9 @@
   outputs = { self, nixpkgs, nixos-cosmic, home-manager, ... }: {
     
 
-    pkgs.homeConfigurations = {
-      tarobutter = home-manager.lib.homeManagerConfiguration {
-        inherit nixpkgs;
+    homeConfigurations = {
+      "tarobutter" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
         configuration = import ./home.nix // {
           profiles = {
             academic = { enable = true; };

@@ -279,7 +279,7 @@
       ## Currently root
       User = "root";
       # Set the working directory to the directory of the compose file
-      WorkingDirectory = "/storage/yarrow/"; 
+      WorkingDirectory = "/storage/yarrow"; 
       Restart = "on-failure";
       RestartSec = "5s";
   };

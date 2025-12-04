@@ -277,7 +277,7 @@
       ## Currently using root
       ## #todo - Switch to localai or shortstack user
       ## Currently root
-      User = "tarobutter";
+      User = "root";
       # Set the working directory to the directory of the compose file
       WorkingDirectory = "/storage/yarrow/"; 
       Restart = "on-failure";

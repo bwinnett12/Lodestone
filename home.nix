@@ -27,8 +27,11 @@
   ## Github information
   programs.git = {
     enable = true;
-    userName = "W. Winnett";
-    userEmail = "bwinnett12@gmail.com";
+    
+    settings.user = {
+      name = "W. Winnett";
+      email = "bwinnett12@gmail.com";
+    };
   };
 
 

@@ -20,7 +20,9 @@
     };
 
     ## Flake Utils
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
 
 
     ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -36,13 +38,18 @@
 
 
 
-  #### Outputs
-  outputs = inputs@{ self, nixpkgs, nixos-cosmic, home-manager, flake-utils, ... }: {
 
-    flake-utils.lib.eachDefaultSystem (system: 
-    let
-      pkgs = import nixpkgs { inherit system; };
-    in {
+
+
+  #### Outputs
+  outputs = { self, nixpkgs, nixos-cosmic, home-manager, flake-utils, ... }: {
+
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+        #pkgs = nixpkgs.legacyPackages.${system};
+      in 
+      rec {
 
       legacyPackages = {
         homeConfigurations = {

@@ -48,23 +48,19 @@
       let
         pkgs = import nixpkgs { inherit system; };
         #pkgs = nixpkgs.legacyPackages.${system};
-      in 
-      rec {
+
+      in {
 
       legacyPackages = {
+        inherit pkgs;
+
         homeConfigurations = {
           tarobutter = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-
+          
             modules = [ ./home.nix ];
             };
           };
         };
-
-
-    ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ #
-    ####### Machines available
-    # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
 
     nixosConfigurations = {
 
@@ -135,7 +131,6 @@
         };
       };
 
-    };
 
 
 
@@ -157,6 +152,8 @@
 
 
       ];
+    };
+
     };
 
    # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #

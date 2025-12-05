@@ -42,7 +42,7 @@
 
 
   #### Outputs
-  outputs = { self, nixpkgs, nixos-cosmic, home-manager, flake-utils, ... }: {
+  outputs = { self, nixpkgs, nixos-cosmic, home-manager, flake-utils, ... }: 
 
     flake-utils.lib.eachDefaultSystem (system:
       let
@@ -140,7 +140,7 @@
     Locomotive = nixpkgs.lib.nixosSystem {
     
       ## System Architecture
-      system = "x86_64-linux";  ## Fix this
+      system = "aarch64-linux";
 
 
       ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

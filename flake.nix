@@ -15,7 +15,7 @@
 
     ## Home manager
     home-manager = {
-      url = "github:nix-community/home-manage";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -61,93 +61,83 @@
     ####### Machines available
     # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
 
-    ### Loom
-    ## Originally a A Microsoft Surface Book 2 
-    nixosConfigurations.Loom = nixpkgs.lib.nixosSystem {
+    nixosConfigurations = {
 
-      ## System Architecture
-      system = "x86_64-linux";
+      ### Loom
+      ## Originally a A Microsoft Surface Book 2
+      # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
+      Loom = nixpkgs.lib.nixosSystem {
 
+        ## System Architecture
+        system = "x86_64-linux";
 
-      ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-      modules = [
-        ./machines/loom/configuration.nix
-      ];
+        ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+        modules = [
+          ./machines/loom/configuration.nix
+        ];
 
-
-      ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-      ### Additional Arguments 
-      specialArgs = {
-        inherit self; 
-        nixosCosmicModule = nixos-cosmic.nixosModules.default;
+        ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+        ### Additional Arguments 
+        specialArgs = {
+          inherit self; 
+          nixosCosmicModule = nixos-cosmic.nixosModules.default;
+        };
       };
-    };
-
-    # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
 
 
-
-
-
-    ### Island
-    ## A basic desktop PC
-    nixosConfigurations.Island = nixpkgs.lib.nixosSystem {
-    
-      ## System Architecture
-      system = "x86_64-linux";
-
-      # flake.homeModules.modules.communications.professional.enable = true;
-      # flake.homeModules.modules.academic.enable = true;
-
-      # options.profiles.communication-professional.enable = true;
-      # options.profiles.communication-personal.enable = true;
-      # options.profiles.academic = true;
+      ### Island
+      ## A basic desktop PC
+      Island = nixpkgs.lib.nixosSystem {
       
+        ## System Architecture
+        system = "x86_64-linux";
 
+        # flake.homeModules.modules.communications.professional.enable = true;
+        # flake.homeModules.modules.academic.enable = true;
 
-
-      ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-      ## Import modules
-      modules = [
-
-        ## Machine Specific Configuration
-        ./machines/island/configuration.nix
-
-
-        ### Shortstack
-        ## Placeholder Jellyfin for now
-        ./modules/media/jellyfin.nix
-        
-        
-
-        ### Storage options
-        ./modules/hardware/storage/nettle.nix
-        ./modules/hardware/storage/orchid.nix
-        ./modules/hardware/storage/yarrow.nix
-
+        # options.profiles.communication-professional.enable = true;
+        # options.profiles.communication-personal.enable = true;
+        # options.profiles.academic = true;
         
 
 
-      ];
+
+        ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+        ## Import modules
+        modules = [
+
+          ## Machine Specific Configuration
+          ./machines/island/configuration.nix
 
 
-      ### Additional Arguments
-      specialArgs = {
-        inherit self;
-        nixosCosmicModule = nixos-cosmic.nixosModules.default;
+          ### Shortstack
+          ## Placeholder Jellyfin for now
+          ./modules/media/jellyfin.nix
+          
+
+          ### Storage options
+          ./modules/hardware/storage/nettle.nix
+          ./modules/hardware/storage/orchid.nix
+          ./modules/hardware/storage/yarrow.nix
+
+        ];
+
+
+        ### Additional Arguments
+        specialArgs = {
+          inherit self;
+          nixosCosmicModule = nixos-cosmic.nixosModules.default;
+        };
       };
+
     };
-
-    # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
-
-
 
 
 
 
     ### Locomotive
     ## A raspberry pi 4
-    nixosConfigurations.Locomotive = nixpkgs.lib.nixosSystem {
+    Locomotive = nixpkgs.lib.nixosSystem {
     
       ## System Architecture
       system = "x86_64-linux";  ## Fix this

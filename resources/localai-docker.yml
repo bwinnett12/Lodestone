@@ -5,14 +5,14 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/readyz"]
       interval: 1m
-      timeout: 20m
+      timeout: 5m
       retries: 5
     ports:
       - 8080:8080
     environment:
       - DEBUG=true
     volumes:
-      - /storage/Yarrow/localai/models:/storage/Yarrow/localai/models:cached
+      - /storage/Orchid/shortstack/localai:/storage/Orchid/shortstack/localai/models:cached
     # For NVIDIA GPUs, uncomment:
     deploy:
       resources:

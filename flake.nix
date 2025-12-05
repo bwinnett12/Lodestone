@@ -5,19 +5,22 @@
 {
   description = "a NixOS Flake for Me";
 
+  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   #### Inputs
   inputs = {
 
-    ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-    #### Package repository sources
+    #### Package repo sources
     ## Nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    
 
-    ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
     ## Home manager
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manage";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ## Flake Utils
+    flake-utils.url = "github:numtide/flake-utils";
 
 
     ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -34,19 +37,24 @@
 
 
   #### Outputs
-  outputs = { self, nixpkgs, nixos-cosmic, home-manager, ... }: {
+  outputs = inputs@{ self, nixpkgs, nixos-cosmic, home-manager, flake-utils, ... }: {
+
+    flake-utils.lib.eachDefaultSystem (system: 
+    let
+      pkgs = import nixpkgs { inherit system; };
+    in {
+
+      legacyPackages = {
+        homeConfigurations = {
+          tarobutter = home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+
+            modules = [ ./home.nix ];
+            };
+          };
+        };
+    });
     
-
-    homeConfigurations = {
-      tarobutter = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
-        # extraSpecialArgs = {inherit inputs;};
-        modules = [
-          ./home.nix
-        ];
-      };
-    };
 
 
     ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ #

@@ -256,7 +256,7 @@
 
 
 
-  systemd.services.localai-docker-compose = {
+  systemd.services.localai-docker = {
 
     ### LocalAI
     description = "LocalAI via Docker Compose";
@@ -277,7 +277,8 @@
       ## Currently using root
       ## #todo - Switch to localai or shortstack user
       ## Currently root
-      User = "root";
+
+      User = "localai";
       # Set the working directory to the directory of the compose file
       WorkingDirectory = "/etc/localai/"; 
       Restart = "on-failure";
@@ -367,6 +368,16 @@
   users.users.tarobutter = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" "storage-yarrow" "storage-orchid"];
+    packages = with pkgs; [
+      tree
+    ];
+  };
+
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.localai = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "docker" "storage-orchid"];
     packages = with pkgs; [
       tree
     ];

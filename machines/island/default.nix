@@ -2,17 +2,15 @@
   pkgs,
   self,
   ...
-}: let
-  mounts = [
-    
-  ];
-in {
+}: 
+{ 
   imports = [
     ./hardware-configuration.nix
 
     self.nixosModules.locale
 
   ];
+  
   boot.loader = {
     efi.canTouchEfiVariables = true;
     systemd-boot.enable = true;
@@ -40,7 +38,7 @@ in {
 
 
   system.stateVersion = "25.05";
-  
+
   users.users.tarobutter = {
     description = "Tarot D. Butter";
     extraGroups = [

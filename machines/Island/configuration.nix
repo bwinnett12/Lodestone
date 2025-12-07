@@ -7,7 +7,7 @@
   imports =
     [ 
 
-      nixosCosmicModule
+      # nixosCosmicModule
       ./modules/jellyfin.nix
     ];
 

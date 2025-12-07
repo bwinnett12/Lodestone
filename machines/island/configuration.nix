@@ -13,8 +13,7 @@
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ### System Information
-
-  networking.hostName = "Island";
+  
   time.timeZone = "America/Anchorage";
   i18n.defaultLocale = "en_US.UTF-8";
 

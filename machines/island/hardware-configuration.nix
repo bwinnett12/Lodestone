@@ -19,7 +19,7 @@
       fsType = "ext4";
     };
 
-# In ~/Lodestone/hosts/island/hardware-configuration.nix
+# In ~/Lodestone/hosts/Island/hardware-configuration.nix
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/37EF-3F7E"; 
     fsType = "vfat";

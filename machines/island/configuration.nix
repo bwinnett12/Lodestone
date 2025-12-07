@@ -6,8 +6,9 @@
   ### Import Mechanism
   imports =
     [ 
-      ./hardware-configuration.nix
+
       nixosCosmicModule
+      ./modules/jellyfin.nix
     ];
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -34,27 +35,59 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
-  ## Key mapping
-  # Configure keymap in X11
-  services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # console = {
-  #  font = "Lat2-Terminus16";
-  #  keyMap = "us";
-  #  useXkbConfig = true; # use xkb.options in tty.
-  #};
+
+
+    
+  fileSystems."/storage/Yarrow/" = {
+
+    device = "UUID=6EFF-B51B";
+    fsType = "exfat";
+    options = [
+      "defaults"
+      "nofail"
+      "x-systemd.automount"
+      "x-systemd.device-timeout=5s"
+      "uid=1000"
+      "gid=storage-yarrow"
+    ];
+  };
+
+
+
+  fileSystems."/storage/Orchid/" = {
+
+    device = "UUID=4074ccad-cc37-4e98-9d6b-9dead0b25e1d";
+    fsType = "btrfs";
+    options = [
+      "nofail"
+      "x-systemd.automount"
+      "noatime"
+    ];
+
+  };
+
+
+  fileSystems."/storage/Nettle/" = {
+
+    device = "UUID=10ba586f-c9b7-48ce-a8e5-7f5adbb34ab9";
+    fsType = "ext4";
+    options = [
+      "defaults"
+      "nofail"
+      "x-systemd.automount"
+    ];
+  };
 
 
 
 
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## Build modifiers
-  # nix.maxJobs = 1; # Only allow one build job at a time
+
+
+
 
 
 
@@ -117,15 +150,9 @@
     4822  ## 4822 - Guacamole
 
   ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # networking.firewall.enable = false;  ## To disable the firewall altogether.
 
 
 
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ###### The environment
-
-  # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   #### Desktop Environments
@@ -152,9 +179,6 @@
 
 
 
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## Sound
-  # Enable sound.
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -367,7 +391,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "storage-yarrow" "storage-orchid"];
+    extraGroups = [ "wheel" "docker" ];
     packages = with pkgs; [
       tree
     ];
@@ -377,7 +401,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.localai = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "storage-orchid"];
+    extraGroups = [ "wheel" "docker" ];
     packages = with pkgs; [
       tree
     ];

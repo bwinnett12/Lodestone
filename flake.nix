@@ -25,6 +25,10 @@
     };
 
 
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
+
+
     ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
     ### Desktop sources
     ## Cosmic flake
@@ -37,135 +41,24 @@
   };
 
 
-
-
-
-
-  #### Outputs
-  outputs = { self, nixpkgs, nixos-cosmic, home-manager, flake-utils, ... }: 
-
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-        #pkgs = nixpkgs.legacyPackages.${system};
-
-      in {
-
-      legacyPackages = {
-        inherit pkgs;
-
-        homeConfigurations = {
-          tarobutter = home-manager.lib.homeManagerConfiguration {
-          
-            modules = [ ./home.nix ];
-            };
-          };
-        };
-
-    nixosConfigurations = {
-
-      ### Loom
-      ## Originally a A Microsoft Surface Book 2
-      # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
-      Loom = nixpkgs.lib.nixosSystem {
-
-        ## System Architecture
-        system = "x86_64-linux";
-
-        ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-        modules = [
-          ./machines/loom/configuration.nix
-        ];
-
-        ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-        ### Additional Arguments 
-        specialArgs = {
-          inherit self; 
-          nixosCosmicModule = nixos-cosmic.nixosModules.default;
-        };
-      };
-
-
-      ### Island
-      ## A basic desktop PC
-      Island = nixpkgs.lib.nixosSystem {
-      
-        ## System Architecture
-        system = "x86_64-linux";
-
-        # flake.homeModules.modules.communications.professional.enable = true;
-        # flake.homeModules.modules.academic.enable = true;
-
-        # options.profiles.communication-professional.enable = true;
-        # options.profiles.communication-personal.enable = true;
-        # options.profiles.academic = true;
-        
-
-
-
-        ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-        ## Import modules
-        modules = [
-
-          ## Machine Specific Configuration
-          ./machines/island/configuration.nix
-
-
-          ### Shortstack
-          ## Placeholder Jellyfin for now
-          ./modules/media/jellyfin.nix
-          
-
-          ### Storage options
-          ./modules/hardware/storage/nettle.nix
-          ./modules/hardware/storage/orchid.nix
-          ./modules/hardware/storage/yarrow.nix
-
-        ];
-
-
-        ### Additional Arguments
-        specialArgs = {
-          inherit self;
-          nixosCosmicModule = nixos-cosmic.nixosModules.default;
-        };
-      };
-
-
-
-
-
-    ### Locomotive
-    ## A raspberry pi 4
-    Locomotive = nixpkgs.lib.nixosSystem {
-    
-      ## System Architecture
-      system = "aarch64-linux";
-
-
-      ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-      ## Import modules
-      modules = [
-
-        ## Machine Specific Configuration
-        ./hosts/locomotive/configuration.nix
-
+outputs = {
+    self,
+    flake-parts,
+    ...
+  } @ inputs:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux" "aarch64-linux"];
+      imports = [
+        ./machines
 
       ];
     };
 
-    };
 
-       # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
-   #### Dev Shells
+    # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
+    #### Dev Shells
     devShells."x86_64-linux".video-tools = kgs.legacyPackages."x86_64-linux".mkShell {
       packages = with pkgs.legacyPackages."x86_64-linux".pkgs; [ handbrake makemkv mkvtoolnix flac cdparanoia abcde ];
       shellHook = ''echo "Entering video transcoding shell." '';
-      };
-
-
-    # ~~!~~~~~~!~~~~~~!~~!~~~~~~!~~~~~~!~~~~~~!~~!~~x~x~~!~~!~~~~~! # 
-
-  });
-
+    };
 }

@@ -7,7 +7,7 @@
   imports = [
     ./hardware-configuration.nix
 
-    self.nixosModules.locale
+    # self.nixosModules.locale
 
   ];
   

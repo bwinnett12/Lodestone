@@ -15,8 +15,8 @@
         system = "x86_64-linux";
       };
   in {
-    island = mkSystem "island";
+    Island = mkSystem "Island";
     # locomotive = mkSystem "locomotive";
-    loom = mkSystem "loom";
+    Loom = mkSystem "Loom";
   };
 }

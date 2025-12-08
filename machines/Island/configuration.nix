@@ -50,8 +50,6 @@
       "nofail"
       "x-systemd.automount"
       "x-systemd.device-timeout=5s"
-      "uid=1000"
-      "gid=storage-yarrow"
     ];
   };
 
@@ -239,12 +237,12 @@
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   #### Guacamole
   ### Guacamole
-  services.guacamole-server = {
-    enable = true;
-    host = "127.0.0.1";
-    userMappingXml = ./guacamole/user-mapping.xml;
+  #services.guacamole-server = {
+  #  enable = true;
+  #  host = "127.0.0.1";
+  #  userMappingXml = ./guacamole/user-mapping.xml;
     # package = pkgs.unstable.guacamole-server; # Optional, use only when you want to use the unstable channel
-  };
+  #};
 
   services.guacamole-client = {
     enable = true;
@@ -378,7 +376,10 @@
 
 
 
-
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+  };
 
 
 

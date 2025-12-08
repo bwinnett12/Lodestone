@@ -6,10 +6,6 @@
   services.jellyfin = {
     enable = true;
     openFirewall = true;
-
-    # Specify the user and group Jellyfin will run as.
-    user = "tarobutter";
-    group = "users";
   };
 }
   

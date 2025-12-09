@@ -408,6 +408,11 @@
     nettools
     rustscan
 
+    ## todo - Implement with Jellyfin stand-alone package
+    jellyfin
+    jellyfin-web
+    jellyfin-ffmpeg
+
     coreutils
 
     exfatprogs

@@ -7,6 +7,10 @@
     enable = true;
     openFirewall = true;
     user = "tarobutter";
+    group = "jellyfin";
+    dataDir = "/storage/Yarrow/temp";
+    configDir = "/storage/Orchid/temp";
+
   };
   
 }

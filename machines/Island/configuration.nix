@@ -316,9 +316,9 @@
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## User groups
-  users.groups.storage-yarrow = {};
-  users.groups.storage-orchid = {};
-  users.groups.storage-nettle = {};
+  users.groups.storage-yarrow = {};  # 986
+  users.groups.storage-orchid = {};  # 987
+  users.groups.storage-nettle = {};  # Get this 
     
   fileSystems."/storage/Yarrow" = {
 
@@ -329,6 +329,9 @@
       "nofail"
       "x-systemd.automount"
       "x-systemd.device-timeout=5s"
+      "gid=986"
+      "fmask=133"
+      "dmask=755"
     ];
   };
 
@@ -342,6 +345,7 @@
       "nofail"
       "x-systemd.automount"
       "noatime"
+      "gid=987"
     ];
 
   };
@@ -362,7 +366,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "storage-yarrow" "storage-nettle" "storage-orchid" ];
+    extraGroups = [ "wheel" "docker" "storage-yarrow" "storage-nettle" "storage-orchid" "jellyfin" ];
     packages = with pkgs; [
       tree
     ];

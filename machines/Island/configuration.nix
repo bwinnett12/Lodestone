@@ -39,45 +39,6 @@
 
 
 
-    
-  fileSystems."/storage/Yarrow" = {
-
-    device = "UUID=6EFF-B51B";
-    fsType = "exfat";
-    options = [
-      "defaults"
-      "nofail"
-      "x-systemd.automount"
-      "x-systemd.device-timeout=5s"
-    ];
-  };
-
-
-
-  fileSystems."/storage/Orchid" = {
-
-    device = "UUID=4074ccad-cc37-4e98-9d6b-9dead0b25e1d";
-    fsType = "btrfs";
-    options = [
-      "nofail"
-      "x-systemd.automount"
-      "noatime"
-    ];
-
-  };
-
-
-  fileSystems."/storage/Nettle" = {
-
-    device = "UUID=10ba586f-c9b7-48ce-a8e5-7f5adbb34ab9";
-    fsType = "ext4";
-    options = [
-      "defaults"
-      "nofail"
-      "x-systemd.automount"
-    ];
-  };
-
 
 
 
@@ -352,28 +313,56 @@
     };
   };
 
-  # users.groups.komga = "users";
 
+  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+  ## User groups
+  users.groups.storage-yarrow = {};
+  users.groups.storage-orchid = {};
+  users.groups.storage-nettle = {};
+    
+  fileSystems."/storage/Yarrow" = {
 
-
-
-  services.jellyfin = {
-    enable = true;
-    openFirewall = true;
-    user = "tarobutter";
+    device = "UUID=6EFF-B51B";
+    fsType = "exfat";
+    options = [
+      "defaults"
+      "nofail"
+      "x-systemd.automount"
+      "x-systemd.device-timeout=5s"
+    ];
   };
 
 
 
+  fileSystems."/storage/Orchid" = {
+
+    device = "UUID=4074ccad-cc37-4e98-9d6b-9dead0b25e1d";
+    fsType = "btrfs";
+    options = [
+      "nofail"
+      "x-systemd.automount"
+      "noatime"
+    ];
+
+  };
 
 
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## User groups
+  fileSystems."/storage/Nettle" = {
+
+    device = "UUID=10ba586f-c9b7-48ce-a8e5-7f5adbb34ab9";
+    fsType = "ext4";
+    options = [
+      "defaults"
+      "nofail"
+      "x-systemd.automount"
+    ];
+  };
+
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "storage-yarrow" "storage-nettle" "storage-orchid" ];
     packages = with pkgs; [
       tree
     ];
@@ -383,7 +372,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.localai = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "storage-nettle" "storage-orchid" ];
     packages = with pkgs; [
       tree
     ];

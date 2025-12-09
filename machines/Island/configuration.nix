@@ -1,4 +1,3 @@
-# https://search.nixos.org/options: NixOS manual (`nixos-help`)
 
 { config, lib, pkgs, inputs, nixosCosmicModule, home-manager, ... }:
 
@@ -115,21 +114,6 @@
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
 
-  ### Caddy for HTTPS Proxy
-#  services.caddy = {
-#    enable = true;
-#    email = "bwinnett12@gmail.com";  # Required for Let's Encrypt registration
-#    virtualHosts."komga.platatoo.com" = { # Replace with your public domain
-#      extraConfig = ''
-#        # Caddy automatically generates a self-signed certificate for localhost
-#        reverse_proxy 127.0.0.1:8081
-#      '';
-#     # Automatically opens ports 80/443 in the firewall.
-#      # If you want to use a specific port, you must configure Caddy's listen addresses.
-#    };
-#  };
-
-
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -137,9 +121,6 @@
 
   # Open ports in the firewall
   networking.firewall.allowedTCPPorts = [ 
-    # 80  ## 80 - Caddy
-    # 443  ## 443 - Caddy
-    # 8443  ## 8443 - Caddy
     8080  ## 8080 - LocalAI
     8081  ## 8081 - LocalAI
     2104  ## 2104 - Komga

@@ -316,7 +316,8 @@
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## User groups
-    
+
+
   fileSystems."/storage/Yarrow" = {
 
     device = "UUID=6EFF-B51B";
@@ -326,6 +327,9 @@
       "nofail"
       "x-systemd.automount"
       "x-systemd.device-timeout=5s"
+      "gid=1000"      ## todo - Currently with "shared group"
+      "uid=1000"      # todo - Replace with tarobutter
+      "umask=0002"          # Allows group writing
     ];
   };
 

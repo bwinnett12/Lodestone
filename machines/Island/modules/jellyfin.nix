@@ -7,11 +7,14 @@
     enable = true;
     openFirewall = true;
     
+    user = "jellyfin";
     group = "jellyfin";
+
     dataDir = "/storage/Yarrow/temp";
     configDir = "/storage/Orchid/temp";
+    logDir = "/storage/Nettle/temp";
+    # cacheDir = ""; # todo - Set this to be the SSD?
 
   };
   
 }
-  

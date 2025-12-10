@@ -7,7 +7,7 @@
     enable = true;
     openFirewall = true;
     
-    user = "jellyfin";
+    user = "tarobutter";  # todo - Provide a better solution for this
     group = "jellyfin";
 
     dataDir = "/storage/Yarrow/temp";

@@ -8,7 +8,7 @@
     openFirewall = true;
     
     user = "tarobutter";  # todo - Provide a better solution for this
-    group = "jellyfin";
+    group = "users";  # todo - Provide a better solution for this
 
     dataDir = "/storage/Yarrow/temp";
     configDir = "/storage/Orchid/temp";

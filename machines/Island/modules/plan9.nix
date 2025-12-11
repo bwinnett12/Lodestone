@@ -1,7 +1,7 @@
 #### 9p server - u9fs
-### Thrifted from 
+### Thrifted from https://github.com/justinrubek/nixos-configs
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
 
@@ -17,7 +17,7 @@
     services."u9fs@" = let
       mountDir = "/storage/9p"; # TODO: ensure this directory exists and is owned by this user
       user = "tarobutter";
-      package = inputs'.u9fs.packages.default;
+      package = inputs.pkgs.u9fs.packages.default;
     in {
       description = "9P filesystem server";
       after = ["network.target"];

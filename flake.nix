@@ -53,7 +53,7 @@ outputs = {
 
       ];
     };
-
+}
 
     # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
     #### Dev Shells
@@ -61,4 +61,3 @@ outputs = {
 #      packages = with pkgs.legacyPackages."x86_64-linux".pkgs; [ handbrake makemkv mkvtoolnix flac cdparanoia abcde ];
 #      shellHook = ''echo "Entering video transcoding shell." '';
 #    };
-}

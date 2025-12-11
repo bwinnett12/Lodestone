@@ -1,0 +1,36 @@
+#### 9p server - u9fs
+### Thrifted from 
+
+{ config, pkgs, ... }:
+
+{
+
+ systemd = {
+    sockets.u9fs = {
+      description = "9P filesystem server socket";
+      wantedBy = ["sockets.target"];
+      socketConfig = {
+        ListenStream = "4500";
+        Accept = "yes";
+      };
+    };
+    services."u9fs@" = let
+      mountDir = "/storage/9p"; # TODO: ensure this directory exists and is owned by this user
+      user = "tarobutter";
+      package = inputs'.u9fs.packages.default;
+    in {
+      description = "9P filesystem server";
+      after = ["network.target"];
+
+      serviceConfig = {
+        ExecStart = "${package}/bin/u9fs -D -a none -u ${user} -d ${mountDir}";
+        User = "${user}";
+        StandardInput = "socket";
+        StandardError = "journal";
+      };
+    };
+  };
+
+  
+  
+}

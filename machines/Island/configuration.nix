@@ -8,6 +8,7 @@
 
       # nixosCosmicModule
       ./modules/jellyfin.nix
+      ./modules/plan9.nix
     ];
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -381,7 +382,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "jellyfin" ];
+    extraGroups = [ "wheel" "docker" ];
     packages = with pkgs; [
       tree
     ];

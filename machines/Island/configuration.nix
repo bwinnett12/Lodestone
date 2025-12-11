@@ -359,6 +359,24 @@
     ];
   };
 
+  ## External Drives
+
+  fileSystems."/storage/Lilac" = {
+
+    device = "UUID=7237-9737";
+    fsType = "exfat";
+    options = [
+      "defaults"
+      "nofail"
+      "x-systemd.automount"
+      "x-systemd.device-timeout=5s"
+      "gid=1000"      ## todo - Currently with "shared group"
+      "uid=1000"      # todo - Replace with tarobutter
+      "umask=0002"          # Allows group writing
+    ];
+  };
+  
+
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {

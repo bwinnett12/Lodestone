@@ -439,6 +439,8 @@
     efibootmgr
 
     tmux
+
+    u9fs
   ];
 
 

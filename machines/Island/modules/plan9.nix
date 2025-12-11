@@ -17,7 +17,7 @@
     services."u9fs@" = let
       mountDir = "/storage/9p"; # TODO: ensure this directory exists and is owned by this user
       user = "tarobutter";
-      #package = inputs.nixpkgs.u9fs.packages.default;
+      package = inputs.nixpkgs.u9fs;
     in {
       description = "9P filesystem server";
       after = ["network.target"];

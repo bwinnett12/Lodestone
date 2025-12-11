@@ -8,7 +8,7 @@
 
       # nixosCosmicModule
       ./modules/jellyfin.nix
-      ./modules/plan9.nix
+      #./modules/plan9.nix
       ./modules/rustdesk.nix
     ];
 

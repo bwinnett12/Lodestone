@@ -88,6 +88,7 @@
     2104  ## 2104 - Komga
     2108  ## 2108 - Suwayomi Server
     4822  ## 4822 - Guacamole
+    4500  ## 4500 - u9fs
 
   ];
 

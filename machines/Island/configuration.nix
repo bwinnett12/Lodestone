@@ -442,6 +442,8 @@
     tmux
 
     u9fs
+
+    rustdesk
   ];
 
 

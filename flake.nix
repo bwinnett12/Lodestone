@@ -24,6 +24,11 @@
       url = "github:numtide/flake-utils";
     };
 
+    u9fs = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:justinrubek/u9fs";
+    };
+
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 

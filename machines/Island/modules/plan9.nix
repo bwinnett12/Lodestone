@@ -17,7 +17,7 @@
     services."u9fs@" = let
       mountDir = "/storage/9p"; # TODO: ensure this directory exists and is owned by this user
       user = "tarobutter";
-      package = inputs.nixpkgs.legacyPackages.x86_64-linux.u9fs;  # TODO: Replace with inheritable system
+      package = u9fs;  # TODO: Replace with inheritable system
     in {
       description = "9P filesystem server";
       after = ["network.target"];

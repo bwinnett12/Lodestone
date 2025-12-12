@@ -14,8 +14,6 @@
     configDir = "/storage/Orchid/temp";  # todo - Re-implement with 9p system
     logDir = "/storage/Nettle/temp";  # todo - Re-implement with 9p system
     # cacheDir = ""; # todo - Set this to be the SSD?
-
-    packages
   };
 
   environment.systemPackages = with pkgs; [

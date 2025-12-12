@@ -32,7 +32,7 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    arion.url = "github:arion-system/arion";
+    #arion.url = "github:arion-system/arion";
 
 
 

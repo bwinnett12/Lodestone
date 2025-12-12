@@ -24,7 +24,7 @@
 
     serviceConfig = {
       ExecStart = ''
-        "${pkgs.docker-compose}/bin/docker-compose -f ./rustdesk-docker.yml up
+        ${pkgs.docker-compose}/bin/docker-compose -f ./rustdesk-docker.yml up
       '';
       Restart = "always";
       User = "tarobutter";

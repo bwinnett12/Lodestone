@@ -90,10 +90,17 @@
     2108  ## 2108 - Suwayomi Server
     4822  ## 4822 - Guacamole
     4500  ## 4500 - u9fs
-
+    21115  ## Rustdesk
+    21116  ## Rustdesk
+    21117  ## Rustdesk
+    21118  ## Rustdesk
+    21119  ## Rustdesk
   ];
 
 
+  networking.firewall.allowedUDPPorts = [ 
+    21116  ## Rustdesk
+  ];
 
   services.xserver.enable = true;
 

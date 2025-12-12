@@ -67,7 +67,6 @@
     curl
     wget
     unzip
-	btrfs
   ];
   
 

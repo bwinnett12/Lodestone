@@ -34,6 +34,9 @@
       Restart = "always";
       User = "tarobutter";
     };
+
+    StandardOutput = "append:/storage/Orchid/docker-rustdesk-server.out";
+    StandardError = "append:/storage/Orchid/docker-rustdesk-server.log";
   };
 
 

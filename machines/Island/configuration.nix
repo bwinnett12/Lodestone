@@ -30,7 +30,7 @@
   nixpkgs.config.allowUnfree = true;
 
   networking = {
-    networking.networkmanager.enable = true;
+    networkmanager.enable = true;
 
     firewall.allowedTCPPorts = [ 
       8080  ## 8080 - LocalAI

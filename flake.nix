@@ -32,6 +32,8 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    arion.url = "github:arion-system/arion";
+
 
 
     ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

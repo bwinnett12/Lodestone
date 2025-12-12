@@ -4,12 +4,6 @@
 
 {
 
-  #services. = {
-  #  enable = true;
-  #  openFirewall = true;
-    # signal.relayHosts = ["example.com"];
-  #};
-
   environment.systemPackages = with pkgs; [
     curl
     wget
@@ -22,6 +16,7 @@
 
   # Define a systemd service to run docker-compose
   systemd.services.docker-rustdesk-server = {
+    
 
     description = "Rust desk server";
     after = ["docker.service"];
@@ -29,15 +24,15 @@
 
     serviceConfig = {
       ExecStart = ''
-        docker-compose -f ./rustdesk-docker.yml up
+        "${pkgs.docker-compose}/bin/docker-compose -f ./rustdesk-docker.yml up
       '';
       Restart = "always";
       User = "tarobutter";
     };
 
-    Type = "simple";
-    StandardOutput = "append:/storage/Orchid/docker-rustdesk-server.out";
-    StandardError = "append:/storage/Orchid/docker-rustdesk-server.log";
+    #Type = "simple";
+    #StandardOutput = "append:/storage/Orchid/docker-rustdesk-server.out";
+    #StandardError = "append:/storage/Orchid/docker-rustdesk-server.log";
   };
 
 

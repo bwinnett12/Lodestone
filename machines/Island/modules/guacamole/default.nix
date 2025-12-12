@@ -8,7 +8,7 @@
   services.guacamole-server = {
     enable = true;
 	
-    host = "127.0.0.2";
+    host = "127.0.0.1";
     userMappingXml = ./user-mapping.xml;
 
   };
@@ -21,7 +21,7 @@
 
     settings = {
       guacd-port = 4822;
-      guacd-hostname = "127.0.0.2";
+      guacd-hostname = "127.0.0.1";
     };
 
   };

@@ -6,12 +6,18 @@
   imports =
     [ 
       # nixosCosmicModule
-      #./modules/plan9.nix
 
       ./modules/drives.nix
-      ./modules/jellyfin.nix
-      # ./modules/rustdesk.nix
       ./modules/games.nix
+
+      ./modules/guacamole
+      #./modules/komga
+      #./modules/localai
+      ./modules/jellyfin
+      #./modules/plan9.nix
+      # ./modules/rustdesk.nix
+      #./modules/suwayomi.nix
+      
     ];
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -36,15 +42,23 @@
     firewall.allowedTCPPorts = [ 
       8080  ## 8080 - LocalAI
       8081  ## 8081 - LocalAI
+
       2104  ## 2104 - Komga
+      
       2108  ## 2108 - Suwayomi Server
+
       4822  ## 4822 - Guacamole
+      4822  ## 4822 - Guacamole
+
       4500  ## 4500 - u9fs
+
       21115  ## Rustdesk
       21116  ## Rustdesk
       21117  ## Rustdesk
       21118  ## Rustdesk
       21119  ## Rustdesk
+
+
     ];
 
     firewall.allowedUDPPorts = [ 

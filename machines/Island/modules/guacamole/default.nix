@@ -1,13 +1,15 @@
+
 #### Guacamole
 { config, pkgs, inputs, ... }:
+
 
 {
   ### Guacamole Server
   services.guacamole-server = {
     enable = true;
 	
-    host = "127.0.0.1";
-    userMappingXml = ./guacamole/user-mapping.xml;
+    host = "Island";
+    userMappingXml = ./user-mapping.xml;
 
   };
 
@@ -19,7 +21,7 @@
 
     settings = {
       guacd-port = 4822;
-      guacd-hostname = "127.0.0.1";
+      guacd-hostname = "Island";
     };
 
   };

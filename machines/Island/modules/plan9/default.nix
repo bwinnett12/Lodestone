@@ -7,7 +7,7 @@
 
  systemd = {
     sockets.u9fs = {
-      description = "9P filesystem server socket";
+      description = "9P filesystem server socket... Not the one from outer space...";
       wantedBy = ["sockets.target"];
       socketConfig = {
         ListenStream = "4500";

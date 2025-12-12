@@ -9,7 +9,7 @@
     enable = true;
 	
     host = "0.0.0.0";
-    userMappingXml = ./resources/user-mapping.xml;
+    userMappingXml = ./user-mapping.xml;
 
   };
 

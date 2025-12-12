@@ -30,4 +30,15 @@
       };
     };
   };
+
+
+  # Dependencies
+  environment.systemPackages = with pkgs; [
+    curl
+    wget
+    unzip
+    jq
+    u9fs
+  ];
+  
 }

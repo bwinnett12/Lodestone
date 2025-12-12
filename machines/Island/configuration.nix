@@ -5,18 +5,17 @@
   ### Import Mechanism
   imports =
     [ 
-
       # nixosCosmicModule
-      ./modules/jellyfin.nix
       #./modules/plan9.nix
+
+      ./modules/drives.nix
+      ./modules/jellyfin.nix
       ./modules/rustdesk.nix
     ];
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ### System Information
-  
-  time.timeZone = "America/Anchorage";
-  i18n.defaultLocale = "en_US.UTF-8";
+
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ### Nix settings
@@ -28,93 +27,29 @@
     # trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
   };
 
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ### General settings
-  virtualisation.docker.enable = true;
+  nixpkgs.config.allowUnfree = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
+  networking = {
+    networking.networkmanager.enable = true;
 
+    firewall.allowedTCPPorts = [ 
+      8080  ## 8080 - LocalAI
+      8081  ## 8081 - LocalAI
+      2104  ## 2104 - Komga
+      2108  ## 2108 - Suwayomi Server
+      4822  ## 4822 - Guacamole
+      4500  ## 4500 - u9fs
+      21115  ## Rustdesk
+      21116  ## Rustdesk
+      21117  ## Rustdesk
+      21118  ## Rustdesk
+      21119  ## Rustdesk
+    ];
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ####### Boot settings
-
-  # Enable NTFS support
-  boot.kernelModules = [ "ntfs3" "ext4" "btrfs" "vfat" "exfat" ];
-  
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot";
-
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ######## Network settings
-  
-  services.openssh.enable = true;
-
-  ### Networking mechanism
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
-
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Open ports in the firewall
-  networking.firewall.allowedTCPPorts = [ 
-    8080  ## 8080 - LocalAI
-    8081  ## 8081 - LocalAI
-    2104  ## 2104 - Komga
-    2108  ## 2108 - Suwayomi Server
-    4822  ## 4822 - Guacamole
-    4500  ## 4500 - u9fs
-    21115  ## Rustdesk
-    21116  ## Rustdesk
-    21117  ## Rustdesk
-    21118  ## Rustdesk
-    21119  ## Rustdesk
-  ];
-
-
-  networking.firewall.allowedUDPPorts = [ 
-    21116  ## Rustdesk
-  ];
-
-  services.xserver.enable = true;
-
-  #### Desktop Environments
-  # Enable the GNOME Desktop Environment.
-  services.desktopManager.gnome.enable = true; 
-  services.displayManager.gdm.enable = true;
-
-  # Enable the Cosmic Desktop Environment
-  # services.desktopManager.cosmic.enable = true;
-  # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
-
-
-
+    firewall.allowedUDPPorts = [ 
+      21116  ## Rustdesk
+    ];
+  };
 
 
   #### Sleep schedule
@@ -124,15 +59,6 @@
     suspend.enable = false;
     hibernate.enable = false;
     hybrid-sleep.enable = false;
-  };
-
-
-
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa.enable = true;
-    jack.enable = true;
   };
 
 
@@ -173,229 +99,7 @@
     # Power management set to false. 
     powerManagement.enable = false;
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  #### Guacamole
-  ### Guacamole
-  #services.guacamole-server = {
-  #  enable = true;
-  #  host = "127.0.0.1";
-  #  userMappingXml = ./guacamole/user-mapping.xml;
-    # package = pkgs.unstable.guacamole-server; # Optional, use only when you want to use the unstable channel
-  #};
-
-  services.guacamole-client = {
-    enable = true;
-    enableWebserver = true;
-
-    settings = {
-      guacd-port = 4822;
-      guacd-hostname = "127.0.0.1";
-    };
-  };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## Local AI by docker-compose
-
-
-
-#  systemd.services.localai-docker = {
-
-    ### LocalAI
-#    description = "LocalAI via Docker Compose";
-
-
-    # Wait for network and your storage mount to be ready
-    # after = [ "network.target" "docker.service" ];
-    
-#    requires = [ "docker.service" ];
-#    wantedBy = [ "multi-user.target" ];
-
-
-#    serviceConfig = {
-      # Replace the path with wherever you put your docker-compose.yml
-#      ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml up"; 
-#      ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml down";
-
-      ## Currently using root
-      ## #todo - Switch to localai or shortstack user
-      ## Currently root
-
-##      User = "localai";
-      # Set the working directory to the directory of the compose file
-#      WorkingDirectory = "/etc/localai/"; 
-###      Restart = "on-failure";
-#      RestartSec = "5s";
-#  };
-#};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ##### Suwayomi server
-  ###  
-#  services.suwayomi-server = {
- #   enable = true;
-  #  user = "suwayomi";
-   # group = "suwayomi";
-
-    #dataDir = "/storage/Orchid/shortstack/suwayomi-server"; 
-    #openFirewall = true;
-
-#    settings = {
- #     server.port = 2108;
-  #    server.address = "0.0.0.0";
-   #   server.enableSystemTray = true;
-    #  server.autoDownloadNewChapters = true;
-     # server.downloadsPath = "/storage/Orchid/Manga";
-#      server.backupPath = "/var/lib/suwayomi/backups";
- #     server.debugLogsEnable = true;
-  #  };
- # };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## Komga
-  services.komga.enable = true;
-
-  services.komga = {
-    openFirewall = false;
-
-    # Configuration for the internal Komga Spring Boot application
-    settings = {
-      server.port = 2104;
-      address = "0.0.0.0";
-    };
-  };
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## User groups
-
-
-  fileSystems."/storage/Yarrow" = {
-
-    device = "UUID=6EFF-B51B";
-    fsType = "exfat";
-    options = [
-      "defaults"
-      "nofail"
-      "x-systemd.automount"
-      "x-systemd.device-timeout=5s"
-      "gid=1000"      ## todo - Currently with "shared group"
-      "uid=1000"      # todo - Replace with tarobutter
-      "umask=0002"          # Allows group writing
-    ];
-  };
-
-
-
-  fileSystems."/storage/Orchid" = {
-
-    device = "UUID=4074ccad-cc37-4e98-9d6b-9dead0b25e1d";
-    fsType = "btrfs";
-    options = [
-      "nofail"
-      "x-systemd.automount"
-      "noatime"
-    ];
-
-  };
-
-
-  fileSystems."/storage/Nettle" = {
-
-    device = "UUID=10ba586f-c9b7-48ce-a8e5-7f5adbb34ab9";
-    fsType = "ext4";
-    options = [
-      "defaults"
-      "nofail"
-      "x-systemd.automount"
-    ];
-  };
-
-  ## External Drives
-
-  fileSystems."/storage/Lilac" = {
-
-    device = "UUID=7237-9737";
-    fsType = "exfat";
-    options = [
-      "defaults"
-      "nofail"
-      "x-systemd.automount"
-      "x-systemd.device-timeout=5s"
-      "gid=1000"      ## todo - Currently with "shared group"
-      "uid=1000"      # todo - Replace with tarobutter
-      "umask=0002"          # Allows group writing
-    ];
-  };
   
-
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.tarobutter = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
-    packages = with pkgs; [
-      tree
-    ];
-  };
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -406,16 +110,12 @@
       tree
     ];
   };
-
-
+  
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Programs
-  
   programs.firefox.enable = true;
 
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     vim
     wget
@@ -426,20 +126,12 @@
     nettools
     rustscan
 
-    ## todo - Implement with Jellyfin stand-alone package
-    jellyfin
-    jellyfin-web
-    jellyfin-ffmpeg
-
     coreutils
 
     exfatprogs
     parted
     btrfs-progs
     lsof
-
-    guacamole-client
-    guacamole-server
 
     docker-compose
 
@@ -448,18 +140,7 @@
     efibootmgr
 
     tmux
-
-    u9fs
-
-    rustdesk
   ];
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## Unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   # Some programs need SUID wrappers, can be configured further or are
@@ -469,9 +150,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  ### Beyond here lies nothin'
-  ### Nothin' we can call our own
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

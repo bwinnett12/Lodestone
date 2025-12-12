@@ -1,22 +1,10 @@
 #### Rust desk
+## TODO - Fill this out
 
 { config, pkgs, inputs, ... }:
 
 {
-
-  environment.systemPackages = with pkgs; [
-    curl
-    wget
-    unzip
-    jq
-    docker-compose
-    rustdesk
-    rustdesk-server
-  ];
-
-  # Define a systemd service to run docker-compose
   systemd.services.docker-rustdesk-server = {
-    
 
     description = "Rust desk server";
     after = ["docker.service"];
@@ -29,12 +17,16 @@
       Restart = "always";
       User = "tarobutter";
     };
-
-    #Type = "simple";
-    #StandardOutput = "append:/storage/Orchid/docker-rustdesk-server.out";
-    #StandardError = "append:/storage/Orchid/docker-rustdesk-server.log";
   };
 
-
-
+  # Dependencies
+  environment.systemPackages = with pkgs; [
+    curl
+    wget
+    unzip
+    jq
+    docker-compose
+    rustdesk
+    rustdesk-server
+  ];
 }

@@ -1,5 +1,5 @@
 #### Jellyfin server
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Enable the Jellyfin service
@@ -15,8 +15,14 @@
     logDir = "/storage/Nettle/temp";  # todo - Re-implement with 9p system
     # cacheDir = ""; # todo - Set this to be the SSD?
 
+    packages = with pkgs; [
+      curl
+      wget
+      unzip
+      jq
+      jellyfin
+      jellyfin-web
+      jellyfin-ffmpeg
+    ];
   };
-
-  
-  
 }

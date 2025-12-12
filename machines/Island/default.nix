@@ -5,28 +5,60 @@
 }: 
 { 
   imports = [
-    ./hardware-configuration.nix
+  ./hardware-configuration.nix
 	./configuration.nix
 
     # self.nixosModules.locale
 
   ];
   
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    systemd-boot.enable = true;
+
+  boot = {
+    kernelModules = [ "ntfs3" "ext4" "btrfs" "vfat" "exfat" ];
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+      systemd-boot.enable = true;
+    };
   };
+
+
+  i18n.defaultLocale = "en_US.UTF-8";
+
+
   networking = {
     # firewall.checkReversePath = "loose";
     hostName = "Island";
     networkmanager.enable = true;
   };
 
-  programs.steam.enable = true;
   security.rtkit.enable = true;
-  services = {
 
-    # tailscale.enable = true;
+  services = {
+    
+    # Enable the Cosmic Desktop Environment
+    # services.desktopManager.cosmic.enable = true;
+    # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
+    desktopManager.gnome.enable = true; 
+    displayManager.gdm.enable = true;
+
+
+    # Enable touchpad support (enabled default in most desktopManager).
+    libinput.enable = true;
+
+    openssh.enable = true;
+
+    pipewire = {
+      enable = true;
+
+      pulse.enable = true;
+      alsa.enable = true;
+      jack.enable = true;
+    };
+
+    printing.enable = true;
 
     xserver = {
       enable = true;
@@ -37,8 +69,9 @@
     };
   };
 
-
   system.stateVersion = "25.05";
+
+  time.timeZone = "America/Anchorage";
 
   users.users.tarobutter = {
     description = "Tarot D. Butter";
@@ -47,8 +80,11 @@
       "networkmanager"
       "systemd-journal"
       "wheel"
+      "docker"
     ];
     isNormalUser = true;
     shell = pkgs.bash;
   };
+
+  virtualisation.docker.enable = true;
 }

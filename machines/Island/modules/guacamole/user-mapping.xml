@@ -3,8 +3,8 @@
     <!-- User using SHA-256 to hash the password -->
     <authorize
         username="tarobutter"
-        password="c7e616822f366fb1b5e0756af498cc11d2c0862edcb32ca65882f622ff39de1b"
-        encoding="sha256">
+        password="test"
+        encoding="plain">
 
         <connection name="NixOS Server SSH">
             <protocol>ssh</protocol>

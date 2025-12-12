@@ -9,9 +9,6 @@
     host = "127.0.0.1";
     userMappingXml = ./guacamole/user-mapping.xml;
 
-     packages = with pkgs; [
-		guacamole-server
-	 ];
   };
 
 
@@ -25,8 +22,10 @@
       guacd-hostname = "127.0.0.1";
     };
 
-	packages = with pkgs; [
-		guacamole-client
-	 ];
   };
+
+	environment.systemPackages = with pkgs; [
+		guacamole-client
+		guacamole-server
+	];
 }

@@ -15,7 +15,10 @@
     logDir = "/storage/Nettle/temp";  # todo - Re-implement with 9p system
     # cacheDir = ""; # todo - Set this to be the SSD?
 
-    packages = with pkgs; [
+    packages
+  };
+
+  environment.systemPackages = with pkgs; [
       curl
       wget
       unzip
@@ -24,5 +27,4 @@
       jellyfin-web
       jellyfin-ffmpeg
     ];
-  };
 }

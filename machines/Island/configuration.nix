@@ -11,6 +11,7 @@
       ./modules/drives.nix
       ./modules/jellyfin.nix
       ./modules/rustdesk.nix
+      ./modules/games.nix
     ];
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

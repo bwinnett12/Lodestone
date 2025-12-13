@@ -32,7 +32,7 @@
       webapps = [
         pkgs.guacamole-client
       ];
-      # extraEnvironment = [ "GUACAMOLE_HOME=${cfg.baseDir}" ];
+    # extraEnvironment = [ "GUACAMOLE_HOME=/etc/guacamole" ];
     };  
 
 	environment.systemPackages = with pkgs; [

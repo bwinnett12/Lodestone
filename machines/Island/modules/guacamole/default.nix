@@ -17,7 +17,7 @@
   ### Guacamole Client
   services.guacamole-client = {
     enable = true;
-    enableWebserver = true;
+    #enableWebserver = true;
 
     settings = {
       guacd-port = 4822;
@@ -33,7 +33,7 @@
         pkgs.guacamole-client
       ];
       # extraEnvironment = [ "GUACAMOLE_HOME=${cfg.baseDir}" ];
-    };
+    };  
 
 	environment.systemPackages = with pkgs; [
 		guacamole-client

@@ -18,6 +18,7 @@
           <param name="port">3389</param>
           <param name="ignore-cert">true</param>
           <param name="security">rdp</param>
+          <param name="domain">test</param>
       </connection>
     </authorize>
 </user-mapping>

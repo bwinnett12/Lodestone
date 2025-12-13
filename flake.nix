@@ -9,36 +9,30 @@
   #### Inputs
   inputs = {
 
-    #### Package repo sources
-    ## Nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    ### Core (Nix, Flakes, Home manager, etc.)
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+    };
 
-    ## Home manager
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ## Flake Utils
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    ### Others
     u9fs = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:justinrubek/u9fs";
     };
 
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
-
-    #arion.url = "github:arion-system/arion";
-
-
-
-    ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
     ### Desktop sources
-    ## Cosmic flake
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.url = "github:NixOS/nixpkgs/9807714d6944a957c2e036f84b0ff8caf9930bc0";
@@ -62,6 +56,7 @@ outputs = {
     };
 }
 
+    ## TODO - Reintegrate
     # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
     #### Dev Shells
 #    devShells."x86_64-linux".video-tools = pkgs.legacyPackages."x86_64-linux".mkShell {

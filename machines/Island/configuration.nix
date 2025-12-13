@@ -80,51 +80,45 @@
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   #### Nvidia settings
+  ## Don't integrate quite yet. Don't open that can of worms quite yet.
 
-  # Enable graphic card
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
+  hardware = {
+    # Enable graphic card
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+
+    nvidia-container-toolkit.enable = true;
+
+    nvidia = {
+
+      # Use the stable driver package
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+      # Enable modesetting for better Wayland support and overall display.
+      # Essential for modern NVIDIA setups.
+      modesetting.enable = true;
+
+      # Open-source drivers are for RTX 20-series and newer
+      # Set to false to use the proprietary (closed-source) driver.
+      open = false;
+
+      # Enable the NVIDIA settings application
+      nvidiaSettings = true;
+
+      # Power management set to false. 
+      powerManagement.enable = false;
+    };
+
   };
+  
 
   ## Enable the NVIDIA driver for Xorg and load the kernel module
   services.xserver.videoDrivers = [ "nvidia" ];
 
   virtualisation.docker.rootless.daemon.settings.features.cdi = true;
-  #virtualisation.docker.enableNvidia = true;
-  hardware.nvidia-container-toolkit.enable = true;  
 
-  # Configure the NVIDIA module
-  hardware.nvidia = {
-
-    # Use the stable driver package
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-    # Enable modesetting for better Wayland support and overall display.
-    # Essential for modern NVIDIA setups.
-    modesetting.enable = true;
-
-    # Open-source drivers are for RTX 20-series and newer
-    # Set to false to use the proprietary (closed-source) driver.
-    open = false;
-
-    # Enable the NVIDIA settings application
-    nvidiaSettings = true;
-
-    # Power management set to false. 
-    powerManagement.enable = false;
-  };
-  
-
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.localai = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
-    packages = with pkgs; [
-      tree
-    ];
-  };
   
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

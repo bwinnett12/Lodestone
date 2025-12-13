@@ -1,36 +1,45 @@
+#### ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+#### Komga Module
+
+{ config, pkgs, inputs, ... }:
+
+{
+      systemd.services.localai-docker = {
+
+            ### LocalAI
+            description = "LocalAI via Docker Compose";
 
 
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## Local AI by docker-compose
+            Wait for network and your storage mount to be ready
+            after = [ "network.target" "docker.service" ];
+            
+            requires = [ "docker.service" ];
+            wantedBy = [ "multi-user.target" ];
 
 
+            serviceConfig = {
+                  # Replace the path with wherever you put your docker-compose.yml
+                  ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml up"; 
+                  ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml down";
 
-#  systemd.services.localai-docker = {
+                  ## TODO - Switch to localai or shortstack user
 
-    ### LocalAI
-#    description = "LocalAI via Docker Compose";
+                  User = "tarobutter";
+                  # Set the working directory to the directory of the compose file
+                  WorkingDirectory = "/storage/Orchid/shortstack/localai/"; 
+                  Restart = "on-failure";
+                  RestartSec = "5s";
+            };
+
+            # Define a user account. Don't forget to set a password with ‘passwd’.
+            users.users.localai = {
+                  isNormalUser = true;
+                  extraGroups = [ "wheel" "docker" ];
+                  packages = with pkgs; [
+                        tree
+                  ];
+                  };
+            };
+}
 
 
-    # Wait for network and your storage mount to be ready
-    # after = [ "network.target" "docker.service" ];
-    
-#    requires = [ "docker.service" ];
-#    wantedBy = [ "multi-user.target" ];
-
-
-#    serviceConfig = {
-      # Replace the path with wherever you put your docker-compose.yml
-#      ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml up"; 
-#      ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml down";
-
-      ## Currently using root
-      ## #todo - Switch to localai or shortstack user
-      ## Currently root
-
-##      User = "localai";
-      # Set the working directory to the directory of the compose file
-#      WorkingDirectory = "/etc/localai/"; 
-###      Restart = "on-failure";
-#      RestartSec = "5s";
-#  };
-#};

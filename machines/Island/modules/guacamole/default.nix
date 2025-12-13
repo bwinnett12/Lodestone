@@ -26,6 +26,15 @@
 
   };
 
+  services.tomcat = {
+      enable = true;
+      purifyOnStart = true;
+      webapps = [
+        pkgs.guacamole-client
+      ];
+      # extraEnvironment = [ "GUACAMOLE_HOME=${cfg.baseDir}" ];
+    };
+
 	environment.systemPackages = with pkgs; [
 		guacamole-client
 		guacamole-server

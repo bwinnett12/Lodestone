@@ -2,30 +2,7 @@
 { config, lib, pkgs, inputs, nixosCosmicModule, home-manager, ... }:
 
 {
-  ### Import Mechanism
-  imports =
-    [ 
-      # nixosCosmicModule
 
-      ./modules/drives.nix
-      ./modules/games.nix
-
-      ./modules/guacamole
-      #./modules/komga
-      #./modules/localai
-      ./modules/jellyfin
-      #./modules/plan9.nix
-      # ./modules/rustdesk.nix
-      #./modules/suwayomi.nix
-      
-    ];
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ### System Information
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ### Nix settings
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ]; 
 

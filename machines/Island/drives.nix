@@ -60,15 +60,4 @@
       "umask=0002"          # Allows group writing
     ];
   };
-  
-
-
-  environment.systemPackages = with pkgs; [
-    curl
-    wget
-    unzip
-  ];
-  
-
-  
 }

@@ -5,12 +5,28 @@
 }: 
 { 
   imports = [
-  ./hardware-configuration.nix
-	./configuration.nix
+    ./hardware-configuration.nix
+    ./drives.nix
+    ./configuration.nix
+    
 
-    # self.nixosModules.locale
+    self.nixosModules.games
+    self.nixosModules.guacamole
+    self.nixosModules.jellyfin
+    self.nixosModules.suwayomi
+
+    # nixosCosmicModule
+
+    
+    
+    #./modules/komga
+    #./modules/localai
+    #./modules/plan9.nix
+    # ./modules/rustdesk.nix
 
   ];
+
+  
   
 
   boot = {

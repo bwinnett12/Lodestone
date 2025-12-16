@@ -23,6 +23,7 @@
       2104  ## 2104 - Komga
 
       2108  ## 2108 - Suwayomi Server
+      4567  ## 4567 - Suwayomi Server
 
       4822  ## 4822 - Guacamole
       3389  ## 3389 - Guacamole

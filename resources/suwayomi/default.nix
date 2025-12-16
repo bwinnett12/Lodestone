@@ -5,12 +5,12 @@
 { config, pkgs, inputs, ... }:
 
 {
-  services.suwayomi = {
+  services.suwayomi-server = {
     enable = true;
     user = "tarobutter";
     group = "users";
 
-    dataDir = "/storage/Orchid/shortstack/suwayomi-server"; 
+    dataDir = "/storage/Orchid/Shortstack/suwayomi-server"; 
     openFirewall = true;
 
     settings = {

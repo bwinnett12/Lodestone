@@ -6,4 +6,11 @@
 		enable = true;	
 	};
 
+
+	environment.systemPackages = with pkgs; [
+		pkgs.runescape
+		pkgs.runelite
+	];
+
+
 }

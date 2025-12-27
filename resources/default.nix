@@ -1,10 +1,14 @@
 
-_: {
-  flake.nixosModules = {
-	"games" = ./games;
-	"guacamole" = ./guacamole;
-	"jellyfin" = ./jellyfin;
-	"rustdesk" = ./rustdesk;
-	"suwayomi" = ./suwayomi;
-  };
+# TODO - Improve this 
+{
+  inputs,
+  self,
+  ...
+}: {
+
+	imports = [
+		./modules
+		./home
+	];
 }
+

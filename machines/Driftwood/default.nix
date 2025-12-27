@@ -1,4 +1,3 @@
-
 {
   pkgs,
   self,
@@ -6,12 +5,12 @@
 }: 
 { 
   imports = [
-    ./hardware-configuration.nix
-    ./drives.nix
-    ./configuration.nix
+    #./hardware-configuration.nix
+    #./drives.nix
+    #./configuration.nix
     
 
-    self.nixosModules.games
+    #self.nixosModules.games
     self.nixosModules.guacamole
     self.nixosModules.jellyfin
     # self.nixosModules.suwayomi
@@ -20,13 +19,16 @@
     # self.nixosModules.plan9
 
     # nixosCosmicModule
+
     
     
     # ./modules/plan9.nix
     # ./modules/rustdesk.nix
 
-
   ];
+
+  
+  
 
   boot = {
     kernelModules = [ "ntfs3" "ext4" "btrfs" "vfat" "exfat" ];
@@ -42,9 +44,10 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+
   networking = {
     # firewall.checkReversePath = "loose";
-    hostName = "Island";
+    hostName = "Driftwood";
     networkmanager.enable = true;
   };
 
@@ -86,6 +89,19 @@
   system.stateVersion = "25.05";
 
   time.timeZone = "America/Anchorage";
+
+  users.users.tarobutter = {
+    description = "Tarot D. Butter";
+    extraGroups = [
+      "input"
+      "networkmanager"
+      "systemd-journal"
+      "wheel"
+      "docker"
+    ];
+    isNormalUser = true;
+    shell = pkgs.bash;
+  };
 
   virtualisation.docker.enable = true;
 }

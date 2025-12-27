@@ -14,14 +14,14 @@
     username = "tarobutter";
     homeDirectory = "/home/tarobutter";
     useUserPackages = true;
+  };
 
-    packages = with pkgs; [
+  environment.systemPackages = with pkgs; [
       htop
       neofetch
       exfatprogs
       kando
-    ];
-  };
+  ];
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

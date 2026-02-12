@@ -11,6 +11,19 @@
     # trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
   };
 
+  users.users.tarobutter = {
+    description = "Tarot D. Butter";
+    extraGroups = [
+      "input"
+      "networkmanager"
+      "systemd-journal"
+      "wheel"
+      "docker"
+    ];
+    isNormalUser = true;
+    shell = pkgs.bash;
+  };
+
   nixpkgs.config.allowUnfree = true;
 
   networking = {

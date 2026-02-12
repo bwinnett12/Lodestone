@@ -27,19 +27,6 @@
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## User information
 
-  users.users.tarobutter = {
-    description = "Tarot D. Butter";
-    extraGroups = [
-      "input"
-      "networkmanager"
-      "systemd-journal"
-      "wheel"
-      "docker"
-    ];
-    isNormalUser = true;
-    shell = pkgs.bash;
-  };
-
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

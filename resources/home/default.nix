@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, home-manager, self, ... }:
 
 {
 
@@ -16,12 +16,12 @@
     useUserPackages = true;
   };
 
-  environment.systemPackages = with pkgs; [
-      htop
-      neofetch
-      exfatprogs
-      kando
-  ];
+  #environment.systemPackages = with nixpkgs; [
+  #    htop
+  #    neofetch
+  #    exfatprogs
+  #    kando
+  #];
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

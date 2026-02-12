@@ -6,6 +6,7 @@
 {
   imports =
     [ 
+      ./hardware-configuration.nix
       nixosCosmicModule
       
     ];
@@ -72,7 +73,7 @@
 
   #### Desktop Environments
   # Enable the GNOME Desktop Environment.
-  services.xserver.desktopManager.gnome.enable = false;
+  services.xserver.desktopManager.gnome.enable = true;
   services.displayManager.gdm.enable = true;
 
 

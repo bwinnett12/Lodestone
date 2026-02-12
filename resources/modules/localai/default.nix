@@ -10,7 +10,7 @@
             description = "LocalAI via Docker Compose";
 
 
-            Wait for network and your storage mount to be ready
+            # Wait for network and your storage mount to be ready
             after = [ "network.target" "docker.service" ];
             
             requires = [ "docker.service" ];

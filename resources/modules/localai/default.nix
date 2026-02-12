@@ -31,15 +31,16 @@
                   RestartSec = "5s";
             };
 
-            # Define a user account. Don't forget to set a password with ‘passwd’.
-            users.users.localai = {
-                  isNormalUser = true;
-                  extraGroups = [ "wheel" "docker" ];
-                  packages = with pkgs; [
-                        tree
-                  ];
-                  };
-            };
+      };
+      # Define a user account. Don't forget to set a password with ‘passwd’
+      users.users.localai = {
+            isNormalUser = true;
+            extraGroups = [ "wheel" "docker" ];
+            packages = with pkgs; [
+                  tree
+            ];
+      };
+      
 }
 
 

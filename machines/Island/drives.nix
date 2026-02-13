@@ -19,7 +19,7 @@
   };
   
 
-  fileSystems."/storage/Orchid" = {
+   fileSystems."/storage/Orchid" = {
 
     device = "UUID=4074ccad-cc37-4e98-9d6b-9dead0b25e1d";
     fsType = "btrfs";
@@ -32,16 +32,16 @@
   };
 
 
-  fileSystems."/storage/Nettle" = {
-
-    device = "UUID=10ba586f-c9b7-48ce-a8e5-7f5adbb34ab9";
-    fsType = "ext4";
-    options = [
-      "defaults"
-      "nofail"
-      "x-systemd.automount"
-    ];
-  };
+#  fileSystems."/storage/Nettle" = {
+#
+#    device = "UUID=10ba586f-c9b7-48ce-a8e5-7f5adbb34ab9";
+#    fsType = "ext4";
+#    options = [
+#      "defaults"
+#      "nofail"
+#      "x-systemd.automount"
+#    ];
+#  };
 
 
 

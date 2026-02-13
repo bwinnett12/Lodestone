@@ -10,9 +10,9 @@
     user = "tarobutter";  # todo - Provide a better solution for this
     group = "users";  # todo - Provide a better solution for this
 
-    dataDir = "/storage/Yarrow/temp";  # todo - Re-implement with 9p system
-    configDir = "/storage/Orchid/temp";  # todo - Re-implement with 9p system
-    logDir = "/storage/Nettle/temp";  # todo - Re-implement with 9p system
+    dataDir = "/storage/Yarrow/temp";  # TODO  - Re-implement with 9p system
+    configDir = "/storage/Yarrow/temp5";  # TODO  - Re-implement with 9p system
+    logDir = "/storage/Yarrow/temp6";  # TODO - Re-implement with 9p system
     # cacheDir = ""; # todo - Set this to be the SSD?
   };
 

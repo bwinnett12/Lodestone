@@ -15,9 +15,9 @@
       };
     };
     services."u9fs@" = let
-      mountDir = "/storage/9p"; # TODO: ensure this directory exists and is owned by this user
+      mountDir = "/storage/Well"; # TODO: ensure this directory exists and is owned by this user
       user = "tarobutter";   # TODO - Replace with a user?
-      package = u9fs;  # TODO: Replace with inheritable system
+      package = pkgs.u9fs;  # TODO: Replace with inheritable system
     in {
       description = "9P filesystem server";
       after = ["network.target"];

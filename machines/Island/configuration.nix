@@ -110,9 +110,12 @@
 
   virtualisation.docker = {
     enable = true;
-    #enableNvidia = true;
+    enableNvidia = true;
   };
 
+  virtualisation.containers.cdi.dynamicConfig.nvidia.enable = true;
+
+# Ensure your hardware drivers are correct
 
   #virtualisation.docker.rootless.daemon.settings.features.cdi = true;
 

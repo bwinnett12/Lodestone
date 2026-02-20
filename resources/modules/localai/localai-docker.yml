@@ -8,11 +8,17 @@ services:
       timeout: 5m
       retries: 5
     ports:
-      - 8080:8080
+      - 8090:8080
     environment:
       - DEBUG=true
     volumes:
       - /storage/Orchid/shortstack/localai:/storage/Orchid/shortstack/localai/models:cached
 
     # For NVIDIA GPUs with standalone Docker:
-    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

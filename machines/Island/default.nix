@@ -17,7 +17,7 @@
     # self.nixosModules.suwayomi
     # self.nixosModules.komga
     self.nixosModules.localai
-    # self.nixosModules.plan9
+    self.nixosModules.plan9
 
     # nixosCosmicModule
     

@@ -32,11 +32,10 @@
     "openssl-1.1.1w"
   ];
 
-  ### Options for docker
+  ### Options for localai-docker
   virtualisation.docker.enable = true;
   virtualisation.docker.enableNvidia = true;
 
-  hardware.nvidia.package = config.boot.kernelPackages.nvidia_x11;
   hardware.nvidia.modesetting.enable = true;
 
 

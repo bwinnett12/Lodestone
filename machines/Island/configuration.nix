@@ -108,8 +108,12 @@
   ## Enable the NVIDIA driver for Xorg and load the kernel module
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  virtualisation.docker.rootless.daemon.settings.features.cdi = true;
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableNvidia = true;
+  };
+
+  #virtualisation.docker.rootless.daemon.settings.features.cdi = true;
 
   
 

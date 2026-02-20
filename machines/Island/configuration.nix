@@ -113,7 +113,7 @@
     enableNvidia = true;
   };
 
-  virtualisation.containers.cdi.dynamicConfig.nvidia.enable = true;
+  #virtualisation.containers.cdi.dynamicConfig.nvidia.enable = true;
 
 # Ensure your hardware drivers are correct
 

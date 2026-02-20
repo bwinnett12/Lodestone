@@ -15,10 +15,5 @@ services:
       - /storage/Orchid/shortstack/localai:/storage/Orchid/shortstack/localai/models:cached
 
     # For NVIDIA GPUs with standalone Docker:
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+    devices:
+      - nvidia.com/gpu=all

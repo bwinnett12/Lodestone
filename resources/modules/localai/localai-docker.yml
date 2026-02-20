@@ -13,11 +13,6 @@ services:
       - DEBUG=true
     volumes:
       - /storage/Orchid/shortstack/localai:/storage/Orchid/shortstack/localai/models:cached
-    # For NVIDIA GPUs, uncomment:
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+
+    # For NVIDIA GPUs with standalone Docker:
+    runtime: nvidia

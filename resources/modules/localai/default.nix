@@ -1,5 +1,5 @@
 #### ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-#### Komga Module
+#### Localai module through docker
 
 { config, pkgs, inputs, ... }:
 
@@ -23,7 +23,6 @@
                   ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml down";
 
                   ## TODO - Switch to localai or shortstack user
-
                   User = "tarobutter";
                   # Set the working directory to the directory of the compose file
                   WorkingDirectory = "/storage/Orchid/shortstack/localai/"; 

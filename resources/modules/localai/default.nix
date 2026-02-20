@@ -19,8 +19,11 @@
 
             serviceConfig = {
                   # Replace the path with wherever you put your docker-compose.yml
-                  ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml up"; 
-                  ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /etc/localai/docker-compose.yml down";
+                  #ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f ./localai-docker.yml up"; 
+                  #ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f ./localai-docker.yml down";
+
+                  ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f /home/tarobutter/Lodestone/resources/modules/localai/localai-docker.yml up -d";
+                  ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /home/tarobutter/Lodestone/resources/modules/localai/localai-docker.yml down";
 
                   ## TODO - Switch to localai or shortstack user
                   User = "tarobutter";

@@ -113,6 +113,8 @@
     enableNvidia = true;
   };
 
+  systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];
+
   #virtualisation.containers.cdi.dynamicConfig.nvidia.enable = true;
 
 # Ensure your hardware drivers are correct

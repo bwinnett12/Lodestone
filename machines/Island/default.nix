@@ -32,13 +32,6 @@
     "openssl-1.1.1w"
   ];
 
-  ### Options for localai-docker
-  virtualisation.docker.enable = true;
-  #virtualisation.docker.enableNvidia = true;
-  hardware.nvidia-container-toolkit.enable = true;
-
-  hardware.nvidia.modesetting.enable = true;
-
 
   boot = {
     kernelModules = [ "ntfs3" "ext4" "btrfs" "vfat" "exfat" ];

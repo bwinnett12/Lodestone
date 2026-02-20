@@ -110,8 +110,9 @@
 
   virtualisation.docker = {
     enable = true;
-    enableNvidia = true;
+    #enableNvidia = true;
   };
+
 
   #virtualisation.docker.rootless.daemon.settings.features.cdi = true;
 

@@ -1,18 +1,24 @@
 { config, pkgs, ... }:
 {
-  # https://wiki.nixos.org/wiki/Prometheus
-  # https://nixos.org/manual/nixos/stable/#module-services-prometheus-exporters-configuration
-  # https://github.com/NixOS/nixpkgs/blob/nixos-24.05/nixos/modules/services/monitoring/prometheus/default.nix
-  services.prometheus = {
+  # https://nixos.org/manual/nixos/stable/#module-services-prometheus-exporters
+  # https://github.com/NixOS/nixpkgs/blob/nixos-24.05/nixos/modules/services/monitoring/prometheus/exporters.nix
+  services.prometheus.exporters.node = {
     enable = true;
-    globalConfig.scrape_interval = "10s"; # "1m"
-    scrapeConfigs = [
-      {
-        job_name = "node";
-        static_configs = [{
-          targets = [ "localhost:${toString config.services.prometheus.exporters.node.port}" ];
-        }];
-      }
+    port = 9000;
+    # For the list of available collectors, run, depending on your install:
+    # - Flake-based: nix run nixpkgs#prometheus-node-exporter -- --help
+    # - Classic: nix-shell -p prometheus-node-exporter --run "node_exporter --help"
+    enabledCollectors = [
+      "ethtool"   
+      "softirqs"
+      "systemd"
+      "tcpstat"
+      "wifi"
     ];
+    # You can pass extra options to the exporter using `extraFlags`, e.g.
+    # to configure collectors or disable those enabled by default.
+    # Enabling a collector is also possible using "--collector.[name]",
+    # but is otherwise equivalent to using `enabledCollectors` above.
+    extraFlags = [ "--collector.ntp.protocol-version=4" "--no-collector.mdadm" ];
   };
 }

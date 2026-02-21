@@ -41,6 +41,7 @@
       2104  ## 2104 - Komga
 
       9000  ## 9000 - Prometheus
+      3000  ## 3000 - Grafana
 
       2108  ## 2108 - Suwayomi Server
       4567  ## 4567 - Suwayomi Server

@@ -1,3 +1,4 @@
+{ config, pkgs, ... }:
 {
   services.grafana = {
     enable = true;

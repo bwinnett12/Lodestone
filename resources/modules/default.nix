@@ -2,6 +2,7 @@
 _: {
   flake.nixosModules = {
 	"games" = ./games;
+	"grafana" = ./grafana;
 	"guacamole" = ./guacamole;
 	"jellyfin" = ./jellyfin;
 	"localai" = ./localai;

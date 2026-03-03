@@ -9,7 +9,8 @@
 { 
   imports = [
     ./hardware-configuration.nix
-    ./drives.nix
+
+    # ./drives.nix #TODO - Consider re-implementing this but with the possible external drives or SD cards this machine may come in contact
     ./configuration.nix
     
 

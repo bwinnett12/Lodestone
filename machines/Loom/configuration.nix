@@ -17,17 +17,6 @@
 
 
 
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ####### System Information
-
-  networking.hostName = "Loom";
-  time.timeZone = "America/Anchorage";
-  i18n.defaultLocale = "en_US.UTF-8";
-
-
-
-
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Build modifiers
   # nix.maxJobs = 1; # Only allow one build job at a time
@@ -53,7 +42,6 @@
 
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
 
   # Configure network proxy if necessary
@@ -68,6 +56,8 @@
 
 
   networking = {
+
+    hostName = "Loom";
     networkmanager.enable = true;
 
     firewall.allowedTCPPorts = [ 

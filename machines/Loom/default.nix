@@ -51,12 +51,6 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  networking = {
-    # firewall.checkReversePath = "loose";
-    hostName = "Loom";
-    networkmanager.enable = true;
-  };
-
   security.rtkit.enable = true;
 
   services = {

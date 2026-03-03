@@ -1,15 +1,21 @@
 
 # https://search.nixos.org/options: NixOS manual (`nixos-help`)
 
-{ config, lib, pkgs, inputs, nixosCosmicModule, ... }:
+{ config, lib, pkgs, inputs, nixosCosmicModule, home-manager, ... }:
 
 {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-      nixosCosmicModule
-      
-    ];
+
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+  };
+
+
+
+  ## Settings for cosmic
+  # substituters = [ "https://cosmic.cachix.org/" ];
+  # trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+
+
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -45,9 +51,6 @@
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ######## Network settings
 
-  services.openssh.enable = true;
-
-  ### Networking mechanism
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -61,6 +64,51 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # networking.firewall.enable = false;  ## To disable the firewall altogether.
+
+
+
+  networking = {
+    networkmanager.enable = true;
+
+    firewall.allowedTCPPorts = [ 
+      8080  ## 8080 - LocalAI
+      8081  ## 8081 - LocalAI      
+      8090  ## 8080 - LocalAI
+
+
+      4822  ## 4822 - Guacamole
+      3389  ## 3389 - Guacamole
+
+      2104  ## 2104 - Komga
+
+      9000  ## 9000 - Prometheus
+      3000  ## 3000 - Grafana
+
+      2108  ## 2108 - Suwayomi Server
+      4567  ## 4567 - Suwayomi Server
+
+
+      4500  ## 4500 - u9fs
+
+
+
+
+      21115  ## Rustdesk
+      21116  ## Rustdesk
+      21117  ## Rustdesk
+      21118  ## Rustdesk
+      21119  ## Rustdesk
+
+
+    ];
+
+    firewall.allowedUDPPorts = [ 
+      21116  ## Rustdesk
+    ];
+  };
+
+
+  services.openssh.enable = true;
 
 
 
@@ -111,54 +159,67 @@
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   #### Nvidia settings
 
+  ## Don't integrate quite yet. Don't open that can of worms quite yet.
+
+  hardware = {
+    # Enable graphic card
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+
+    nvidia-container-toolkit.enable = true;
+
+    nvidia = {
+
+      # Use the stable driver package
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+      # Enable modesetting for better Wayland support and overall display.
+      # Essential for modern NVIDIA setups.
+      modesetting.enable = true;
+
+      # Open-source drivers are for RTX 20-series and newer
+      # Set to false to use the proprietary (closed-source) driver.
+      open = false;
+
+      # Enable the NVIDIA settings application
+      nvidiaSettings = true;
+
+      # Power management set to false. 
+      powerManagement.enable = false;
+    };
+
+  };
+  
+
   ## Enable the NVIDIA driver for Xorg and load the kernel module
-  # Enable the proprietary NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  # Enable graphic card
-  hardware.graphics.enable = true;
-
-  # Configure the NVIDIA module
-  hardware.nvidia = {
-
-    # This ensures that the NVIDIA kernel module is built against your
-    # currently active kernel (which is linux-surface).
-    # NixOS will automatically try to compile the proprietary driver
-    # for your current kernel unless you specify a different one.
-    # boot.kernelPackages = config.boot.kernelPackages.nvidiaPackages.stable; # DO NOT UNCOMMENT THIS for Surface, as it might override the Surface kernel
-
-
-    # Use the stable driver package
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-    # Enable modesetting for better Wayland support and overall display.
-    # Essential for modern NVIDIA setups.
-    modesetting.enable = true;
-
-    # Set to false to use the proprietary (closed-source) driver.
-    # Set to true to attempt to use the open-source NVIDIA kernel modules (new, might not work on GTX 1050 yet).
-    # For stability and performance with GTX 1050, keep false.
-    open = false;
-
-    # Enable the NVIDIA settings application
-    nvidiaSettings = true;
-
-    # Enable NVIDIA power management settings for better power efficiency.
-    # This might require some tuning or might not work perfectly on all laptops.
-    powerManagement.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableNvidia = true;
   };
+
+  systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];
+
+
+  
+
 
 
 
 
 
   # Correct way to set Surface-specific options
-  #hardware.surface = { # This is the main attribute set for Surface hardware
-  #  enable = true; # Enables the core Surface hardware support (kernel patches etc.)
-  #  ipts.enable = true; # Enables touch and pen support
-  #};
+  hardware.surface = { # This is the main attribute set for Surface hardware
+    enable = true; # Enables the core Surface hardware support (kernel patches etc.)
+    ipts.enable = true; # Enables touch and pen support
+  };
 
-  # services.surface-control.enable = true; # This remains a separate service
+  services.surface-control.enable = true; # This remains a separate service
+  
+  
     # Keep your increased swap and zramSwap settings
   swapDevices = [
     { device = "/swapfile"; size = 8192; } # Or 16384 for 16GB
@@ -170,19 +231,14 @@
   };
 
 
-
-
-
-
-
-
+  #### Sleep schedule
   ## Systemd configuration for disabling auto sleep
-  #systemd.targets = {
-  #  sleep.enable = false;
-  #  suspend.enable = false;
-  #  hibernate.enable = false;
-  #  hybrid-sleep.enable = false;
-  #};
+  systemd.targets = {
+    sleep.enable = false;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
+  };
 
   ## Systemd login configuration
   #services.logind = {
@@ -234,15 +290,18 @@
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## User groups
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      tree
+    description = "Tarot D. Butter";
+    extraGroups = [
+      "input"
+      "networkmanager"
+      "systemd-journal"
+      "wheel"
+      "docker"
     ];
+    isNormalUser = true;
+    shell = pkgs.bash;
   };
-
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -257,10 +316,40 @@
     wget
     git
     vlc
+
+    openssl
+    nettools
+    rustscan
+
     coreutils
+
     exfatprogs
     parted
+    btrfs-progs
+    lsof
+
+    docker-compose
+
+    nvidia-container-toolkit
+
+    efibootmgr
+
+    tmux
+    inetutils
   ];
+
+
+
+ 
+
+
+
+
+
+
+
+
+
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -304,4 +393,17 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
+
+
+
+
+
+
+
+  
+
+
+
+
+
 

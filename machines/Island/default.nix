@@ -14,7 +14,9 @@
     self.nixosModules.games
     self.nixosModules.guacamole
 
-    self.nixosModules.grafana
+    # self.nixosModules.grafana
+
+    self.nixosModules.homepage
 
     self.nixosModules.jellyfin
     # self.nixosModules.suwayomi

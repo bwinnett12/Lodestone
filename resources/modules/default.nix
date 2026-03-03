@@ -1,6 +1,7 @@
 
 _: {
   flake.nixosModules = {
+	"homepage" = ./homepage;
 	"games" = ./games;
 	"grafana" = ./grafana;
 	"guacamole" = ./guacamole;

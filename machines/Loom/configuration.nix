@@ -207,7 +207,7 @@
   #  ipts.enable = true; # Enables touch and pen support
   #};
 
-  services.surface-control.enable = true; # This remains a separate service
+  #services.surface-control.enable = true; # This remains a separate service
   
   
     # Keep your increased swap and zramSwap settings

@@ -4,11 +4,15 @@
 {
   pkgs,
   self,
+  inputs,
   ...
 }: 
 { 
   imports = [
     ./hardware-configuration.nix
+
+
+	inputs.nixos-hardware.microsoft.surface.common
 
     # ./drives.nix #TODO - Consider re-implementing this but with the possible external drives or SD cards this machine may come in contact
     ./configuration.nix
@@ -28,7 +32,6 @@
     self.nixosModules.plan9
     self.nixosModules.prometheus
 
-	nixos-hardware.microsoft.surface.common
 
     # nixosCosmicModule
 

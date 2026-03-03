@@ -28,6 +28,8 @@
     self.nixosModules.plan9
     self.nixosModules.prometheus
 
+	nixos-hardware.microsoft.surface.common
+
     # nixosCosmicModule
 
   ];

@@ -202,10 +202,10 @@
 
 
   # Correct way to set Surface-specific options
-  hardware.surface = { # This is the main attribute set for Surface hardware
-    enable = true; # Enables the core Surface hardware support (kernel patches etc.)
-    ipts.enable = true; # Enables touch and pen support
-  };
+  #hardware.surface = { # This is the main attribute set for Surface hardware
+  #  enable = true; # Enables the core Surface hardware support (kernel patches etc.)
+  #  ipts.enable = true; # Enables touch and pen support
+  #};
 
   services.surface-control.enable = true; # This remains a separate service
   

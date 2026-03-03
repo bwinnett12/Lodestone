@@ -244,13 +244,6 @@
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-
-
-
-  ## Docker
-  virtualisation.docker.enable = true;
-
-
   ####### Key mapping
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";

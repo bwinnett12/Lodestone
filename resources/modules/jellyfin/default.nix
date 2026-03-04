@@ -7,7 +7,7 @@
     enable = true;
     openFirewall = true;
     
-    user = "tarobutter";  # todo - Provide a better solution for this
+    user = "root";  # todo - Provide a better solution for this
     group = "users";  # todo - Provide a better solution for this
 
     dataDir = "/var/lib/jellyfin";  # TODO  - Re-implement with 9p system

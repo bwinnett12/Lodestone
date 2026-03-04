@@ -8,9 +8,9 @@
     openFirewall = true;
     
     user = "root";  # todo - Provide a better solution for this
-    group = "users";  # todo - Provide a better solution for this
+    #group = "jellyfin";  # todo - Provide a better solution for this
 
-    dataDir = "/var/lib/jellyfin";  # TODO  - Re-implement with 9p system
+    #dataDir = "/var/lib/jellyfin";  # TODO  - Re-implement with 9p system
     #configDir = "/storage/Yarrow/temp5";  # TODO  - Re-implement with 9p system
     #logDir = "/storage/Yarrow/temp6";  # TODO - Re-implement with 9p system
     # cacheDir = ""; # todo - Set this to be the SSD?

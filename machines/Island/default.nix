@@ -16,7 +16,7 @@
 
     # self.nixosModules.grafana
 
-    self.nixosModules.homepage
+    # self.nixosModules.homepage
 
     self.nixosModules.jellyfin
     # self.nixosModules.suwayomi

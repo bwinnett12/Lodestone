@@ -53,12 +53,6 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  networking = {
-    # firewall.checkReversePath = "loose";
-    hostName = "Island";
-    networkmanager.enable = true;
-  };
-
   security.rtkit.enable = true;
 
   services = {

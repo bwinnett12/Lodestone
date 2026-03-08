@@ -27,6 +27,9 @@
   nixpkgs.config.allowUnfree = true;
 
   networking = {
+    
+    hostName = "Island";
+
     networkmanager.enable = true;
 
     firewall.allowedTCPPorts = [ 

@@ -32,43 +32,51 @@
 
     networkmanager.enable = true;
 
-    firewall.allowedTCPPorts = [ 
+    firewall = {
+      allowedTCPPorts = [ 
 
-      22 ##  22 - Default ssh 
-      8080  ## 8080 - LocalAI
-      8081  ## 8081 - LocalAI      
-      8090  ## 8080 - LocalAI
-
-
-      4822  ## 4822 - Guacamole
-      3389  ## 3389 - Guacamole
-
-      2104  ## 2104 - Komga
-
-      9000  ## 9000 - Prometheus
-      3000  ## 3000 - Grafana
-
-      2108  ## 2108 - Suwayomi Server
-      4567  ## 4567 - Suwayomi Server
+        22 ##  22 - Default ssh 
+        8080  ## 8080 - LocalAI
+        8081  ## 8081 - LocalAI      
+        8090  ## 8080 - LocalAI
 
 
-      4500  ## 4500 - u9fs
+        4822  ## 4822 - Guacamole
+        3389  ## 3389 - Guacamole
+
+        2104  ## 2104 - Komga
+
+        9000  ## 9000 - Prometheus
+        3000  ## 3000 - Grafana
+
+        2108  ## 2108 - Suwayomi Server
+        4567  ## 4567 - Suwayomi Server
+
+
+        4500  ## 4500 - u9fs
 
 
 
 
-      21115  ## Rustdesk
-      21116  ## Rustdesk
-      21117  ## Rustdesk
-      21118  ## Rustdesk
-      21119  ## Rustdesk
+        21115  ## Rustdesk
+        21116  ## Rustdesk
+        21117  ## Rustdesk
+        21118  ## Rustdesk
+        21119  ## Rustdesk
 
 
-    ];
+      ];
 
-    firewall.allowedUDPPorts = [ 
-      21116  ## Rustdesk
-    ];
+      firewall.allowedUDPPorts = [ 
+        21116  ## Rustdesk
+      ];
+
+    };
+
+    
+
+
+
   };
 
 

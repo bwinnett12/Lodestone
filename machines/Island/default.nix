@@ -67,7 +67,13 @@
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
 
-    openssh.enable = true;
+    ## Open ssh
+    openssh = {
+      enable = true;
+      ports = [ 22 ];
+
+    };
+    
 
     pipewire = {
       enable = true;

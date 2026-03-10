@@ -67,7 +67,7 @@
 
       ];
 
-      firewall.allowedUDPPorts = [ 
+      allowedUDPPorts = [ 
         21116  ## Rustdesk
       ];
 

@@ -2,15 +2,17 @@
 { config, pkgs, inputs, ... }:
 
 {
-	programs.steam = {
-		enable = true;	
-	};
+  programs.steam = {
+	enable = true;	
+  };
 
 
-	environment.systemPackages = with pkgs; [
-		pkgs.runescape
-		pkgs.runelite
-	];
+  environment.systemPackages = with pkgs; [
+	pkgs.bolt-launcher
+	# pkgs.runescape
+
+	pkgs.runelite
+  ];
 
 
 }

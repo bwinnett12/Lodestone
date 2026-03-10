@@ -34,8 +34,6 @@
 
     firewall = {
       allowedTCPPorts = [ 
-
-        22 ##  22 - Default ssh 
         8080  ## 8080 - LocalAI
         8081  ## 8081 - LocalAI      
         8090  ## 8080 - LocalAI

@@ -12,7 +12,6 @@
     ./hardware-configuration.nix
 
 	# inputs.nixos-hardware.nixosModules.microsoft-surface-common
-
     # ./drives.nix #TODO - Consider re-implementing this but with the possible external drives or SD cards this machine may come in contact
     ./configuration.nix
     
@@ -24,7 +23,7 @@
 
     # self.nixosModules.homepage
 
-    self.nixosModules.jellyfin
+    # self.nixosModules.jellyfin
     # self.nixosModules.suwayomi
     # self.nixosModules.komga
     # self.nixosModules.localai

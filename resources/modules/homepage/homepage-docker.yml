@@ -6,7 +6,12 @@ services:
       - 3000:3000
     volumes:
       - /storage/Orchid/shortstack/homepage:/app/config # Make sure your local config directory exists
+      - /storage/Orchid/Media/Pictures/Art:app/public/images
       - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
     environment:
       HOMEPAGE_ALLOWED_HOSTS: "island,island:3000,localhost,127.0.0.1" # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
+
+    title: I like to platatoo
+    description: A description of my awesome homepage
+
 

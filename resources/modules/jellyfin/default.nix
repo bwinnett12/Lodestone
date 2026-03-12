@@ -7,7 +7,7 @@
     enable = true;
     openFirewall = true;
     
-    user = "root";  # todo - Provide a better solution for this
+    user = "tarobutter";  # todo - Provide a better solution for this
     # group = "tarobutter";  # todo - Provide a better solution for this
 
     dataDir = "/storage/Yarrow/temp";  # TODO  - Re-implement with 9p system

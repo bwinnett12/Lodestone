@@ -9,7 +9,6 @@
     enable = true;
 	
     host = "0.0.0.0";
-    userMappingXml = ./user-mapping.xml;
 
   };
 
@@ -17,6 +16,7 @@
   ### Guacamole Client
   services.guacamole-client = {
     enable = true;
+    userMappingXml = ./user-mapping.xml;
     #enableWebserver = true;
 
     settings = {

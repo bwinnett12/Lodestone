@@ -13,6 +13,8 @@
     dataDir = "/storage/Yarrow/temp";  # TODO  - Re-implement with 9p system
     configDir = "/storage/Yarrow/temp5";  # TODO  - Re-implement with 9p system
     logDir = "/storage/Yarrow/temp6";  # TODO - Re-implement with 9p system
+    cacheDir = "/storage/Yarrow/temp-cache";
+    webdir = "/storage/Yarrow/temp-web";
     # cacheDir = ""; # todo - Set this to be the SSD?
   };
 

@@ -17,7 +17,7 @@
     
 
     # self.nixosModules.games
-    self.nixosModules.guacamole
+    # self.nixosModules.guacamole
 
     # self.nixosModules.grafana
 

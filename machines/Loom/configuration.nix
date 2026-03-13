@@ -304,6 +304,8 @@
     git
     vlc
 
+    neofetch
+
     openssl
     nettools
     rustscan

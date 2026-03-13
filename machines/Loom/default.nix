@@ -3,6 +3,7 @@
 
 {
   pkgs,
+  lib,
   self,
   inputs,
   ...
@@ -39,9 +40,12 @@
   #  "openssl-1.1.1w"
   #];
 
+  config.microsoft-surface.surface-control.enable = true;
+
 
   boot = {
     kernelModules = [ "ntfs3" "ext4" "btrfs" "vfat" "exfat" ];
+    kernelPackages = lib.mkForce pkgs.linuxPackages_6_6;
     loader = {
       efi = {
         canTouchEfiVariables = true;

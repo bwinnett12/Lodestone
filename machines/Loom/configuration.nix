@@ -285,6 +285,7 @@
       "systemd-journal"
       "wheel"
       "docker"
+      "surface-control"
     ];
     isNormalUser = true;
     shell = pkgs.bash;

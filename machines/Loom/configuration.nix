@@ -304,7 +304,7 @@
     git
     vlc
 
-    neofetch
+    fastfetch
 
     openssl
     nettools

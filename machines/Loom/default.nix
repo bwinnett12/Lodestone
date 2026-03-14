@@ -43,6 +43,8 @@
   config.microsoft-surface.surface-control.enable = true;
 
 
+  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+  ####### Boot settings
   boot = {
     kernelModules = [ "ntfs3" "ext4" "btrfs" "vfat" "exfat" ];
     kernelPackages = lib.mkForce pkgs.linuxPackages_6_6;
@@ -54,7 +56,13 @@
       systemd-boot.enable = true;
     };
   };
+  
 
+  
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
 

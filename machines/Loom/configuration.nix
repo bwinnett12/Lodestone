@@ -28,16 +28,7 @@
 
 
 
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ####### Boot settings
 
-  # Enable NTFS support
-  boot.kernelModules = [ "ntfs3" "ext4" "btrfs" "vfat" "exfat" ];
-  
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
 
 

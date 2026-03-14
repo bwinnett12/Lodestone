@@ -40,7 +40,7 @@
   #  "openssl-1.1.1w"
   #];
 
-  config.microsoft-surface.surface-control.enable = true;
+  #config.microsoft-surface.surface-control.enable = true;
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -56,13 +56,7 @@
       systemd-boot.enable = true;
     };
   };
-  
 
-  
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
 

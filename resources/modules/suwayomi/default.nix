@@ -8,7 +8,7 @@
   services.suwayomi-server = {
 
     enable = true;
-    user = "tarobutter";
+    user = "pomona";
     group = "users";
 
     dataDir = "/storage/Orchid/shortstack/suwayomi-server"; 
@@ -36,15 +36,7 @@
 
     ];
 
-    # Define a user account. Don't forget to set a password with ‘passwd’
-  users.users.suwayomi = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
-    packages = with pkgs; [
-      tree
-      suwayomi-server
-    ];
-};
+
   
 
 }

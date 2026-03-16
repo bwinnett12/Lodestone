@@ -11,7 +11,7 @@
       "/storage/Orchid/Media/Books"
 	];
 	openFirewall = true;
-	port = "2111";
+	port = 2111;
   };
 
   environment.systemPackages = with pkgs; [

@@ -7,7 +7,9 @@
     enable = true;
 	group = "root";
 	user = "root";
-	libraries = "/storage/Orchid/Media/Books";
+	libraries = [
+      "/storage/Orchid/Media/Books"
+	];
 	openFirewall = true;
 	port = "2111";
   };

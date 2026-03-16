@@ -5,6 +5,7 @@ _: {
 	"games" = ./games;
 	"grafana" = ./grafana;
 	"guacamole" = ./guacamole;
+	"komga" = ./komga;
 	"jellyfin" = ./jellyfin;
 	"localai" = ./localai;
 	"plan9" = ./plan9;

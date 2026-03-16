@@ -36,11 +36,16 @@
 
 	
   users.users.pomona = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
-    packages = with pkgs; [
-      tree
+    description = "Roman goddess of the Orchard: Maintainer of apps";
+    extraGroups = [
+      "input"
+      "networkmanager"
+      "systemd-journal"
+      "wheel"
+      "docker"
     ];
-};
+    isNormalUser = true;
+    shell = pkgs.bash;
+  };
 
 }

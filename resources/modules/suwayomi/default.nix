@@ -7,9 +7,8 @@
 {
   services.suwayomi-server = {
 
-    #TODO - Updated this to be a user named suwayomi
     enable = true;
-    user = "suwayomi";
+    user = "tarobutter";
     group = "users";
 
     dataDir = "/storage/Orchid/shortstack/suwayomi-server"; 

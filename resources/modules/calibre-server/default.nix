@@ -36,7 +36,7 @@
 
 	
   users.users.pomona = {
-    description = "Roman goddess of the Orchard: Maintainer of apps";
+    description = "Roman goddess of the Orchard and Maintainer of our apps";
     extraGroups = [
       "input"
       "networkmanager"

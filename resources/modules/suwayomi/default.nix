@@ -9,7 +9,7 @@
 
     #TODO - Updated this to be a user named suwayomi
     enable = true;
-    user = "tarobutter";
+    user = "suwayomi";
     group = "users";
 
     dataDir = "/storage/Orchid/shortstack/suwayomi-server"; 
@@ -24,15 +24,20 @@
       #TODO - Change to Yarrow
       #TODO - give access to yarrow for suwayomi user
       server.downloadsPath = "/storage/Orchid/Media/Manga";
-      server.backupPath = "/storage/Nettle/backups/suwayomi";
+      server.backupPath = "/storage/Orchid/backups/suwayomi";
       server.debugLogsEnable = true;
   };
  };
 
-  environment.systemPackages = with pkgs; [
-    suwayomi-server
-  ];
-
-
+    # Define a user account. Don't forget to set a password with ‘passwd’
+  users.users.suwayomi = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "docker" ];
+    packages = with pkgs; [
+      tree
+      suwayomi-server
+    ];
+};
+  
 
 }

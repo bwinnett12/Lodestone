@@ -21,4 +21,20 @@
     # but is otherwise equivalent to using `enabledCollectors` above.
     extraFlags = [ "--collector.ntp.protocol-version=4" "--no-collector.mdadm" ];
   };
+  
+  services.prometheus = {
+    enable = true;
+    port = 9090;
+    scrapeConfigs = [
+      {
+        job_name = "node";
+        static_configs = [
+          {
+            # This tells Prometheus to look at your Node Exporter
+            targets = [ "127.0.0.1:9000" ]; 
+          }
+        ];
+      }
+    ];
+  };
 }

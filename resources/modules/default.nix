@@ -1,6 +1,7 @@
 
 _: {
   flake.nixosModules = {
+	"calibre-server" = ./calibre-server;
 	"homepage" = ./homepage;
 	"games" = ./games;
 	"grafana" = ./grafana;

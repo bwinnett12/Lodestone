@@ -10,7 +10,7 @@
     ./drives.nix
     ./configuration.nix
     
-
+    self.nixosModules.calibre-server
     self.nixosModules.games
     self.nixosModules.guacamole
 

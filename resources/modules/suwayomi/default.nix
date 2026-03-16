@@ -28,6 +28,14 @@
   };
  };
 
+   environment.systemPackages = with pkgs; [
+      curl
+      wget
+      unzip
+      suwayomi-server
+
+    ];
+
     # Define a user account. Don't forget to set a password with ‘passwd’
   users.users.suwayomi = {
     isNormalUser = true;

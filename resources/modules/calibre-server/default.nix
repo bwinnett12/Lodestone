@@ -17,11 +17,16 @@
 	pkgs.calibre
   ];
 
-
+  ## Calibre Web client
   services.calibre-web = {
+
     enable = true;
-    listen.address = "0.0.0.0";
-    listen.port = 8083;
+
+	listen = {
+      ip = "0.0.0.0";
+	  port = 8083;
+	};
+
     options = {
       calibreLibrary = "/storage/Orchid/Media/Books";
       enableBookUploading = true;

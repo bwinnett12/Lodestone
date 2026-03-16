@@ -56,6 +56,7 @@
 
 
         2111  ## 2111 - Calibre Server
+        8083  ## 8083 - Calibre Web
 
 
 

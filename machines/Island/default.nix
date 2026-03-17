@@ -9,6 +9,8 @@
     ./hardware-configuration.nix
     ./drives.nix
     ./configuration.nix
+
+    self.nixosModules.mailroom
     
     self.nixosModules.calibre-server
     self.nixosModules.filebrowser

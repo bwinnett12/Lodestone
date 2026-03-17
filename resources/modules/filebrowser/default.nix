@@ -10,10 +10,12 @@
 
 	user = "pomona";
 
-    listen = {
-      ip = "0.0.0.0";
-	  port = 2000;
+    address = "0.0.0.0";
+	settings = {
+      port = 2000;
+
 	};
+
   };
 
 }

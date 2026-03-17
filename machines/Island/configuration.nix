@@ -59,6 +59,7 @@
         8083  ## 8083 - Calibre Web
 
         2112  ## 2112 - Message
+        2113  ## 2113 - Mailroom
 
         2000  ## filebrowser
 

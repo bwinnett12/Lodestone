@@ -10,12 +10,6 @@
 
 	user = "pomona";
 
-    address = "0.0.0.0";
-	settings = {
-      port = 2000;
-
-	};
-
   };
 
 }

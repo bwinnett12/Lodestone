@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NixOS Message Portal</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #1a1b26; color: #a9b1d6; display: flex; justify-content: center; padding-top: 50px; }
+        .card { background: #24283b; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 400px; }
+        h2 { color: #7aa2f7; margin-top: 0; }
+        .field { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 10px; background: #1a1b26; border: 1px solid #414868; color: white; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #7aa2f7; border: none; color: #1a1b26; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+        button:hover { background: #89ddff; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>System Dispatcher</h2>
+        <form id="dispatchForm">
+            <div class="field">
+                <label>Message Payload</label>
+                <input type="text" id="payload" placeholder="Type message here..." required>
+            </div>
+            <div class="field">
+                <label>Destination Channel</label>
+                <select id="channel">
+                    <option value="notify">Desktop Notification</option>
+                    <option value="log">Systemd Journal</option>
+                    <option value="localai">LocalAI Inference</option>
+                </select>
+            </div>
+            <button type="submit">Dispatch Message</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('dispatchForm').onsubmit = (e) => {
+            e.preventDefault();
+            const data = {
+                msg: document.getElementById('payload').value,
+                to: document.getElementById('channel').value
+            };
+            console.log("Dispatched:", data);
+            alert(`Message sent to ${data.to}`);
+        };
+    </script>
+</body>
+</html>

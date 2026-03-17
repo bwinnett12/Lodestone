@@ -36,20 +36,30 @@
     <script>
         document.getElementById('dispatchForm').onsubmit = async (e) => {
             e.preventDefault();
-            const payload = {
-                message: document.getElementById('payload').value,
-                file: document.getElementById('channel').value
-            };
+            
+            // Grab the values from the form
+            const messageText = document.getElementById('payload').value;
+            const targetFile = document.getElementById('channel').value;
 
             try {
-                const response = await fetch('http://' + window.location.hostname + ':2113/log', {
+                // We send the data to port 2113, not 2112
+                const response = await fetch(`http://''${window.location.hostname}:2113/log`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({
+                        message: messageText,
+                        file: targetFile
+                    })
                 });
-                if (response.ok) alert("Logged to " + payload.file);
+
+                if (response.ok) {
+                    alert("Success! Message echoed to /tmp/" + targetFile + ".log");
+                    document.getElementById('payload').value = ""; // Clear the box
+                } else {
+                    alert("Server error: " + response.status);
+                }
             } catch (err) {
-                alert("Error: Backend not reachable");
+                alert("Connection failed. Is the backend running on 2113?");
             }
         };
     </script>

@@ -34,14 +34,23 @@
         </form>
     </div>
     <script>
-        document.getElementById('dispatchForm').onsubmit = (e) => {
+        document.getElementById('dispatchForm').onsubmit = async (e) => {
             e.preventDefault();
-            const data = {
-                msg: document.getElementById('payload').value,
-                to: document.getElementById('channel').value
+            const payload = {
+                message: document.getElementById('payload').value,
+                file: document.getElementById('channel').value
             };
-            console.log("Dispatched:", data);
-            alert(`Message sent to ${data.to}`);
+
+            try {
+                const response = await fetch('http://' + window.location.hostname + ':2113/log', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (response.ok) alert("Logged to " + payload.file);
+            } catch (err) {
+                alert("Error: Backend not reachable");
+            }
         };
     </script>
 </body>

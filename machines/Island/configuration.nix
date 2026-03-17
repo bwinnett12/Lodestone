@@ -58,6 +58,8 @@
         2111  ## 2111 - Calibre Server
         8083  ## 8083 - Calibre Web
 
+        2112  ## 2112 - Message
+
         2000  ## filebrowser
 
 

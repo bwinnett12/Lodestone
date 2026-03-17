@@ -1,15 +1,8 @@
 { config, pkgs, ... }:
 
 let
-  # This tells Nix to grab the local index.html and put it in the store
-  uiFiles = pkgs.stdenv.mkDerivation {
-    name = "message-center-ui";
-    src = ./.; # Looks in the current directory
-    installPhase = ''
-      mkdir -p $out
-      cp index.html $out/
-    '';
-  };
+  # This reads the content of your local index.html and writes it to a directory in the Nix store
+  uiFiles = pkgs.writeTextDir "index.html" (builtins.readFile ./index.html);
 in
 {
   services.nginx = {

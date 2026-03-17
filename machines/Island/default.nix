@@ -11,6 +11,7 @@
     ./configuration.nix
     
     self.nixosModules.calibre-server
+    self.nixosModules.filebrowser
     self.nixosModules.games
     self.nixosModules.guacamole
 
@@ -23,7 +24,7 @@
     self.nixosModules.komga
 
     self.nixosModules.localai
-    
+
     self.nixosModules.plan9
     self.nixosModules.prometheus
 

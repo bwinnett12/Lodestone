@@ -15,7 +15,7 @@
     openFirewall = true;
 
     settings = {
-      server.port = 2108;
+      server.port = 4567;
       server.address = "Island";
       server.enableSystemTray = true;
       server.autoDownloadNewChapters = true;

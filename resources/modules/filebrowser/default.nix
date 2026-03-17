@@ -10,7 +10,6 @@
 
 	user = "pomona";
 
-    port = 2000;
   };
 
 }

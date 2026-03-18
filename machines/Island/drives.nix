@@ -32,16 +32,16 @@
   };
 
 
-#  fileSystems."/storage/Nettle" = {
-#
-#    device = "UUID=10ba586f-c9b7-48ce-a8e5-7f5adbb34ab9";
-#    fsType = "ext4";
-#    options = [
-#      "defaults"
-#      "nofail"
-#      "x-systemd.automount"
-#    ];
-#  };
+  fileSystems."/storage/Nettle" = {
+
+    device = "UUID=10ba586f-c9b7-48ce-a8e5-7f5adbb34ab9";
+    fsType = "ext4";
+    options = [
+      "defaults"
+      "nofail"
+      "x-systemd.automount"
+    ];
+  };
 
 
 

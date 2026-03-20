@@ -6,10 +6,16 @@
   services.filebrowser = {
     enable = true;
 
-	group = "users";
-	openFirewall = true;
+    # Wait for network and your storage mount to be ready
+    after = [ "network.target" "docker.service" ];
+    
+    requires = [ "docker.service" ];
+    wantedBy = [ "multi-user.target" ];
 
-	user = "pomona";
+    group = "users";
+    openFirewall = true;
+
+	  user = "pomona";
  
     settings = {
       port = 2000;      # Using port 2000 as seen in your error

@@ -1,35 +1,44 @@
+
+
 { config, pkgs, inputs, ... }:
 
 let
+  # UI Files
   uiFiles = pkgs.writeTextDir "html-files" ''
-    <html>
-      <head><title>Message Logger</title></head>
-      <body>
-        <h1>Send a Message</h1>
-        <form id="messageForm">
-          <textarea name="message" required></textarea>
-          <button type="submit">Send</button>
-        </form>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>NixOS Message Portal</title>
+        <!-- Include the rest of the HTML here as shown above -->
+    </head>
+    <body>
+        <div class="card">
+            <h2>System Dispatcher</h2>
+            <form id="dispatchForm">
+                <div class="field">
+                    <label>Message Payload</label>
+                    <input type="text" id="payload" placeholder="Type message here..." required>
+                </div>
+                <div class="field">
+                    <label>Destination Channel</label>
+                    <select id="channel">
+                        <option value="notify">Desktop Notification</option>
+                        <option value="log">Systemd Journal</option>
+                        <option value="localai">LocalAI Inference</option>
+                    </select>
+                </div>
+                <button type="submit">Dispatch Message</button>
+            </form>
+        </div>
         <script>
-          document.getElementById('messageForm').onsubmit = async function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            const message = formData.get('message');
-            const response = await fetch('http://messages.local:2113/message', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ message: message, file: 'messages-log' }) // Adjust the filename logic as needed
-            });
-            const result = await response.text();
-            alert(result);
-          };
+            // JavaScript for handling form submission goes here
         </script>
-      </body>
+    </body>
     </html>
   '';
 
+  # Log Server
   logServer = pkgs.writeScriptBin "log-server" ''
     #!${pkgs.python3}/bin/python3
     from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -62,8 +71,12 @@ let
 
     HTTPServer(('0.0.0.0', 2113), Handler).serve_forever()
   '';
+
 in
 {
+  # Systemd and u9fs configurations remain the same
+  # ...
+
   systemd = {
     sockets.u9fs = {
       description = "9P filesystem server socket... Not the one from outer space...";
@@ -93,7 +106,7 @@ in
     enable = true;
     virtualHosts."messages.local" = {
       listen = [{ addr = "0.0.0.0"; port = 2112; }];
-      root = "${uiFiles}";
+      root = "${uiFiles}";  # Root points to the new HTML files
     };
   };
 
@@ -113,7 +126,7 @@ in
       User = "root"; 
     };
   };
-  
+
   # Dependencies
   environment.systemPackages = with pkgs; [
     curl

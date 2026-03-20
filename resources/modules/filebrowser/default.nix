@@ -7,10 +7,10 @@
     enable = true;
 
     # Wait for network and your storage mount to be ready
-    after = [ "network.target" "docker.service" ];
+    #after = [ "network.target" "docker.service" ];
     
-    requires = [ "docker.service" ];
-    wantedBy = [ "multi-user.target" ];
+    #requires = [ "docker.service" ];
+    #wantedBy = [ "multi-user.target" ];
 
     group = "users";
     openFirewall = true;

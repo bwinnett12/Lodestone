@@ -46,7 +46,7 @@
 
         9000  ## 9000 - Prometheus
         9090  ## 9090 - Prometheus
-        3000  ## 3000 - Grafana
+        2117  ## 2117 - Grafana
 
         2108  ## 2108 - Suwayomi Server
         4567  ## 4567 - Suwayomi Server
@@ -60,6 +60,11 @@
 
         2112  ## 2112 - Message
         2113  ## 2113 - Mailroom
+
+        3000  ## 3000 - Homepage
+
+
+
         5150  ## Mailroom
 
         2000  ## filebrowser

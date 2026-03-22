@@ -20,7 +20,7 @@
         proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}";
         proxyWebsockets = true;
         extraConfig = ''
-          proxy_set_header Host ${config.services.grafana.domain};
+          proxy_set_header Host ${config.services.grafana.settings.server.domain};
         '';
     };
   };

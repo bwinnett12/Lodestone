@@ -15,7 +15,7 @@
         
         # Use 'nix run' to ensure all flake dependencies are loaded
         # The '.' tells nix to run the default package defined in your flake
-        ExecStart = "${pkgs.nix}/bin/nix run . -- start";
+        ExecStart = "${pkgs.nix}/bin/nix develop . --command cargo loco start";
         
         Restart = "always";
         User = "tarobutter";
@@ -31,8 +31,8 @@
         WorkingDirectory = "/home/tarobutter/Projects/Mailroom";
         
         # Passing the --worker flag through nix run
-        ExecStart = "${pkgs.nix}/bin/nix run . -- start --worker";
-        
+        ExecStart = "${pkgs.nix}/bin/nix develop . --command cargo loco start --worker";
+
         Restart = "always";
         User = "tarobutter";
         Environment = "LOCO_ENV=development";

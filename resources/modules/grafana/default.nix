@@ -6,6 +6,10 @@
     domain = "grafana.platatoo";
     port = 3000;
     addr = "127.0.0.1";
+
+    settings.security.secret_key = "/var/lib/grafana/secret_key";
+
+    user = "pomona";
   };
 
   # nginx reverse proxy

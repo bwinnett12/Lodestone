@@ -43,6 +43,7 @@
       "systemd-journal"
       "wheel"
       "docker"
+      "grafana"
     ];
     isNormalUser = true;
     shell = pkgs.bash;

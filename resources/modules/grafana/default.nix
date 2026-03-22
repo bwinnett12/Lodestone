@@ -9,7 +9,7 @@
 
     settings.security.secret_key = "/var/lib/grafana/secret_key";
 
-    user = "pomona";
+    users = "pomona";
   };
 
   # nginx reverse proxy

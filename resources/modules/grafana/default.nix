@@ -5,7 +5,7 @@
     enable = true;
   
     settings.server = {
-      http_addr = "127.0.0.1";
+      http_addr = "10.0.1.10";
       http_port = 2117;
       domain = "grafana.island";
     };

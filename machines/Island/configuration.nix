@@ -26,6 +26,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  services.tailscale.enable = true;
+
   networking = {
     
     hostName = "Island";
@@ -33,6 +35,9 @@
     networkmanager.enable = true;
 
     firewall = {
+
+      checkReversePath = "loose";
+      trustedInterfaces = [ "tailscale0" ];
       allowedTCPPorts = [ 
         8080  ## 8080 - LocalAI
         8081  ## 8081 - LocalAI      
@@ -89,9 +94,7 @@
 
       ];
 
-      allowedUDPPorts = [ 
-        21116  ## Rustdesk
-      ];
+      allowedUDPPorts = [ config.services.tailscale.port ];
 
     };
 

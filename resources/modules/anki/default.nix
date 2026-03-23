@@ -33,6 +33,13 @@
 	};
 
   };
+
+  services.caddy = {
+	enable = true;
+	virtualHosts."anki.island.local".extraConfig = ''
+	  reverse_proxy localhost:3111
+	'';
+  };
   # Define a user account. Don't forget to set a password with ‘passwd’
   #users.users.localai = {
   #	isNormalUser = true;

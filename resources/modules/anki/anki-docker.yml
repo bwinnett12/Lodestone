@@ -1,6 +1,6 @@
 services:
   anki-sync-server:
-    image: chrislongros/anki-sync-server-enhanced:25.09.2-1
+    image: chrislongros/anki-sync-server-enhanced
     container_name: anki-sync
     ports:
       - "3111:3111"   # Sync server (HTTP)

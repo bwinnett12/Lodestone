@@ -27,7 +27,7 @@
 	  User = "root";
 
 	  # Set the working directory to the directory of the compose file
-	  WorkingDirectory = "/storage/Orchid/shortstack/anki/"; 
+	  WorkingDirectory = "/storage/Orchid/shortstack/anki"; 
 	  Restart = "on-failure";
 	  RestartSec = "5s";
 	};
@@ -43,5 +43,4 @@
 # };
       
 }
-
 

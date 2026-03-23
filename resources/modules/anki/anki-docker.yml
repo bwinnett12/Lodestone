@@ -14,10 +14,6 @@ services:
       - METRICS_ENABLED=true
       - DASHBOARD_ENABLED=true
     volumes:
-      - anki_data:/storage/Orchid/shortstack/anki
-      - anki_backups:/storage/Orchid/backups/anki
+      - /storage/Orchid/shortstack/anki:/data
+      - /storage/Orchid/backups/anki:/backups
     restart: unless-stopped
-
-volumes:
-  anki_data:
-  anki_backups:

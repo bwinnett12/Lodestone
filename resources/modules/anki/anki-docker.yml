@@ -5,8 +5,8 @@ services:
     ports:
       - "3111:3111"   # Sync server (HTTP)
       - "8443:8443"   # Sync server (HTTPS, if TLS_ENABLED)
-      - "3112:3112"   # Dashboard (optional)
-      - "3113:3113"   # Metrics (optional)
+      - "3112:8081"   # Dashboard (optional)
+      - "3113:9090"   # Metrics (optional)
     environment:
       - SYNC_USER1=alice:password1
       - TZ=America/Anchorage

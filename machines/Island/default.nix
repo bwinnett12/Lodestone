@@ -12,6 +12,8 @@
 
     self.nixosModules.mailroom
     
+    self.nixosModules.anki
+
     self.nixosModules.calibre-server
     self.nixosModules.filebrowser
     self.nixosModules.games
@@ -40,6 +42,8 @@
 
 
   ];
+
+  services.nginx.enable = true;
 
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"

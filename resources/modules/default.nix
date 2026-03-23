@@ -1,6 +1,7 @@
 
 _: {
   flake.nixosModules = {
+	"anki" = ./anki;
 	"calibre-server" = ./calibre-server;
 	"filebrowser" = ./filebrowser;
 	"homepage" = ./homepage;

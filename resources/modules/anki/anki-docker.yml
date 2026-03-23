@@ -1,0 +1,23 @@
+services:
+  anki-sync-server:
+    image: chrislongros/anki-sync-server-enhanced:25.09.2-1
+    container_name: anki-sync
+    ports:
+      - "3111:3111"   # Sync server (HTTP)
+      - "8443:8443"   # Sync server (HTTPS, if TLS_ENABLED)
+      - "3112:3112"   # Dashboard (optional)
+      - "3113:3113"   # Metrics (optional)
+    environment:
+      - SYNC_USER1=alice:password1
+      - TZ=America/Anchorage
+      - BACKUP_ENABLED=true
+      - METRICS_ENABLED=true
+      - DASHBOARD_ENABLED=true
+    volumes:
+      - anki_data:/storage/Orchid/shortstack/anki
+      - anki_backups:/storage/Orchid/backups
+    restart: unless-stopped
+
+volumes:
+  anki_data:
+  anki_backups:

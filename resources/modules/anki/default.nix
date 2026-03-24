@@ -34,12 +34,20 @@
 
   };
 
-  services.caddy = {
-	enable = true;
-	virtualHosts."anki.island.local".extraConfig = ''
-	  reverse_proxy localhost:3111
-	'';
+  services.nginx.virtualHosts."anki.island.local" = {
+  locations."/" = {
+    proxyPass = "http://127.0.0.1:3111";
+    proxyWebsockets = true; # Good practice for Anki sync
   };
+};
+
+  #services.caddy = {
+#	enable = true;
+#	virtualHosts."anki.island.local".extraConfig = ''
+#	  reverse_proxy localhost:3111
+#	'';
+#  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’
   #users.users.localai = {
   #	isNormalUser = true;

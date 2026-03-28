@@ -32,10 +32,14 @@
     
     hostName = "Island";
 
+    interfaces.enp0s31f6.useDHCP = true;
+
     networkmanager.enable = true;
 
     firewall = {
 
+
+      enable = true;
       checkReversePath = "loose";
       trustedInterfaces = [ "tailscale0" ];
       allowedTCPPorts = [ 

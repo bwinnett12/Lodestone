@@ -43,8 +43,19 @@
 
   ];
 
-  services.nginx.enable = true;
-
+  services.nginx = {
+  enable = true;
+  virtualHosts."_" = { # The "_" makes this the default for any IP/Domain
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:3111";
+      proxyWebsockets = true; 
+      extraConfig = ''
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+      '';
+    };
+  };
+};
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"
   ];

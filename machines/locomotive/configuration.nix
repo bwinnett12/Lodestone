@@ -45,7 +45,6 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-	passwd = "666";
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
       tree

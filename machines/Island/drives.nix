@@ -25,8 +25,9 @@
     fsType = "btrfs";
     options = [
       "nofail"
-      "x-systemd.automount"
+      # "x-systemd.automount" Disable auto-mount
       "noatime"
+      "compress=zstd"
     ];
 
   };

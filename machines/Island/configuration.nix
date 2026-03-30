@@ -31,7 +31,6 @@
   networking = {
     
     hostName = "Island";
-
     interfaces.enp0s31f6.useDHCP = true;
 
     networkmanager.enable = true;

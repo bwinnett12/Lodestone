@@ -15,7 +15,7 @@
     self.nixosModules.anki
 
     self.nixosModules.calibre-server
-    self.nixosModules.filebrowser
+ #   self.nixosModules.filebrowser
     self.nixosModules.games
     self.nixosModules.guacamole
 
@@ -42,6 +42,8 @@
 
 
   ];
+
+  hardware.enableRedistributableFirmware = true;
 
   services.nginx = {
   enable = true;

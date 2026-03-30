@@ -194,8 +194,6 @@
     btrfs-progs
     lsof
 
-    lsusb
-
     docker-compose
 
     nvidia-container-toolkit

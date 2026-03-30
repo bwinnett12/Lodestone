@@ -64,13 +64,25 @@
 
 
   boot = {
-    kernelModules = [ "ntfs3" "ext4" "btrfs" "vfat" "exfat" ];
+    kernelModules = [ 
+      "xhci_pci" "usb_storage" "usbhid" "sd_mod"
+      "ntfs3" "ext4" "btrfs" "vfat" "exfat"
+    ];
+
+    kernelParams = [
+      "tpm_tis.interrupts=0" 
+      "pci=noaer"
+    ];
+
     loader = {
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot";
       };
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 15;
+      };
     };
   };
 

@@ -44,6 +44,7 @@
   ];
 
   hardware.enableRedistributableFirmware = true;
+  services.udisks2.enable = true;
 
   services.nginx = {
   enable = true;

@@ -6,42 +6,22 @@
 
 {
   
-  systemd.services = {
-    mailroom-server = {
-      description = "Mailroom Loco API Server";
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        # Path to where Cargo.toml and flake.nix live
-        WorkingDirectory = "/home/tarobutter/Projects/Mailroom";
-        
-        # Use 'nix run' to ensure all flake dependencies are loaded
-        # The '.' tells nix to run the default package defined in your flake
-        ExecStart = "${pkgs.nix}/bin/nix develop . --command cargo loco start";
-        
-        Restart = "always";
-        User = "tarobutter";
-        Environment = "LOCO_ENV=development";
-      };
+  systemd.services.mailroom = {
+    description = "Mailroom - Server built on Genie with Julia";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-`user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.julia-bin}/bin/julia --project=/home/tarobutter/Projects/Mailroom /home/tarobutter/Projects/Mailroom/bootstrap.jl";
+      Restart = "on-failure";
+      RestartSec = "5s";
+
+      User = "tarobutter";
+      WorkingDirectory = "/home/tarobutter/Projects/Mailroom";
     };
-
-    mailroom-worker = {
-      description = "Mailroom AI Worker Processor";
-      after = [ "network.target" "mailroom-server.service" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        WorkingDirectory = "/home/tarobutter/Projects/Mailroom";
-        
-        # Passing the --worker flag through nix run
-        ExecStart = "${pkgs.nix}/bin/nix develop . --command cargo loco start --worker";
-
-        Restart = "always";
-        User = "tarobutter";
-        Environment = "LOCO_ENV=development";
-      };
+    environment = {
+      LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib pkgs.zlib ]}";
     };
-};
-
+  };
 
 }
 

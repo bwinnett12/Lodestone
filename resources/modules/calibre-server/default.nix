@@ -45,9 +45,18 @@
       "docker"
       "grafana"
       "storage-orchid"
+      "storage-yarrow"
+      "jellyfin"
+      "video"   # Required for hardware-accelerated transcoding
+      "render"  # Required for Intel/AMD quicksync/VA-API
     ];
+
+    home = "/var/lib/pomona";
+    createHome = true;
+
     isNormalUser = true;
     shell = pkgs.bash;
   };
+  users.groups.pomona = {};
 
 }

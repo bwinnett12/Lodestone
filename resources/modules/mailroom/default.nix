@@ -16,7 +16,7 @@ in
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_15; # Explicit versioning for stability
-    ensureDatabases = [ "${dbName}" ];
+    ensureDatabases = [ "${dbName}" "${user}" ];
     ensureUsers = [
       {
         name = "${user}";

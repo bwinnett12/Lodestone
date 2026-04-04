@@ -143,7 +143,7 @@
         nvidia-vaapi-driver
         intel-media-driver # For Intel QuickSync (newer CPUs)
         intel-vaapi-driver   # For older Intel CPUs
-        vaapiVdpau
+        libva-vdpau-driver
         libvdpau-va-gl
         intel-compute-runtime # Optional: for OpenCL tone mapping
       ];

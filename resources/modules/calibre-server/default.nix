@@ -44,6 +44,7 @@
       "wheel"
       "docker"
       "grafana"
+      "storage-orchid"
     ];
     isNormalUser = true;
     shell = pkgs.bash;

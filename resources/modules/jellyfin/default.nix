@@ -19,7 +19,7 @@
 
     serviceConfig = {
       DeviceAllow = [ "/dev/dri/renderD128" ];
-    }
+    };
   };
 
   environment.systemPackages = with pkgs; [

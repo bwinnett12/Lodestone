@@ -28,6 +28,10 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+
+
   services.tailscale.enable = true;
 
   networking = {

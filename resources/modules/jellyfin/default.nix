@@ -17,9 +17,10 @@
     # webdir = "/storage/Yarrow/temp-web";
     # cacheDir = ""; # todo - Set this to be the SSD?
 
-    serviceConfig = {
-      DeviceAllow = [ "/dev/dri/renderD128" ];
-    };
+    # TODO - ADd later
+    #serviceConfig = {
+    #  DeviceAllow = [ "/dev/dri/renderD128" ];
+    #};
   };
 
   environment.systemPackages = with pkgs; [

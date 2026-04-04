@@ -44,8 +44,8 @@
       "wheel"
       "docker"
       "grafana"
-      "storage-orchid"
-      "storage-yarrow"
+      "storage-Orchid"
+      "storage-Yarrow"
       "jellyfin"
       "video"   # Required for hardware-accelerated transcoding
       "render"  # Required for Intel/AMD quicksync/VA-API

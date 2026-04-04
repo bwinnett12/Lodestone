@@ -22,9 +22,9 @@
       "video"
       "render"
       "jellyfin"
-      "storage-orchid"
-      "storage-yarrow"
-      "storage-tulip"
+      "storage-Orchid"
+      "storage-Yarrow"
+      "storage-Tulip"
     ];
     isNormalUser = true;
     shell = pkgs.bash;

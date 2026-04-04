@@ -4,12 +4,11 @@
 { config, pkgs, inputs, ... }:
 
 let
-  # 1. Define your variables here
+
+  ## user defined variables
   user = "pomona";
-  # Adjust this path once you move to the orchid drive
   mailroom-dir = "/storage/Orchid/shortstack/Mailroom"; 
   dbName = "mailroom_db";
-  # Example for the new drive: basePath = "/mnt/storage-orchid/Mailroom";
 in
 {
   # 1. Enable and Configure PostgreSQL
@@ -38,8 +37,8 @@ in
     description = "Mailroom - Server built on Genie with Julia";
 
     # Ensures the drive is mounted before trying to start
-    after = [ "network.target" "storage-orchid.mount" "postgresql.service" ]; 
-    requires = [ "storage-orchid.mount" ];
+    after = [ "network.target" "storage-Orchid.mount" "postgresql.service" ]; 
+    requires = [ "storage-Orchid.mount" ];
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
@@ -62,10 +61,6 @@ in
       DB_USER = user;
       # Since we used 'trust' for local, we don't strictly need a password here,
       # #TODO - Updated to use a secret file.
-
-
-
-
 
       LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath [ 
         pkgs.stdenv.cc.cc.lib 

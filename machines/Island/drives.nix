@@ -72,9 +72,11 @@
       "nofail"
       "x-systemd.automount"
       "x-systemd.device-timeout=5s"
-      "gid=1000"      ## todo - Currently with "shared group"
+      "gid=995"      ## Set to media group
       "uid=1000"      # todo - Replace with tarobutter
       "umask=0002"          # Allows group writing
+      "dmask=0002"         # Directory mask
+      "fmask=0003"         # File mask (removes execute bit from files for safety)
     ];
   };
 }

@@ -49,6 +49,7 @@
       "jellyfin"
       "video"   # Required for hardware-accelerated transcoding
       "render"  # Required for Intel/AMD quicksync/VA-API
+      "media"
     ];
 
     home = "/var/lib/pomona";

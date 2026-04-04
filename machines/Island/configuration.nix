@@ -25,6 +25,7 @@
       "storage-Orchid"
       "storage-Yarrow"
       "storage-Tulip"
+      "media"
     ];
     isNormalUser = true;
     shell = pkgs.bash;

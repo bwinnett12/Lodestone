@@ -43,6 +43,10 @@
 
   ];
 
+  users.groups.media = {
+    gid = 995; # Pick a unique ID or let NixOS auto-assign
+  };
+
   hardware.enableRedistributableFirmware = true;
   services.udisks2.enable = true;
 

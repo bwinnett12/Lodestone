@@ -53,6 +53,9 @@ in
 
     };
     environment = {
+
+      JULIA_DEPOT_PATH = "${mailroom-dir}/.julia-depot";
+
       # 4. Pass DB credentials to Julia via ENV
       GENIE_ENV = "prod";
       DB_ADAPTER = "PostgreSQL";

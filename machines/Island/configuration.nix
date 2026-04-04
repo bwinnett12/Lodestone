@@ -142,7 +142,7 @@
       extraPackages = with pkgs; [
         nvidia-vaapi-driver
         intel-media-driver # For Intel QuickSync (newer CPUs)
-        vaapiIntel    # For older Intel CPUs
+        intel-vaapi-driver   # For older Intel CPUs
         vaapiVdpau
         libvdpau-va-gl
         intel-compute-runtime # Optional: for OpenCL tone mapping

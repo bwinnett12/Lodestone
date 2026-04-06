@@ -30,6 +30,7 @@
       # "x-systemd.automount" Disable auto-mount
       "noatime"
       "compress=zstd"
+      "acl"
     ];
 
   };

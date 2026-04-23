@@ -64,8 +64,8 @@
     # Enable the Cosmic Desktop Environment
     # services.desktopManager.cosmic.enable = true;
     # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
-    desktopManager.gnome.enable = true; 
-    displayManager.gdm.enable = true;
+    #desktopManager.gnome.enable = true; 
+    # displayManager.gdm.enable = true;
 
 
     # Enable touchpad support (enabled default in most desktopManager).

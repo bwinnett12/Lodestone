@@ -7,7 +7,7 @@
 { 
   imports = [
     ./hardware-configuration.nix
-    ./drives.nix
+    #./drives.nix
     ./configuration.nix
 
     #self.nixosModules.mailroom

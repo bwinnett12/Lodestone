@@ -18,8 +18,8 @@
 
     Loom = mkSystem "Loom" "x86_64-linux";
 
-    locomotive = mkSystem "locomotive" "aarch64-linux";
+    Locomotive = mkSystem "Locomotive" "aarch64-linux";
 
-    
+
   };
 }

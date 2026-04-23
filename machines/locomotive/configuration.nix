@@ -2,7 +2,7 @@
 {
   imports =
     [
-      <nixos-hardware/raspberry-pi/4>
+      # <nixos-hardware/raspberry-pi/4>
       #./hardware-configuration.nix
     ];
   hardware = {
@@ -12,6 +12,18 @@
       filter = "*rpi-4-*.dtb";
     };
   };
+
+
+
+  # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
+  boot.loader.grub.enable = false;
+  # Enables the generation of /boot/extlinux/extlinux.conf
+  boot.loader.generic-extlinux-compatible.enable = true;
+
+  # networking.hostName = "nixos"; # Define your hostname.
+
+  # Configure network connections interactively with nmcli or nmtui.
+  networking.networkmanager.enable = true;
 
 
 

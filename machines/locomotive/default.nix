@@ -61,12 +61,18 @@
   security.rtkit.enable = true;
 
   services = {
+
+    getty.autologinUser = "tarobutter";
     
     # Enable the Cosmic Desktop Environment
     # services.desktopManager.cosmic.enable = true;
     # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
     #desktopManager.gnome.enable = true; 
     # displayManager.gdm.enable = true;
+
+    xserver.enable = true;
+    xserver.desktopManager.xfce.enable = true;
+    displayManager.lightdm.enable = true;
 
 
     # Enable touchpad support (enabled default in most desktopManager).

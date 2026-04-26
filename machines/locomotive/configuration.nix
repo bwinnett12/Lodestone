@@ -48,11 +48,42 @@
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   services.tailscale.enable = true;
-  networking.firewall.trustedInterfaces = [ "tailscale0" ];
+  networking.firewall.trustedInterfaces = [ "tailscale0"  "eth0" ];
 
   # Enable firewall opening DNS and HTTP for Pi-hole if using host networking
   networking.firewall.allowedTCPPorts = [ 80 53 ];
   networking.firewall.allowedUDPPorts = [ 53 41641 ];
+
+
+  networking.interfaces.eth0.ipv4.addresses = [{
+    address = "192.168.100.1"; # The Pi's address on the private link
+    prefixLength = 24;
+  }];
+
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+  };
+
+
+
+  networking.firewall.extraCommands = ''
+    iptables -A FORWARD -i tailscale0 -o eth0 -j ACCEPT
+    iptables -A FORWARD -i eth0 -o tailscale0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+  '';
+
+  networking.nat = {
+    enable = true;
+    internalInterfaces = [ "eth0" ];
+    externalInterface = "wlan0"; # or wherever the Pi gets its internet
+  };
+
+  
+
+
+
+
+
+
 
 
 
@@ -72,9 +103,26 @@
 
   console.enable = false;
   environment.systemPackages = with pkgs; [
+    git
     libraspberrypi
     raspberrypi-eeprom
-	podman
+	  podman
+
+
+
+    vim
+    wget
+
+    openssl
+    nettools
+    rustscan
+
+    coreutils
+
+    exfatprogs
+    parted
+    btrfs-progs
+    lsof
   ];
   # system.stateVersion = "24.11";
 }

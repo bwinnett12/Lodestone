@@ -10,7 +10,7 @@
     ./drives.nix
     ./configuration.nix
 
-    self.nixosModules.mailroom
+    #self.nixosModules.mailroom
     
     self.nixosModules.anki
 

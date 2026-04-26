@@ -42,11 +42,23 @@
   networking = {
     
     hostName = "Island";
-    interfaces.enp0s31f6.useDHCP = true;
+    #interfaces.enp0s31f6.useDHCP = true;
+
+    interfaces.enp0s31f6.ipv4.addresses = [{
+      address = "192.168.100.2";
+      prefixLength = 24;
+    }];
+    interfaces.enp0s31f6.useDHCP = false;
+
+    defaultGateway = "192.168.100.1";
+    nameservers = [ "1.1.1.1" "8.8.8.8" ];
 
     networkmanager.enable = true;
 
     firewall = {
+
+      allowedUDPPorts = [ config.services.tailscale.port ];
+
 
 
       enable = true;
@@ -108,7 +120,6 @@
 
       ];
 
-      allowedUDPPorts = [ config.services.tailscale.port ];
 
     };
 

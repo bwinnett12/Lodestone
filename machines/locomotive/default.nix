@@ -70,9 +70,7 @@
     #desktopManager.gnome.enable = true; 
     # displayManager.gdm.enable = true;
 
-    xserver.enable = true;
-    xserver.desktopManager.xfce.enable = true;
-    displayManager.lightdm.enable = true;
+
 
 
     # Enable touchpad support (enabled default in most desktopManager).
@@ -97,11 +95,15 @@
 
     xserver = {
       enable = true;
+      desktopManager.xfce.enable = true;
+      displayManager.lightdm.enable = true;
+
       xkb = {
         layout = "us";
         variant = "";
       };
     };
+
   };
 
   system.stateVersion = "25.11";

@@ -19,6 +19,7 @@
   boot.loader.grub.enable = false;
   # Enables the generation of /boot/extlinux/extlinux.conf
   boot.loader.generic-extlinux-compatible.enable = true;
+  
 
 
   hardware.enableRedistributableFirmware = true;
@@ -46,9 +47,14 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
+  services.tailscale.enable = true;
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
+
   # Enable firewall opening DNS and HTTP for Pi-hole if using host networking
   networking.firewall.allowedTCPPorts = [ 80 53 ];
-  networking.firewall.allowedUDPPorts = [ 53 ];
+  networking.firewall.allowedUDPPorts = [ 53 41641 ];
+
+
 
 
 

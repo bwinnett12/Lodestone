@@ -32,9 +32,10 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
-
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 
   services.tailscale.enable = true;
 
@@ -78,7 +79,6 @@
         2108  ## 2108 - Suwayomi Server
         4567  ## 4567 - Suwayomi Server
 
-
         4500  ## 4500 - u9fs
 
 
@@ -108,17 +108,8 @@
 
         80 
         443
-
-
       ];
-
-
     };
-
-    
-
-
-
   };
 
 
@@ -174,7 +165,6 @@
       # Power management set to false. 
       powerManagement.enable = false;
     };
-
   };
   
 
@@ -187,14 +177,6 @@
   };
 
   systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];
-
-  #virtualisation.containers.cdi.dynamicConfig.nvidia.enable = true;
-
-# Ensure your hardware drivers are correct
-
-  #virtualisation.docker.rootless.daemon.settings.features.cdi = true;
-
-  
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Programs

@@ -12,8 +12,7 @@ services:
     environment:
       - DEBUG=true
     volumes:
-      - /storage/Orchid/shortstack/localai:/storage/Orchid/shortstack/localai/models:cached
-
+      - /storage/Orchid/shortstack/localai:/localai:cached
     # For NVIDIA GPUs with standalone Docker:
     devices:
       - nvidia.com/gpu=all

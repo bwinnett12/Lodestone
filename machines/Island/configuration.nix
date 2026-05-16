@@ -2,7 +2,6 @@
 { config, lib, pkgs, inputs, nixosCosmicModule, home-manager, ... }:
 
 {
-
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ]; 
 
@@ -51,15 +50,13 @@
     interfaces.enp0s31f6.useDHCP = false;
 
     defaultGateway = "192.168.100.1";
-    nameservers = [ "1.1.1.1" "8.8.8.8" ];
+    nameservers = [ "1.1.1.1" "8.8.8.8" "100.100.100.100" ];
 
     networkmanager.enable = true;
 
     firewall = {
 
       allowedUDPPorts = [ config.services.tailscale.port ];
-
-
 
       enable = true;
       checkReversePath = "loose";
@@ -68,7 +65,6 @@
         8080  ## 8080 - LocalAI
         8081  ## 8081 - LocalAI      
         8090  ## 8080 - LocalAI
-
 
         4822  ## 4822 - Guacamole
         3389  ## 3389 - Guacamole
@@ -101,11 +97,7 @@
 
 
         5150  ## Mailroom
-
         2000  ## filebrowser
-
-
-
 
 
         21115  ## Rustdesk

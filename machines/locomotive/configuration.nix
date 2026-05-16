@@ -1,18 +1,10 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 {
   imports =
     [
       # <nixos-hardware/raspberry-pi/4>
       #./hardware-configuration.nix
     ];
-  #hardware = {
-  #  raspberry-pi."4".apply-overlays-dtmerge.enable = true;
-  #  deviceTree = {
-  #    enable = true;
-  #    filter = "*rpi-4-*.dtb";
-  #  };
-  #};
-
 
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
@@ -34,9 +26,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
 
-
-
-
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ######## Network settings
   
@@ -53,6 +42,10 @@
   # Enable firewall opening DNS and HTTP for Pi-hole if using host networking
   networking.firewall.allowedTCPPorts = [ 80 53 ];
   networking.firewall.allowedUDPPorts = [ 53 41641 ];
+
+  environment.shellAliases = {
+    wake-island = "wakeonlan 70:85:c2:50:d2:0a";
+  };
 
 
   networking.interfaces.eth0.ipv4.addresses = [{
@@ -84,11 +77,6 @@
 
 
 
-
-
-
-
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
@@ -108,7 +96,7 @@
     raspberrypi-eeprom
 	  podman
 
-
+    wakeonlan
 
     vim
     wget

@@ -66,20 +66,6 @@
     };
   };
 
-  services.guacamole-client = {
-    enable = true;
-    userMappingXml = ./user-mapping.xml;
-    settings = {
-      guacd-port = 4822;
-      guacd-hostname = "127.0.0.1";
-    };
-  };
-
-  services.guacamole-server = {
-    enable = true;
-    port = 4822;
-  };
-
 
   boot = {
     kernelModules = [ 

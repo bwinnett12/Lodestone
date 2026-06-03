@@ -34,12 +34,7 @@
 
   };
 
-  services.nginx.virtualHosts."anki.island.local" = {
-  locations."/" = {
-    proxyPass = "http://127.0.0.1:3111";
-    proxyWebsockets = true; # Good practice for Anki sync
-  };
-};
+	virtualisation.docker.enable = true;
 
   #services.caddy = {
 #	enable = true;

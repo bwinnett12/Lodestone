@@ -49,24 +49,39 @@
 
   hardware.enableRedistributableFirmware = true;
   services.udisks2.enable = true;
-
   services.nginx = {
     enable = true;
-    virtualHosts."_" = { # The "_" makes this the default for any IP/Domain
+    virtualHosts."_" = {
+      listen = [
+        { addr = "0.0.0.0"; port = 80; }
+        { addr = "0.0.0.0"; port = 443; ssl = true; }
+      ];
+      sslCertificate = "/path/to/cert.pem";     # Add your cert
+      sslCertificateKey = "/path/to/key.pem";   # Add your key
+      
       locations."/" = {
         proxyPass = "http://127.0.0.1:3111";
-        proxyWebsockets = true; 
+        proxyWebsockets = true;
         extraConfig = ''
           proxy_set_header Host $host;
           proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+        '';
+      };
+      
+      locations."/guacamole-server/" = {
+        proxyPass = "http://127.0.0.1:4822/";
+        proxyWebsockets = true;
+        extraConfig = ''
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
         '';
       };
     };
   };
-  nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.1.1w"
-  ];
-
 
   boot = {
     kernelModules = [ 

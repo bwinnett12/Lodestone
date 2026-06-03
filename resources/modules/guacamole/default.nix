@@ -2,7 +2,6 @@
 #### Guacamole
 { config, pkgs, inputs, ... }:
 
-
 {
   ### Guacamole Server
   services.guacamole-server = {
@@ -10,9 +9,7 @@
 	
     host = "0.0.0.0";
     port = 4822;
-
   };
-
 
   ### Guacamole Client
   services.guacamole-client = {
@@ -24,7 +21,6 @@
       guacd-port = 4822;
       guacd-hostname = "Island";
     };
-
   };
 
   services.tomcat = {

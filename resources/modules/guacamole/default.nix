@@ -39,13 +39,25 @@
     #freerdp
 	];
 
-    # services.tomcat = {
-  #     enable = true;
-  #     purifyOnStart = true;
-  #     webapps = [
-  #       pkgs.guacamole-client
-  #     ];
-  #   # extraEnvironment = [ "GUACAMOLE_HOME=/etc/guacamole" ];
-  #   };
+    services.tomcat = {
+      enable = true;
+      purifyOnStart = true;
+      webapps = [
+        pkgs.guacamole-client
+      ];
+    extraEnvironment = [ "GUACAMOLE_HOME=/etc/guacamole" ];
+    };
+
+    environment.etc."guacamole/user-mapping.xml" = {
+      source = ./user-mapping.xml;
+      mode = "0644";
+    };
+
+    environment.etc."guacamole/guacamole.properties" = {
+      text = ''
+        guacd-hostname = 127.0.0.1
+        guacd-port = 4822
+      '';
+    };
 
 }

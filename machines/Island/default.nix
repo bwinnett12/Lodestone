@@ -17,7 +17,7 @@
     self.nixosModules.calibre-server
  #   self.nixosModules.filebrowser
     self.nixosModules.games
-    self.nixosModules.guacamole
+    # self.nixosModules.guacamole
 
     self.nixosModules.grafana
 
@@ -31,6 +31,7 @@
 
     # self.nixosModules.plan9
     self.nixosModules.prometheus
+    self.nixosModules.rustdesk
 
     self.nixosModules.suwayomi
 

@@ -23,14 +23,14 @@
     };
   };
 
-  services.tomcat = {
-      enable = true;
-      purifyOnStart = true;
-      webapps = [
-        pkgs.guacamole-client
-      ];
-    # extraEnvironment = [ "GUACAMOLE_HOME=/etc/guacamole" ];
-    };
+  # services.tomcat = {
+  #     enable = true;
+  #     purifyOnStart = true;
+  #     webapps = [
+  #       pkgs.guacamole-client
+  #     ];
+  #   # extraEnvironment = [ "GUACAMOLE_HOME=/etc/guacamole" ];
+  #   };
 
       ### XRDP Service
   services.xrdp = {

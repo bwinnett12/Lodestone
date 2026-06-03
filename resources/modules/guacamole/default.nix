@@ -23,6 +23,8 @@
     };
   };
 
+  systemd.sockets.guacamole-server.enable = false;
+
 
       ### XRDP Service
   services.xrdp = {

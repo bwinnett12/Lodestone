@@ -7,7 +7,7 @@
   services.guacamole-server = {
     enable = true;
 	
-    host = "localhost";
+    host = "0.0.0.0";
     port = 4822;
   };
 
@@ -19,7 +19,7 @@
 
     settings = {
       guacd-port = 4822;
-      guacd-hostname = "localhost";
+      guacd-hostname = "127.0.0.1";
     };
   };
 

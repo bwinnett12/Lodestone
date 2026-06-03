@@ -7,6 +7,7 @@
   enable = true;
   host = "0.0.0.0";
   port = 4822;
+  package = pkgs.guacamole-server;
 };
 
 
@@ -14,6 +15,7 @@
   services.guacamole-client = {
     enable = true;
     userMappingXml = ./user-mapping.xml;
+    package = pkgs.guacamole-client;
     
     settings = {
       guacd-port = 4822;

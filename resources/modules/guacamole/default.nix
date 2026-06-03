@@ -7,7 +7,7 @@
   services.guacamole-server = {
     enable = true;
 	
-    host = "0.0.0.0";
+    host = "localhost";
     port = 4822;
   };
 
@@ -19,18 +19,10 @@
 
     settings = {
       guacd-port = 4822;
-      guacd-hostname = "Island";
+      guacd-hostname = "localhost";
     };
   };
 
-  # services.tomcat = {
-  #     enable = true;
-  #     purifyOnStart = true;
-  #     webapps = [
-  #       pkgs.guacamole-client
-  #     ];
-  #   # extraEnvironment = [ "GUACAMOLE_HOME=/etc/guacamole" ];
-  #   };
 
       ### XRDP Service
   services.xrdp = {
@@ -44,4 +36,14 @@
 		guacamole-server
     #freerdp
 	];
+
+    # services.tomcat = {
+  #     enable = true;
+  #     purifyOnStart = true;
+  #     webapps = [
+  #       pkgs.guacamole-client
+  #     ];
+  #   # extraEnvironment = [ "GUACAMOLE_HOME=/etc/guacamole" ];
+  #   };
+
 }

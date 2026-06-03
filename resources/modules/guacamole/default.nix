@@ -4,10 +4,11 @@
 {
   ### Guacamole Server
   services.guacamole-server = {
-    enable = true;
-    host = "127.0.0.1";
-    port = 4822;
-  };
+  enable = true;
+  host = "0.0.0.0";
+  port = 4822;
+};
+
 
   ### Guacamole Client (web UI)
   services.guacamole-client = {

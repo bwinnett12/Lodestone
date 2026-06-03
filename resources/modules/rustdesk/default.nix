@@ -39,43 +39,35 @@ let
   '';
 in
 {
-  # Enable Docker
   virtualisation.docker.enable = true;
-  
+
   systemd.services.rustdesk-server = {
     description = "RustDesk Server";
     after = [ "docker.service" ];
     requires = [ "docker.service" ];
     wantedBy = [ "multi-user.target" ];
 
-    environment = {
-      COMPOSE_FILE = rustdeskComposeFile;
-    };
-
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${pkgs.docker}/bin/docker compose -f ${rustdeskComposeFile} up";
+      ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f ${rustdeskComposeFile} up";
       Restart = "on-failure";
       RestartSec = 10;
-      User = "root";  # Docker needs root, or add tarobutter to docker group
+      User = "root";
       StandardOutput = "journal";
       StandardError = "journal";
     };
   };
 
-  # Create persistent directory for RustDesk data
   systemd.tmpfiles.rules = [
     "d /var/lib/rustdesk 0755 root root -"
   ];
 
-  # Dependencies
+  # Dependencies - removed rustdesk
   environment.systemPackages = with pkgs; [
     curl
     wget
     unzip
     jq
-    docker
     docker-compose
-    rustdesk
   ];
 }

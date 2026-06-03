@@ -1,4 +1,3 @@
-
 #### Guacamole
 { config, pkgs, inputs, ... }:
 
@@ -6,56 +5,40 @@
   ### Guacamole Server
   services.guacamole-server = {
     enable = true;
-    host = "127.0.0.1";  # Listen on IPv4 localhost
+    host = "127.0.0.1";
     port = 4822;
   };
 
-  ### Guacamole Client
+  ### Guacamole Client (web UI)
   services.guacamole-client = {
     enable = true;
     userMappingXml = ./user-mapping.xml;
     
     settings = {
       guacd-port = 4822;
-      guacd-hostname = "127.0.0.1";  # Use IPv4, not "Island"
+      guacd-hostname = "127.0.0.1";
     };
   };
 
-  systemd.sockets.guacamole-server.enable = false;
-
-
-      ### XRDP Service
+  ### XRDP Service
   services.xrdp = {
-    enable = true;  # Enable the XRDP service
-    #defaultWindowManager = "startplasma-x11";  # Change this if you're using a different window manager
-    openFirewall = true;  # This will allow traffic through the firewall for RDP
+    enable = true;
+    openFirewall = true;
   };
 
-	environment.systemPackages = with pkgs; [
-		guacamole-client
-		guacamole-server
-    #freerdp
-	];
-
-    services.tomcat = {
-      enable = true;
-      purifyOnStart = true;
-      webapps = [
-        pkgs.guacamole-client
-      ];
-    extraEnvironment = [ "GUACAMOLE_HOME=/etc/guacamole" ];
+  services.nginx = {
+    enable = true;
+    virtualHosts."_" = {
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:3111";
+        proxyWebsockets = true;
+        extraConfig = ''
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+        '';
+      };
     };
-
-    environment.etc."guacamole/user-mapping.xml" = {
-      source = ./user-mapping.xml;
-      mode = "0644";
-    };
-
-    environment.etc."guacamole/guacamole.properties" = {
-      text = ''
-        guacd-hostname = 127.0.0.1
-        guacd-port = 4822
-      '';
-    };
-
+  };
 }

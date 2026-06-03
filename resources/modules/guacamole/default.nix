@@ -6,8 +6,7 @@
   ### Guacamole Server
   services.guacamole-server = {
     enable = true;
-	
-    host = "0.0.0.0";
+    host = "127.0.0.1";  # Listen on IPv4 localhost
     port = 4822;
   };
 
@@ -15,11 +14,10 @@
   services.guacamole-client = {
     enable = true;
     userMappingXml = ./user-mapping.xml;
-    #enableWebserver = true;
-
+    
     settings = {
       guacd-port = 4822;
-      guacd-hostname = "127.0.0.1";
+      guacd-hostname = "127.0.0.1";  # Use IPv4, not "Island"
     };
   };
 

@@ -41,8 +41,7 @@ in
 {
   # Enable Docker
   virtualisation.docker.enable = true;
-  virtualisation.docker-compose.enable = true;
-
+  
   systemd.services.rustdesk-server = {
     description = "RustDesk Server";
     after = [ "docker.service" ];

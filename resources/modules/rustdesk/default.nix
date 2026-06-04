@@ -8,8 +8,10 @@
     relay.enable = true;
     
     # Force hbbs to point to this machine's IP or localhost for the relay
-    signal.relayHosts = [ #"100.82.185.26"
-      "island"
+    signal.relayHosts = [ 
+    
+      #"100.82.185.26"
+      ""
      ]; 
   };
 

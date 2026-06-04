@@ -25,6 +25,7 @@
       "storage-Yarrow"
       "storage-Tulip"
       "media"
+      "rustdesk"
     ];
     isNormalUser = true;
     shell = pkgs.bash;

@@ -18,18 +18,15 @@
     wantedBy = [ "multi-user.target" ];
     
     environment = {
-      DISPLAY = ":0"; # Forces it to look at your main display
-      HOME = "/var/lib/rustdesk";
+      DISPLAY = ":0"; 
+      HOME = "/root"; # Set this to root so it grabs /root/.config/rustdesk
     };
 
     serviceConfig = {
       Type = "simple";
-      # Pulls the rustdesk binary straight out of your system packages
       ExecStart = "${pkgs.rustdesk-flutter}/bin/rustdesk --service";
       Restart = "always";
       RestartSec = "10";
-      
-      # Runs as root so it has the system permissions needed to control the input
       User = "root"; 
     };
   };

@@ -21,20 +21,19 @@
   #systemd.services.rustdesk-link.serviceConfig.WorkingDirectory = "/storage/Orchid/shortstack/rustdesk";
   systemd.services.rustdesk-signal.serviceConfig.WorkingDirectory = pkgs.lib.mkForce "/var/lib/rustdesk";
   systemd.services.rustdesk-relay.serviceConfig.WorkingDirectory = pkgs.lib.mkForce "/var/lib/rustdesk";
+  systemd.services.rustdesk-link.enable = pkgs.lib.mkForce false;
+
+  # 2. Force the host controller daemon to use the same directory
   systemd.services.rustdesk-daemon.serviceConfig.WorkingDirectory = pkgs.lib.mkForce "/var/lib/rustdesk";
 
-  # Completely nuke the broken, non-standard 'rustdesk-link' service that your custom module built
-  systemd.services.rustdesk-link.enable = pkgs.lib.mkForce false;
+  # 3. Inject the correct explicit environment string options natively
+  systemd.services.rustdesk-daemon.environment.RUSTDESK_ID_SERVER = "127.0.0.1";
+  systemd.services.rustdesk-daemon.environment.RUSTDESK_RELAY_SERVER = "127.0.0.1";
   
   systemd.services.rustdesk-daemon = {
     description = "RustDesk Client Service";
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
-
-    environment = {
-      RUSTDESK_ID_SERVER = "127.0.0.1";
-      RUSTDESK_RELAY_SERVER = "127.0.0.1";
-    };
 
     serviceConfig = {
       Type = "exec";

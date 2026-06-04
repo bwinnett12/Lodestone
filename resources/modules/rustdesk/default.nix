@@ -41,18 +41,26 @@
       Restart = "always";
       RestartSec = "10";
       User = "root";
+      Environment = [ "XDG_RUNTIME_DIR=/run/user/1000" ];
     };
   };
 
 
   xdg.portal = {
+
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gnome ]; # Or -gtk / -kde depending on your DE
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "*";
   };
+
 
   environment.systemPackages = [
     pkgs.rustdesk-flutter
   ];
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
     
     # Optional: If you have a domain name or public IP, put it here.
     # Otherwise, it defaults to your local setup.

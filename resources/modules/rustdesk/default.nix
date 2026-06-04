@@ -6,12 +6,13 @@
     enable = true;
     signal.enable = true;
     relay.enable = true;
+    openFirewall = false;
     
     # Force hbbs to point to this machine's IP or localhost for the relay
     signal.relayHosts = [ 
     
       #"100.82.185.26"
-      ""
+      "127.0.0.1"
      ]; 
   };
 

@@ -49,6 +49,10 @@
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gnome ]; # Or -gtk / -kde depending on your DE
   };
+
+  environment.systemPackages = [
+    pkgs.rustdesk-flutter
+  ];
     
     # Optional: If you have a domain name or public IP, put it here.
     # Otherwise, it defaults to your local setup.

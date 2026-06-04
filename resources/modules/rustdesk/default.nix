@@ -8,28 +8,24 @@
     relay.enable = true;
     
     # Force hbbs to point to this machine's IP or localhost for the relay
-    signal.relayHosts = [ "127.0.0.1" ]; 
+    signal.relayHosts = [ "100.82.185.26" ]; 
   };
 
-
+  
   systemd.services.rustdesk-daemon = {
     description = "RustDesk Client Service";
-    after = [ "network.target" "display-manager.service" ];
+    after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
-    
-    environment = {
-      DISPLAY = ":0"; 
-      HOME = "/root"; # Set this to root so it grabs /root/.config/rustdesk
-    };
 
     serviceConfig = {
-      Type = "simple";
+      Type = "exec";
       ExecStart = "${pkgs.rustdesk-flutter}/bin/rustdesk --service";
       Restart = "always";
       RestartSec = "10";
-      User = "root"; 
+      User = "root";
     };
   };
+
 
   xdg.portal = {
     enable = true;

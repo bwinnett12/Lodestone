@@ -31,6 +31,11 @@
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
 
+    environment = {
+      RUSTDESK_ID_SERVER = "127.0.0.1";
+      RUSTDESK_RELAY_SERVER = "127.0.0.1";
+    };
+
     serviceConfig = {
       Type = "exec";
       ExecStart = "${pkgs.rustdesk-flutter}/bin/rustdesk --service";

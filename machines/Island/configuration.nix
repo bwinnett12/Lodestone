@@ -57,7 +57,10 @@
 
     firewall = {
 
-      allowedUDPPorts = [ config.services.tailscale.port ];
+      allowedUDPPorts = [ 
+        config.services.tailscale.port 
+        21116
+      ];
 
       enable = true;
       checkReversePath = "loose";

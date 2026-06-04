@@ -10,6 +10,11 @@
     # Force hbbs to point to this machine's IP or localhost for the relay
     signal.relayHosts = [ "127.0.0.1" ]; 
   };
+
+  environment.systemPackages = with pkgs; [
+    # ... your other packages ...
+    rustdesk-flutter
+  ];
     
     # Optional: If you have a domain name or public IP, put it here.
     # Otherwise, it defaults to your local setup.

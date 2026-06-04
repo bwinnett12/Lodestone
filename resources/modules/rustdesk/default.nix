@@ -21,6 +21,7 @@
   #systemd.services.rustdesk-link.serviceConfig.WorkingDirectory = "/storage/Orchid/shortstack/rustdesk";
   systemd.services.rustdesk-signal.serviceConfig.WorkingDirectory = pkgs.lib.mkForce "/var/lib/rustdesk";
   systemd.services.rustdesk-relay.serviceConfig.WorkingDirectory = pkgs.lib.mkForce "/var/lib/rustdesk";
+  systemd.services.rustdesk-daemon.serviceConfig.WorkingDirectory = pkgs.lib.mkForce "/var/lib/rustdesk";
 
   # Completely nuke the broken, non-standard 'rustdesk-link' service that your custom module built
   systemd.services.rustdesk-link.enable = pkgs.lib.mkForce false;

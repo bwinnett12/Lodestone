@@ -17,9 +17,10 @@
      ]; 
   };
 
-  systemd.services.rustdesk-signal.serviceConfig.WorkingDirectory = "/storage/Orchid/shortstack/rustdesk";
-  systemd.services.rustdesk-link.serviceConfig.WorkingDirectory = "/storage/Orchid/shortstack/rustdesk";
-
+  #systemd.services.rustdesk-signal.serviceConfig.WorkingDirectory = "/storage/Orchid/shortstack/rustdesk";
+  #systemd.services.rustdesk-link.serviceConfig.WorkingDirectory = "/storage/Orchid/shortstack/rustdesk";
+  systemd.services.rustdesk-signal.serviceConfig.WorkingDirectory = pkgs.lib.mkForce "/var/lib/rustdesk";
+  systemd.services.rustdesk-link.serviceConfig.WorkingDirectory = pkgs.lib.mkForce "/var/lib/rustdesk";
   
   systemd.services.rustdesk-daemon = {
     description = "RustDesk Client Service";

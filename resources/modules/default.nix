@@ -10,6 +10,7 @@ _: {
 	"guacamole" = ./guacamole;
 	"komga" = ./komga;
 	"mailroom" = ./mailroom;
+	"moonlight" = .m/oonlight;
 	"jellyfin" = ./jellyfin;
 	"localai" = ./localai;
 	"plan9" = ./plan9;

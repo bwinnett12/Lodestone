@@ -7,8 +7,6 @@
     signal.enable = true;
     relay.enable = true;
     openFirewall = false;
-
-    dataDir = "/storage/Orchid/shortstack/rustdesk";
     
     # Force hbbs to point to this machine's IP or localhost for the relay
     signal.relayHosts = [ 
@@ -18,6 +16,9 @@
       "island"
      ]; 
   };
+
+  systemd.services.rustdesk-signal.serviceConfig.WorkingDirectory = "/storage/Orchid/shortstack/rustdesk";
+  systemd.services.rustdesk-link.serviceConfig.WorkingDirectory = "/storage/Orchid/shortstack/rustdesk";
 
   
   systemd.services.rustdesk-daemon = {

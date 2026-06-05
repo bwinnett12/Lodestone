@@ -172,11 +172,13 @@
   # Tell X11 and Wayland Compositors to use the NVIDIA Kernel Driver
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  hardware.nvidia-container-toolkit.enable = true;
+
   # Docker Container Toolkit Optimization
   virtualisation.docker = {
     enable = true;
     # Native method to pass your GPU cleanly into containers (e.g., Plex, cloud gaming)
-    enableNvidia = true; 
+    # enableNvidia = true; 
   };
 
   systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];

@@ -25,7 +25,7 @@
 
     self.nixosModules.jellyfin
 
-    self.nixosModules.moonlight
+    #self.nixosModules.moonlight
 
     self.nixosModules.komga
 

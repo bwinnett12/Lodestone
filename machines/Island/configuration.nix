@@ -31,6 +31,7 @@
     isNormalUser = true;
     shell = pkgs.bash;
   };
+  
 
   nixpkgs.config.allowUnfree = true;
 

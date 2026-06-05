@@ -163,7 +163,7 @@
     nvidiaSettings = true;
 
     # STREAMING CRITICAL: Fixes VRAM corruption/crashes when streaming instances wake up
-    powerManagement.enable = true; 
+    powerManagement.enable = false; 
 
     # OPTIONAL: Use 'beta' or specific versions if you are fighting newer Wayland bugs.
     # Defaulting to stable lets NixOS handle stability updates cleanly.

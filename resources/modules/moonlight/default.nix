@@ -10,7 +10,7 @@
     openFirewall = true; # Automatically opens streaming ports (47984-48010)
 
 	package = pkgs.sunshine.override {
-      cudaSupport = true;
+      cudaSupport = false;
     };
   };
 

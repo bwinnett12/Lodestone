@@ -94,7 +94,9 @@
 
         3000  ## 3000 - Homepage
 
-        47990 ## 47990 - Moonlight
+        47990  ## 47990 - Moonlight
+        48010  ## 48010 - Sunshine
+        
 
 
         3111  ## Anki 
@@ -153,26 +155,13 @@
     nvidia-container-toolkit.enable = true;
 
     nvidia = {
-
-      # Use the stable driver package
       package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-      # Enable modesetting for better Wayland support and overall display.
-      # Essential for modern NVIDIA setups.
       modesetting.enable = true;
-
-      # Open-source drivers are for RTX 20-series and newer
-      # Set to false to use the proprietary (closed-source) driver.
-      open = false;
-
-      # Enable the NVIDIA settings application
+      open = false; # Open-source drivers are for RTX 20-series and newer; false to use the proprietary (closed-source) driver
       nvidiaSettings = true;
-
-      # Power management set to false. 
       powerManagement.enable = false;
     };
   };
-  
 
   ## Enable the NVIDIA driver for Xorg and load the kernel module
   services.xserver.videoDrivers = [ "nvidia" ];

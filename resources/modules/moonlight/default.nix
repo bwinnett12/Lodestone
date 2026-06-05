@@ -3,7 +3,6 @@
 { config, pkgs, inputs, ... }:
 
 {
-  # Enable the Sunshine service
   services.sunshine = {
     enable = true;
     autoStart = true;
@@ -18,6 +17,7 @@
     };
   };
 
+  systemd.user.services.sunshine.unitConfig.ConditionUser = "tarobutter";
 
   environment.systemPackages = with pkgs; [
     ];

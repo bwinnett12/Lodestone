@@ -138,39 +138,45 @@
   #### Nvidia settings
   ## Don't integrate quite yet. Don't open that can of worms quite yet.
 
-  hardware = {
-    # Enable graphic card
-    graphics = {
-      enable = true;
-      enable32Bit = true;
 
-      extraPackages = with pkgs; [
-        nvidia-vaapi-driver
-        intel-media-driver # For Intel QuickSync (newer CPUs)
-        intel-vaapi-driver   # For older Intel CPUs
-        libva-vdpau-driver
-        libvdpau-va-gl
-        intel-compute-runtime # Optional: for OpenCL tone mapping
-      ];
-    };
+  # Core Graphics Infrastructure
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # Critical for 32-bit Steam games / Wine / Proton
 
-    nvidia-container-toolkit.enable = true;
-
-    nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-      modesetting.enable = true;
-      open = false; # Open-source drivers are for RTX 20-series and newer; false to use the proprietary (closed-source) driver
-      nvidiaSettings = true;
-      powerManagement.enable = false;
-    };
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver   # Hardware VA-API translation layer for Nvidia
+      libva-vdpau-driver    # Vdpau translation bridge
+      libvdpau-va-gl        # VDPAU driver with OpenGL backend
+    ];
   };
 
-  ## Enable the NVIDIA driver for Xorg and load the kernel module
+  # NVIDIA Driver Configuration
+  hardware.nvidia = {
+    modesetting.enable = true;
+    
+    # Keep false to use proprietary driver. (Note: Only switch to 'true' if 
+    # you have an RTX 20-series or newer AND do not require OBS NVENC encoding wrappers).
+    open = false; 
+
+    nvidiaSettings = true;
+
+    # STREAMING CRITICAL: Fixes VRAM corruption/crashes when streaming instances wake up
+    powerManagement.enable = true; 
+
+    # OPTIONAL: Use 'beta' or specific versions if you are fighting newer Wayland bugs.
+    # Defaulting to stable lets NixOS handle stability updates cleanly.
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  # Tell X11 and Wayland Compositors to use the NVIDIA Kernel Driver
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  # Docker Container Toolkit Optimization
   virtualisation.docker = {
     enable = true;
-    # enableNvidia = true;
+    # Native method to pass your GPU cleanly into containers (e.g., Plex, cloud gaming)
+    enableNvidia = true; 
   };
 
   systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];

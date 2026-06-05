@@ -60,8 +60,7 @@
     firewall = {
 
       allowedUDPPorts = [ 
-        config.services.tailscale.port 
-        21116
+        config.services.tailscale.port
       ];
 
       enable = true;
@@ -97,6 +96,8 @@
 
         47990  ## 47990 - Moonlight
         48010  ## 48010 - Sunshine
+        47984  ## 48010 - Sunshine
+        47989  ## 48010 - Sunshine
         
 
 

@@ -9,10 +9,7 @@
     capSysAdmin = true; # Necessary for GPU hardware capture paths
     openFirewall = true; # Automatically opens streaming ports (47984-48010)
 
-	package = pkgs.sunshine.override {
-      cudaSupport = false;
-      stdenv = pkgs.stdenv;
-    };
+	package = pkgs.sunshine;
   };
 
   systemd.user.services.sunshine = {

@@ -23,6 +23,8 @@
       XDG_SESSION_TYPE = "wayland";
       XDG_CURRENT_DESKTOP = "GNOME";
 	  LD_LIBRARY_PATH = "/run/opengl-driver/lib:/run/opengl-driver-32/lib";
+	  LIBVA_DRIVER_NAME = "nvidia";
+
     };
   };
 

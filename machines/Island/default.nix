@@ -76,6 +76,13 @@
       "ntfs3" "ext4" "btrfs" "vfat" "exfat"
     ];
 
+    initrd.kernelModules = [ 
+      "nvidia" 
+      "nvidia_modeset" 
+      "nvidia_uvm" 
+      "nvidia_drm" 
+    ];
+
     kernelParams = [
       "tpm_tis.interrupts=0" 
       "pci=noaer"

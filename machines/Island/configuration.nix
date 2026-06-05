@@ -150,7 +150,6 @@
         intel-vaapi-driver   # For older Intel CPUs
         libva-vdpau-driver
         libvdpau-va-gl
-        vaapiVdpau
         intel-compute-runtime # Optional: for OpenCL tone mapping
       ];
     };

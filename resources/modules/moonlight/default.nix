@@ -8,7 +8,7 @@
     autoStart = true;
     capSysAdmin = true; # Necessary for GPU hardware capture paths
     openFirewall = true; # Automatically opens streaming ports (47984-48010)
-	
+
 	package = pkgs.sunshine.override {
       cudaSupport = false;
       stdenv = pkgs.stdenv;
@@ -27,6 +27,13 @@
 	  LIBVA_DRIVER_NAME = "nvidia";
 
     };
+  };
+
+  security.wrappers.sunshine = {
+    owner = "root";
+    group = "root";
+    capabilities = "cap_sys_admin+ep";
+    source = "${pkgs.sunshine}/bin/sunshine";
   };
 
 

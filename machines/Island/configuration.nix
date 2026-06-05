@@ -26,6 +26,7 @@
       "storage-Tulip"
       "media"
       "rustdesk"
+      "uinput"
     ];
     isNormalUser = true;
     shell = pkgs.bash;
@@ -205,6 +206,8 @@
 
     pciutils
     usbutils
+
+    wlr-randr
   ];
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

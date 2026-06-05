@@ -16,7 +16,7 @@
 
   systemd.user.services.sunshine = {
 
-	description = "Sunshine self-hosted game stream host for Moonlight";
+	#description = "Sunshine self-hosted game stream host for Moonlight";
     wantedBy = [ "graphical-session.target" ];
 
     environment = {

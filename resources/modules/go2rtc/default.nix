@@ -13,8 +13,12 @@
 
       streams = {
         locomotive_stream = [
-          # Force a manual system-level capture that locks the mic and camera together
-          "exec:${pkgs.ffmpeg}/bin/ffmpeg -f v4l2 -input_format mjpeg -i /dev/video0 -f alsa -i default -c:v libx264 -preset ultrafast -tune zerolatency -c:a libopus -b:a 128k -f rtsp {output}"
+          # Track 1: The Webcam video stream handled cleanly
+          "ffmpeg:device?video=/dev/video0#video=h264"
+          
+          # Track 2: Use the native go2rtc ALSA hook to pull the USB mic directly
+          # This automatically crawls the system for the Snowball and transcodes it to Opus
+          "alsa:default#audio=opus"
         ];
       };
     };
@@ -23,7 +27,7 @@
 # Ensures the go2rtc background system worker has direct hardware rights
   users.users.go2rtc = {
     group = "go2rtc";
-    extraGroups = [ "video" "audio" "input" ];
+    extraGroups = [ "video" "audio" "input" "sound"];
     isSystemUser = true;
   };
   users.groups.go2rtc = {};

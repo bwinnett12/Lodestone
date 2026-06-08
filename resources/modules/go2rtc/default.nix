@@ -13,12 +13,8 @@
 
       streams = {
         locomotive_stream = [
-          # Track 1: Grab webcam video, explicitly convert pixel output to H.264
-          "ffmpeg:device?video=/dev/video0#video=h264"
-          
-          # Track 2: Use the generalized 'default' system recording pipeline 
-          # instead of hardcoding hw:1,0, and encode it on-the-fly to Opus for browsers
-          "ffmpeg:device?audio=default#audio=opus"
+          # Force a manual system-level capture that locks the mic and camera together
+          "exec:${pkgs.ffmpeg}/bin/ffmpeg -f v4l2 -input_format mjpeg -i /dev/video0 -f alsa -i default -c:v libx264 -preset ultrafast -tune zerolatency -c:a libopus -b:a 128k -f rtsp {output}"
         ];
       };
     };

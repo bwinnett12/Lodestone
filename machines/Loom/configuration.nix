@@ -49,51 +49,58 @@
   # networking.firewall.enable = false;  ## To disable the firewall altogether.
 
 
+  services.tailscale.enable = true;
+  services.openssh.enable = true;
 
   networking = {
 
     hostName = "Loom";
     networkmanager.enable = true;
+    useDHCP = false;
+    interfaces.enp0s31f6.useDHCP = true; # Change this interface name if Loom's physical port is different!
 
-    firewall.allowedTCPPorts = [ 
-      8080  ## 8080 - LocalAI
-      8081  ## 8081 - LocalAI      
-      8090  ## 8080 - LocalAI
-
-
-      4822  ## 4822 - Guacamole
-      3389  ## 3389 - Guacamole
-
-      2104  ## 2104 - Komga
-
-      9000  ## 9000 - Prometheus
-      3000  ## 3000 - Grafana
-
-      2108  ## 2108 - Suwayomi Server
-      4567  ## 4567 - Suwayomi Server
+    firewall = {
+      checkReversePath = "loose"; # Crucial for Tailscale to route stream traffic properly
+      trustedInterfaces = [ "tailscale0" ];
+      allowedTCPPorts = [ 
+        #8080  ## 8080 - LocalAI
+        #8081  ## 8081 - LocalAI      
+        #8090  ## 8080 - LocalAI
 
 
-      4500  ## 4500 - u9fs
+        #4822  ## 4822 - Guacamole
+        #3389  ## 3389 - Guacamole
+
+        #2104  ## 2104 - Komga
+
+        9000  ## 9000 - Prometheus
+        3000  ## 3000 - Grafana
+
+        #2108  ## 2108 - Suwayomi Server
+        #4567  ## 4567 - Suwayomi Server
 
 
+        #4500  ## 4500 - u9fs
 
+        # --- 2. SUNSHINE & MOONLIGHT PORTS ---
+        47984
+        47989
+        47990  ## 47990 - Moonlight Web UI HTTPS
+        48010  ## 48010 - Sunshine Server
 
-      21115  ## Rustdesk
-      21116  ## Rustdesk
-      21117  ## Rustdesk
-      21118  ## Rustdesk
-      21119  ## Rustdesk
+        ### Base
+        80
+        443
 
+      ];
 
-    ];
-
-    firewall.allowedUDPPorts = [ 
-      21116  ## Rustdesk
-    ];
+      allowedUDPPorts = [ 
+        config.services.tailscale.port
+      ];
+    };
   };
 
 
-  services.openssh.enable = true;
 
 
 

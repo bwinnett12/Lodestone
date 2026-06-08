@@ -9,10 +9,10 @@
     autoStart = true;
     capSysAdmin = true;   # Gives Sunshine kernel permission to capture your GPU frames
     openFirewall = true;  # Automatically opens streaming ports (47984-48010)
-    
-    package = pkgs.sunshine.override {
-      cudaSupport = true;
-    };
+
+    package = if pkgs.stdenv.hostPlatform.isAarch64
+      then pkgs.sunshine
+      else pkgs.sunshine.override { cudaSupport = true; };
   };
 
   systemd.user.services.sunshine.unitConfig = {
@@ -21,6 +21,10 @@
 
   hardware.uinput.enable = true;
   #users.users.tarobutter.extraGroups = [ "uinput" "input" ];
+
+  environment.systemPackages = with pkgs; [
+    gnome-randr
+  ];
 
 }
 

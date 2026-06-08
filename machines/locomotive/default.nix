@@ -28,9 +28,10 @@
     #self.nixosModules.komga
 
     #self.nixosModules.localai
+    self.nixosModules.moonlight
 
     # self.nixosModules.plan9
-    #self.nixosModules.prometheus
+    self.nixosModules.prometheus
 
     #self.nixosModules.suwayomi
 
@@ -72,9 +73,6 @@
     # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
     #desktopManager.gnome.enable = true; 
     # displayManager.gdm.enable = true;
-
-
-
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;

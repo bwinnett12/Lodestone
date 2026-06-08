@@ -224,6 +224,20 @@
     wlr-randr
   ];
 
+  boot.kernel.sysctl = {
+    "net.ipv6.conf.all.forwarding" = 1;
+  };
+
+  systemd.services.ethtool-gro = {
+    description = "Enable UDP GRO forwarding on enp0s31f6";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.ethtool}/bin/ethtool -K enp0s31f6 rx-udp-gro-forwarding on";
+    };
+  };
+
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

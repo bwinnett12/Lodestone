@@ -1,6 +1,5 @@
 #### 9p server - u9fs
 ### Thrifted from https://github.com/justinrubek/nixos-configs
-
 { config, pkgs, inputs, ... }:
 
 {
@@ -31,9 +30,6 @@
     };
   };
 
-
-
-  # Dependencies
   environment.systemPackages = with pkgs; [
     curl
     wget

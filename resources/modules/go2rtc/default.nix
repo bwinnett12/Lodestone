@@ -26,6 +26,7 @@
 
 # Ensures the go2rtc background system worker has direct hardware rights
   users.users.go2rtc = {
+    group = "go2rtc";
     extraGroups = [ "video" "audio" "input" ];
     isSystemUser = true;
   };

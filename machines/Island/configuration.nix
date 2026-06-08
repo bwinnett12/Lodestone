@@ -27,6 +27,7 @@
       "media"
       "rustdesk"
       "uinput"
+      "go2rtc"
       
     ];
     isNormalUser = true;

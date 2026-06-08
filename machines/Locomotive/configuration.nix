@@ -109,6 +109,7 @@
       "media"
       "rustdesk"
       "uinput"
+      "go2rtc"
       ];
     packages = with pkgs; [
       tree

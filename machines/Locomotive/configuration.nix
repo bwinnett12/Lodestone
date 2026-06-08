@@ -80,12 +80,32 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tarobutter = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [
+      "input"
+      "networkmanager"
+      "systemd-journal"
+      "wheel"
+      "docker"
+      "video"
+      "render"
+      "jellyfin"
+      "storage-Orchid"
+      "storage-Yarrow"
+      "storage-Tulip"
+      "media"
+      "rustdesk"
+      "uinput"
+      ];
     packages = with pkgs; [
       tree
     ];
     initialPassword = "666";
   };
+
+  services.xserver.displayManager.lightdm.extraConfig = ''
+  # Forces a fake layout even if nothing is plugged in
+  xserver-command=X -nocursor
+'';
 
 
 

@@ -31,5 +31,9 @@
   systemd.services.go2rtc.serviceConfig = {
     SupplementaryGroups = [ "video" "audio" "input" ];
   };
+
+  environment.systemPackages = with pkgs; [
+    alsa-utils  # Installs amixer, arecord, and alsamixer for hardware troubleshooting
+  ];
 }
 

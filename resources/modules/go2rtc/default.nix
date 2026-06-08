@@ -13,14 +13,23 @@
 
       streams = {
         locomotive_stream = [
-          "ffmpeg:device?video=/dev/video0"  ## The Raw USB Webcam hardware video pipeline          
-          "ffmpeg:device?audio=hw:1,0#audio=opus"    # The Independent ALSA hardware microphone recording pipeline 
+          # Track 1: Grab webcam video, explicitly convert pixel output to H.264
+          "ffmpeg:device?video=/dev/video0#video=h264"
+          
+          # Track 2: Use the generalized 'default' system recording pipeline 
+          # instead of hardcoding hw:1,0, and encode it on-the-fly to Opus for browsers
+          "ffmpeg:device?audio=default#audio=opus"
         ];
       };
     };
   };
 
-  # Grant systemd permissions to interact with hardware device lines
+# Ensures the go2rtc background system worker has direct hardware rights
+  users.users.go2rtc = {
+    extraGroups = [ "video" "audio" "input" ];
+    isSystemUser = true;
+  };
+
   systemd.services.go2rtc.serviceConfig = {
     SupplementaryGroups = [ "video" "audio" "input" ];
   };

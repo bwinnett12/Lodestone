@@ -30,6 +30,7 @@
     extraGroups = [ "video" "audio" "input" ];
     isSystemUser = true;
   };
+  users.groups.go2rtc = {};
 
   systemd.services.go2rtc.serviceConfig = {
     SupplementaryGroups = [ "video" "audio" "input" ];

@@ -6,9 +6,7 @@
   services.go2rtc = {
     enable = true;
 
-    package = pkgs.go2rtc.override {
-      ffmpeg = pkgs.ffmpeg;
-    };
+    package = pkgs.go2rtc;
 
     settings = {
       api.listen = ":1984"; # The local control dashboard web port

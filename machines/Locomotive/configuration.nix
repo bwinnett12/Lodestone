@@ -40,8 +40,17 @@
   networking.firewall.trustedInterfaces = [ "tailscale0"  "eth0" ];
 
   # Enable firewall opening DNS and HTTP for Pi-hole if using host networking
-  networking.firewall.allowedTCPPorts = [ 80 53 ];
-  networking.firewall.allowedUDPPorts = [ 53 41641 ];
+  networking.firewall.allowedTCPPorts = [ 80 53 
+    5900  # 5900 -x11vnc
+  
+  ];
+  
+  networking.firewall.allowedUDPPorts = [ 53 41641 
+  
+    5900  # 5900 -x11vnc
+  
+  ];
+  
 
   environment.shellAliases = {
     wake-island = "wakeonlan 70:85:c2:50:d2:0a";
@@ -103,11 +112,9 @@
   };
 
   services.xserver.displayManager.lightdm.extraConfig = ''
-  # Forces a fake layout even if nothing is plugged in
-  xserver-command=X -nocursor
-'';
-
-
+    # Forces a fake layout even if nothing is plugged in
+    xserver-command=X -nocursor
+  '';
 
   console.enable = false;
   environment.systemPackages = with pkgs; [
@@ -132,5 +139,4 @@
     btrfs-progs
     lsof
   ];
-  # system.stateVersion = "24.11";
 }

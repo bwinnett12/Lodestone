@@ -28,7 +28,7 @@
     #self.nixosModules.komga
 
     #self.nixosModules.localai
-    self.nixosModules.moonlight
+    # self.nixosModules.moonlight
 
     # self.nixosModules.plan9
     self.nixosModules.prometheus
@@ -97,7 +97,12 @@
     xserver = {
       enable = true;
       desktopManager.xfce.enable = true;
-      displayManager.lightdm.enable = true;
+      displayManager.lightdm = {
+        enable = true;
+        extraConfig = ''
+          xserver-command=X -core -nocursor
+          '';
+        };
 
       xkb = {
         layout = "us";

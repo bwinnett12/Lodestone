@@ -40,9 +40,13 @@
   networking.firewall.trustedInterfaces = [ "tailscale0"  "eth0" ];
 
   # Enable firewall opening DNS and HTTP for Pi-hole if using host networking
-  networking.firewall.allowedTCPPorts = [ 80 53 
+  networking.firewall.allowedTCPPorts = [ 
+    80 
+    53 
     5900  # 5900 -x11vnc
     1984  # 1984 - go2rtc
+    8555  # 8555 - go2rtc
+    8554  # 8554 - go2rtc
   ];
 
   networking.firewall.allowedUDPPorts = [ 53 41641 

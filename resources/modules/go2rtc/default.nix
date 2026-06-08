@@ -3,20 +3,20 @@
 { config, pkgs, inputs, ... }:
 
 {
-
-
   services.go2rtc = {
     enable = true;
 
-    package = pkgs.go2rtc;
-    # Declarative YAML Generation handled directly by the Nix compiler
+    package = pkgs.go2rtc.override {
+      ffmpeg = pkgs.ffmpeg;
+    };
+
     settings = {
       api.listen = ":1984"; # The local control dashboard web port
-      
+
       streams = {
-        # Defines our live node path using the embedded ffmpeg framework loop
         locomotive_stream = [
-          "ffmpeg:device?video=/dev/video0&audio=default"
+          "ffmpeg:device?video=/dev/video0"  ## The Raw USB Webcam hardware video pipeline          
+          "ffmpeg:device?audio=hw:1,0#audio=opus"    # The Independent ALSA hardware microphone recording pipeline 
         ];
       };
     };
@@ -26,21 +26,5 @@
   systemd.services.go2rtc.serviceConfig = {
     SupplementaryGroups = [ "video" "audio" "input" ];
   };
-
-  # Punch holes cleanly through the firewall for monitoring pipelines
-  networking.firewall = {
-    allowedTCPPorts = [ 1984 8554 8555 ];
-    allowedUDPPorts = [ 8555 ]; # WebRTC utilizes high-speed UDP negotiation layers
-  };
-
-
-
-
-
-  environment.systemPackages = with pkgs; [
-	  pkgs.go2rtc
-  ];
-
-
 }
 

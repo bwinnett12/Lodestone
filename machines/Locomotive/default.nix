@@ -20,6 +20,7 @@
     #self.nixosModules.guacamole
 
     #self.nixosModules.grafana
+    self.nixosModules.go2rtc
 
     #self.nixosModules.homepage
 
@@ -32,6 +33,7 @@
 
     # self.nixosModules.plan9
     self.nixosModules.prometheus
+    
 
     #self.nixosModules.suwayomi
 

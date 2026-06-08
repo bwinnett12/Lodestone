@@ -27,6 +27,7 @@
       "media"
       "rustdesk"
       "uinput"
+      
     ];
     isNormalUser = true;
     shell = pkgs.bash;
@@ -99,6 +100,8 @@
         48010  ## 48010 - Sunshine
         47984  ## 48010 - Sunshine
         47989  ## 48010 - Sunshine
+
+        1984  # 1984 - go2rtc
         
 
 

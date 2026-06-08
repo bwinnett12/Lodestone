@@ -17,5 +17,6 @@ _: {
 	"prometheus" = ./prometheus;
 	"rustdesk" = ./rustdesk;
 	"suwayomi" = ./suwayomi;
+	"go2rtc" = ./go2rtc;
   };
 }

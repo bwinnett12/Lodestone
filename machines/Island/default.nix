@@ -17,6 +17,7 @@
     self.nixosModules.calibre-server
  #   self.nixosModules.filebrowser
     self.nixosModules.games
+    self.nixosModules.go2rtc
     # self.nixosModules.guacamole
 
     self.nixosModules.grafana

@@ -6,11 +6,8 @@
 	enable = true;	
   };
 
-
   environment.systemPackages = with pkgs; [
 	pkgs.bolt-launcher
-	# pkgs.runescape
-
 	pkgs.runelite
   ];
 

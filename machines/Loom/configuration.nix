@@ -25,13 +25,6 @@
   ## Build modifiers
   # nix.maxJobs = 1; # Only allow one build job at a time
 
-
-
-
-
-
-
-
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ######## Network settings
 

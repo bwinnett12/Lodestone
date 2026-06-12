@@ -3,12 +3,14 @@
 
 {
   programs.steam = {
-	enable = true;	
+	  enable = true;	
   };
 
+    imports = [ ./pokemmo.nix ];
+
   environment.systemPackages = with pkgs; [
-	pkgs.bolt-launcher
-	pkgs.runelite
+	  pkgs.bolt-launcher
+	  pkgs.runelite
   ];
 
 

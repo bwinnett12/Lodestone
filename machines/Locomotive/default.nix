@@ -10,40 +10,12 @@
     ./hardware-configuration.nix
     #./drives.nix
     ./configuration.nix
-
-    #self.nixosModules.mailroom
-    #self.nixosModules.anki
-
     #self.nixosModules.calibre-server
     #self.nixosModules.filebrowser
-    #self.nixosModules.games
-    #self.nixosModules.guacamole
-
-    #self.nixosModules.grafana
     self.nixosModules.go2rtc
-
-    #self.nixosModules.homepage
-
-    #self.nixosModules.jellyfin
-
-    #self.nixosModules.komga
-
-    #self.nixosModules.localai
     # self.nixosModules.moonlight
-
     # self.nixosModules.plan9
     self.nixosModules.prometheus
-    
-
-    #self.nixosModules.suwayomi
-
-    # nixosCosmicModule
-    
-    
-    # ./modules/plan9.nix
-    # ./modules/rustdesk.nix
-
-
   ];
   
 

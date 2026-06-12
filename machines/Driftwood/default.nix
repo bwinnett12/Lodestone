@@ -9,22 +9,11 @@
     #./drives.nix
     #./configuration.nix
     
-
-    #self.nixosModules.games
     self.nixosModules.guacamole
     self.nixosModules.jellyfin
     # self.nixosModules.suwayomi
     # self.nixosModules.komga
-    # self.nixosModules.localai
     # self.nixosModules.plan9
-
-    # nixosCosmicModule
-
-    
-    
-    # ./modules/plan9.nix
-    # ./modules/rustdesk.nix
-
   ];
 
   

@@ -53,8 +53,10 @@
     interfaces.enp0s31f6.useDHCP = true; # Change this interface name if Loom's physical port is different!
 
     firewall = {
-      checkReversePath = "loose"; # Crucial for Tailscale to route stream traffic properly
+      enable = true;
+      checkReversePath = "loose";
       trustedInterfaces = [ "tailscale0" ];
+
       allowedTCPPorts = [ 
         #8080  ## 8080 - LocalAI
         #8081  ## 8081 - LocalAI      
@@ -84,7 +86,6 @@
         ### Base
         80
         443
-
       ];
 
       allowedUDPPorts = [ 
@@ -92,7 +93,7 @@
       ];
     };
   };
-
+  systemd.services.tailscaled.wantedBy = [ "multi-user.target" ];
 
 
 
@@ -125,9 +126,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
-
-
-
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Sound
   # Enable sound.
@@ -143,9 +141,6 @@
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   #### Nvidia settings
-
-  ## Don't integrate quite yet. Don't open that can of worms quite yet.
-
   hardware = {
     # Enable graphic card
     graphics = {
@@ -187,12 +182,6 @@
   };
 
   systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];
-
-
-  
-
-
-
 
 
 
@@ -317,6 +306,9 @@
 
     tmux
     inetutils
+
+    intel-media-driver
+    nvidia-vaapi-driver
   ];
 
 

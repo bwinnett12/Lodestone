@@ -11,18 +11,12 @@
 { 
   imports = [
     ./hardware-configuration.nix
+    ./configuration.nix
 
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
-    ./configuration.nix
-    
 
-    # self.nixosModules.games
-    # self.nixosModules.guacamole
-
+    self.nixosModules.games
     # self.nixosModules.grafana
-
-    # self.nixosModules.homepage
-
     # self.nixosModules.jellyfin
     # self.nixosModules.suwayomi
     # self.nixosModules.komga

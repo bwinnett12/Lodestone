@@ -1,12 +1,12 @@
 #### Gaming Module
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
   programs.steam = {
 	  enable = true;	
   };
 
-    imports = [ ./pokemmo.nix ];
+  imports = [ ./pokemmo.nix ];
 
   environment.systemPackages = with pkgs; [
 	  pkgs.bolt-launcher

@@ -1,4 +1,5 @@
 #### Pokemmo Module
+{ config, pkgs, inputs, ... }:
 {
   options.gaming.pokemmo.enable = lib.mkOption {
     type    = lib.types.bool;

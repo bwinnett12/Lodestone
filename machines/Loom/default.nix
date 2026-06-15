@@ -65,6 +65,12 @@
     desktopManager.gnome.enable = true; 
     displayManager.gdm.enable = true;
 
+    ## Crucial for lilyinstarlight/nixos-cosmic for faster builds:
+    #nix.settings = {
+    #  substituters = [ "https://cosmic.cachix.org/" ];
+    #  trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+    # };
+
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
@@ -73,7 +79,6 @@
 
     pipewire = {
       enable = true;
-
       pulse.enable = true;
       alsa.enable = true;
       jack.enable = true;
@@ -87,6 +92,7 @@
         layout = "us";
         variant = "";
       };
+      videoDrivers = [ "nvidia" ];
     };
   };
 

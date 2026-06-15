@@ -20,30 +20,16 @@
   # trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
 
 
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## Build modifiers
-  # nix.maxJobs = 1; # Only allow one build job at a time
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ######## Network settings
-
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  services = {
+    openssh = { enable = true; };
+    tailscale = {
+      enable = true; 
+      permitCertUid = "caddy";
+    };
+    tailscaled.wantedBy = [ "multi-user.target" ];
+  };
 
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # networking.firewall.enable = false;  ## To disable the firewall altogether.
-
-
-  services.tailscale.enable = true;
-  services.openssh.enable = true;
 
   networking = {
 
@@ -95,52 +81,20 @@
       ];
     };
   };
-  systemd.services.tailscaled.wantedBy = [ "multi-user.target" ];
-  services.tailscale.permitCertUid = "caddy";
 
+  services.caddy.virtualHosts.${cfg.domain} = {
+    extraConfig = ''
+      tls {
+        get_certificate tailscale
+      }
 
+      root * ${hlsBase}
+      file_server browse
 
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ###### The environment
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  #### Desktop Environments
-  # Enable the GNOME Desktop Environment.
-  services.desktopManager.gnome.enable = true;
-  services.displayManager.gdm.enable = true;
-
-
-  # Enable the Cosmic Desktop Environment
-  # services.desktopManager.cosmic.enable = true;
-  # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
-  
-
-  ## Crucial for lilyinstarlight/nixos-cosmic for faster builds:
-  #nix.settings = {
-  #  substituters = [ "https://cosmic.cachix.org/" ];
-  #  trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-  # };
-
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## Sound
-  # Enable sound.
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa.enable = true;
-    jack.enable = true;
+      header Access-Control-Allow-Origin "*"
+      header Cache-Control "no-cache"
+    '';
   };
-
-
-
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   #### Nvidia settings
@@ -174,10 +128,6 @@
     };
 
   };
-  
-
-  ## Enable the NVIDIA driver for Xorg and load the kernel module
-  services.xserver.videoDrivers = [ "nvidia" ];
 
   virtualisation.docker = {
     enable = true;
@@ -186,8 +136,6 @@
 
   systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];
 
-
-
   # Correct way to set Surface-specific options
   #hardware.surface = { # This is the main attribute set for Surface hardware
   #  enable = true; # Enables the core Surface hardware support (kernel patches etc.)
@@ -195,7 +143,6 @@
   #};
 
   #services.surface-control.enable = true; # This remains a separate service
-  
   
     # Keep your increased swap and zramSwap settings
   swapDevices = [
@@ -222,40 +169,6 @@
   #  lidSwitchExternalPower = "ignore";
   #  lidSwitchBattery = "ignore";
   #};
-
-
-
-  
-
-
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ####### Key mapping
-  # Configure keymap in X11
-  services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # console = {
-  #  font = "Lat2-Terminus16";
-  #  keyMap = "us";
-  #  useXkbConfig = true; # use xkb.options in tty.
-  #};
-
-
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-
-
-
-
-
-
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## User groups
@@ -313,14 +226,6 @@
     intel-media-driver
     nvidia-vaapi-driver
   ];
-
-
-
- 
-
-
-
-
 
 
 

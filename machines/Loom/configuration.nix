@@ -25,8 +25,8 @@
     tailscale = {
       enable = true; 
       permitCertUid = "caddy";
+      wantedBy = [ "multi-user.target" ];
     };
-    tailscaled.wantedBy = [ "multi-user.target" ];
   };
 
 

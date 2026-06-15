@@ -48,7 +48,7 @@ let
           -hide_banner -loglevel warning \
           -f pulse \
           -i ${lib.escapeShellArg cfg.device} \
-          -filter_complex "${filterComplex}" \          
+          -filter_complex "${filterComplex}" \
           -map "[out]" \
           -c:a aac \
           -b:a ${cfg.bitrate} \

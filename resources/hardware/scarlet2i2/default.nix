@@ -163,7 +163,7 @@ in {
     users.users.scarlett-stream = {
       isSystemUser = true;
       group        = "scarlett-stream";
-      UMask        = "0027";
+      # UMask        = "0027";
       extraGroups  = [ "audio" "pipewire" ];
       home         = hlsBase;
       createHome   = true;

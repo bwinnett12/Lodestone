@@ -1,14 +1,10 @@
 #### ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-#### Home page through docker
-
+#### Anki via Docker Compose
 { config, pkgs, inputs, ... }:
 
 {
   systemd.services.anki-docker = {
-
-	### LocalAI
 	description = "Anki via Docker Compose";
-
 
 	# Wait for network and your storage mount to be ready
 	after = [ "network.target" "docker.service" ];
@@ -16,13 +12,12 @@
 	requires = [ "docker.service" ];
 	wantedBy = [ "multi-user.target" ];
 
-
 	serviceConfig = {
 	  # Replace the path with wherever you put your docker-compose.yml
 
 	  ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f /home/tarobutter/Lodestone/resources/modules/anki/anki-docker.yml up";
 	  ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /home/tarobutter/Lodestone/resources/modules/anki/anki-docker.yml down";
-
+	
 	  ## TODO - Switch to anki or shortstack user
 	  User = "root";
 
@@ -33,24 +28,6 @@
 	};
 
   };
-
 	virtualisation.docker.enable = true;
-
-  #services.caddy = {
-#	enable = true;
-#	virtualHosts."anki.island.local".extraConfig = ''
-#	  reverse_proxy localhost:3111
-#	'';
-#  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’
-  #users.users.localai = {
-  #	isNormalUser = true;
-  #	extraGroups = [ "wheel" "docker" ];
-  #	packages = with pkgs; [
-  #			tree
-  #	];
-# };
-      
 }
 

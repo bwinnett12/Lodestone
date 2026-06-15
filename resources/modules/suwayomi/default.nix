@@ -6,7 +6,6 @@
 
 {
   services.suwayomi-server = {
-
     enable = true;
     user = "pomona";
     group = "users";
@@ -28,15 +27,8 @@
   };
  };
 
+   # TODO - Bake this into the service
    environment.systemPackages = with pkgs; [
-      curl
-      wget
-      unzip
       suwayomi-server
-
     ];
-
-
-  
-
 }

@@ -96,6 +96,7 @@
     };
   };
   systemd.services.tailscaled.wantedBy = [ "multi-user.target" ];
+  services.tailscale.permitCertUid = "caddy";
 
 
 

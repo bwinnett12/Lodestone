@@ -57,7 +57,7 @@ let
           -hls_list_size 0 \
           -hls_flags append_list \
           -hls_segment_type mpegts \
-          -hls_segment_filename "${outDir}/seg-%06d.ts" \
+          -hls_segment_filename "${outDir}/seg-%%06d.ts" \
           "${outDir}/stream.m3u8"
       '';
     };

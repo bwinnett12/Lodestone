@@ -21,8 +21,8 @@ let
         ${pkgs.ffmpeg}/bin/ffmpeg \
           -hide_banner -loglevel warning \
           -f pulse -i ${lib.escapeShellArg cfg.device} \
-          -filter_complex "[0:a]pan=mono|FL=${panExpr}[out]" \
-          -map "[out]" -c:a aac -b:a ${cfg.bitrate} -f adts \
+          -filter_complex "[0:a]channelsplit=channel_layout=stereo[FL][FR]" \
+          -map "[${mapChannel}]" -c:a aac -b:a ${cfg.bitrate} -f adts \
           "srt://0.0.0.0:${toString port}?mode=listener&latency=${toString cfg.latency}"
       '';
     };

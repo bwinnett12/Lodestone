@@ -55,7 +55,9 @@
     firewall = {
       enable = true;
       checkReversePath = "loose";
-      trustedInterfaces = [ "tailscale0" ];
+      trustedInterfaces = [ 
+        #"tailscale0" 
+        ];
 
       allowedTCPPorts = [ 
         #8080  ## 8080 - LocalAI
@@ -107,7 +109,7 @@
 
   #### Desktop Environments
   # Enable the GNOME Desktop Environment.
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
   services.displayManager.gdm.enable = true;
 
 

@@ -23,6 +23,12 @@ in {
       default = 8888;
       description = "Ch1 port. Ch2 will use port+1 (default: 8889).";
     };
+
+    exposeLAN = lib.mkOption {        # ← add here
+      type = lib.types.bool;
+      default = false;
+      description = "Also expose stream ports on LAN, not just Tailscale.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -72,6 +78,7 @@ in {
     };
     users.groups.scarlett-stream = {};
 
-    networking.firewall.allowedUDPPorts = [ cfg.port (cfg.port + 1) ];
+    networking.firewall.interfaces."tailscale0".allowedUDPPorts = [ cfg.port (cfg.port + 1) ];
+    networking.firewall.allowedUDPPorts = lib.mkIf cfg.exposeLAN [ cfg.port (cfg.port + 1) ];
   };
 }

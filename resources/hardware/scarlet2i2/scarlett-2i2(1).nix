@@ -212,12 +212,11 @@ in {
     # ── Caddy: serve HLS over HTTPS on Tailscale ──────────────────────────── #
     services.caddy = {
       enable = true;
-      virtualHosts.${cfg.domain} = {
+      virtualHosts."http://${cfg.domain}" = {    # ← http:// prefix tells Caddy not to attempt TLS
         extraConfig = ''
           root * ${hlsBase}
           file_server browse
 
-          # Allow HLS players to request segments cross-origin
           header Access-Control-Allow-Origin "*"
           header Cache-Control "no-cache"
         '';

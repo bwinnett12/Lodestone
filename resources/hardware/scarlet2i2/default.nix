@@ -215,18 +215,18 @@ in {
     };
 
     # ── Caddy: serve HLS over HTTPS on Tailscale ──────────────────────────── #
-    services.caddy = {
-      enable = true;
-      virtualHosts.${cfg.domain} = {
-        extraConfig = ''
-          root * ${hlsBase}
-          file_server browse
+    services.caddy.virtualHosts.${cfg.domain} = {
+      extraConfig = ''
+        tls {
+          get_certificate tailscale
+        }
 
-          # Allow HLS players to request segments cross-origin
-          header Access-Control-Allow-Origin "*"
-          header Cache-Control "no-cache"
-        '';
-      };
+        root * ${hlsBase}
+        file_server browse
+
+        header Access-Control-Allow-Origin "*"
+        header Cache-Control "no-cache"
+      '';
     };
 
     # ── Firewall ──────────────────────────────────────────────────────────── #

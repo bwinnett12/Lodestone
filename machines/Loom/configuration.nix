@@ -82,20 +82,6 @@
     };
   };
 
-  services.caddy.virtualHosts.${cfg.domain} = {
-    extraConfig = ''
-      tls {
-        get_certificate tailscale
-      }
-
-      root * ${hlsBase}
-      file_server browse
-
-      header Access-Control-Allow-Origin "*"
-      header Cache-Control "no-cache"
-    '';
-  };
-
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   #### Nvidia settings
   hardware = {

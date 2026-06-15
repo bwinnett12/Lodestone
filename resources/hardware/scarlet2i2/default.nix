@@ -242,5 +242,13 @@ in {
     networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 80 443 ];
     networking.firewall.allowedTCPPorts = lib.mkIf cfg.exposeLAN [ 80 443 ];
 
+    systemd.tmpfiles.rules = [
+      "Z ${hlsBase}      0755 scarlett-stream scarlett-stream -"
+      "Z ${hlsDir}       0755 scarlett-stream scarlett-stream -"
+      "Z ${hlsDir}/ch1   0755 scarlett-stream scarlett-stream -"
+      "Z ${hlsDir}/ch2   0755 scarlett-stream scarlett-stream -"
+      "Z ${clipDir}      0755 scarlett-stream scarlett-stream -"
+    ];
+
   };
 }

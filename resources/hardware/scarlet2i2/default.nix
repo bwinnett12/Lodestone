@@ -25,7 +25,7 @@ let
   #   channel    - human label (1 or 2)
   #   mapChannel - HLS output subdirectory and filter label (FL or FR)
   #   outDir     - where to write segments
-  mkStreamService = channel: mapChannel: outDir: {
+  mkStreamService = channel: filterComplex: mapChannel: outDir: {
     description = "Scarlett 2i2 HLS stream - Channel ${toString channel}";
     after    = [ "pipewire.service" "pipewire-pulse.service" "sound.target" "network.target" ];
     wants    = [ "pipewire.service" "pipewire-pulse.service" ];

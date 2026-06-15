@@ -217,12 +217,8 @@ in {
     };
 
     # ── Caddy: serve HLS over HTTPS on Tailscale ──────────────────────────── #
-    services.caddy.virtualHosts.${cfg.domain} = {
+    services.caddy.virtualHosts."http://loom.tail4b1127.ts.net" = {
       extraConfig = ''
-        tls {
-          get_certificate tailscale
-        }
-
         root * ${hlsBase}
         file_server browse
 

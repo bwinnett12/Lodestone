@@ -25,7 +25,7 @@ let
   #   channel    - human label (1 or 2)
   #   mapChannel - HLS output subdirectory and filter label (FL or FR)
   #   outDir     - where to write segments
-  mkStreamService = channel: filterComplex: mapChannel: outDir: {
+  mkStreamService = channel: filterComplex: outDir: {
     description = "Scarlett 2i2 HLS stream - Channel ${toString channel}";
     after    = [ "pipewire.service" "pipewire-pulse.service" "sound.target" "network.target" ];
     wants    = [ "pipewire.service" "pipewire-pulse.service" ];
@@ -49,7 +49,7 @@ let
           -f pulse \
           -i ${lib.escapeShellArg cfg.device} \
           -filter_complex "${filterComplex}" \
-          -map "[out]" \
+          -map "[out2]" \
           -c:a aac \
           -b:a ${cfg.bitrate} \
           -f hls \
@@ -182,11 +182,11 @@ in {
     # ── ffmpeg stream services ─────────────────────────────────────────────── #
   systemd.services.scarlett-stream-ch1 = mkStreamService 1
     "[0:a]channelsplit=channel_layout=stereo[out][FR]; [FR]anullsink; [out]aformat=channel_layouts=mono[out2]"
-    "out2" "${hlsDir}/ch1";
+    "${hlsDir}/ch1";
 
   systemd.services.scarlett-stream-ch2 = mkStreamService 2
     "[0:a]channelsplit=channel_layout=stereo[FL][out]; [FL]anullsink; [out]aformat=channel_layouts=mono[out2]"
-    "out2" "${hlsDir}/ch2";
+    "${hlsDir}/ch2";
 
     # ── udev: auto-start on plug-in, stop on unplug ───────────────────────── #
     services.udev.extraRules = ''

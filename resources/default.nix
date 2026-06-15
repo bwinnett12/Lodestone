@@ -8,6 +8,7 @@
 
 	imports = [
 		./modules
+		./hardware
 		#./home
 	];
 }

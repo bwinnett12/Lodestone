@@ -24,6 +24,7 @@
     #self.nixosModules.plan9
     self.nixosModules.prometheus
     self.nixosModules.moonlight
+    self.nixosModules."hardware-scarlett-2i2"
 
 
     # nixosCosmicModule

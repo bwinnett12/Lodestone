@@ -30,6 +30,7 @@ in {
       enable = lib.mkDefault true;
       alsa.enable = lib.mkDefault true;
       pulse.enable = lib.mkDefault true;
+      systemWide = true;
     };
 
     environment.systemPackages = [ pkgs.ffmpeg ];
@@ -73,7 +74,4 @@ in {
 
     networking.firewall.allowedUDPPorts = [ cfg.port (cfg.port + 1) ];
   };
-
-  
-  services.pipewire.systemWide = true;
 }

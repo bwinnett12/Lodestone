@@ -21,7 +21,7 @@ let
         ${pkgs.ffmpeg}/bin/ffmpeg \
           -hide_banner -loglevel warning \
           -f pulse -i ${lib.escapeShellArg cfg.device} \
-          -filter_complex "[0:a]pan=mono|c0=${panExpr}[out]" \
+          -filter_complex "[0:a]pan=mono|FL=${panExpr}[out]" \
           -map "[out]" -c:a aac -b:a ${cfg.bitrate} -f adts \
           "srt://0.0.0.0:${toString port}?mode=listener&latency=${toString cfg.latency}"
       '';
@@ -86,8 +86,8 @@ in {
       TAG+="systemd", ENV{SYSTEMD_WANTS}="scarlett-stream-ch1.service scarlett-stream-ch2.service"
     '';
 
-    systemd.services.scarlett-stream-ch1 = mkService 1 "c0=c0" cfg.port;
-    systemd.services.scarlett-stream-ch2 = mkService 2 "c0=c1" (cfg.port + 1);
+    systemd.services.scarlett-stream-ch1 = mkService 1 "FL" cfg.port;
+    systemd.services.scarlett-stream-ch2 = mkService 2 "FR" (cfg.port + 1);
 
     users.users.scarlett-stream = {
       isSystemUser = true;

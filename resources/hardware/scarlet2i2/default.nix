@@ -48,8 +48,8 @@ let
           -hide_banner -loglevel warning \
           -f pulse \
           -i ${lib.escapeShellArg cfg.device} \
-          -filter_complex "[0:a]channelsplit=channel_layout=stereo[FL][FR]" \
-          -map "[${mapChannel}]" \
+          -filter_complex "${filterComplex}" \          
+          -map "[out]" \
           -c:a aac \
           -b:a ${cfg.bitrate} \
           -f hls \
@@ -180,8 +180,13 @@ in {
     ];
 
     # ── ffmpeg stream services ─────────────────────────────────────────────── #
-    systemd.services.scarlett-stream-ch1 = mkStreamService 1 "FL" "${hlsDir}/ch1";
-    systemd.services.scarlett-stream-ch2 = mkStreamService 2 "FR" "${hlsDir}/ch2";
+    systemd.services.scarlett-stream-ch1 = mkStreamService 1
+      "[0:a]channelsplit=channel_layout=stereo[out][FR]; [FR]anullsink"
+      "out" "${hlsDir}/ch1";
+
+    systemd.services.scarlett-stream-ch2 = mkStreamService 2
+      "[0:a]channelsplit=channel_layout=stereo[FL][out]; [FL]anullsink"
+      "out" "${hlsDir}/ch2";
 
     # ── udev: auto-start on plug-in, stop on unplug ───────────────────────── #
     services.udev.extraRules = ''

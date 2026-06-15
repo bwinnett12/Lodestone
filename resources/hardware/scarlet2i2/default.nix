@@ -180,13 +180,13 @@ in {
     ];
 
     # ── ffmpeg stream services ─────────────────────────────────────────────── #
-    systemd.services.scarlett-stream-ch1 = mkStreamService 1
-      "[0:a]channelsplit=channel_layout=stereo[out][FR]; [FR]anullsink"
-      "out" "${hlsDir}/ch1";
+  systemd.services.scarlett-stream-ch1 = mkStreamService 1
+    "[0:a]channelsplit=channel_layout=stereo[out][FR]; [FR]anullsink; [out]aformat=channel_layouts=mono[out2]"
+    "out2" "${hlsDir}/ch1";
 
-    systemd.services.scarlett-stream-ch2 = mkStreamService 2
-      "[0:a]channelsplit=channel_layout=stereo[FL][out]; [FL]anullsink"
-      "out" "${hlsDir}/ch2";
+  systemd.services.scarlett-stream-ch2 = mkStreamService 2
+    "[0:a]channelsplit=channel_layout=stereo[FL][out]; [FL]anullsink; [out]aformat=channel_layouts=mono[out2]"
+    "out2" "${hlsDir}/ch2";
 
     # ── udev: auto-start on plug-in, stop on unplug ───────────────────────── #
     services.udev.extraRules = ''

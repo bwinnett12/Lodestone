@@ -53,16 +53,27 @@ in {
         ExecStartPre = "${pkgs.coreutils}/bin/sleep 3";
         ExecStart = ffmpegCmd;
       };
+
+      environment = {
+        PULSE_SERVER = "unix:/run/pulse/native";   # system-wide pulse socket
+        HOME = "/var/lib/scarlett-stream";
+      };
+
     };
 
     users.users.scarlett-stream = {
       isSystemUser = true;
+      description = "Scarlett SRT stream service user";
       group = "scarlett-stream";
       extraGroups = [ "audio" "pipewire" ];
-      description = "Scarlett SRT stream service user";
+      home = "/var/lib/scarlett-stream";
+      createHome = true; 
     };
     users.groups.scarlett-stream = {};
 
     networking.firewall.allowedUDPPorts = [ cfg.port (cfg.port + 1) ];
   };
+
+  
+  services.pipewire.systemWide = true;
 }

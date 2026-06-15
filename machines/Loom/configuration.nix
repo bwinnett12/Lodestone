@@ -178,7 +178,7 @@
 
   virtualisation.docker = {
     enable = true;
-    enableNvidia = true;
+    #enableNvidia = true;
   };
 
   systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];

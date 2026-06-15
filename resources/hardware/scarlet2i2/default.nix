@@ -2,7 +2,7 @@
 let
   cfg = config.services.scarlett-stream;
 
-  mkService = channel: panExpr: port: {
+  mkService = channel: mapChannel: port: {
     description = "Scarlett 2i2 SRT stream - Channel ${toString channel}";
     after = [ "pipewire.service" "pipewire-pulse.service" "sound.target" ];
     wants = [ "pipewire.service" "pipewire-pulse.service" ];

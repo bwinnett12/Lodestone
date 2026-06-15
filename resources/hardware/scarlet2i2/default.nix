@@ -163,12 +163,14 @@ in {
     users.users.scarlett-stream = {
       isSystemUser = true;
       group        = "scarlett-stream";
+      UMask        = "0027";
       extraGroups  = [ "audio" "pipewire" ];
       home         = hlsBase;
       createHome   = true;
       description  = "Scarlett HLS stream service user";
     };
     users.groups.scarlett-stream = {};
+    users.users.caddy.extraGroups = [ "scarlett-stream" ];
 
     # ── Directory layout ──────────────────────────────────────────────────── #
     systemd.tmpfiles.rules = [

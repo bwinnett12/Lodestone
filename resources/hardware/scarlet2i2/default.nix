@@ -227,6 +227,16 @@ in {
       '';
     };
 
+    services.caddy.virtualHosts."http://:80" = {
+      extraConfig = ''
+        root * ${hlsBase}
+        file_server browse
+
+        header Access-Control-Allow-Origin "*"
+        header Cache-Control "no-cache"
+      '';
+    };
+
     # ── Firewall ──────────────────────────────────────────────────────────── #
     # Caddy listens on 80/443; only open to Tailscale unless exposeLAN is set
     networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 80 443 ];

@@ -1,5 +1,6 @@
 
 {
+  inputs,
   pkgs,
   self,
   ...
@@ -16,6 +17,8 @@
     # self.nixosModules.moonlight
     # self.nixosModules.plan9
     self.nixosModules.prometheus
+
+    inputs.mailroom.nixosModules.default
   ];
   
 
@@ -39,28 +42,17 @@
   security.rtkit.enable = true;
 
   services = {
-
     getty.autologinUser = "tarobutter";
-    
-    # Enable the Cosmic Desktop Environment
-    # services.desktopManager.cosmic.enable = true;
-    # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
-    #desktopManager.gnome.enable = true; 
-    # displayManager.gdm.enable = true;
-
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
 
     ## Open ssh
     openssh = {
       enable = true;
-
     };
-    
 
     pipewire = {
       enable = true;
-
       pulse.enable = true;
       alsa.enable = true;
       jack.enable = true;

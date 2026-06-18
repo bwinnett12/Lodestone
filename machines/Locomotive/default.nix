@@ -15,6 +15,8 @@
     # self.nixosModules.plan9
     self.nixosModules.prometheus
     self.inputs.home-manager.nixosModules.home-manager
+    ../../configurations
+    ../../resources/home/default.nix
 
     # inputs.mailroom.nixosModules.default
   ];

@@ -5,13 +5,13 @@
       # <nixos-hardware/raspberry-pi/4>
     ];
 
-  services.mailroom = {
-    enable      = true;
-    llmUrl      = "http://island.tail4b1127.ts.net:8090";
-    vaultPath   = "";
-    libraryRoot = "/storage/Library";
-    listenAddr  = "0.0.0.0:3000";
-  };
+  #services.mailroom = {
+  #  enable      = true;
+  #  llmUrl      = "http://island.tail4b1127.ts.net:8090";
+  #  vaultPath   = "";
+  #  libraryRoot = "/storage/Library";
+  #  listenAddr  = "0.0.0.0:3000";
+  #};
 
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)

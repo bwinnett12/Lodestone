@@ -25,8 +25,8 @@
         ../../resources/home/default.nix
         ../../configurations/users/tarobutter
       ];
-      profiles.communications.enable = false;
-      profiles.gaming.enable = false;
+      profiles.communications.enable = lib.mkForce false;
+      profiles.gaming.enable = lib.mkForce false;
     };
   }; 
 

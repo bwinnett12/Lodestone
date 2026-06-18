@@ -1,4 +1,6 @@
-{ config, pkgs, ... }:
+#### Grafana
+# resources/modules/grafana/default.nix
+{ config, pkgs, inputs, ... }:
 {
   # grafana configuration
   services.grafana = {
@@ -19,7 +21,10 @@
         proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}";
         proxyWebsockets = true;
         extraConfig = ''
-          proxy_set_header Host ${config.services.grafana.settings.server.domain};
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
         '';
     };
   };

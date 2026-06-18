@@ -1,36 +1,56 @@
 #### Jellyfin server
+# resources/modules/jellyfin/default.nix
 { config, pkgs, inputs, ... }:
 
 {
+  ## Setup Jellyfin user
+  users = {
+    users.jellyfin = {
+    isSystemUser = true;
+    group = "jellyfin";
+    extraGroups = [ "video" "render" ];
+    };
+  groups.jellyfin = {};
+  };
+
   # Enable the Jellyfin service
   services.jellyfin = {
     enable = true;
     openFirewall = true;
-    
-    user = "pomona";  # todo - Provide a better solution for this
-    group = "jellyfin";  # todo - Provide a better solution for this
 
-    dataDir = "/storage/Yarrow/temp";  # TODO  - Re-implement with 9p system
-    configDir = "/storage/Yarrow/temp5";  # TODO  - Re-implement with 9p system
-    logDir = "/storage/Yarrow/temp6";  # TODO - Re-implement with 9p system
-    cacheDir = "/storage/Yarrow/temp-cache";
-    # webdir = "/storage/Yarrow/temp-web";
-    # cacheDir = ""; # todo - Set this to be the SSD?
+    dataDir  = "/var/lib/jellyfin";
+    configDir = "/var/lib/jellyfin/config";
+    logDir   = "/var/log/jellyfin";
+    cacheDir = "/storage/Orchid/shortstack/jellyfin/cache";
 
-    # TODO - ADd later
-    #serviceConfig = {
-    #  DeviceAllow = [ "/dev/dri/renderD128" ];
-    #};
+    serviceConfig = {
+      DeviceAllow = [ "/dev/dri/renderD128" "rw" ];
+      SupplementaryGroups = [ "video" "render" ];
+    };
   };
 
-  environment.systemPackages = with pkgs; [
-      curl
-      wget
-      unzip
-      jq
-      jellyfin
-      jellyfin-web
-      jellyfin-ffmpeg
-    ];
-}
+  ## Nginx
+  services.nginx.virtualHosts."jellyfin.${config.networking.hostName}" = {
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:8096";
+      proxyWebsockets = true;
+      extraConfig = ''
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+      '';
+    };
+  };
 
+  ## Infrastructure
+  environment.systemPackages = with pkgs; [
+    curl
+    wget
+    unzip
+    jq
+    jellyfin
+    jellyfin-web
+    jellyfin-ffmpeg
+  ];
+}

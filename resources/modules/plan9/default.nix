@@ -1,41 +1,14 @@
-#### 9p server - u9fs
-### Thrifted from https://github.com/justinrubek/nixos-configs
-{ config, pkgs, inputs, ... }:
 
+# Simply importing plan 9
 {
+  inputs,
+  self,
+  ...
+}: {
 
- systemd = {
-    sockets.u9fs = {
-      description = "9P filesystem server socket... Not the one from outer space...";
-      wantedBy = ["sockets.target"];
-      socketConfig = {
-        ListenStream = "4500";
-        Accept = "yes";
-      };
-    };
-    services."u9fs@" = let
-      mountDir = "/storage/Well"; # TODO: ensure this directory exists and is owned by this user
-      user = "root";   # TODO - Replace with a user?
-      package = pkgs.u9fs;  # TODO - Replace with inheritable system
-    in {
-      description = "9P filesystem server";
-      after = ["network.target"];
-
-      serviceConfig = {
-        ExecStart = "${package}/bin/u9fs -D -a none -u ${user} -d ${mountDir}";
-        User = "${user}";
-        StandardInput = "socket";
-        StandardError = "journal";
-      };
-    };
-  };
-
-  environment.systemPackages = with pkgs; [
-    curl
-    wget
-    unzip
-    jq
-    u9fs
-  ];
-  
+	imports = [
+    ./u9fs-client.nix
+    ./u9fs-server.nix
+	];
 }
+

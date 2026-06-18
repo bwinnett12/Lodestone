@@ -206,6 +206,7 @@
 
     efibootmgr
 
+    kando
     tmux
     inetutils
 

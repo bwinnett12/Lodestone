@@ -15,7 +15,6 @@
 
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
 
-    self.nixosModules.games
     # self.nixosModules.grafana
     # self.nixosModules.jellyfin
     # self.nixosModules.suwayomi
@@ -30,6 +29,12 @@
     # nixosCosmicModule
 
   ];
+
+  ## Profiles:
+  profiles.communications.enable = true;
+  profiles.communications.professional = true;
+  profiles.communications.gaming = true;
+  profiles.gaming.enable = true;
 
   #nixpkgs.config.permittedInsecurePackages = [
   #  "openssl-1.1.1w"

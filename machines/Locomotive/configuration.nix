@@ -8,7 +8,7 @@
   services.mailroom = {
     enable      = true;
     llmUrl      = "http://island.tail4b1127.ts.net:8090";
-    vaultPath   = "/home/user/vault";
+    vaultPath   = "";
     libraryRoot = "/storage/Library";
     listenAddr  = "0.0.0.0:3000";
   };
@@ -20,8 +20,6 @@
   boot.loader.generic-extlinux-compatible.enable = true;
   
 
-
-  hardware.enableRedistributableFirmware = true;
   #hardware.raspberry-pi."4".apply-overlays-dtmerge.enable = true;
 
 

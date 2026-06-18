@@ -1,5 +1,5 @@
 
-{ config, lib, pkgs, inputs, nixosCosmicModule, home-manager, ... }:
+{ config, lib, pkgs, inputs, nixosCosmicModule, ... }:
 
 {
   nix.settings = {
@@ -28,7 +28,6 @@
       "rustdesk"
       "uinput"
       "go2rtc"
-      
     ];
     isNormalUser = true;
     shell = pkgs.bash;
@@ -45,10 +44,7 @@
   services.tailscale.enable = true;
 
   networking = {
-    
     hostName = "Island";
-    #interfaces.enp0s31f6.useDHCP = true;
-
     interfaces.enp0s31f6.ipv4.addresses = [{
       address = "192.168.100.2";
       prefixLength = 24;
@@ -57,7 +53,6 @@
 
     defaultGateway = "192.168.100.1";
     nameservers = [ "1.1.1.1" "8.8.8.8" "100.100.100.100" ];
-
     networkmanager.enable = true;
 
     firewall = {
@@ -94,9 +89,7 @@
 
         2112  ## 2112 - Message
         2113  ## 2113 - Mailroom
-
         3000  ## 3000 - Homepage
-
         47990  ## 47990 - Moonlight
         48010  ## 48010 - Sunshine
         47984  ## 48010 - Sunshine
@@ -113,14 +106,6 @@
 
         5150  ## Mailroom
         2000  ## filebrowser
-
-
-        21115  ## Rustdesk
-        21116  ## Rustdesk
-        21117  ## Rustdesk
-        21118  ## Rustdesk
-        21119  ## Rustdesk
-
         80 
         443
       ];
@@ -137,54 +122,39 @@
     hybrid-sleep.enable = false;
   };
 
-
-
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   #### Nvidia settings
   ## Don't integrate quite yet. Don't open that can of worms quite yet.
-
-
   # Core Graphics Infrastructure
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true; # Critical for 32-bit Steam games / Wine / Proton
 
-    extraPackages = with pkgs; [
-      nvidia-vaapi-driver   # Hardware VA-API translation layer for Nvidia
-      libva-vdpau-driver    # Vdpau translation bridge
-      libvdpau-va-gl        # VDPAU driver with OpenGL backend
-    ];
+  hardware = {
+    enableRedistributableFirmware = true;
+
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+
+      extraPackages = with pkgs; [
+        nvidia-vaapi-driver
+        libva-vdpau-driver
+        libvdpau-va-gl
+      ];
+    };
+
+    nvidia-container-toolkit.enable = true;
+    nvidia = {
+      modesetting.enable = true;
+      services.xserver.videoDrivers = [ "nvidia" ];
+      
+      open = false; 
+      nvidiaSettings = true;
+      powerManagement.enable = false; 
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
   };
 
-  # NVIDIA Driver Configuration
-  hardware.nvidia = {
-    modesetting.enable = true;
-    
-    # Keep false to use proprietary driver. (Note: Only switch to 'true' if 
-    # you have an RTX 20-series or newer AND do not require OBS NVENC encoding wrappers).
-    open = false; 
 
-    nvidiaSettings = true;
-
-    # STREAMING CRITICAL: Fixes VRAM corruption/crashes when streaming instances wake up
-    powerManagement.enable = false; 
-
-    # OPTIONAL: Use 'beta' or specific versions if you are fighting newer Wayland bugs.
-    # Defaulting to stable lets NixOS handle stability updates cleanly.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-  # Tell X11 and Wayland Compositors to use the NVIDIA Kernel Driver
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia-container-toolkit.enable = true;
-
-  # Docker Container Toolkit Optimization
-  virtualisation.docker = {
-    enable = true;
-    # Native method to pass your GPU cleanly into containers (e.g., Plex, cloud gaming)
-    # enableNvidia = true; 
-  };
+  virtualisation.docker.enable = true; 
 
   systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];
 
@@ -196,31 +166,23 @@
     vim
     wget
     git
-    vlc
-
+    vlcs
     openssl
     nettools
     rustscan
-
     coreutils
-
     exfatprogs
     parted
     btrfs-progs
     lsof
-
+    kando
     docker-compose
-
     nvidia-container-toolkit
-
     efibootmgr
-
     tmux
     inetutils
-
     pciutils
     usbutils
-
     wlr-randr
   ];
 
@@ -270,5 +232,4 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }

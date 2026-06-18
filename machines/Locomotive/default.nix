@@ -7,12 +7,9 @@
 }: 
 { 
   imports = [
-    #<nixos-hardware/raspberry-pi/4>
     ./hardware-configuration.nix
     #./drives.nix
     ./configuration.nix
-    #self.nixosModules.calibre-server
-    #self.nixosModules.filebrowser
     self.nixosModules.go2rtc
     # self.nixosModules.moonlight
     # self.nixosModules.plan9
@@ -20,6 +17,13 @@
 
     inputs.mailroom.nixosModules.default
   ];
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = { inherit self; };
+    users.tarobutter = import ../../resources/home/default.nix;
+  };
   
 
 

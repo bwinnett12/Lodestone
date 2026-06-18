@@ -1,9 +1,8 @@
-{ config, pkgs, inputs, lib, home-manager, self, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  # Let Home Manager install and manage itself. 
   # TODO - Is this best to declare each time or 
   programs.home-manager = {
     enable = true;
@@ -13,7 +12,6 @@
   home = {
     username = "tarobutter";
     homeDirectory = "/home/tarobutter";
-    useUserPackages = true;
   };
 
   #environment.systemPackages = with nixpkgs; [
@@ -22,6 +20,11 @@
   #    exfatprogs
   #    kando
   #];
+  home.packages = [
+    neofetch
+    htop
+    exfatprogs
+  ];
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Programming
@@ -33,7 +36,6 @@
 
     ## Github information
     git = { 
-
       enable = true;
       settings.user = {
         name = "W. Winnett";
@@ -41,7 +43,6 @@
       };
     };
   }; 
-
 
   #### ~~~~~~~~~
   # This value determines the Home Manager release that your

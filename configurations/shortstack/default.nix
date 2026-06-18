@@ -1,19 +1,18 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
-  cfg = config.profiles.communication-professional;
-in {
-  options.profiles.communication-professional = {
-    enable = lib.mkEnableOption "a Profile for Professional Communications";
-  };
+{ self, config, lib, pkgs, ... }: {
+  imports = [
+    self.nixosModules.steam
+    self.nixosModules.discord
+    self.nixosModules.pokemmo
+    self.nixosModules.firefox
+  ];
 
-  config = lib.mkIf cfg.enable {
-    home.packages = [
-      #pkgs.slack
-      #pkgs.zoom-us
-    ];
-  };
+  # Pre-configure each module with shortstack's opinions
+  modules.steam.enable   = true;
+  modules.discord.enable = true;
+  modules.pokemmo.enable = true;
+
+  #modules.firefox = {
+  #  enable   = true;
+  #  profile  = "gaming";    # maybe sets different homepage, extensions, etc.
+  #};
 }

@@ -1,60 +1,28 @@
-{ config, pkgs, inputs, lib, ... }:
-
+{ config, pkgs, lib, ... }:
 {
-
-  imports = [
-    ../../configurations
-  ];
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  # TODO - Is this best to declare each time or 
-  programs.home-manager = {
-    enable = true;
-    useUserPackages = true;
-  };
+  programs.home-manager.enable = true;
 
   home = {
     username = "tarobutter";
     homeDirectory = "/home/tarobutter";
+    stateVersion = "24.05";
+
+    packages = with pkgs; [
+      neofetch
+      htop
+      exfatprogs
+    ];
   };
 
-  #environment.systemPackages = with nixpkgs; [
-  #    htop
-  #    neofetch
-  #    exfatprogs
-  #    kando
-  #];
-  home.packages = [
-    neofetch
-    htop
-    exfatprogs
-  ];
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## Programming
   programs = {
+    bash.enable = true;
 
-    bash = {
-      enable = true;
-    };
-
-    ## Github information
-    git = { 
+    git = {
       enable = true;
       settings.user = {
         name = "W. Winnett";
         email = "bwinnett12@gmail.com";
       };
     };
-  }; 
-
-  #### ~~~~~~~~~
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "24.05";
+  };
 }

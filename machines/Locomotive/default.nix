@@ -8,32 +8,30 @@
 { 
   imports = [
     ./hardware-configuration.nix
-    #./drives.nix
     ./configuration.nix
     self.nixosModules.go2rtc
-    # self.nixosModules.moonlight
-    # self.nixosModules.plan9
     self.nixosModules.prometheus
     self.inputs.home-manager.nixosModules.home-manager
-    ../../configurations
-    ../../resources/home/default.nix
 
     # inputs.mailroom.nixosModules.default
   ];
 
-home-manager = {
-  useGlobalPkgs = true;
-  useUserPackages = true;
-  extraSpecialArgs = { inherit self; };
-  users.tarobutter = { config, lib, pkgs, ... }: {
-    imports = [ ../../resources/home/default.nix ];
-    profiles.communications = {
-      enable = false;
-      professional = false;
-      gaming = false;
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = { inherit self; };
+    users.tarobutter = { config, lib, pkgs, ... }: {
+      imports = [
+        ../../resources/home/default.nix  # ← lives here only
+        ../../configurations              # ← lives here only
+      ];
+      profiles.communications = {
+        enable = false;
+        professional = false;
+        gaming = false;
+      };
     };
   };
-};
   
 
 

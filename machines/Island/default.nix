@@ -29,9 +29,11 @@
   ];
 
   ## Profiles:
-  profiles.communications.enable = true;
-  profiles.communications.professional = true;
-  profiles.communications.gaming = true;
+  profiles.communications = {
+    enable = true;
+    professional = true;
+    gaming = true;
+  };
   profiles.gaming.enable = true;
 
 
@@ -39,7 +41,14 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit self; };
-    users.tarobutter = import ../../resources/home/default.nix;
+    users.tarobutter = { config, lib, pkgs, ... }: {
+      imports = [ ../../resources/home/default.nix ];
+      profiles.communications = {
+        enable = true;
+        professional = true;
+        gaming = true;
+      };
+    };
   };
 
   users.groups.media = {

@@ -1,8 +1,6 @@
 ## Communications profiles
-{
-  self, config, lib, pkgs,
-  ...
-}: let
+{ config, lib, pkgs, ... }:
+let
   cfg = config.profiles.communications;
 in {
   options.profiles.communications = {
@@ -24,13 +22,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    communications.gaming.enable = lib.mkDefault cfg.gaming;
-    communications.professional.enable = lib.mkDefault cfg.professional;
-
-    home.packages = lib.optionals cfg.professional 
-      [  pkgs.zoom-us pkgs.slack  ]
-      ++ lib.optionals cfg.gaming [  pkgs.teamspeak_client  ] 
-      ++ [  pkgs.discord  ];
+    home.packages = 
+      lib.optionals cfg.professional [ pkgs.zoom-us pkgs.slack ]
+      ++ lib.optionals cfg.gaming [ pkgs.teamspeak_client ]
+      ++ [ pkgs.discord ];
   };
 }
-

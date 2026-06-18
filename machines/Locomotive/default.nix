@@ -19,12 +19,19 @@
     # inputs.mailroom.nixosModules.default
   ];
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = { inherit self; };
-    users.tarobutter = import ../../resources/home/default.nix;
+home-manager = {
+  useGlobalPkgs = true;
+  useUserPackages = true;
+  extraSpecialArgs = { inherit self; };
+  users.tarobutter = { config, lib, pkgs, ... }: {
+    imports = [ ../../resources/home/default.nix ];
+    profiles.communications = {
+      enable = false;
+      professional = false;
+      gaming = false;
+    };
   };
+};
   
 
 

@@ -1,15 +1,6 @@
-
-# Simply importing the general configurations
-{
-  inputs,
-  self,
-  ...
-}: {
-
-	imports = [
+# configurations/default.nix
+{ ... }: {
+  imports = [
     ./general
-    #./home
-	  #./shortstack
-	  #./users
-	];
+  ];
 }

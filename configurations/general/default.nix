@@ -1,14 +1,7 @@
-
-# Simply importing the general configurations
-{
-  inputs,
-  self,
-  ...
-}: {
-
-	imports = [
+# configurations/general/default.nix
+{ ... }: {
+  imports = [
     ./games.nix
     ./communications.nix
-	];
+  ];
 }
-

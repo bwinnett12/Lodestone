@@ -2,6 +2,9 @@
 
 {
 
+  imports = [
+    ../../configurations
+  ];
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   # TODO - Is this best to declare each time or 
   programs.home-manager = {

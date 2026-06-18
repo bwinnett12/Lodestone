@@ -22,16 +22,15 @@
     extraSpecialArgs = { inherit self; };
     users.tarobutter = { config, lib, pkgs, ... }: {
       imports = [
-        ../../resources/home/default.nix  # ← lives here only
-        ../../configurations              # ← lives here only
+        ../../resources/home/default.nix
+        ../../configurations/users/tarobutter
       ];
-      profiles.communications = {
-        enable = false;
-        professional = false;
-        gaming = false;
-      };
     };
   }; 
+
+  # TODO - Fix this
+  profiles.communications.enable = false;
+  profiles.gaming.enable = false;
 
   users.groups.media = {
     gid = 995; # Pick a unique ID or let NixOS auto-assign

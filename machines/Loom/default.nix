@@ -25,6 +25,8 @@
     self.nixosModules.moonlight
     self.nixosModules.scarlet2i2
 
+    self.nixosModules.gaming
+
 
     # nixosCosmicModule
 

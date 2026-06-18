@@ -1,7 +1,7 @@
 
 # https://search.nixos.org/options: NixOS manual (`nixos-help`)
 
-{ config, lib, pkgs, inputs, nixosCosmicModule, home-manager, ... }:
+{ config, lib, pkgs, inputs, nixosCosmicModule, ... }:
 
 {
 

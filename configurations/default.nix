@@ -8,7 +8,7 @@
 
 	imports = [
     ./general
-    ./home
+    #./home
 	#./shortstack
 	  ./users
 	];

@@ -9,7 +9,7 @@
 	imports = [
 		./modules
 		./hardware
-		#./home
+		./home
 	];
 }
 

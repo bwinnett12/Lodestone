@@ -24,7 +24,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = 
       lib.optionals cfg.professional [ pkgs.zoom-us pkgs.slack ]
-      ++ lib.optionals cfg.gaming [ pkgs.teamspeak_client ]
+      ++ lib.optionals cfg.gaming [ pkgs.teamspeak3 ]
       ++ [ pkgs.discord ];
   };
 }

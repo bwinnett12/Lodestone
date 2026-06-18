@@ -171,7 +171,7 @@
     parted
     btrfs-progs
     lsof
-    # kando
+    kando
     docker-compose
     nvidia-container-toolkit
     efibootmgr

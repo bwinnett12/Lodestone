@@ -6,6 +6,7 @@
   flake.nixosConfigurations = let
     mkSystem = name: system:
       inputs.nixpkgs.lib.nixosSystem {
+        inherit system;
         modules = [
           ./${name}
         ];

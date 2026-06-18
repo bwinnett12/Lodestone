@@ -29,27 +29,23 @@
   ];
 
   ## Profiles:
-  profiles.communications = {
-    enable = true;
-    professional = true;
-    gaming = true;
-  };
-  profiles.gaming.enable = true;
-
-
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit self; };
     users.tarobutter = { config, lib, pkgs, ... }: {
-      imports = [ ../../resources/home/default.nix ];
+      imports = [
+        ../../resources/home/default.nix
+        ../../configurations/users/tarobutter
+      ];
       profiles.communications = {
         enable = true;
         professional = true;
         gaming = true;
       };
+      profiles.gaming.enable = true;
     };
-  };
+  }; 
 
   users.groups.media = {
     gid = 995; # Pick a unique ID or let NixOS auto-assign

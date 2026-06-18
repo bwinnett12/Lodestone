@@ -33,8 +33,6 @@
   ];
 
   ## Profiles:
-
-
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -44,13 +42,13 @@
         ../../resources/home/default.nix
         ../../configurations/users/tarobutter
       ];
+      profiles.communications = {
+        enable = true;
+        professional = true;
+        gaming = true;
+      };
+      profiles.gaming.enable = true;
     };
-    profiles.communications = {
-      enable = true;
-      professional = true;
-      gaming = true;
-    };
-    profiles.gaming.enable = true;
   }; 
 
   #nixpkgs.config.permittedInsecurePackages = [

@@ -8,7 +8,7 @@
     stateVersion = "24.05";
 
     packages = with pkgs; [
-      neofetch
+      fastfetch
       htop
       exfatprogs
     ];

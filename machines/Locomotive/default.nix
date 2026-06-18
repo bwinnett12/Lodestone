@@ -15,7 +15,7 @@
     # self.nixosModules.plan9
     self.nixosModules.prometheus
 
-    inputs.mailroom.nixosModules.default
+    # inputs.mailroom.nixosModules.default
   ];
 
   home-manager = {

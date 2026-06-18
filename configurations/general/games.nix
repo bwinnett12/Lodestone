@@ -46,7 +46,7 @@ in {
         pkgs.protontricks
         
         pkgs.winetricks
-        bolt-launcher
+        pkgs.bolt-launcher
       ];
   };
 }

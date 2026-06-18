@@ -57,7 +57,6 @@ outputs = {
       imports = [
         ./resources
         ./machines
-        ./configurations
       ];
     };
 }

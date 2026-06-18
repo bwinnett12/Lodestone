@@ -26,8 +26,6 @@
     self.nixosModules.prometheus
     self.nixosModules.suwayomi
     # nixosCosmicModule
-    ../../configurations 
-    ../../resources/home/default.nix
   ];
 
   ## Profiles:

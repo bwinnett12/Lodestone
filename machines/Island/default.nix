@@ -101,7 +101,7 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
   security.rtkit.enable = true;
-
+  
   services = {
     
     # Enable the Cosmic Desktop Environment
@@ -125,6 +125,7 @@
     udisks2.enable = true;
     xserver = {
       enable = true;
+      videoDrivers = [ "nvidia" ];
       xkb = {
         layout = "us";
         variant = "";

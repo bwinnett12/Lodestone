@@ -41,7 +41,6 @@
     nix-direnv.enable = true;
   };
 
-  services.tailscale.enable = true;
 
   networking = {
     hostName = "Island";
@@ -126,7 +125,6 @@
   #### Nvidia settings
   ## Don't integrate quite yet. Don't open that can of worms quite yet.
   # Core Graphics Infrastructure
-
   hardware = {
     enableRedistributableFirmware = true;
 
@@ -143,9 +141,7 @@
 
     nvidia-container-toolkit.enable = true;
     nvidia = {
-      modesetting.enable = true;
-      services.xserver.videoDrivers = [ "nvidia" ];
-      
+      modesetting.enable = true;      
       open = false; 
       nvidiaSettings = true;
       powerManagement.enable = false; 
@@ -166,7 +162,7 @@
     vim
     wget
     git
-    vlcs
+    vlc
     openssl
     nettools
     rustscan

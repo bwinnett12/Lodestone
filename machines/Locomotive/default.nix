@@ -49,14 +49,9 @@
 
   services = {
     getty.autologinUser = "tarobutter";
-    # Enable touchpad support (enabled default in most desktopManager).
-    libinput.enable = true;
+    openssh.enable = true;
 
-    ## Open ssh
-    openssh = {
-      enable = true;
-    };
-
+    # Keep if Locomotive does audio capture (Scarlett 2i2 / go2rtc)
     pipewire = {
       enable = true;
       pulse.enable = true;
@@ -65,24 +60,25 @@
     };
 
     printing.enable = true;
-
-    xserver = {
-      enable = true;
-      desktopManager.xfce.enable = true;
-      displayManager.lightdm = {
-        enable = true;
-        extraConfig = ''
-          xserver-command=X -core -nocursor
-          '';
-        };
-
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-    };
-
   };
+
+    
+
+    # xserver = {
+    #   enable = true;
+    #   desktopManager.xfce.enable = true;
+    #   displayManager.lightdm = {
+    #     enable = true;
+    #     extraConfig = ''
+    #       xserver-command=X -core -nocursor
+    #       '';
+    #     };
+
+    #   xkb = {
+    #     layout = "us";
+    #     variant = "";
+    #   };
+    # };
 
   system.stateVersion = "25.11";
 

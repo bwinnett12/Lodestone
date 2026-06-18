@@ -1,13 +1,8 @@
 # resources/modules/default.nix
+{ lib, ... }:
 {
-  inputs,
-  self,
-  lib,
-  ...
-}: 
-_: {
   flake.nixosModules = lib.mapAttrs
-    (name: _: ./${name})
+    (name: _: import ./${name})
     (lib.filterAttrs
       (_: type: type == "directory")
       (builtins.readDir ./.));

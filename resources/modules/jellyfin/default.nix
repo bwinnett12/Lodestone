@@ -1,6 +1,6 @@
 #### Jellyfin server
 # resources/modules/jellyfin/default.nix
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
 {
   ## Setup Jellyfin user
@@ -22,11 +22,11 @@
     configDir = "/var/lib/jellyfin/config";
     logDir   = "/var/log/jellyfin";
     cacheDir = "/storage/Orchid/shortstack/jellyfin/cache";
+  };
 
-    serviceConfig = {
-      DeviceAllow = [ "/dev/dri/renderD128" "rw" ];
-      SupplementaryGroups = [ "video" "render" ];
-    };
+  systemd.services.jellyfin.serviceConfig = {
+    DeviceAllow = [ "/dev/dri/renderD128" "rw" ];
+    SupplementaryGroups = [ "video" "render" ];
   };
 
   ## Nginx

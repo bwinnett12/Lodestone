@@ -27,12 +27,12 @@
     };
 
     ### Mailroom
-    mailroom = {
-      url = "github:bwinnett12/Mailroom";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
+    #mailroom = {
+    #  url = "github:bwinnett12/Mailroom";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #  inputs.flake-utils.follows = "flake-utils";
+    #  inputs.rust-overlay.follows = "rust-overlay";
+    #};
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";

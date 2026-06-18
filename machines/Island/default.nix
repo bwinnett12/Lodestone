@@ -51,8 +51,13 @@
     gid = 995; # Pick a unique ID or let NixOS auto-assign
   };
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssl-1.1.1w"
+    "qtwebengine-5.15.19"
+  ];
+
   services.nginx = {
-  enable = true;
+    enable = true;
     virtualHosts."_" = {
       locations."/" = {
         proxyPass = "http://127.0.0.1:3111";
@@ -101,7 +106,7 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
   security.rtkit.enable = true;
-  
+
   services = {
     
     # Enable the Cosmic Desktop Environment

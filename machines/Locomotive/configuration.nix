@@ -40,6 +40,8 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+  networking.interfaces.eth0.useDHCP = true;
 
   services.tailscale.enable = true;
   networking.firewall.trustedInterfaces = [ "tailscale0"  "eth0" ];
@@ -67,10 +69,10 @@
   };
 
 
-  networking.interfaces.eth0.ipv4.addresses = [{
-    address = "192.168.100.1"; # The Pi's address on the private link
-    prefixLength = 24;
-  }];
+  #networking.interfaces.eth0.ipv4.addresses = [{
+  #  address = "192.168.100.1"; # The Pi's address on the private link
+  #  prefixLength = 24;
+  #}];
 
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;

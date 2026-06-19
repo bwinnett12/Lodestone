@@ -34,6 +34,8 @@
     gid = 995; # Pick a unique ID or let NixOS auto-assign
   };
 
+  nix.settings.trusted-users = [ "tarobutter" ];
+
   hardware.enableRedistributableFirmware = true;
   services.udisks2.enable = true;
 

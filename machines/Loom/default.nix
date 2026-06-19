@@ -7,25 +7,23 @@
   self,
   inputs,
   ...
-}: 
+}:
 { 
   imports = [
     ./hardware-configuration.nix
     ./configuration.nix
-
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
-
     # self.nixosModules.grafana
     # self.nixosModules.jellyfin
     # self.nixosModules.suwayomi
     # self.nixosModules.komga
     # self.nixosModules.localai
-    #self.nixosModules.plan9
+    # self.nixosModules.plan9
     self.nixosModules.prometheus
     self.nixosModules.moonlight
     #self.nixosModules.scarlet2i2
 
-    self.nixosModules.gaming
+    self.nixosModules.games
 
 
     # nixosCosmicModule

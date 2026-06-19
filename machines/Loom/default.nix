@@ -50,6 +50,10 @@
     };
   }; 
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "qtwebengine-5.15.19"
+  ];
+
   #nixpkgs.config.permittedInsecurePackages = [
   #  "openssl-1.1.1w"
   #];

@@ -56,12 +56,8 @@
     "qtwebengine-5.15.19"
   ];
 
-
   boot = {
-    kernelModules = [ 
-      "xhci_pci" "usb_storage" "usbhid" "sd_mod"
-      "ntfs3" "ext4" "btrfs" "vfat" "exfat"
-    ];
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
 
     initrd.kernelModules = [ 
       "nvidia" 
@@ -70,6 +66,11 @@
       "nvidia_drm" 
     ];
 
+
+    kernelModules = [ 
+      "xhci_pci" "usb_storage" "usbhid" "sd_mod"
+      "ntfs3" "ext4" "btrfs" "vfat" "exfat"
+    ];
     kernelParams = [
       "tpm_tis.interrupts=0" 
       "pci=noaer"
@@ -92,17 +93,17 @@
   security.rtkit.enable = true;
 
   services = {
-    
+
     # Enable the Cosmic Desktop Environment
     # services.desktopManager.cosmic.enable = true;
     # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
     desktopManager.gnome.enable = true; 
     displayManager.gdm.enable = true;
-    
+
+
     libinput.enable = true;
     nginx.enable = true;
     openssh.enable = true;
-
     pipewire = {
       enable = true;
       pulse.enable = true;
@@ -110,8 +111,7 @@
       jack.enable = true;
     };
     printing.enable = true;
-
-        tailscale = {
+    tailscale = {
       enable = true; 
       permitCertUid = "nginx";
     };
@@ -127,6 +127,5 @@
   };
 
   system.stateVersion = "25.05";
-
   time.timeZone = "America/Anchorage";
 }

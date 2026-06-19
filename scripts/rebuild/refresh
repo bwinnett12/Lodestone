@@ -86,7 +86,7 @@ CMD=(sudo nixos-rebuild "$SUBCOMMAND" --flake "$FLAKE_DIR#$TARGET")
 if [[ "$IS_LOCAL" == false ]]; then
   CMD+=(--build-host  "tarobutter@$BUILDER")
   CMD+=(--target-host "tarobutter@$TARGET")
-  CMD+=(--use-remote-sudo)
+  CMD+=(--sudo)
 fi
 
 echo ""

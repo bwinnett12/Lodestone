@@ -23,7 +23,7 @@
     #self.nixosModules.plan9
     self.nixosModules.prometheus
     self.nixosModules.moonlight
-    self.nixosModules.scarlet2i2
+    #self.nixosModules.scarlet2i2
 
     self.nixosModules.gaming
 

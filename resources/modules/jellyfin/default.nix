@@ -24,9 +24,20 @@
     cacheDir = "/storage/Orchid/shortstack/jellyfin/cache";
   };
 
-  systemd.services.jellyfin.serviceConfig = {
-    DeviceAllow = [ "/dev/dri/renderD128" "rw" ];
-    SupplementaryGroups = [ "video" "render" ];
+
+  systemd = {
+    services.jellyfin.serviceConfig = {
+      DeviceAllow = [ "/dev/dri/renderD128" "rw" ];
+      SupplementaryGroups = [ "video" "render" ];
+    };
+
+    tmpfiles.rules = [
+      "d /var/lib/jellyfin           0700 jellyfin jellyfin -"
+      "d /var/lib/jellyfin/config    0700 jellyfin jellyfin -"
+      "d /var/log/jellyfin           0700 jellyfin jellyfin -"
+      "d /storage/Orchid/shortstack/jellyfin/cache  0700 jellyfin jellyfin -"
+    ];
+
   };
 
   ## Nginx

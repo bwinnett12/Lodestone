@@ -56,22 +56,6 @@
     "qtwebengine-5.15.19"
   ];
 
-  services.nginx = {
-    enable = true;
-    virtualHosts."_" = {
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:3111";
-        proxyWebsockets = true;
-        extraConfig = ''
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header X-Forwarded-Proto $scheme;
-        '';
-      };
-    };
-  };
-
 
   boot = {
     kernelModules = [ 
@@ -115,11 +99,10 @@
     desktopManager.gnome.enable = true; 
     displayManager.gdm.enable = true;
     
-    # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
-
-    ## Open ssh
+    nginx.enable = true;
     openssh.enable = true;
+
     pipewire = {
       enable = true;
       pulse.enable = true;
@@ -127,6 +110,11 @@
       jack.enable = true;
     };
     printing.enable = true;
+
+        tailscale = {
+      enable = true; 
+      permitCertUid = "nginx";
+    };
     udisks2.enable = true;
     xserver = {
       enable = true;
@@ -136,8 +124,6 @@
         variant = "";
       };
     };
-
-    
   };
 
   system.stateVersion = "25.05";

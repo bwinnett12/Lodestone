@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+## shells — list all available Lodestone devShells
+## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
+set -euo pipefail
+
+FLAKE_DIR="${LODESTONE_ROOT:-$(git -C "$(dirname "$0")" rev-parse --show-toplevel 2>/dev/null)}"
+[[ -z "$FLAKE_DIR" ]] && { echo "Could not locate Lodestone root"; exit 1; }
+
+echo ""
+echo "🏝  Available Lodestone shells:"
+echo ""
+
+nix flake show "$FLAKE_DIR" 2>/dev/null \
+  | grep "devShell" \
+  | grep -oP "(?<=─ )\w+" \
+  | grep -v "^$" \
+  | while read -r shell; do
+      printf "  %-20s  nix develop %s#%s\n" "shell-$shell" "$FLAKE_DIR" "$shell"
+    done
+
+echo ""
+echo "  Enter any shell:   nix develop $FLAKE_DIR#<name>"
+echo "  From lodestone:    shell-<name>"
+echo ""

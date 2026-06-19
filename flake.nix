@@ -57,6 +57,7 @@ outputs = {
       imports = [
         ./resources
         ./machines
+        ./shells
       ];
     };
 }

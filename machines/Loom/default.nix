@@ -13,6 +13,7 @@
     ./hardware-configuration.nix
     ./configuration.nix
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
+    self.inputs.home-manager.nixosModules.home-manager
     # self.nixosModules.grafana
     # self.nixosModules.jellyfin
     # self.nixosModules.suwayomi

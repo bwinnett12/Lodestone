@@ -36,6 +36,10 @@
     SupplementaryGroups = [ "video" "audio" "input" ];
   };
 
+#        1984  # 1984 - go2rtc
+#        8555  # 8555 - go2rtc
+#        8554  # 8554 - go2rtc
+
   environment.systemPackages = with pkgs; [
     alsa-utils  # Installs amixer, arecord, and alsamixer for hardware troubleshooting
   ];

@@ -13,56 +13,43 @@
   #  listenAddr  = "0.0.0.0:3000";
   #};
 
-
-  # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
-  boot.loader.grub.enable = false;
-  # Enables the generation of /boot/extlinux/extlinux.conf
-  boot.loader.generic-extlinux-compatible.enable = true;
-  
-
-  #hardware.raspberry-pi."4".apply-overlays-dtmerge.enable = true;
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ### System Information
-
-  networking.hostName = "Locomotive";
-  time.timeZone = "America/Anchorage";
-  i18n.defaultLocale = "en_US.UTF-8";
-
+  boot = {
+    kernel.sysctl."net.ipv4.ip_forward" = 1;
+    loader = {
+      grub.enable = false;
+      generic-extlinux-compatible.enable = true;
+    };
+  };
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ######## Network settings
-  
-  services.openssh.enable = true;
+  networking = {
+    firewall = {
+      allowedTCPPorts = [ 
+        80 
+        53 
+        5900  # 5900 -x11vnc
+        1984  # 1984 - go2rtc
+        8555  # 8555 - go2rtc
+        8554  # 8554 - go2rtc
+      ];
+      allowedUDPPorts = [ 
+        53 41641 
+        5900  # 5900 -x11vnc
+        1984  # 1984 - go2rtc
+      ];
+      trustedInterfaces = [ "tailscale0"  "eth0" ];
+    };
 
-  ### Networking mechanism
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
-  networking.interfaces.eth0.useDHCP = true;
-
-  services.tailscale.enable = true;
-  networking.firewall.trustedInterfaces = [ "tailscale0"  "eth0" ];
-
-  # Enable firewall opening DNS and HTTP for Pi-hole if using host networking
-  networking.firewall.allowedTCPPorts = [ 
-    80 
-    53 
-    5900  # 5900 -x11vnc
-    1984  # 1984 - go2rtc
-    8555  # 8555 - go2rtc
-    8554  # 8554 - go2rtc
-  ];
-
-  networking.firewall.allowedUDPPorts = [ 53 41641 
-  
-    5900  # 5900 -x11vnc
-    1984  # 1984 - go2rtc
-  
-  ];
-  
+    hostName = "Locomotive";
+    interfaces.eth0.useDHCP = true;
+    nat = {
+      enable = true;
+      internalInterfaces = [ "eth0" ];
+      externalInterface = "wlan0"; # or wherever the Pi gets its internet
+    };
+    networkmanager.enable = true;
+  };
 
   environment.shellAliases = {
     wake-island = "wakeonlan 70:85:c2:50:d2:0a";
@@ -74,54 +61,41 @@
   #  prefixLength = 24;
   #}];
 
-  boot.kernel.sysctl = {
-    "net.ipv4.ip_forward" = 1;
-  };
 
-
-
-  networking.firewall.extraCommands = ''
-    iptables -A FORWARD -i tailscale0 -o eth0 -j ACCEPT
-    iptables -A FORWARD -i eth0 -o tailscale0 -m state --state ESTABLISHED,RELATED -j ACCEPT
-  '';
-
-  networking.nat = {
-    enable = true;
-    internalInterfaces = [ "eth0" ];
-    externalInterface = "wlan0"; # or wherever the Pi gets its internet
-  };
-
-  
-
-
-
-
-
+  #networking.firewall.extraCommands = ''
+  #  iptables -A FORWARD -i tailscale0 -o eth0 -j ACCEPT
+  #  iptables -A FORWARD -i eth0 -o tailscale0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+  #'';
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.tarobutter = {
-    isNormalUser = true;
-    extraGroups = [
-      "input"
-      "networkmanager"
-      "systemd-journal"
-      "wheel"
-      "docker"
-      "video"
-      "render"
-      "jellyfin"
-      "storage-Orchid"
-      "storage-Yarrow"
-      "storage-Tulip"
-      "media"
-      "rustdesk"
-      "uinput"
-      "go2rtc"
+  users = { 
+    users.tarobutter = {
+      isNormalUser = true;
+      extraGroups = [
+        "input"
+        "networkmanager"
+        "systemd-journal"
+        "wheel"
+        "docker"
+        "video"
+        "render"
+        "jellyfin"
+        "storage-Orchid"
+        "storage-Yarrow"
+        "storage-Tulip"
+        "media"
+        "rustdesk"
+        "uinput"
+        "go2rtc"
+        ];
+      packages = with pkgs; [
+        tree
       ];
-    packages = with pkgs; [
-      tree
-    ];
-    initialPassword = "666";
+      initialPassword = "666";
+    };
+    groups.media = {
+      gid = 995; # Pick a unique ID or let NixOS auto-assign
+    };
   };
 
   services.xserver.displayManager.lightdm.extraConfig = ''

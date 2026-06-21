@@ -30,15 +30,9 @@
     };
   }; 
 
-  users.groups.media = {
-    gid = 995; # Pick a unique ID or let NixOS auto-assign
-  };
-
   nix.settings.trusted-users = [ "tarobutter" ];
 
   hardware.enableRedistributableFirmware = true;
-  services.udisks2.enable = true;
-
 
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"
@@ -62,27 +56,10 @@
     };
 
     printing.enable = true;
+    tailscale.enable = true;
+    udisks2.enable = true;
   };
 
-    
-
-    # xserver = {
-    #   enable = true;
-    #   desktopManager.xfce.enable = true;
-    #   displayManager.lightdm = {
-    #     enable = true;
-    #     extraConfig = ''
-    #       xserver-command=X -core -nocursor
-    #       '';
-    #     };
-
-    #   xkb = {
-    #     layout = "us";
-    #     variant = "";
-    #   };
-    # };
-
   system.stateVersion = "25.11";
-
   time.timeZone = "America/Anchorage";
 }

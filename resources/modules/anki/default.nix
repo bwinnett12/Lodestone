@@ -24,8 +24,8 @@
 
   ## Set the docker compose to /var/lib/anki/docker-compose.yml
   environment.etc."anki/docker-compose.yml" = {
-	source = ./anki-docker.yml;
-	mode = "0644";
+    source = ./anki-docker.yml;
+    mode = "0644";
   };
 
   services.nginx.virtualHosts."anki.${config.networking.hostName}" = {

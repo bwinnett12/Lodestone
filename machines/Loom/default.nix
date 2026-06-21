@@ -1,6 +1,3 @@
-
-# TODO - Improve this 
-
 {
   pkgs,
   lib,
@@ -14,21 +11,11 @@
     ./configuration.nix
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
     self.inputs.home-manager.nixosModules.home-manager
-    # self.nixosModules.grafana
-    # self.nixosModules.jellyfin
-    # self.nixosModules.suwayomi
-    # self.nixosModules.komga
-    # self.nixosModules.localai
-    # self.nixosModules.plan9
     self.nixosModules.prometheus
     self.nixosModules.moonlight
     #self.nixosModules.scarlet2i2
-
     self.nixosModules.games
-
-
     # nixosCosmicModule
-
   ];
 
   ## Profiles:
@@ -52,11 +39,13 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "qtwebengine-5.15.19"
+    "openssl-1.1.1w"
   ];
 
-  #nixpkgs.config.permittedInsecurePackages = [
-  #  "openssl-1.1.1w"
-  #];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [ "root" "tarobutter" ];
+  };
 
   #config.microsoft-surface.surface-control.enable = true;
 
@@ -94,22 +83,39 @@
     #  trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
     # };
 
-
-    caddy.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      publish = {
+        enable = true;
+        addresses = true;
+      };
+    };
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
 
-    openssh.enable = true;
+  # Systemd login configuration
+  #  logind = {
+  #  lidSwitchExternalPower = "ignore";
+  #  lidSwitchBattery = "ignore";
+  #};
 
+
+    nginx.enable = true;
+    openssh.enable = true;
     pipewire = {
       enable = true;
       pulse.enable = true;
       alsa.enable = true;
       jack.enable = true;
     };
-
     printing.enable = true;
+    tailscale = {
+      enable = true; 
+      permitCertUid = "nginx";
+    };
+    udisks2.enable = true;
 
     xserver = {
       enable = true;
@@ -122,8 +128,5 @@
   };
 
   system.stateVersion = "25.05";
-
   time.timeZone = "America/Anchorage";
 }
-
-

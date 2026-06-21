@@ -4,36 +4,12 @@
 { config, lib, pkgs, inputs, nixosCosmicModule, ... }:
 
 {
-
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-  };
-
-  nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.1.1w"
-  ];
-
-
-
   ## Settings for cosmic
   # substituters = [ "https://cosmic.cachix.org/" ];
   # trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-
-
-  services = {
-    openssh = { enable = true; };
-    tailscale = {
-      enable = true; 
-      permitCertUid = "caddy";
-      #wantedBy = [ "multi-user.target" ];
-    };
-  };
-
-
-
   networking = {
-
     hostName = "Loom";
+
     networkmanager.enable = true;
     useDHCP = false;
     interfaces.enp0s31f6.useDHCP = true; # Change this interface name if Loom's physical port is different!
@@ -120,7 +96,18 @@
     #enableNvidia = true;
   };
 
-  systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];
+  systemd = {
+    services.docker.path = [ pkgs.nvidia-container-toolkit ];
+
+    #### Sleep schedule
+    ## Systemd configuration for disabling auto sleep
+    targets = {
+      sleep.enable = false;
+      suspend.enable = false;
+      hibernate.enable = false;
+      hybrid-sleep.enable = false;
+    };
+  };
 
   # Correct way to set Surface-specific options
   #hardware.surface = { # This is the main attribute set for Surface hardware
@@ -141,20 +128,9 @@
   };
 
 
-  #### Sleep schedule
-  ## Systemd configuration for disabling auto sleep
-  systemd.targets = {
-    sleep.enable = false;
-    suspend.enable = false;
-    hibernate.enable = false;
-    hybrid-sleep.enable = false;
-  };
 
-  ## Systemd login configuration
-  #services.logind = {
-  #  lidSwitchExternalPower = "ignore";
-  #  lidSwitchBattery = "ignore";
-  #};
+
+
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## User groups

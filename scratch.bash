@@ -36,7 +36,7 @@ sudo nixos-rebuild switch --flake .#Locomotive \
   --option filter-syscalls false
 
 
-  
+
   
 
 
@@ -44,5 +44,25 @@ sudo nixos-rebuild switch --flake .#Locomotive \
 sudo nixos-rebuild switch --flake .#Loom \
   --target-host tarobutter@100.83.209.81 \
   --sudo
+  --option sandbox false \
+  --option filter-syscalls false
+
+
+
+
+
+  sudo nixos-rebuild boot --flake .#Locomotive \
+    --build-host tarobutter@10.0.1.10 \
+    --target-host tarobutter@192.168.100.1 \
+    --sudo \
+    --ask-sudo-password \
+    --option sandbox false \
+    --option filter-syscalls false
+
+sudo nixos-rebuild boot --flake .#Loom \
+  --build-host tarobutter@10.0.1.10 \
+  --target-host tarobutter@100.83.209.81
+  --sudo \
+  --ask-sudo-password \
   --option sandbox false \
   --option filter-syscalls false

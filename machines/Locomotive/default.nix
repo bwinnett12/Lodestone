@@ -48,6 +48,15 @@
     getty.autologinUser = "tarobutter";
     openssh.enable = true;
 
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      publish = {
+        enable = true;
+        addresses = true;
+      };
+    };
+
     # Keep if Locomotive does audio capture (Scarlett 2i2 / go2rtc)
     pipewire = {
       enable = true;

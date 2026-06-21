@@ -100,6 +100,14 @@
     desktopManager.gnome.enable = true; 
     displayManager.gdm.enable = true;
 
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      publish = {
+        enable = true;
+        addresses = true;
+      };
+    };
 
     libinput.enable = true;
     nginx.enable = true;

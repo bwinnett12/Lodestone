@@ -30,7 +30,8 @@
     };
   }; 
 
-  nix.settings.trusted-users = [ "tarobutter" ];
+  nix.settings.trusted-users = [ "root" "tarobutter" ];
+  
 
   hardware.enableRedistributableFirmware = true;
 

@@ -98,10 +98,10 @@
     };
   };
 
-  services.xserver.displayManager.lightdm.extraConfig = ''
-    # Forces a fake layout even if nothing is plugged in
-    xserver-command=X -nocursor
-  '';
+  #services.xserver.displayManager.lightdm.extraConfig = ''
+  #  # Forces a fake layout even if nothing is plugged in
+  #  xserver-command=X -nocursor
+  #'';
 
   console.enable = false;
   environment.systemPackages = with pkgs; [

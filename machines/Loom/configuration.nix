@@ -114,6 +114,8 @@
   fonts.fontconfig.subpixel.rgba = "none";  # for HiDPI, subpixel is counterproductive
   services.xserver.wacom.enable = true;  # fallback for some stylus configs
 
+  services.power-profiles-daemon.enable = false;
+
   virtualisation.docker = {
     enable = true;
     #enableNvidia = true;

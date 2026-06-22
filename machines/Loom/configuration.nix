@@ -77,19 +77,41 @@
       # Enable modesetting for better Wayland support and overall display.
       # Essential for modern NVIDIA setups.
       modesetting.enable = true;
-
-      # Open-source drivers are for RTX 20-series and newer
-      # Set to false to use the proprietary (closed-source) driver.
       open = false;
-
-      # Enable the NVIDIA settings application
       nvidiaSettings = true;
-
-      # Power management set to false. 
-      powerManagement.enable = false;
+      powerManagement = { 
+        enable = true;
+        prime = {
+          offload.enable = true;
+          offload.enableOffloadCmd = true;
+          intelBusId = "PCI:0:2:0";
+          nvidiaBusId = "PCI:1:0:0";  # verify with `lspci | grep -i nvidia`
+        };
+      };
     };
 
   };
+
+  powerManagement.cpuFreqGovernor = "powersave";  # or "schedutil"
+
+  # TLP or auto-cpufreq for more nuanced control
+  services.auto-cpufreq.enable = true;
+  services.auto-cpufreq.settings = {
+    battery = {
+      governor = "powersave";
+      turbo = "never";
+    };
+    charger = {
+      governor = "performance";
+      turbo = "auto";
+    };
+  };
+
+  # Thermald helps prevent throttling on battery
+  services.thermald.enable = true;
+  services.colord.enable = true;
+  fonts.fontconfig.subpixel.rgba = "none";  # for HiDPI, subpixel is counterproductive
+  services.xserver.wacom.enable = true;  # fallback for some stylus configs
 
   virtualisation.docker = {
     enable = true;
@@ -110,12 +132,12 @@
   };
 
   # Correct way to set Surface-specific options
-  #hardware.surface = { # This is the main attribute set for Surface hardware
-  #  enable = true; # Enables the core Surface hardware support (kernel patches etc.)
-  #  ipts.enable = true; # Enables touch and pen support
-  #};
-
-  #services.surface-control.enable = true; # This remains a separate service
+  hardware.microsoft-surface = {
+    enable = true;           # core surface support
+    ipts.enable = true;      # touchscreen + stylus (IPTS protocol)
+    surface-control.enable = true;  # performance mode control CLI
+    kernelVersion = "stable";
+  };
   
     # Keep your increased swap and zramSwap settings
   swapDevices = [

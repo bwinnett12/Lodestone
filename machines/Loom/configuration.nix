@@ -134,7 +134,6 @@
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## User groups
-
   users.users.tarobutter = {
     description = "Tarot D. Butter";
     extraGroups = [

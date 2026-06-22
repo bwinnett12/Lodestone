@@ -19,8 +19,9 @@
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
     };
+    tmpOnTmpfs = true;
   };
-
+  
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ######## Network settings
   networking = {

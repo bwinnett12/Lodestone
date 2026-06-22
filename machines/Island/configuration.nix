@@ -33,26 +33,29 @@
 
 
   networking = {
-    hostName = "Island";
-    interfaces.enp0s31f6.ipv4.addresses = [{
-      address = "192.168.100.2";
-      prefixLength = 24;
-    }];
-    interfaces.enp0s31f6.useDHCP = false;
-
     defaultGateway = "192.168.100.1";
+    enableIPv6 = false;
+
+    hostName = "Island";
+
+    interfaces.enp0s31f6 = {
+      ipv4.addresses = [{
+        address = "192.168.100.2";
+        prefixLength = 24;
+      }];
+      useDHCP = false;
+    };
+
     nameservers = [ "1.1.1.1" "8.8.8.8" "100.100.100.100" ];
     networkmanager.enable = true;
 
     firewall = {
 
-      allowedUDPPorts = [ 
-        config.services.tailscale.port
-      ];
-
-      enable = true;
+      allowedUDPPorts = [ config.services.tailscale.port ];
       checkReversePath = "loose";
+      enable = true;
       trustedInterfaces = [ "tailscale0" ];
+
       allowedTCPPorts = [ 
         8080  ## 8080 - LocalAI
         8081  ## 8081 - LocalAI      
@@ -129,7 +132,6 @@
 
   systemd = {
     services = {
-
       docker.path = [ pkgs.nvidia-container-toolkit ];
       
       ethtool-gro = {

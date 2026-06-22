@@ -86,8 +86,8 @@
       prime = {                          # prime is directly under hardware.nvidia
         offload.enable = true;
         offload.enableOffloadCmd = true;
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
+        intelBusId = "PCI:0:2:0";   # correct, 00:02.0 → PCI:0:2:0
+        nvidiaBusId = "PCI:2:0:0";  # was PCI:1:0:0, correct is 02:00.0 → PCI:2:0:0
       };
     };
 

@@ -133,7 +133,7 @@
 
   # Correct way to set Surface-specific options
   hardware.microsoft-surface = {
-    enable = true;           # core surface support
+  #  enable = true;
     ipts.enable = true;      # touchscreen + stylus (IPTS protocol)
     surface-control.enable = true;  # performance mode control CLI
     kernelVersion = "stable";

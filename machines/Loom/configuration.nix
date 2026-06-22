@@ -81,12 +81,13 @@
       nvidiaSettings = true;
       powerManagement = { 
         enable = true;
-        prime = {
-          offload.enable = true;
-          offload.enableOffloadCmd = true;
-          intelBusId = "PCI:0:2:0";
-          nvidiaBusId = "PCI:1:0:0";  # verify with `lspci | grep -i nvidia`
-        };
+      };
+
+      prime = {                          # prime is directly under hardware.nvidia
+        offload.enable = true;
+        offload.enableOffloadCmd = true;
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
       };
     };
 
@@ -131,11 +132,13 @@
     };
   };
 
+  microsoft-surface.surface-control.enable = true;
+
   # Correct way to set Surface-specific options
   hardware.microsoft-surface = {
   #  enable = true;
-    ipts.enable = true;      # touchscreen + stylus (IPTS protocol)
-    surface-control.enable = true;  # performance mode control CLI
+    #ipts.enable = true;      # touchscreen + stylus (IPTS protocol)
+    #surface-control.enable = true;  # performance mode control CLI
     kernelVersion = "stable";
   };
   

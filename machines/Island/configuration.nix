@@ -2,13 +2,6 @@
 { config, lib, pkgs, inputs, nixosCosmicModule, ... }:
 
 {
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ]; 
-
-    ## Settings for cosmic
-    # substituters = [ "https://cosmic.cachix.org/" ];
-    # trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-  };
 
   users.users.tarobutter = {
     description = "Tarot D. Butter";
@@ -33,9 +26,6 @@
     shell = pkgs.bash;
   };
   
-
-  nixpkgs.config.allowUnfree = true;
-
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
@@ -94,10 +84,6 @@
         47984  ## 48010 - Sunshine
         47989  ## 48010 - Sunshine
 
-        1984  # 1984 - go2rtc
-        8555  # 8555 - go2rtc
-        8554  # 8554 - go2rtc
-
         3111  ## Anki 
         3112  ## Anki 
         3113  ## Anki 
@@ -108,16 +94,6 @@
         443
       ];
     };
-  };
-
-
-  #### Sleep schedule
-  ## Systemd configuration for disabling auto sleep
-  systemd.targets = {
-    sleep.enable = false;
-    suspend.enable = false;
-    hibernate.enable = false;
-    hybrid-sleep.enable = false;
   };
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -151,7 +127,30 @@
 
   virtualisation.docker.enable = true; 
 
-  systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];
+  systemd = {
+    services = {
+
+      docker.path = [ pkgs.nvidia-container-toolkit ];
+      
+      ethtool-gro = {
+        description = "Enable UDP GRO forwarding on enp0s31f6";
+        after = [ "network.target" ];
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.ethtool}/bin/ethtool -K enp0s31f6 rx-udp-gro-forwarding on";
+        };
+      };
+      systemd-timesyncd.wantedBy = [ "multi-user.target" ];
+    };
+
+    targets = {
+      sleep.enable = false;
+      suspend.enable = false;
+      hibernate.enable = false;
+      hybrid-sleep.enable = false;
+    };
+  };
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Programs
@@ -180,29 +179,6 @@
     usbutils
     wlr-randr
   ];
-
-  boot.kernel.sysctl = {
-    "net.ipv6.conf.all.forwarding" = 1;
-  };
-
-  systemd.services.ethtool-gro = {
-    description = "Enable UDP GRO forwarding on enp0s31f6";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.ethtool}/bin/ethtool -K enp0s31f6 rx-udp-gro-forwarding on";
-    };
-  };
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

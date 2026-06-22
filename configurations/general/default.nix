@@ -3,5 +3,6 @@
   imports = [
     ./games.nix
     ./communications.nix
+    ./development
   ];
 }

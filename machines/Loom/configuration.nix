@@ -163,8 +163,6 @@
     git
     vlc
 
-    fastfetch
-
     openssl
     nettools
     rustscan
@@ -189,24 +187,6 @@
     intel-media-driver
     nvidia-vaapi-driver
   ];
-
-
-
-
-
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## Unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-      "nvidia-settings"
-      "cuda"
-      # Other Nvidia packages
-    ];
-
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ##                                                                         ##

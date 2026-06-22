@@ -37,16 +37,27 @@
     };
   }; 
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "qtwebengine-5.15.19"
-    "openssl-1.1.1w"
-  ];
-
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "root" "tarobutter" ];
   };
 
+  nixpkgs.config = {
+    allowUnfree = true;
+
+    allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+      "cuda"
+      # Other Nvidia packages
+    ];
+
+    permittedInsecurePackages = [
+      "qtwebengine-5.15.19"
+      "openssl-1.1.1w"
+    ];
+  };
   #config.microsoft-surface.surface-control.enable = true;
 
 
@@ -68,7 +79,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   security.rtkit.enable = true;
-
   services = {
     
     # Enable the Cosmic Desktop Environment
@@ -114,6 +124,10 @@
     tailscale = {
       enable = true; 
       permitCertUid = "nginx";
+    };
+    timesyncd = {
+      enable = true;
+      servers = [ "time.cloudflare.com" "pool.ntp.org" ];
     };
     udisks2.enable = true;
 

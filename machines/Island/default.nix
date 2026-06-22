@@ -51,10 +51,30 @@
     gid = 995; # Pick a unique ID or let NixOS auto-assign
   };
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.1.1w"
-    "qtwebengine-5.15.19"
-  ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [ "root" "tarobutter" ];
+    ## Settings for cosmic
+    # substituters = [ "https://cosmic.cachix.org/" ];
+    # trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+  };
+
+  nixpkgs.config = {
+    allowUnfree = true;
+
+    allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+      "cuda"
+      # Other Nvidia packages
+    ];
+
+    permittedInsecurePackages = [
+      "qtwebengine-5.15.19"
+      "openssl-1.1.1w"
+    ];
+  };
 
   boot = {
     binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -65,6 +85,10 @@
       "nvidia_uvm" 
       "nvidia_drm" 
     ];
+
+    kernel.sysctl = {
+      "net.ipv6.conf.all.forwarding" = 1;
+    };
 
 
     kernelModules = [ 
@@ -122,6 +146,13 @@
     tailscale = {
       enable = true; 
       permitCertUid = "nginx";
+    };
+    timesyncd = {
+      enable = true;
+      servers = [
+        "time.cloudflare.com"
+        "pool.ntp.org"
+      ];
     };
     udisks2.enable = true;
     xserver = {

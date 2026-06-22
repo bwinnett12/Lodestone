@@ -132,7 +132,7 @@
     };
   };
 
-  microsoft-surface.surface-control.enable = true;
+  # microsoft-surface.surface-control.enable = true;
 
   # Correct way to set Surface-specific options
   hardware.microsoft-surface = {

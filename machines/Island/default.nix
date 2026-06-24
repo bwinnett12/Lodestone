@@ -171,7 +171,6 @@
         "pool.ntp.org"
       ];
     };
-    u9fs-server.enable = true;
     udisks2.enable = true;
     xserver = {
       enable = true;

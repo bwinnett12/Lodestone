@@ -56,8 +56,8 @@
     exportPath  = "/storage/Orchard";
     port        = 4500;
   };
-  networking.firewall.allowedTCPPorts = [ 4500 ];
-
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
+  
   ## TODO - Move this to a configuration file
   users.groups.media = {
     gid = 995; # Pick a unique ID or let NixOS auto-assign

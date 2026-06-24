@@ -1,18 +1,18 @@
 # resources/modules/u9fs-server.nix
-# Replaces your current u9fs snippet.
-# Deploy on Island — exposes /storage/Orchid over 9P on Tailscale only.
-
 { config, lib, pkgs, inputs, ... }:
 
 let
-  cfg = config.services.u9fs-server;
+  cfg     = config.services.u9fs-server;
+  u9fsPkg = inputs.u9fs.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  # Pull the u9fs binary from the justinrubek flake input.
+
 in {
   options.services.u9fs-server = {
     enable = lib.mkEnableOption "u9fs 9P file server";
 
     exportPath = lib.mkOption {
       type        = lib.types.str;
-      default     = "/storage/Orchid";
+      default     = "/storage/Orchard";
       description = ''
         Directory to expose over 9P.
         This is the physical storage root on Island.
@@ -72,7 +72,7 @@ in {
       wants       = [ "tailscaled.service" ];
 
       serviceConfig = {
-        ExecStart = "${pkgs.u9fs}/bin/u9fs -D -a none -u u9fs -d ${cfg.exportPath}";
+        ExecStart = "${u9fsPkg}/bin/u9fs -D -a none -u u9fs -d ${cfg.exportPath}";
         # -D           verbose logging to journal
         # -a none      no auth — Tailscale handles trust
         # -u u9fs      run as the u9fs system user
@@ -92,7 +92,7 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
-      u9fs
+      u9fsPkg
       curl
       wget
       unzip

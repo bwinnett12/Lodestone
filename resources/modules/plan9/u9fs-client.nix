@@ -2,7 +2,7 @@
 # Deploy on Locomotive — mounts Island's storage at /storage/Library.
 # Uses systemd automount — safe when Island is offline.
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   cfg = config.services.u9fs-client;
@@ -12,7 +12,7 @@ in {
 
     mountPoint = lib.mkOption {
       type        = lib.types.str;
-      default     = "/storage/Well";
+      default     = "/storage/Orchard";
       description = ''
         Where Island's storage appears on Locomotive.
         Mailroom reads and writes here as if local.

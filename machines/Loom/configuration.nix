@@ -1,6 +1,5 @@
 
 # https://search.nixos.org/options: NixOS manual (`nixos-help`)
-
 { config, lib, pkgs, inputs, nixosCosmicModule, ... }:
 
 {
@@ -47,6 +46,7 @@
         47990  ## 47990 - Moonlight Web UI HTTPS
         48010  ## 48010 - Sunshine Server
 
+
         ### Base
         80
         443
@@ -83,7 +83,7 @@
         enable = true;
       };
 
-      prime = {                          # prime is directly under hardware.nvidia
+      prime = {
         offload.enable = true;
         offload.enableOffloadCmd = true;
         intelBusId = "PCI:0:2:0";   # correct, 00:02.0 → PCI:0:2:0
@@ -200,6 +200,9 @@
     btrfs-progs
     lsof
 
+    libcamera
+    libcamera-qcam
+
     docker-compose
 
     nvidia-container-toolkit
@@ -243,17 +246,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-
-
-
-
-
-
-
-  
-
-
-
-
-
-

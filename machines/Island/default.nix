@@ -10,7 +10,7 @@
     ./drives.nix
     ./configuration.nix
     self.inputs.home-manager.nixosModules.home-manager
-
+    
     #self.nixosModules.mailroom
     self.nixosModules.anki
     self.nixosModules.calibre-server
@@ -25,6 +25,7 @@
     # self.nixosModules.plan9
     self.nixosModules.prometheus
     self.nixosModules.suwayomi
+    self.nixosModules.u9fs-server
     # nixosCosmicModule
   ];
 
@@ -47,10 +48,21 @@
     };
   }; 
 
+  ## TODO - move this to configuration file
+  services.u9fs-server = {
+    enable      = true;
+    tailscaleIP = "100.82.185.26"; # ipv4
+    exportPath  = "/storage/Orchard";
+    port        = 4500;
+  };
+  networking.firewall.allowedTCPPorts = [ 4500 ];
+
+  ## TODO - Move this to a configuration file
   users.groups.media = {
     gid = 995; # Pick a unique ID or let NixOS auto-assign
   };
 
+  ## TODO - Move this to a configuration file
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "root" "tarobutter" ];
@@ -60,6 +72,7 @@
   };
 
   nixpkgs.config = {
+    ## TODO - Move this to a configuration file
     allowUnfree = true;
 
     allowUnfreePredicate = pkg:
@@ -113,6 +126,8 @@
   };
 
 
+
+  ## TODO - Move this to a configuration file
   i18n.defaultLocale = "en_US.UTF-8";
   security.rtkit.enable = true;
 
@@ -135,7 +150,7 @@
 
     libinput.enable = true;
     nginx.enable = true;
-    openssh.enable = true;
+    openssh.enable = true; ## TODO - Move this to a configuration file
     pipewire = {
       enable = true;
       pulse.enable = true;
@@ -143,7 +158,8 @@
       jack.enable = true;
     };
     printing.enable = true;
-    tailscale = {
+    ## TODO - Move this to a configuration file
+    tailscale = { 
       enable = true; 
       permitCertUid = "nginx";
     };
@@ -166,5 +182,6 @@
   };
 
   system.stateVersion = "25.05";
+  ## TODO - Move this to a configuration file
   time.timeZone = "America/Anchorage";
 }

@@ -6,9 +6,11 @@
   ## Setup Jellyfin user
   users = {
     users.jellyfin = {
-    isSystemUser = true;
-    group = "jellyfin";
-    extraGroups = [ "video" "render" ];
+      isSystemUser = true;
+      group = "jellyfin";
+      extraGroups = [ "video" "render" ];
+      createHome = true;
+      home = "/var/lib/jellyfin";
     };
   groups.jellyfin = {};
   };

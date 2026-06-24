@@ -26,7 +26,7 @@
     # self.nixosModules.plan9
     self.nixosModules.prometheus
     self.nixosModules.suwayomi
-    self.nixosModules.u9fs-server
+    self.nixosModules.plan9
     # nixosCosmicModule
   ];
 
@@ -171,6 +171,7 @@
         "pool.ntp.org"
       ];
     };
+    u9fs-server.enable = true;
     udisks2.enable = true;
     xserver = {
       enable = true;

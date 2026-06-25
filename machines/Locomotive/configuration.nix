@@ -88,6 +88,7 @@
         "rustdesk"
         "uinput"
         "go2rtc"
+        "u9fs"
         ];
       packages = with pkgs; [
         tree

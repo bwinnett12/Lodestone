@@ -21,6 +21,7 @@
       "rustdesk"
       "uinput"
       "go2rtc"
+      "u9fs"
     ];
     isNormalUser = true;
     shell = pkgs.bash;

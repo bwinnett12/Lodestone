@@ -109,6 +109,4 @@ in {
       wants = [ "network-online.target" ];
     }];
   };
-
-  #networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
 }

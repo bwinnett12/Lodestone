@@ -43,14 +43,6 @@ in {
       "d ${cfg.exportPath} 0750 u9fs u9fs -"
     ];
 
-    # ── Dedicated service user ───────────────────────────────────────────────
-    users.users.u9fs = {
-      isSystemUser = true;
-      group        = "u9fs";
-      description  = "u9fs 9P file server user";
-    };
-    users.groups.u9fs = {};
-
     # ── Socket unit ──────────────────────────────────────────────────────────
     systemd.sockets.u9fs = {
       description = "u9fs 9P file server socket";

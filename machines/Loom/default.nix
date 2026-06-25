@@ -15,8 +15,12 @@
     self.nixosModules.moonlight
     #self.nixosModules.scarlet2i2
     self.nixosModules.games
+    self.nixosModules.plan9
     # nixosCosmicModule
   ];
+
+
+  services.u9fs-client.enable = true;
 
   ## Profiles:
   home-manager = {

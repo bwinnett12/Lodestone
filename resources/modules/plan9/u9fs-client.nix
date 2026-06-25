@@ -7,6 +7,7 @@
 let
   cfg = config.services.u9fs-client;
 in {
+
   options.services.u9fs-client = {
     enable = lib.mkEnableOption "u9fs 9P client mount";
 
@@ -14,7 +15,7 @@ in {
       type        = lib.types.str;
       default     = "/storage/Orchard";
       description = ''
-        Where Island's storage appears on Locomotive.
+        Where Island's storage appears on the client device.
         Mailroom reads and writes here as if local.
         Created automatically at boot.
       '';
@@ -108,4 +109,6 @@ in {
       wants = [ "network-online.target" ];
     }];
   };
+
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
 }

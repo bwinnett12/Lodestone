@@ -23,6 +23,8 @@
     dataDir  = "/var/lib/jellyfin";
     configDir = "/var/lib/jellyfin/config";
     logDir   = "/var/log/jellyfin";
+
+    ## TODO - Eventually, set this to the current runner. Maybe user.jellyfin.home?
     cacheDir = "/storage/Orchid/shortstack/jellyfin/cache";
   };
 

@@ -19,8 +19,13 @@
     # nixosCosmicModule
   ];
 
+  services.u9fs-client = {
+    enable      = true;
+    tailscaleIP = "100.82.185.26"; # ipv4 of Island
+    mountPoint  = "/storage/Orchard";
+    port        = 4500;
+  };
 
-  services.u9fs-client.enable = true;
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
 
 

@@ -99,5 +99,5 @@ in {
       jq
     ];
   };
-  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
+  # networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
 }

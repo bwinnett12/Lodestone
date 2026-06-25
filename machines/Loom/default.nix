@@ -21,7 +21,7 @@
 
   services.u9fs-client = {
     enable      = true;
-    tailscaleIP = "100.82.185.26"; # ipv4 of Island
+    serverIP = "100.82.185.26"; # ipv4 of Island
     mountPoint  = "/storage/Orchard";
     port        = 4500;
   };

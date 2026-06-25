@@ -56,7 +56,7 @@
     exportPath  = "/storage/Orchard";
     port        = 4500;
   };
-  # networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
 
   ## TODO - Move this to a configuration file
   users.groups.media = {

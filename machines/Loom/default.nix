@@ -21,6 +21,8 @@
 
 
   services.u9fs-client.enable = true;
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
+
 
   ## Profiles:
   home-manager = {

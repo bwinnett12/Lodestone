@@ -39,9 +39,7 @@
     "openssl-1.1.1w"
   ];
 
-
   i18n.defaultLocale = "en_US.UTF-8";
-
   security.rtkit.enable = true;
 
   services = {

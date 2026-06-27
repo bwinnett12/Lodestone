@@ -16,6 +16,7 @@
     self.nixosModules.anki
     self.nixosModules.calibre-server
  #   self.nixosModules.filebrowser
+    self.nixosModules.gitea
     self.nixosModules.go2rtc
     self.nixosModules.grafana
     self.nixosModules.homepage

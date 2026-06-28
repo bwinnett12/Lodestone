@@ -28,10 +28,11 @@
 		HTTP_ADDR = "127.0.0.1";
 		HTTP_PORT = 3030;
         DOMAIN = "island.tail4b1127.ts.net";
-		ROOT_URL = "http://island.tail4b1127.ts.net:3030/";
+		ROOT_URL = "http://island.tail4b1127.ts.net/";
 	  };
 	};
     nginx.virtualHosts.${config.services.gitea.settings.server.DOMAIN} = {
+	  enable = true
 	  listen = [{ addr = "100.82.185.26"; port = 80; }];  # Tailscale only
       locations."/" = {
         proxyPass = "http://127.0.0.1:${toString config.services.gitea.settings.server.HTTP_PORT}";

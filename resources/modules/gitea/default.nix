@@ -31,19 +31,21 @@
 		ROOT_URL = "http://island.tail4b1127.ts.net/";
 	  };
 	};
-    nginx.virtualHosts.${config.services.gitea.settings.server.DOMAIN} = {
+    nginx = {
 	  enable = true;
-	  listen = [{ addr = "100.82.185.26"; port = 80; }];  # Tailscale only
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString config.services.gitea.settings.server.HTTP_PORT}";
-        proxyWebsockets = true;
-        extraConfig = ''
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header X-Forwarded-Proto $scheme;
-        '';
+	  virtualHosts.${config.services.gitea.settings.server.DOMAIN} = {
+	    listen = [{ addr = "100.82.185.26"; port = 80; }];  # Tailscale only
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${toString config.services.gitea.settings.server.HTTP_PORT}";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+          '';
+        };
       };
-    };
+	};
   };
 }

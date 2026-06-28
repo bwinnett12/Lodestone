@@ -26,9 +26,9 @@
 	  };
 	  settings.server = {
 		HTTP_ADDR = "127.0.0.1";
-		HTTP_PORT = 3000;
+		HTTP_PORT = 3030;
         DOMAIN = "island.tail4b1127.ts.net";
-		ROOT_URL = "http://island.tail4b1127.ts.net:3000/";
+		ROOT_URL = "http://island.tail4b1127.ts.net:3030/";
 	  };
 	};
     nginx.virtualHosts.${config.services.gitea.settings.server.DOMAIN} = {

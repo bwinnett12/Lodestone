@@ -5,8 +5,9 @@
 # resources/modules/gitea/default.nix
 { config, pkgs, inputs, ... }:
 {
-  # Gitea configuration
+
   services = {
+	# Postgres for tracking
 	postgresql = {
 	  enable = true;
 	  ensureDatabases = [ "gitea" ];
@@ -16,6 +17,7 @@
   	  }];
 	};
 
+  	# Gitea configuration
 	gitea = {
 	  enable = true;
 	  database = {
@@ -27,14 +29,16 @@
 	  settings.server = {
 		HTTP_ADDR = "127.0.0.1";
 		HTTP_PORT = 3030;
-        DOMAIN = "island.tail4b1127.ts.net";
-		ROOT_URL = "http://island.tail4b1127.ts.net/";
+        DOMAIN = "git.platatoo.com";
+		ROOT_URL = "http://git.platatoo.com/";
 	  };
 	};
+	
+	## Open on 3030
     nginx = {
 	  enable = true;
 	  virtualHosts.${config.services.gitea.settings.server.DOMAIN} = {
-	    listen = [{ addr = "100.82.185.26"; port = 80; }];  # Tailscale only
+	    listen = [{ addr = "0.0.0.0"; port = 80; }];  # Tailscale only
         locations."/" = {
           proxyPass = "http://127.0.0.1:${toString config.services.gitea.settings.server.HTTP_PORT}";
           proxyWebsockets = true;

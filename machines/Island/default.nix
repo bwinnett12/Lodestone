@@ -3,6 +3,7 @@
   pkgs,
   self,
   lib,
+  inputs,
   ...
 }: 
 { 
@@ -29,6 +30,9 @@
     self.nixosModules.suwayomi
     self.nixosModules.plan9
     # nixosCosmicModule
+
+
+    self.nixosModules.hosts
   ];
 
   ## Profiles:

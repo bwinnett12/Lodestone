@@ -17,6 +17,8 @@
     self.nixosModules.games
     self.nixosModules.plan9
     # nixosCosmicModule
+
+    self.nixosModules.hosts
   ];
 
   services.u9fs-client = {

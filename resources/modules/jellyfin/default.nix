@@ -35,7 +35,6 @@
     };
   };
 
-
   ## Setup Jellyfin user
   users = {
     users.jellyfin = {
@@ -51,7 +50,7 @@
   ### Enable Render and video groups
   systemd = {
     services.jellyfin.serviceConfig = {
-      DeviceAllow = [ "/dev/dri/renderD128" "rw" ];
+      DeviceAllow = [ "/dev/dri/renderD128 rw" ];
       SupplementaryGroups = [ "video" "render" ];
     };
 
@@ -59,7 +58,7 @@
       "d /var/lib/jellyfin           0700 jellyfin jellyfin -"
       "d /var/lib/jellyfin/config    0700 jellyfin jellyfin -"
       "d /var/log/jellyfin           0700 jellyfin jellyfin -"
-      "d /storage/Orchid/shortstack/jellyfin/cache  0700 jellyfin jellyfin -"
+      # "d /storage/Orchid/shortstack/jellyfin/cache  0700 jellyfin jellyfin -"
     ];
 
   };  

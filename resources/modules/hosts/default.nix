@@ -10,7 +10,7 @@
 
     # Loom services - Off temporarily. Now on Loom
     100.83.209.81  gitea.platatoo.com
-    100.83.209.81  app.platatoo.com
+    100.83.209.81  ai.platatoo.com
     100.83.209.81  grafana.platatoo.com
     100.83.209.81  jellyfin.platatoo.com
     100.83.209.81  anki.platatoo.com

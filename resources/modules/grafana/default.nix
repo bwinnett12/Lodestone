@@ -19,6 +19,7 @@
   services.nginx = {
     enable = true;
     virtualHosts.${config.services.grafana.settings.server.domain} = {
+      listen = [{ addr = "100.83.209.81"; port = 80; }];  # Tailscale only
       locations."/" = {
           proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}";
           proxyWebsockets = true;

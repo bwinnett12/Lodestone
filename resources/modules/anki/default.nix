@@ -31,7 +31,7 @@
   services.nginx = {
     enable = true;
     virtualHosts."anki.platatoo.com" = {
-      listen = [{ addr = "100.82.185.26"; port = 80; }];
+      listen = [{ addr = "100.83.209.81"; port = 80; }];
       locations."/" = {
           proxyPass = "http://127.0.0.1:3111";
           proxyWebsockets = true;
@@ -45,8 +45,7 @@
     };
   };
 
-
-    ## Setup Anki user
+  ## Setup Anki user
   users = {
     users.anki = {
       isSystemUser = true;

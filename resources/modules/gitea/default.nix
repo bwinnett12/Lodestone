@@ -38,7 +38,7 @@
     nginx = {
 	  enable = true;
 	  virtualHosts.${config.services.gitea.settings.server.DOMAIN} = {
-	    listen = [{ addr = "0.0.0.0"; port = 80; }];  # Tailscale only
+	    listen = [{ addr = "100.83.209.81"; port = 80; }];  # Tailscale only
         locations."/" = {
           proxyPass = "http://127.0.0.1:${toString config.services.gitea.settings.server.HTTP_PORT}";
           proxyWebsockets = true;

@@ -5,16 +5,36 @@
 {
 
   # Enable the Jellyfin service
-  services.jellyfin = {
-    enable = true;
-    openFirewall = true;
+  services = {
+    jellyfin = {
+      enable = true;
+      openFirewall = true;
 
-    dataDir  = "/var/lib/jellyfin";
-    configDir = "/var/lib/jellyfin/config";
-    logDir   = "/var/log/jellyfin";
+      dataDir  = "/var/lib/jellyfin";
+      configDir = "/var/lib/jellyfin/config";
+      logDir   = "/var/log/jellyfin";
 
-    ## TODO - Eventually, set this to the current runner. Maybe user.jellyfin.home?
-    cacheDir = "/storage/Orchid/shortstack/jellyfin/cache";
+      ## TODO - Eventually, set this to the current runner. Maybe user.jellyfin.home?
+      # cacheDir = "/storage/Orchid/shortstack/jellyfin/cache";
+    };
+
+    # nginx reverse proxy
+    nginx = {
+      enable = true;
+      virtualHosts."jellyfin.platatoo.com" = {
+        listen = [{ addr = "100.82.185.26"; port = 80; }];
+        locations."/" = {
+            proxyPass = "http://127.0.0.1:8096";
+            proxyWebsockets = true;
+            extraConfig = ''
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto $scheme;
+            '';
+        };
+      };
+    };
   };
 
 
@@ -44,24 +64,7 @@
       "d /storage/Orchid/shortstack/jellyfin/cache  0700 jellyfin jellyfin -"
     ];
 
-  };
-
-  # nginx reverse proxy
-  services.nginx = {
-    enable = true;
-    virtualHosts."jellyfin.platatoo.com" = {
-      locations."/" = {
-          proxyPass = "http://127.0.0.1:8096";
-          proxyWebsockets = true;
-          extraConfig = ''
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-          '';
-      };
-    };
-  };
+  };  
 
   ## Infrastructure
   environment.systemPackages = with pkgs; [

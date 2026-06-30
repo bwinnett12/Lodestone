@@ -12,6 +12,7 @@
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
     self.inputs.home-manager.nixosModules.home-manager
     self.nixosModules.prometheus
+
     self.nixosModules.moonlight
     #self.nixosModules.scarlet2i2
     self.nixosModules.games
@@ -19,6 +20,10 @@
     # nixosCosmicModule
 
     self.nixosModules.hosts
+
+    self.nixosModules.grafana
+    self.nixosModules.localai
+    self.nixosModules.jellyfin
   ];
 
   services.u9fs-client = {

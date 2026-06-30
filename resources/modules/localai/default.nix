@@ -27,7 +27,7 @@
       ## TODO - Switch to localai or shortstack user
       User = "tarobutter";
       # Set the working directory to the directory of the compose file
-      WorkingDirectory = "/storage/Orchid/shortstack/localai/"; 
+      WorkingDirectory = "/storage/shortstack/localai/"; 
       Restart = "on-failure";
       RestartSec = "5s";
       };

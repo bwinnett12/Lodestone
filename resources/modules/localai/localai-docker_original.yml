@@ -12,8 +12,8 @@ services:
     environment:
       - DEBUG=true
     volumes:
-    - /storage/shortstack/localai/models:/models:cached
-    - /storage/shortstack/localai/backends:/backends:cached
+    - /storage/Orchid/shortstack/localai/models:/models:cached
+    - /storage/Orchid/shortstack/localai/backends:/backends:cached
 
     # For NVIDIA GPUs with standalone Docker:
     devices:

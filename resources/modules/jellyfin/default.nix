@@ -1,9 +1,7 @@
 #### Jellyfin server
 # resources/modules/jellyfin/default.nix
 { config, pkgs, ... }:
-
 {
-
   # Enable the Jellyfin service
   services = {
     jellyfin = {
@@ -22,7 +20,7 @@
     nginx = {
       enable = true;
       virtualHosts."jellyfin.platatoo.com" = {
-        listen = [{ addr = "100.82.185.26"; port = 80; }];
+        listen = [{ addr = "100.83.209.81"; port = 80; }];
         locations."/" = {
             proxyPass = "http://127.0.0.1:8096";
             proxyWebsockets = true;

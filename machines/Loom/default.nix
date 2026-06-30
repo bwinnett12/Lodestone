@@ -38,6 +38,11 @@
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
 
 
+  systemd.services.nginx = {
+    after = [ "tailscaled.service" ];
+    wants = [ "tailscaled.service" ];
+  };
+
   ## Profiles:
   home-manager = {
     useGlobalPkgs = true;

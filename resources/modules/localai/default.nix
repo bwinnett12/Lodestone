@@ -1,21 +1,17 @@
 #### ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
 #### Localai module through docker
-
 { config, pkgs, inputs, ... }:
-
 {
   systemd.services.localai-docker = {
 
       ### LocalAI
       description = "LocalAI via Docker Compose";
 
-
       # Wait for network and your storage mount to be ready
       after = [ "network.target" "docker.service" ];
       
       requires = [ "docker.service" ];
       wantedBy = [ "multi-user.target" ];
-
 
     serviceConfig = {
       #ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f ./localai-docker.yml up"; 
@@ -37,11 +33,24 @@
   users.users.localai = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ];
-    packages = with pkgs; [
-      tree
-    ];
-};
+    packages = with pkgs; [ tree ];
+  };
 
+  # nginx reverse proxy
+  services.nginx = {
+    enable = true;
+    virtualHosts."ai.platatoo.com" = {
+      listen = [{ addr = "100.83.209.81"; port = 80; }];
+      locations."/" = {
+          proxyPass = "http://127.0.0.1:8090";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+          '';
+      };
+    };
+  };
 }
-
-

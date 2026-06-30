@@ -3,17 +3,6 @@
 { config, pkgs, ... }:
 
 {
-  ## Setup Jellyfin user
-  users = {
-    users.jellyfin = {
-      isSystemUser = true;
-      group = "jellyfin";
-      extraGroups = [ "video" "render" ];
-      createHome = true;
-      home = "/var/lib/jellyfin";
-    };
-  groups.jellyfin = {};
-  };
 
   # Enable the Jellyfin service
   services.jellyfin = {
@@ -29,6 +18,19 @@
   };
 
 
+  ## Setup Jellyfin user
+  users = {
+    users.jellyfin = {
+      isSystemUser = true;
+      group = "jellyfin";
+      extraGroups = [ "video" "render" ];
+      createHome = true;
+      home = "/var/lib/jellyfin";
+    };
+  groups.jellyfin = {};
+  };
+
+  ### Enable Render and video groups
   systemd = {
     services.jellyfin.serviceConfig = {
       DeviceAllow = [ "/dev/dri/renderD128" "rw" ];
@@ -44,17 +46,20 @@
 
   };
 
-  ## Nginx
-  services.nginx.virtualHosts."jellyfin.${config.networking.hostName}" = {
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:8096";
-      proxyWebsockets = true;
-      extraConfig = ''
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-      '';
+  # nginx reverse proxy
+  services.nginx = {
+    enable = true;
+    virtualHosts."jellyfin.platatoo.com" = {
+      locations."/" = {
+          proxyPass = "http://127.0.0.1:8096";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+          '';
+      };
     };
   };
 

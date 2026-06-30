@@ -1,9 +1,7 @@
 #### ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
 #### Anki via Docker Compose
 { config, pkgs, ... }:
-
 {
-  virtualisation.docker.enable = true;
 
   systemd.services.anki-docker = {
     description = "Anki via Docker Compose";
@@ -27,36 +25,23 @@
     source = ./anki-docker.yml;
     mode = "0644";
   };
+  virtualisation.docker.enable = true;
 
-  services.nginx.virtualHosts."anki.${config.networking.hostName}" = {
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:3111";
-      proxyWebsockets = true;
-      extraConfig = ''
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-      '';
-    };
-  };
-
-
-    # nginx reverse proxy
-    services.nginx = {
-      enable = true;
-      virtualHosts."anki.platatoo.com" = {
-        listen = [{ addr = "100.82.185.26"; port = 80; }];
-        locations."/" = {
-            proxyPass = "http://127.0.0.1:8096";
-            proxyWebsockets = true;
-            extraConfig = ''
-              proxy_set_header Host $host;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header X-Forwarded-Proto $scheme;
-            '';
-        };
+  # nginx reverse proxy
+  services.nginx = {
+    enable = true;
+    virtualHosts."anki.platatoo.com" = {
+      listen = [{ addr = "100.82.185.26"; port = 80; }];
+      locations."/" = {
+          proxyPass = "http://127.0.0.1:3111";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+          '';
       };
     };
+  };
 }

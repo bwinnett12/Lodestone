@@ -12,11 +12,13 @@
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
     self.inputs.home-manager.nixosModules.home-manager
     self.nixosModules.prometheus
+    self.nixosModules.anki
 
     self.nixosModules.moonlight
     #self.nixosModules.scarlet2i2
     self.nixosModules.games
     self.nixosModules.plan9
+    self.nixosModules.gitea
     # nixosCosmicModule
 
     self.nixosModules.hosts

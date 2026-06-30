@@ -170,6 +170,9 @@
       "wheel"
       "docker"
       "surface-control"
+      "anki"
+      "video"
+      "render"
     ];
     isNormalUser = true;
     shell = pkgs.bash;

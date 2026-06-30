@@ -14,7 +14,7 @@
 	  ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /etc/anki/docker-compose.yml down";
       ## TODO - Switch to anki or shortstack user
       User = "root";
-      WorkingDirectory = "/storage/Orchid/shortstack/anki";
+      WorkingDirectory = "/storage/shortstack/anki";
       Restart = "on-failure";
       RestartSec = "5s";
     };
@@ -43,5 +43,18 @@
           '';
       };
     };
+  };
+
+
+    ## Setup Anki user
+  users = {
+    users.anki = {
+      isSystemUser = true;
+      group = "anki";
+      extraGroups = [ "docker" "wheel" ];
+      createHome = true;
+      home = "/var/lib/anki";
+    };
+  groups.anki = {};
   };
 }

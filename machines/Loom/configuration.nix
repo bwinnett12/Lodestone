@@ -11,7 +11,7 @@
 
     networkmanager.enable = true;
     useDHCP = false;
-    interfaces.enp0s31f6.useDHCP = true; # Change this interface name if Loom's physical port is different!
+    # interfaces.enp0s31f6.useDHCP = true; # Change this interface name if Loom's physical port is different!
 
     firewall = {
       enable = true;
@@ -67,15 +67,8 @@
       enable32Bit = true;
     };
 
-    nvidia-container-toolkit.enable = true;
-
     nvidia = {
-
-      # Use the stable driver package
       package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-      # Enable modesetting for better Wayland support and overall display.
-      # Essential for modern NVIDIA setups.
       modesetting.enable = true;
       open = false;
       nvidiaSettings = true;
@@ -90,31 +83,34 @@
         nvidiaBusId = "PCI:2:0:0";  # was PCI:1:0:0, correct is 02:00.0 → PCI:2:0:0
       };
     };
-
+    nvidia-container-toolkit.enable = true;
   };
 
   powerManagement.cpuFreqGovernor = "powersave";  # or "schedutil"
 
   # TLP or auto-cpufreq for more nuanced control
-  services.auto-cpufreq.enable = true;
-  services.auto-cpufreq.settings = {
-    battery = {
-      governor = "powersave";
-      turbo = "never";
+
+  services = {
+    auto-cpufreq = {
+      enable = true;
+      settings = {
+        battery = {
+          governor = "powersave";
+          turbo = "never";
+        };
+        charger = {
+          governor = "performance";
+          turbo = "auto";
+        };
+      };
     };
-    charger = {
-      governor = "performance";
-      turbo = "auto";
-    };
+    colord.enable = true;
+    power-profiles-daemon.enable = false;
+    thermald.enable = true;
+    xserver.wacom.enable = true;
   };
 
-  # Thermald helps prevent throttling on battery
-  services.thermald.enable = true;
-  services.colord.enable = true;
   fonts.fontconfig.subpixel.rgba = "none";  # for HiDPI, subpixel is counterproductive
-  services.xserver.wacom.enable = true;  # fallback for some stylus configs
-
-  services.power-profiles-daemon.enable = false;
 
   virtualisation.docker = {
     enable = true;

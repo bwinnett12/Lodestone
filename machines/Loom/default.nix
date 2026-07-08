@@ -42,8 +42,8 @@
 
 
   systemd.services.nginx = {
-    after = [ "tailscaled.service" ];
-    wants = [ "tailscaled.service" ];
+    after = [ "tailscaled.service" "network-online.target" ];
+    wants = [ "tailscaled.service" "network-online.target" ];
   };
 
   ## Profiles:
@@ -139,7 +139,6 @@
   #  lidSwitchExternalPower = "ignore";
   #  lidSwitchBattery = "ignore";
   #};
-
 
     nginx.enable = true;
     openssh.enable = true;

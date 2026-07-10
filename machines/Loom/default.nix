@@ -51,8 +51,7 @@
   };
 
   ecosystem.users.tarobutter.enable = true;
-  profiles.shortstack.enable = true;
-
+  
   nixpkgs.config = {
     # allowUnfree = true;
 

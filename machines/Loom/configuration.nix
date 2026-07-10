@@ -151,30 +151,6 @@
   };
 
 
-
-
-
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ## User groups
-  users.users.tarobutter = {
-    description = "Tarot D. Butter";
-    extraGroups = [
-      "input"
-      "networkmanager"
-      "systemd-journal"
-      "wheel"
-      "docker"
-      "surface-control"
-      "anki"
-      "video"
-      "render"
-    ];
-    isNormalUser = true;
-    shell = pkgs.bash;
-  };
-
-
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Programs
   

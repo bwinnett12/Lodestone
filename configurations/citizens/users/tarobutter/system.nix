@@ -4,5 +4,6 @@
     description = "Tarot D. Butter";
     extraGroups = [ "networkmanager" "systemd-journal" "wheel" "docker" "input" "video" "render" ];
     homeManagerModule = ./home.nix;
+    upgraded = true;
   };
 }

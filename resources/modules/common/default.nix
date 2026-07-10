@@ -6,8 +6,10 @@
 
     self.ecosystem.citizens.humans
     self.ecosystem.citizens.functionaries
-    self.nixosModules.hosts
+    self.ecosystem.citizens.upgraded
 
+    self.nixosModules.hosts
+  
     self.inputs.home-manager.nixosModules.home-manager
   ];
 

@@ -1,11 +1,10 @@
 # resources/modules/common/default.nix
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, self, ... }: {
 
   imports = [
 	./networking.nix
 	./exports.nix
 	self.ecosystem.citizens.functionaries
-
 	self.nixosModules.hosts ## TODO - Replace this
   ];
 

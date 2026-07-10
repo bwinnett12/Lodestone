@@ -7,6 +7,8 @@
 	imports = [
 		./modules
 		./citizens
+		./citizens/exports.nix
 		#./hardware
+		
 	];
 }

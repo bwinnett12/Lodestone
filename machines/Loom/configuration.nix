@@ -138,7 +138,6 @@
     #ipts.enable = true;      # touchscreen + stylus (IPTS protocol)
     #surface-control.enable = true;  # performance mode control CLI
     kernelVersion = "stable";
-    ipts.enable = true;
   };
   
     # Keep your increased swap and zramSwap settings
@@ -150,6 +149,8 @@
     memoryPercent = 50;
     priority = 100;
   };
+
+  services.iptsd.enable = true;   # replaces hardware.microsoft-surface.ipts.enable
 
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

@@ -1,4 +1,4 @@
-# configurations/users/tarobutter/system.nix
+# configurations/citizens/users/tarobutter/system.nix
 { ... }: {
   ecosystem.users.tarobutter = {
     description = "Tarot D. Butter";

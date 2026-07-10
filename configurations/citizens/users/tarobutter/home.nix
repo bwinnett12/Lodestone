@@ -1,7 +1,7 @@
-# configurations/users/tarobutter/home.nix
+# configurations/citizens/users/tarobutter/home.nix
 { config, pkgs, lib, ... }: {
   imports = [
-    ../../general
+    ../../../general
   ];
 
   profiles = {

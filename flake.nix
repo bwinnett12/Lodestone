@@ -58,6 +58,7 @@ outputs = {
         ./resources
         ./machines
         ./shells
+        ./configurations
       ];
     };
 }

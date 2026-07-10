@@ -6,7 +6,7 @@
 }: {
 	imports = [
 		./modules
-		./users
+		./citizens
 		#./hardware
 	];
 }

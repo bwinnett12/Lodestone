@@ -2,7 +2,7 @@
 { ... }: {
   imports = [
     ./general
-    ./citizens
+    # ./citizens
     ./shortstack
   ];
 }

@@ -3,6 +3,7 @@
 
   imports = [
     ./networking.nix
+    self.ecosystem.citizens.citizens
     self.ecosystem.citizens.functionaries
     self.nixosModules.hosts
   ];

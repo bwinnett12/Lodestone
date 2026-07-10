@@ -1,9 +1,9 @@
 # resources/modules/common/default.nix
-{ config, lib, pkgs, self, ... }: {
+{ config, lib, pkgs, self, inputs, ... }: {
 
   imports = [
     ./networking.nix
-    
+
     self.ecosystem.citizens.humans
     self.ecosystem.citizens.functionaries
     self.nixosModules.hosts

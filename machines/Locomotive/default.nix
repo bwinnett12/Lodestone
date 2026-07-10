@@ -1,6 +1,6 @@
 ## machines/Locomotive/default.nix
 {
-  inputs, pkgs, self, ...
+  inputs, pkgs, self, lib, ...
 }: 
 {
   imports = [

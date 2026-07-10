@@ -28,6 +28,8 @@
     self.nixosModules.jellyfin
   ];
 
+  nixpkgs.overlays = [ inputs.linux-surface.overlays.default ];
+
   services.u9fs-client = {
     enable      = true;
     serverIP    = "100.82.185.26"; # ipv4 of Island

@@ -5,8 +5,10 @@
     avahi = {
       enable = true;
       nssmdns4 = true;
-      publish.enable = true;
-      publish.addresses = true;
+      publish = {
+        enable = true;
+        addresses = true;
+      };
     };
     nginx.enable = true;
     openssh.enable = true;

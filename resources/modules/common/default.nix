@@ -2,10 +2,10 @@
 { config, lib, pkgs, self, ... }: {
 
   imports = [
-	./networking.nix
-	./exports.nix
-	self.ecosystem.citizens.functionaries
-	self.nixosModules.hosts ## TODO - Replace this
+    ./networking.nix
+    ./exports.nix
+    self.ecosystem.citizens.functionaries
+    self.nixosModules.hosts
   ];
 
   ## General Nix settings
@@ -14,13 +14,31 @@
     trusted-users = [ "root" "tarobutter" ];
   };
   nixpkgs.config.allowUnfree = true;
+  security.rtkit.enable = true;
 
-  ## Common settings that I apply to each device
   i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "America/Anchorage";
 
+  services = {
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+      alsa.enable = true;
+      jack.enable = true;
+    };
+    
+    printing.enable = true;
+    udisks2.enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
-	mangohud
-	protonup-qt
+    coreutils
+    git
+    neofetch
+    nettools
+    openssl
+    openssh
+    vim
+    wget
   ];
 }

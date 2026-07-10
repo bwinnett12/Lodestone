@@ -107,17 +107,11 @@
 
   console.enable = false;
   environment.systemPackages = with pkgs; [
-    git
     libraspberrypi
     raspberrypi-eeprom
 	  podman
 
     wakeonlan
-
-    vim
-    wget
-
-    openssl
     nettools
     rustscan
 

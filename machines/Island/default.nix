@@ -70,9 +70,6 @@
   };
 
   nixpkgs.config = {
-    ## TODO - Move this to a configuration file
-    allowUnfree = true;
-
     allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "nvidia-x11"
@@ -123,52 +120,15 @@
     };
   };
 
-
-
-  ## TODO - Move this to a configuration file
-  i18n.defaultLocale = "en_US.UTF-8";
-  security.rtkit.enable = true;
-
   services = {
-
     # Enable the Cosmic Desktop Environment
     # services.desktopManager.cosmic.enable = true;
     # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
     desktopManager.gnome.enable = true; 
     displayManager.gdm.enable = true;
 
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      publish = {
-        enable = true;
-        addresses = true;
-      };
-    };
-
     libinput.enable = true;
-    nginx.enable = true;
-    openssh.enable = true; ## TODO - Move this to a configuration file
-    pipewire = {
-      enable = true;
-      pulse.enable = true;
-      alsa.enable = true;
-      jack.enable = true;
-    };
-    printing.enable = true;
-    ## TODO - Move this to a configuration file
-    tailscale = { 
-      enable = true; 
-      permitCertUid = "nginx";
-    };
-    timesyncd = {
-      enable = true;
-      servers = [
-        "time.cloudflare.com"
-        "pool.ntp.org"
-      ];
-    };
-    udisks2.enable = true;
+
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
@@ -180,6 +140,4 @@
   };
 
   system.stateVersion = "25.05";
-  ## TODO - Move this to a configuration file
-  time.timeZone = "America/Anchorage";
 }

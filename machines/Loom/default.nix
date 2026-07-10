@@ -89,8 +89,7 @@
       systemd-boot.enable = true;
     };
   };
-  i18n.defaultLocale = "en_US.UTF-8";
-  security.rtkit.enable = true;
+
   services = {
     
     # Enable the Cosmic Desktop Environment
@@ -114,14 +113,6 @@
   #  lidSwitchBattery = "ignore";
   #};
 
-    pipewire = {
-      enable = true;
-      pulse.enable = true;
-      alsa.enable = true;
-      jack.enable = true;
-    };
-    printing.enable = true;
-    udisks2.enable = true;
 
     xserver = {
       enable = true;

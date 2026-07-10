@@ -5,6 +5,7 @@
   ...
 }: {
 	imports = [
+		./ecosystem.nix
 		./paths.nix
 	];
 }

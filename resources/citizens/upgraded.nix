@@ -1,6 +1,13 @@
 # resources/citizens/upgraded.nix
 { config, lib, ... }:
 {
+
+  options.ecosystem.upgradedGroups = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    default = [];
+    description = "Elevated/optional groups available on this machine, for accounts with `upgraded = true`.";
+  };
+
   # The full set of elevated/optional groups a machine *might* have.
   # Expands to only the ones that actually exist on this machine.
   ecosystem.upgradedGroups =

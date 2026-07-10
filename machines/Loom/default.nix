@@ -12,7 +12,6 @@
     self.ecosystem.citizens
 
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
-    self.inputs.home-manager.nixosModules.home-manager
     self.nixosModules.prometheus
     self.nixosModules.anki
 
@@ -20,25 +19,20 @@
     #self.nixosModules.scarlet2i2
 
     self.nixosModules.frontpage
-
     self.nixosModules.games
     self.nixosModules.plan9
     self.nixosModules.gitea
     # nixosCosmicModule
-
     # self.nixosModules.hosts
 
     self.nixosModules.grafana
     self.nixosModules.localai
     self.nixosModules.jellyfin
-
-
-
   ];
 
   services.u9fs-client = {
     enable      = true;
-    serverIP = "100.82.185.26"; # ipv4 of Island
+    serverIP    = "100.82.185.26"; # ipv4 of Island
     mountPoint  = "/storage/Orchard";
     port        = 4500;
   };

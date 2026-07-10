@@ -3,9 +3,12 @@
 
   imports = [
     ./networking.nix
+    
     self.ecosystem.citizens.humans
     self.ecosystem.citizens.functionaries
     self.nixosModules.hosts
+
+    self.inputs.home-manager.nixosModules.home-manager
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";

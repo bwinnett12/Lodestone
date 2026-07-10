@@ -23,8 +23,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = 
-      lib.optionals cfg.rust [ pkgs.cargo ]
-	  ++ lib.optionals cfg.julia [ pkgs.julia ]
-      ++ [ pkgs.alejandra ];
+         lib.optionals cfg.rust  [ pkgs.cargo ]
+	    ++ lib.optionals cfg.julia [ pkgs.julia ]
+      ++                         [ pkgs.alejandra ];
   };
 }

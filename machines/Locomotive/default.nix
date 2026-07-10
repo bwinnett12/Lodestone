@@ -19,15 +19,14 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit self; };
+    users.tarobutter = {
+      profiles.gaming.enable = lib.mkForce false;
+      profiles.communications.enable = lib.mkForce false;
+      profiles.shortstack.enable = false;
+    };
   };
 
   ecosystem.users.tarobutter.enable = true;
-  profiles.shortstack.enable = false;
-  profiles.communications = {
-    enable = false;
-  };
-  profiles.gaming.enable = false;
-
 
   nix.settings.trusted-users = [ "root" "tarobutter" ];
   hardware.enableRedistributableFirmware = true;

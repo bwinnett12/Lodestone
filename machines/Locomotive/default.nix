@@ -22,7 +22,8 @@
     users.tarobutter = {
       profiles.gaming.enable = lib.mkForce false;
       profiles.communications.enable = lib.mkForce false;
-      profiles.shortstack.enable = false;
+      profiles.development.enable = lib.mkForce false;
+      # profiles.shortstack.enable = false;
     };
   };
 

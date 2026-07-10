@@ -28,8 +28,6 @@
     self.nixosModules.jellyfin
   ];
 
-  # nixpkgs.overlays = [ inputs.linux-surface.overlays.default ];
-
   services.u9fs-client = {
     enable      = true;
     serverIP    = "100.82.185.26"; # ipv4 of Island
@@ -70,8 +68,6 @@
       "openssl-1.1.1w"
     ];
   };
-  #config.microsoft-surface.surface-control.enable = true;
-  services.iptsd.enable = true;
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ####### Boot settings
@@ -88,40 +84,52 @@
     };
   };
 
-  services = {
-    
-    # Enable the Cosmic Desktop Environment
-    # services.desktopManager.cosmic.enable = true;
-    # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
-    desktopManager.gnome.enable = true; 
-    displayManager.gdm.enable = true;
 
-    ## Crucial for lilyinstarlight/nixos-cosmic for faster builds:
-    #nix.settings = {
-    #  substituters = [ "https://cosmic.cachix.org/" ];
-    #  trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-    # };
+  services.system76-scheduler.enable = true;
+    environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 
-    # Enable touchpad support (enabled default in most desktopManager).
-    libinput.enable = true;
+ services = {
 
-  # Systemd login configuration
-  #  logind = {
-  #  lidSwitchExternalPower = "ignore";
-  #  lidSwitchBattery = "ignore";
-  #};
+  # Enable the Cosmic Desktop Environment
+  displayManager.cosmic-greeter.enable = true;
+  desktopManager.cosmic.enable = true;
 
+  #desktopManager.gnome.enable = true; 
+  #displayManager.gdm.enable = true;
 
-    xserver = {
-      enable = true;
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-      videoDrivers = [ "nvidia" ];
+  ## Crucial for lilyinstarlight/nixos-cosmic for faster builds:
+  #nix.settings = {
+  #  substituters = [ "https://cosmic.cachix.org/" ];
+  #  trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+  # };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  libinput.enable = true;
+  iptsd.enable = true;
+
+  logind = {
+    lidSwitch = "suspend";              # closing lid while on battery → sleep, standard laptop behavior
+    lidSwitchExternalPower = "ignore";  # plugged in at a desk → stays awake even with lid closed, useful for a 2-in-1 docked with an external display, or just running background tasks
+    lidSwitchDocked = "ignore";         # if you ever use a dock/external monitor setup
+  };
+
+  xserver = {
+    enable = true;
+    xkb = {
+      layout = "us";
+      variant = "";
     };
+    videoDrivers = [ "nvidia" ];
+  };
   };
   system.stateVersion = "25.05";
   hardware.enableRedistributableFirmware = true;
+
+  systemd.targets = {
+    sleep.enable = true;
+    suspend.enable = true;
+    hibernate.enable = true;
+    hybrid-sleep.enable = true;
+  };
 
 }

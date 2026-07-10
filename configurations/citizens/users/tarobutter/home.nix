@@ -5,22 +5,21 @@
   ];
 
   profiles = {
-    gaming = {
-      enable = true;
-      pokemmo = true;
-      runescape = true;
-    };
     communications = {
       enable = true;
       professional = true;
       gaming = true;
     };
-
-	development = {
-		enable = true;
-		rust = true;
-		julia = true;
-	};
+    development = {
+      enable = true;
+      rust = true;
+      julia = true;
+    };
+    gaming = {
+      enable = true;
+      pokemmo = true;
+      runescape = true;
+    };
   };
 
   programs = {
@@ -36,10 +35,18 @@
 
     ssh = {
       enable = true;
+      enableDefaultConfig = false;
+
+      matchBlocks."*" = {
+        # re-declare whatever defaults you actually want to keep, e.g.:
+        forwardAgent = false;
+        addKeysToAgent = "no";
+        compression = false;
+      };
       matchBlocks."github.com" = {
         hostname = "github.com";
         user = "git";
-        identityFile = "~/.ssh/id_ed25519.pub";
+        identityFile = "~/.ssh/id_ed25519";
       };
     };
     home-manager.enable = true;

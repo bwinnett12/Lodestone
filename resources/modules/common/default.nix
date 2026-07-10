@@ -8,6 +8,9 @@
     self.nixosModules.hosts
   ];
 
+  i18n.defaultLocale = "en_US.UTF-8";
+  time.timeZone = "America/Anchorage";
+
   ## General Nix settings
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
@@ -15,9 +18,6 @@
   };
   nixpkgs.config.allowUnfree = true;
   security.rtkit.enable = true;
-
-  i18n.defaultLocale = "en_US.UTF-8";
-  time.timeZone = "America/Anchorage";
 
   services = {
     pipewire = {

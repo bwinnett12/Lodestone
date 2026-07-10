@@ -71,7 +71,7 @@
     ];
   };
   #config.microsoft-surface.surface-control.enable = true;
-  microsoft-surface.ipts.enable = true;
+  services.iptsd.enable = true;
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ####### Boot settings

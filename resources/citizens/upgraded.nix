@@ -10,7 +10,7 @@
 
   # The full set of elevated/optional groups a machine *might* have.
   # Expands to only the ones that actually exist on this machine.
-  ecosystem.upgradedGroups =
+  config.ecosystem.upgradedGroups =
     lib.optional (config.users.groups ? surface-control) "surface-control"
     ++ lib.optional (config.users.groups ? anki) "anki"
     ++ lib.optional (config.users.groups ? docker) "docker"

@@ -28,10 +28,11 @@
 
     ### Mailroom
     mailroom = {
-      url = "github:bwinnett12/Mailroom";
+      url = "git+ssh://git@github.com/bwinnett12/Mailroom.git";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.rust-overlay.follows = "rust-overlay";
+      flake = true; 
     };
 
     rust-overlay = {

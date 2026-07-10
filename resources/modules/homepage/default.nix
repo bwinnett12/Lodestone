@@ -1,3 +1,4 @@
+# resources/modules/homepage/default.nix
 #### ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
 #### Home page through docker
 
@@ -6,16 +7,12 @@
 {
   systemd.services.homepage-docker = {
 
-	### LocalAI
-	description = "Homepage via Docker Compose";
-
-
 	# Wait for network and your storage mount to be ready
+	description = "Homepage via Docker Compose";
 	after = [ "network.target" "docker.service" ];
 	
 	requires = [ "docker.service" ];
 	wantedBy = [ "multi-user.target" ];
-
 
 	serviceConfig = {
 	  # Replace the path with wherever you put your docker-compose.yml
@@ -27,21 +24,29 @@
 	  User = "root";
 
 	  # Set the working directory to the directory of the compose file
-	  WorkingDirectory = "/storage/Orchid/shortstack/homepage/"; 
+	  WorkingDirectory = "/storage/shortstack/homepage/"; 
 	  Restart = "on-failure";
 	  RestartSec = "5s";
 	};
-
   };
-  # Define a user account. Don't forget to set a password with ‘passwd’
-  #users.users.localai = {
-  #	isNormalUser = true;
-  #	extraGroups = [ "wheel" "docker" ];
-  #	packages = with pkgs; [
-  #			tree
-  #	];
-# };
-      
+
+  # nginx reverse proxy
+  services.nginx = {
+    enable = true;
+    virtualHosts."platatoo.com" = {
+      listen = [{ addr = "100.83.209.81"; port = 80; }];
+      locations."/" = {
+          proxyPass = "http://127.0.0.1:8090";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+          '';
+      };
+    };
+  };
 }
 
 

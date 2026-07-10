@@ -14,6 +14,7 @@
         ];
         specialArgs = {
           inherit inputs self;
+          lodestoneRoot = self;
         };
       };
   in {

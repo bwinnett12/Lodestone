@@ -21,7 +21,7 @@
 	  ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /home/tarobutter/Lodestone/resources/modules/homepage/homepage-docker.yml down";
 
 	  ## TODO - Switch to homepage or shortstack user
-	  User = "root";
+	  User = "pamona";
 
 	  # Set the working directory to the directory of the compose file
 	  WorkingDirectory = "/storage/shortstack/homepage/"; 
@@ -33,10 +33,10 @@
   # nginx reverse proxy
   services.nginx = {
     enable = true;
-    virtualHosts."platatoo.com" = {
+    virtualHosts."home.platatoo.com" = {
       listen = [{ addr = "100.83.209.81"; port = 80; }];
       locations."/" = {
-          proxyPass = "http://127.0.0.1:8090";
+          proxyPass = "http://127.0.0.1:3000";
           proxyWebsockets = true;
           extraConfig = ''
             proxy_set_header Host $host;

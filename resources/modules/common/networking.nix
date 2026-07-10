@@ -26,4 +26,12 @@
     after = [ "tailscaled.service" "network-online.target" ];
     wants = [ "tailscaled.service" "network-online.target" ];
   };
+
+  programs.ssh.extraConfig = ''
+    Host github.com
+      HostName github.com
+      User git
+      IdentityFile /home/tarobutter/.ssh/id_ed25519_github
+      IdentitiesOnly yes
+  '';
 }

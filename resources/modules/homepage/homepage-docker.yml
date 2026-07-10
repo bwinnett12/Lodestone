@@ -8,4 +8,4 @@ services:
       - /storage/shortstack/homepage:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
     environment:
-      HOMEPAGE_ALLOWED_HOSTS: "island,island:3000,localhost,127.0.0.1,island.tail4b1127.ts.net,island.tail4b1127.ts.net:3000" # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
+      HOMEPAGE_ALLOWED_HOSTS: "loom,loom:3000,localhost,127.0.0.1,loom.tail4b1127.ts.net,loom.tail4b1127.ts.net:3000,home.platatoo.com"

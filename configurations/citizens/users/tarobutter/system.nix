@@ -3,6 +3,6 @@
   ecosystem.users.tarobutter = {
     description = "Tarot D. Butter";
     extraGroups = [ "networkmanager" "systemd-journal" "wheel" "docker" "input" "video" "render" ];
-    homeManagerModule = ./home.nix;   # sibling file, not the directory
+    homeManagerModule = ./home.nix;
   };
 }

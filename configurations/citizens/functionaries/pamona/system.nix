@@ -1,5 +1,7 @@
-# configurations/functionaries/pamona/system.nix
+# configurations/citizens/functionaries/pamona/system.nix
 { config, lib, ... }: {
+
+
   ecosystem.functionaries.pamona = {
     enable = true;
     description = "Maintainer of Apps and Roman goddess of Orchards";

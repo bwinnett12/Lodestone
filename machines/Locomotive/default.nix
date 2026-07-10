@@ -1,4 +1,4 @@
-
+## machines/Locomotive/default.nix
 {
   inputs, pkgs, self, ...
 }: 
@@ -7,15 +7,10 @@
     ./hardware-configuration.nix
     ./configuration.nix
 
-    self.ecosystem.citizens
-
     self.nixosModules.go2rtc
     self.nixosModules.prometheus
-
-    # self.nixosModules.hosts
-
+    self.nixosModules.hosts
     self.inputs.home-manager.nixosModules.home-manager
-
     # inputs.mailroom.nixosModules.default
   ];
 

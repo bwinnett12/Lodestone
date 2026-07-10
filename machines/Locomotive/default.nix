@@ -9,7 +9,6 @@
 
     self.nixosModules.go2rtc
     self.nixosModules.prometheus
-    self.nixosModules.hosts
     self.inputs.home-manager.nixosModules.home-manager
     # inputs.mailroom.nixosModules.default
   ];

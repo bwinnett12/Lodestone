@@ -9,7 +9,6 @@
   imports = [
     ./hardware-configuration.nix
     ./configuration.nix
-    self.ecosystem.citizens
 
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
     self.nixosModules.prometheus
@@ -23,12 +22,14 @@
     self.nixosModules.plan9
     self.nixosModules.gitea
     # nixosCosmicModule
-    # self.nixosModules.hosts
 
     self.nixosModules.grafana
     self.nixosModules.localai
     self.nixosModules.jellyfin
   ];
+
+  ecosystem.users.tarobutter.enable = true;
+
 
   services.u9fs-client = {
     enable      = true;
@@ -44,6 +45,12 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit self; };
+    users.tarobutter = {
+      profiles.gaming.enable = lib.mkForce true;
+      profiles.communications.enable = lib.mkForce true;
+      profiles.development.enable = lib.mkForce true;
+      # profiles.shortstack.enable = false;
+    };
   };
 
   ecosystem.users.tarobutter.enable = true;
@@ -115,4 +122,6 @@
     };
   };
   system.stateVersion = "25.05";
+  hardware.enableRedistributableFirmware = true;
+
 }

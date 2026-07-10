@@ -1,7 +1,9 @@
 services:
   api:
     # For GPU support, use one of:
-    image: localai/localai:latest-aio-gpu-nvidia-cuda-13
+    image: localai/localai:latest-gpu-nvidia-cuda-13
+
+    pull_policy: missing
     
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/readyz"]

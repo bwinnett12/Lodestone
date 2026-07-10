@@ -20,8 +20,6 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    linux-surface.url = "github:nix-community/linux-surface";
-
     ### Others
     u9fs = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,12 +27,12 @@
     };
 
     ### Mailroom
-    #mailroom = {
-    #  url = "github:bwinnett12/Mailroom";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #  inputs.flake-utils.follows = "flake-utils";
-    #  inputs.rust-overlay.follows = "rust-overlay";
-    #};
+    mailroom = {
+      url = "github:bwinnett12/Mailroom";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";

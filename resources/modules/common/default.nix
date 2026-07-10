@@ -33,8 +33,8 @@
 
   environment.systemPackages = with pkgs; [
     coreutils
+    fastfetch
     git
-    neofetch
     nettools
     openssl
     openssh

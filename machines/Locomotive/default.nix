@@ -11,7 +11,6 @@
     ./configuration.nix
 
     self.ecosystem.citizens
-    self.ecosystem.common
 
     self.nixosModules.go2rtc
     self.nixosModules.prometheus

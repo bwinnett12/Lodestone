@@ -9,10 +9,7 @@
   imports = [
     ./hardware-configuration.nix
     ./configuration.nix
-
     self.ecosystem.citizens
-    self.ecosystem.common
-
 
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
     self.inputs.home-manager.nixosModules.home-manager

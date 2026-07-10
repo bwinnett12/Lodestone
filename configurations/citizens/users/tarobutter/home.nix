@@ -1,9 +1,9 @@
 # configurations/users/tarobutter/home.nix
 { config, pkgs, lib, ... }: {
-  imports = [
-    ../../general/games.nix
-    ../../general/communications.nix
-  ];
+  #imports = [
+  #  ../../general/games.nix
+  #  ../../general/communications.nix
+  #];
 
   profiles = {
     gaming = {

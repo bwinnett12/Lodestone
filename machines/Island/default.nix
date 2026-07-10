@@ -40,20 +40,12 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit self; };
-    users.tarobutter = { config, lib, pkgs, ... }: {
-      imports = [
-        ../../resources/home/default.nix
-        ../../configurations/users/tarobutter
-      ];
-      profiles.communications = {
-        enable = true;
-        professional = true;
-        gaming = true;
-      };
-      profiles.gaming.enable = true;
-    };
-  }; 
+  };
 
+  ecosystem.users.tarobutter.enable = true;
+  profiles.shortstack.enable = true;
+
+  
   ## TODO - move this to configuration file
   services.u9fs-server = {
     enable      = true;

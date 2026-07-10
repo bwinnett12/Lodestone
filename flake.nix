@@ -20,6 +20,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    linux-surface.url = "github:nix-community/linux-surface";
+
     ### Others
     u9fs = {
       inputs.nixpkgs.follows = "nixpkgs";

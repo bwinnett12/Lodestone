@@ -74,7 +74,7 @@
   ####### Boot settings
   boot = {
     kernelModules = [ "ntfs3" "ext4" "btrfs" "vfat" "exfat" ];
-    kernelPackages = lib.mkForce pkgs.linuxPackages_6_6;
+    kernelPackages = lib.mkForce pkgs.linux-surface;
     loader = {
       efi = {
         canTouchEfiVariables = true;

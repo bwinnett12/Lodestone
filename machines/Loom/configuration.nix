@@ -138,6 +138,7 @@
     #ipts.enable = true;      # touchscreen + stylus (IPTS protocol)
     #surface-control.enable = true;  # performance mode control CLI
     kernelVersion = "stable";
+    ipts.enable = true;
   };
   
     # Keep your increased swap and zramSwap settings

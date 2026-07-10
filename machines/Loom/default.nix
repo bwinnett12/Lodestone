@@ -28,7 +28,7 @@
     self.nixosModules.jellyfin
   ];
 
-  nixpkgs.overlays = [ inputs.linux-surface.overlays.default ];
+  # nixpkgs.overlays = [ inputs.linux-surface.overlays.default ];
 
   services.u9fs-client = {
     enable      = true;
@@ -71,12 +71,14 @@
     ];
   };
   #config.microsoft-surface.surface-control.enable = true;
+  config.microsoft-surface.ipts.enable = true;
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ####### Boot settings
   boot = {
     kernelModules = [ "ntfs3" "ext4" "btrfs" "vfat" "exfat" ];
-    kernelPackages = lib.mkForce pkgs.linux-surface;
+    #kernelPackages = lib.mkForce pkgs.linux-surface;
+    # boot.kernelPackages = lib.mkForce pkgs.linuxKernel.kernels.linux_surface_stable;  # confirm exact name
     loader = {
       efi = {
         canTouchEfiVariables = true;

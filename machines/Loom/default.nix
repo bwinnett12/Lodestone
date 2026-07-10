@@ -28,9 +28,6 @@
     self.nixosModules.jellyfin
   ];
 
-  ecosystem.users.tarobutter.enable = true;
-
-
   services.u9fs-client = {
     enable      = true;
     serverIP    = "100.82.185.26"; # ipv4 of Island

@@ -5,8 +5,6 @@
   ...
 }: {
 	imports = [
-		./modules
-		./users
-		#./hardware
+		./paths.nix
 	];
 }

@@ -9,6 +9,11 @@
   imports = [
     ./hardware-configuration.nix
     ./configuration.nix
+
+    self.ecosystem.citizens
+    self.ecosystem.common
+
+
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
     self.inputs.home-manager.nixosModules.home-manager
     self.nixosModules.prometheus
@@ -24,11 +29,14 @@
     self.nixosModules.gitea
     # nixosCosmicModule
 
-    self.nixosModules.hosts
+    # self.nixosModules.hosts
 
     self.nixosModules.grafana
     self.nixosModules.localai
     self.nixosModules.jellyfin
+
+
+
   ];
 
   services.u9fs-client = {
@@ -40,39 +48,18 @@
 
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
 
-
-  systemd.services.nginx = {
-    after = [ "tailscaled.service" "network-online.target" ];
-    wants = [ "tailscaled.service" "network-online.target" ];
-  };
-
   ## Profiles:
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit self; };
-    users.tarobutter = { config, lib, pkgs, ... }: {
-      imports = [
-        ../../resources/home/default.nix
-        ../../configurations/users/tarobutter
-      ];
-      profiles.communications = {
-        enable = true;
-        professional = true;
-        gaming = true;
-      };
-      profiles.gaming.enable = true;
-    };
-  }; 
-
-
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "root" "tarobutter" ];
   };
 
+  ecosystem.users.tarobutter.enable = true;
+  profiles.shortstack.enable = true;
+
   nixpkgs.config = {
-    allowUnfree = true;
+    # allowUnfree = true;
 
     allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
@@ -89,7 +76,6 @@
   };
   #config.microsoft-surface.surface-control.enable = true;
 
-
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ####### Boot settings
   boot = {
@@ -103,10 +89,7 @@
       systemd-boot.enable = true;
     };
   };
-
-
   i18n.defaultLocale = "en_US.UTF-8";
-
   security.rtkit.enable = true;
   services = {
     
@@ -122,15 +105,6 @@
     #  trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
     # };
 
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      publish = {
-        enable = true;
-        addresses = true;
-      };
-    };
-
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
 
@@ -140,8 +114,6 @@
   #  lidSwitchBattery = "ignore";
   #};
 
-    nginx.enable = true;
-    openssh.enable = true;
     pipewire = {
       enable = true;
       pulse.enable = true;
@@ -149,14 +121,6 @@
       jack.enable = true;
     };
     printing.enable = true;
-    tailscale = {
-      enable = true; 
-      permitCertUid = "nginx";
-    };
-    timesyncd = {
-      enable = true;
-      servers = [ "time.cloudflare.com" "pool.ntp.org" ];
-    };
     udisks2.enable = true;
 
     xserver = {
@@ -168,7 +132,5 @@
       videoDrivers = [ "nvidia" ];
     };
   };
-
   system.stateVersion = "25.05";
-  time.timeZone = "America/Anchorage";
 }

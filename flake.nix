@@ -61,11 +61,3 @@ outputs = {
       ];
     };
 }
-
-    ## TODO - Reintegrate
-    # ~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~~!~~~~~!~~!~~~~~~!~~~~~~! #
-    #### Dev Shells
-#    devShells."x86_64-linux".video-tools = pkgs.legacyPackages."x86_64-linux".mkShell {
-#      packages = with pkgs.legacyPackages."x86_64-linux".pkgs; [ handbrake makemkv mkvtoolnix flac cdparanoia abcde ];
-#      shellHook = ''echo "Entering video transcoding shell." '';
-#    };

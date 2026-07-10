@@ -4,6 +4,6 @@
   flake.nixosModules = lib.mapAttrs
     (name: _: import ./${name})
     (lib.filterAttrs
-      (_: type: type == "directory")
+      (name: type: type == "directory" && name != "common")
       (builtins.readDir ./.));
 }

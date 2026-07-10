@@ -4,28 +4,27 @@
 {
   services.calibre-server = {
     enable = true;
-	group = "users";
-	user = "pomona";
-	libraries = [
-      "/storage/Orchid/Media/Books"
-	];
-	openFirewall = true;
-	port = 2111;
+    group = "users";
+    user = "pomona";
+    libraries = [
+        "/storage/Orchid/Media/Books"
+    ];
+    openFirewall = true;
+    port = 2111;
   };
 
   environment.systemPackages = with pkgs; [
-	pkgs.calibre
+	  pkgs.calibre
   ];
 
   ## Calibre Web client
   services.calibre-web = {
-
     enable = true;
 
-	listen = {
+    listen = {
       ip = "0.0.0.0";
-	  port = 8083;
-	};
+      port = 8083;
+	  };
 
     options = {
       calibreLibrary = "/storage/Orchid/Media/Books";

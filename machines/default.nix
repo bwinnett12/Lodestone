@@ -1,3 +1,4 @@
+## machines/default.nix
 {
   inputs,
   self,
@@ -8,6 +9,7 @@
       inputs.nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
+          self.ecosystem.common
           ./${name}
         ];
         specialArgs = {
@@ -16,11 +18,7 @@
       };
   in {
     Island = mkSystem "Island" "x86_64-linux";
-
     Loom = mkSystem "Loom" "x86_64-linux";
-
     Locomotive = mkSystem "Locomotive" "aarch64-linux";
-
-
   };
 }

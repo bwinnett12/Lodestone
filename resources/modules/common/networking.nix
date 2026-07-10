@@ -31,7 +31,7 @@
     Host github.com
       HostName github.com
       User git
-      IdentityFile /home/tarobutter/.ssh/id_ed25519_github
+      IdentityFile /home/tarobutter/.ssh/id_ed25519
       IdentitiesOnly yes
   '';
 }

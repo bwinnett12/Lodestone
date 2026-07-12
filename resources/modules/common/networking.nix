@@ -10,7 +10,6 @@
         addresses = true;
       };
     };
-    networkmanager.enable = true;
     nginx.enable = true;
     openssh.enable = true;
     tailscale = {

@@ -90,6 +90,33 @@
         "type": "github"
       }
     },
+    "mailroom": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": [
+          "rust-overlay"
+        ]
+      },
+      "locked": {
+        "lastModified": 1782373554,
+        "narHash": "sha256-RK/EonB1eIrKGRiLJMmPPs/vEizqk+XZ4YFxjKMhjWA=",
+        "ref": "rust",
+        "rev": "784330438fa94f893855e9ade13e4fdf94a20c90",
+        "revCount": 94,
+        "type": "git",
+        "url": "ssh://git@github.com/bwinnett12/Mailroom.git"
+      },
+      "original": {
+        "ref": "rust",
+        "type": "git",
+        "url": "ssh://git@github.com/bwinnett12/Mailroom.git"
+      }
+    },
     "nixos-cosmic": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -210,9 +237,11 @@
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "mailroom": "mailroom",
         "nixos-cosmic": "nixos-cosmic",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
+        "rust-overlay": "rust-overlay_2",
         "u9fs": "u9fs"
       }
     },
@@ -229,6 +258,26 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "b22d5ee8c60ed1291521f2dde48784edd6bf695b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1782098508,
+        "narHash": "sha256-YeBVH+avasLg/ZTOyshNI4qfU8p5RbMs9O8944A1QDg=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "67eed429b53d462923d9be580cfc9ed372f7564f",
         "type": "github"
       },
       "original": {

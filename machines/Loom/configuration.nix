@@ -49,9 +49,6 @@
 
   systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];
 
-  # microsoft-surface.surface-control.enable = true;
-
-  microsoft-surface.surface-control.enable = true;
   hardware.microsoft-surface.kernelVersion = "longterm";
   
   # Keep your increased swap and zramSwap settings

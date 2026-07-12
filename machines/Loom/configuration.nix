@@ -52,23 +52,22 @@
 
     #### Sleep schedule
     ## Systemd configuration for disabling auto sleep
-    targets = {
-      sleep.enable = false;
-      suspend.enable = false;
-      hibernate.enable = false;
-      hybrid-sleep.enable = false;
-    };
+    #targets = {
+    #  sleep.enable = false;
+    #  suspend.enable = false;
+    #  hibernate.enable = false;
+    #  hybrid-sleep.enable = false;
   };
 
   # microsoft-surface.surface-control.enable = true;
 
   # Correct way to set Surface-specific options
   hardware.microsoft-surface = {
-  #  enable = true;
-    #ipts.enable = true;      # touchscreen + stylus (IPTS protocol)
-    #surface-control.enable = true;  # performance mode control CLI
+    enable = true;
+    ipts.enable = true;      # touchscreen + stylus (IPTS protocol)
+    surface-control.enable = true;  # performance mode control CLI
     kernelVersion = "stable";
-  };
+   };
   
     # Keep your increased swap and zramSwap settings
   swapDevices = [

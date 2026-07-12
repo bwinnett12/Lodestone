@@ -1,6 +1,4 @@
 
 _: {
-  flake.nixosModules = {
-	"scarlet2i2" = ./scarlet2i2;
-  };
+  flake.ecosystem.hardware.scarlet = import ./scarlet2i2;
 }

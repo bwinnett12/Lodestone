@@ -5,14 +5,21 @@ let
 in {
   options.profiles.gaming.enable = lib.mkEnableOption "system-level gaming support";
 
+  imports = [
+    self.nixosModules.games
+  ];
+
   config = lib.mkIf cfg.enable {
-    programs.steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = false;
+    programs = {
+      steam = {
+        enable = true;
+        remotePlay.openFirewall = true;
+        dedicatedServer.openFirewall = false;
+      };
+      gamemode.enable = true;
     };
 
-    programs.gamemode.enable = true;
+
 
     hardware.opengl = {
       enable = true;
@@ -25,4 +32,5 @@ in {
       protonup-qt
     ];
   };
+
 }

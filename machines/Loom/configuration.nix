@@ -47,17 +47,7 @@
     #enableNvidia = true;
   };
 
-  systemd = {
-    services.docker.path = [ pkgs.nvidia-container-toolkit ];
-
-    #### Sleep schedule
-    ## Systemd configuration for disabling auto sleep
-    #targets = {
-    #  sleep.enable = false;
-    #  suspend.enable = false;
-    #  hibernate.enable = false;
-    #  hybrid-sleep.enable = false;
-  };
+  systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];
 
   # microsoft-surface.surface-control.enable = true;
 
@@ -98,10 +88,6 @@
     nvidia-vaapi-driver
     nvidia-container-toolkit
   ];
-
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
-  ##                                                                         ##
-  ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

@@ -18,7 +18,6 @@
     #self.nixosModules.scarlet2i2
 
     self.nixosModules.frontpage
-    self.nixosModules.games
     self.nixosModules.gitea
     # nixosCosmicModule
 

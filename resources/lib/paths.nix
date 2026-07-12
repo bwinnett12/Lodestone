@@ -1,6 +1,4 @@
 # resources/lib/paths.nix
 { self, ... }: {
-
-  ## Central location of lodestone
-  _module.args.lodestoneRoot = self;
+  _module.args.lodestoneRoot = self;   ## Central location of lodestone
 }

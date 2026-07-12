@@ -51,9 +51,6 @@
 
   # microsoft-surface.surface-control.enable = true;
 
-  # Correct way to set Surface-specific options
-  hardware.microsoft-surface.kernelVersion = "stable";
-
   microsoft-surface.surface-control.enable = true;
   hardware.microsoft-surface.kernelVersion = "longterm";
   

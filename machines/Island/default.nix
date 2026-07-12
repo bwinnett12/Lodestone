@@ -11,7 +11,6 @@
     ./hardware-configuration.nix
     ./drives.nix
     ./configuration.nix
-    self.inputs.home-manager.nixosModules.home-manager
     
     #self.nixosModules.mailroom
     self.nixosModules.anki
@@ -28,11 +27,7 @@
     # self.nixosModules.plan9
     self.nixosModules.prometheus
     self.nixosModules.suwayomi
-    self.nixosModules.plan9
     # nixosCosmicModule
-
-
-    self.nixosModules.hosts
   ];
 
   ## Profiles:
@@ -43,8 +38,6 @@
   };
 
   ecosystem.users.tarobutter.enable = true;
-  profiles.shortstack.enable = true;
-
   
   ## TODO - move this to configuration file
   services.u9fs-server = {
@@ -53,20 +46,10 @@
     exportPath  = "/storage/Orchard";
     port        = 4500;
   };
-  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
-
+  
   ## TODO - Move this to a configuration file
   users.groups.media = {
     gid = 995; # Pick a unique ID or let NixOS auto-assign
-  };
-
-  ## TODO - Move this to a configuration file
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "root" "tarobutter" ];
-    ## Settings for cosmic
-    # substituters = [ "https://cosmic.cachix.org/" ];
-    # trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
   };
 
   nixpkgs.config = {
@@ -121,9 +104,7 @@
   };
 
   services = {
-    # Enable the Cosmic Desktop Environment
-    # services.desktopManager.cosmic.enable = true;
-    # services.displayManager.cosmic.enable = false;  # Use the Gnome display Manager instead. 
+
     desktopManager.gnome.enable = true; 
     displayManager.gdm.enable = true;
 

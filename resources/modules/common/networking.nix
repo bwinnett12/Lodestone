@@ -10,6 +10,7 @@
         addresses = true;
       };
     };
+    networkmanager.enable = true;
     nginx.enable = true;
     openssh.enable = true;
     tailscale = {
@@ -21,6 +22,20 @@
       servers = [ "time.cloudflare.com" "pool.ntp.org" ];
     };
   };
+  networking = { 
+    enableIPv6 = false;
+    firewall = {
+      enable = true;
+      allowedUDPPorts = [ config.services.tailscale.port ];
+      checkReversePath = "loose";
+      trustedInterfaces = [ "tailscale0" ];
+      interfaces."tailscale0".allowedTCPPorts = [ 80 443 ];
+    };
+
+    nameservers = [ "1.1.1.1" "8.8.8.8" "100.100.100.100" ];
+    networkmanager.enable = true;
+  };
+
 
   systemd.services.nginx = {
     after = [ "tailscaled.service" "network-online.target" ];
@@ -34,4 +49,13 @@
       IdentityFile /home/tarobutter/.ssh/id_ed25519
       IdentitiesOnly yes
   '';
+
+  environment.systemPackages = with pkgs; [ 
+    inetutils
+    nettools
+    openssh
+    openssl
+    rustscan
+    wakeonlan
+  ];
 }

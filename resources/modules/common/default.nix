@@ -9,7 +9,7 @@
     self.ecosystem.citizens.upgraded
 
     self.nixosModules.hosts
-  
+    self.nixosModules.plan9
     self.inputs.home-manager.nixosModules.home-manager
   ];
 
@@ -40,10 +40,15 @@
     coreutils
     fastfetch
     git
-    nettools
-    openssl
-    openssh
     vim
     wget
+    tree
+    tmux
+
+    exfatprogs
+    parted
+    btrfs-progs
+    lsof
+    usbutils
   ];
 }

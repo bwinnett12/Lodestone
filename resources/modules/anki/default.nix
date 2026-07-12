@@ -45,6 +45,8 @@
     };
   };
 
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 3111 3112 3113 ];
+
   ## Setup Anki user
   users = {
     users.anki = {
@@ -56,4 +58,5 @@
     };
   groups.anki = {};
   };
+
 }

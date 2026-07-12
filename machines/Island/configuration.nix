@@ -1,42 +1,14 @@
 
 { config, lib, pkgs, inputs, nixosCosmicModule, ... }:
-
 {
-
-  users.users.tarobutter = {
-    description = "Tarot D. Butter";
-    extraGroups = [
-      "input"
-      "networkmanager"
-      "systemd-journal"
-      "wheel"
-      "docker"
-      "video"
-      "render"
-      "jellyfin"
-      "storage-Orchid"
-      "storage-Yarrow"
-      "storage-Tulip"
-      "media"
-      "rustdesk"
-      "uinput"
-      "go2rtc"
-      "u9fs"
-    ];
-    isNormalUser = true;
-    shell = pkgs.bash;
-  };
   
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
   };
 
-
   networking = {
     defaultGateway = "192.168.100.1";
-    enableIPv6 = false;
-
     hostName = "Island";
 
     interfaces.enp0s31f6 = {
@@ -45,58 +17,6 @@
         prefixLength = 24;
       }];
       useDHCP = false;
-    };
-
-    nameservers = [ "1.1.1.1" "8.8.8.8" "100.100.100.100" ];
-    networkmanager.enable = true;
-
-    firewall = {
-
-      allowedUDPPorts = [ config.services.tailscale.port ];
-      checkReversePath = "loose";
-      enable = true;
-      trustedInterfaces = [ "tailscale0" ];
-
-      allowedTCPPorts = [ 
-        8080  ## 8080 - LocalAI
-        8081  ## 8081 - LocalAI      
-        8090  ## 8080 - LocalAI
-
-        4822  ## 4822 - Guacamole
-        3389  ## 3389 - Guacamole
-
-        2104  ## 2104 - Komga
-
-        9000  ## 9000 - Prometheus
-        9090  ## 9090 - Prometheus
-        2117  ## 2117 - Grafana
-
-        2108  ## 2108 - Suwayomi Server
-        4567  ## 4567 - Suwayomi Server
-
-        4500  ## 4500 - u9fs
-
-
-        2111  ## 2111 - Calibre Server
-        8083  ## 8083 - Calibre Web
-
-        2112  ## 2112 - Message
-        2113  ## 2113 - Mailroom
-        3000  ## 3000 - Homepage
-        47990  ## 47990 - Moonlight
-        48010  ## 48010 - Sunshine
-        47984  ## 48010 - Sunshine
-        47989  ## 48010 - Sunshine
-
-        3111  ## Anki 
-        3112  ## Anki 
-        3113  ## Anki 
-
-        5150  ## Mailroom
-        2000  ## filebrowser
-        80 
-        443
-      ];
     };
   };
 
@@ -161,22 +81,10 @@
 
   environment.systemPackages = with pkgs; [
     vlc
-    openssl
-    nettools
-    rustscan
-    coreutils
-    exfatprogs
-    parted
-    btrfs-progs
-    lsof
-    kando
     docker-compose
     nvidia-container-toolkit
     efibootmgr
-    tmux
-    inetutils
     pciutils
-    usbutils
     wlr-randr
   ];
 

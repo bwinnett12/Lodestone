@@ -3,59 +3,9 @@
 { config, lib, pkgs, inputs, nixosCosmicModule, ... }:
 
 {
-  ## Settings for cosmic
-  # substituters = [ "https://cosmic.cachix.org/" ];
-  # trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
   networking = {
     hostName = "Loom";
-
-    networkmanager.enable = true;
     useDHCP = false;
-    # interfaces.enp0s31f6.useDHCP = true; # Change this interface name if Loom's physical port is different!
-
-    firewall = {
-      enable = true;
-      checkReversePath = "loose";
-      trustedInterfaces = [ 
-        #"tailscale0" 
-        ];
-
-      allowedTCPPorts = [ 
-        #8080  ## 8080 - LocalAI
-        #8081  ## 8081 - LocalAI      
-        #8090  ## 8080 - LocalAI
-
-
-        #4822  ## 4822 - Guacamole
-        #3389  ## 3389 - Guacamole
-
-        #2104  ## 2104 - Komga
-
-        9000  ## 9000 - Prometheus
-        3000  ## 3000 - Grafana
-
-        #2108  ## 2108 - Suwayomi Server
-        #4567  ## 4567 - Suwayomi Server
-
-
-        #4500  ## 4500 - u9fs
-
-        # --- 2. SUNSHINE & MOONLIGHT PORTS ---
-        47984
-        47989
-        47990  ## 47990 - Moonlight Web UI HTTPS
-        48010  ## 48010 - Sunshine Server
-
-
-        ### Base
-        80
-        443
-      ];
-
-      allowedUDPPorts = [ 
-        config.services.tailscale.port
-      ];
-    };
   };
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
@@ -89,26 +39,6 @@
   powerManagement.cpuFreqGovernor = "powersave";  # or "schedutil"
 
   # TLP or auto-cpufreq for more nuanced control
-
-  services = {
-    auto-cpufreq = {
-      enable = true;
-      settings = {
-        battery = {
-          governor = "powersave";
-          turbo = "never";
-        };
-        charger = {
-          governor = "performance";
-          turbo = "auto";
-        };
-      };
-    };
-    colord.enable = true;
-    power-profiles-daemon.enable = false;
-    thermald.enable = true;
-    xserver.wacom.enable = true;
-  };
 
   fonts.fontconfig.subpixel.rgba = "none";  # for HiDPI, subpixel is counterproductive
 
@@ -150,9 +80,6 @@
     priority = 100;
   };
 
-  services.iptsd.enable = true;   # replaces hardware.microsoft-surface.ipts.enable
-
-
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Programs
   programs.firefox.preferences = {
@@ -164,28 +91,13 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     vlc
-    rustscan
-
-    exfatprogs
-    parted
-    btrfs-progs
-    lsof
-
     libcamera
     libcamera-qcam
-
     docker-compose
-
-    nvidia-container-toolkit
-
     efibootmgr
-
-    #kando
-    tmux
-    inetutils
-
     intel-media-driver
     nvidia-vaapi-driver
+    nvidia-container-toolkit
   ];
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##

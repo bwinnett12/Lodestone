@@ -9,11 +9,10 @@
 
     self.nixosModules.go2rtc
     self.nixosModules.prometheus
-    self.inputs.home-manager.nixosModules.home-manager
     # inputs.mailroom.nixosModules.default
   ];
 
-    ## Profiles:
+  ## Profiles:
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -22,13 +21,11 @@
       profiles.gaming.enable = lib.mkForce false;
       profiles.communications.enable = lib.mkForce false;
       profiles.development.enable = lib.mkForce false;
-      # profiles.shortstack.enable = false;
     };
   };
 
   ecosystem.users.tarobutter.enable = true;
 
-  nix.settings.trusted-users = [ "root" "tarobutter" ];
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"

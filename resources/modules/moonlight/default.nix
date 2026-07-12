@@ -26,5 +26,6 @@
     gnome-randr
   ];
 
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 47984 47989 48010 47990 ];
 }
 

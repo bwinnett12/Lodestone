@@ -52,14 +52,12 @@
   # microsoft-surface.surface-control.enable = true;
 
   # Correct way to set Surface-specific options
-  hardware.microsoft-surface = {
-    enable = true;
-    ipts.enable = true;      # touchscreen + stylus (IPTS protocol)
-    surface-control.enable = true;  # performance mode control CLI
-    kernelVersion = "stable";
-   };
+  hardware.microsoft-surface.kernelVersion = "stable";
+
+  microsoft-surface.surface-control.enable = true;
+  hardware.microsoft-surface.kernelVersion = "longterm";
   
-    # Keep your increased swap and zramSwap settings
+  # Keep your increased swap and zramSwap settings
   swapDevices = [
     { device = "/swapfile"; size = 8192; } # Or 16384 for 16GB
   ];

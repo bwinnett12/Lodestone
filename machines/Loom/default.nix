@@ -111,7 +111,7 @@
       };
       wacom.enable = true;
       videoDrivers = [ "nvidia" ];
-      resolutions = [{ x = 1920; y = 1280 }];
+      resolutions = [{ x = 1920; y = 1280; }];
     };
     auto-cpufreq = {
       enable = true;

@@ -31,7 +31,6 @@
         name = "W. Winnett";
         email = "bwinnett12@gmail.com";
       };
-      init.defaultBranch = "trunk";
     };
 
     ssh = {

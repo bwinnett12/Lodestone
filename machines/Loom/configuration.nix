@@ -63,9 +63,13 @@
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ## Programs
-  programs.firefox.preferences = {
-    # disable libadwaita theming for Firefox
-    "widget.gtk.libadwaita-colors.enabled" = false;
+
+  programs.firefox = {
+    enable = true; 
+    preferences = {
+      # disable libadwaita theming for Firefox
+      "widget.gtk.libadwaita-colors.enabled" = false;
+    };
   };
 
   # List packages installed in system profile.

@@ -87,9 +87,9 @@
  services = {
 
     # Enable the Cosmic Desktop Environment
-    displayManager.cosmic-greeter.enable = true;
-    desktopManager.cosmic.enable = true;
-    system76-scheduler.enable = true;
+    #displayManager.cosmic-greeter.enable = true;
+    #desktopManager.cosmic.enable = true;
+    #system76-scheduler.enable = true;
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
@@ -100,7 +100,9 @@
       lidSwitchExternalPower = "ignore";  # plugged in at a desk → stays awake even with lid closed, useful for a 2-in-1 docked with an external display, or just running background tasks
       lidSwitchDocked = "ignore";         # if you ever use a dock/external monitor setup
     };
-
+    
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
     xserver = {
       enable = true;
       xkb = {

@@ -22,7 +22,7 @@
     # nixosCosmicModule
 
     self.nixosModules.grafana
-    self.nixosModules.localai
+    #self.nixosModules.localai
     self.nixosModules.jellyfin
   ];
 
@@ -82,7 +82,7 @@
     };
   };
 
-  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
+  #environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 
  services = {
 
@@ -109,7 +109,9 @@
         layout = "us";
         variant = "";
       };
+      wacom.enable = true;
       videoDrivers = [ "nvidia" ];
+      resolutions = [{ x = 1920; y = 1280 }];
     };
     auto-cpufreq = {
       enable = true;
@@ -125,9 +127,8 @@
       };
     };
     colord.enable = true;
-    power-profiles-daemon.enable = false;
+    power-profiles-daemon.enable = true;
     thermald.enable = true;
-    xserver.wacom.enable = true;
   };
   system.stateVersion = "25.05";
   hardware.enableRedistributableFirmware = true;

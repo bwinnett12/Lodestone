@@ -76,6 +76,7 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     vlc
+    libinput
     libcamera
     libcamera-qcam
     docker-compose

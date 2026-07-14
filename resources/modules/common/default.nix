@@ -8,7 +8,7 @@
     self.ecosystem.citizens.functionaries
     self.ecosystem.citizens.upgraded
     
-    self.nixoxModules.display
+    self.nixosModules.display
     self.nixosModules.hosts
     self.nixosModules.plan9
 

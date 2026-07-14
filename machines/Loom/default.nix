@@ -114,19 +114,6 @@
       videoDrivers = [ "nvidia" ];
       # resolutions = [{ x = 1920; y = 1280; }]; # TODO - Implement for Gnome
     };
-    auto-cpufreq = {
-      enable = true;
-      settings = {
-        battery = {
-          governor = "powersave";
-          turbo = "never";
-        };
-        charger = {
-          governor = "performance";
-          turbo = "auto";
-        };
-      };
-    };
     colord.enable = true;
     thermald.enable = true;
   };
@@ -137,11 +124,10 @@
     opentabletdriver = {
       enable = true; 
       daemon.enable = true;
-      };
-
+    };
   };
 
-
+  # TODO - Make a sleep module
   systemd.targets = {
     sleep.enable = true;
     suspend.enable = true;

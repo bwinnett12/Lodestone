@@ -91,22 +91,25 @@
  services = {
 
     # Enable the Cosmic Desktop Environment
-    displayManager.cosmic-greeter.enable = true;
-    desktopManager.cosmic.enable = true;
-    system76-scheduler.enable = true;
+    #displayManager.cosmic-greeter.enable = true;
+    #desktopManager.cosmic.enable = true;
+    #system76-scheduler.enable = true;
 
     #desktopManager.gnome.enable = true;
     #displayManager.gdm.enable = true;
 
     # Enable touchpad support (enabled default in most desktopManager).
-    libinput.enable = true;
+    libinput.enable = true;  # TODO - Move to table module
     iptsd.enable = true;
 
     logind = {
-      lidSwitch = "suspend";              # closing lid while on battery → sleep, standard laptop behavior
-      lidSwitchExternalPower = "ignore";  # plugged in at a desk → stays awake even with lid closed, useful for a 2-in-1 docked with an external display, or just running background tasks
-      lidSwitchDocked = "ignore";         # if you ever use a dock/external monitor setup
+      settings.Login = { 
+        HandleLidSwitchDocked = "ignore";   # if you ever using a dock/external monitor setup
+        HandleLidSwitchExternalPower = "ignore";  # plugged in at a desk → stays awake even with lid closed, useful for a 2-in-1 docked with an external display, or just running background tasks
+        HandleLidSwitch = "suspend"; # closing lid while on battery → sleep, standard laptop behavior
+        };
     };
+
     
 
     xserver = {

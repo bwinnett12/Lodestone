@@ -53,10 +53,7 @@ in {
         };
       };
 
-      home.packages = [
-
-      ];
-
+      environment.systemPackages = [ ];
     })
 
     # COSMIC
@@ -69,8 +66,8 @@ in {
         auto-cpufreq.enable = lib.mkDefault false;
       };
 
-      home.packages = [
-        pkgs.OpenTabletDriver
+      environment.systemPackages = [
+        pkgs.OpenTabletDriver ## TODO - Add this to a tablet module
       ];
     })
   ]);  

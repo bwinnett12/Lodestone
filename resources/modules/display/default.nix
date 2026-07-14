@@ -3,6 +3,10 @@
 { config, lib, pkgs, inputs, ... }:
 let
   cfg = config.ecosystem.display;
+  
+  import = [ 
+    ./fonts
+  ];
 in {
 
   options.ecosystem.display = {
@@ -16,9 +20,6 @@ in {
   config = lib.mkIf cfg.enable (lib.mkMerge [
     # Common Display
     {
-      import = [ 
-        ./fonts
-      ];
 
       services = {
         xserver = { 
@@ -52,6 +53,8 @@ in {
           };
         };
       };
+
+      environment.systemPackages = [ ];
     })
 
     # COSMIC
@@ -66,7 +69,7 @@ in {
 
       #environment.systemPackages = [
       #  pkgs.OpenTabletDriver ## TODO - Add this to a tablet module
-      #];
+
     })
   ]);  
 }

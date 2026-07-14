@@ -127,7 +127,7 @@
       };
     };
     colord.enable = true;
-    power-profiles-daemon.enable = true;
+    power-profiles-daemon.enable = false; 
     thermald.enable = true;
   };
   system.stateVersion = "25.05";

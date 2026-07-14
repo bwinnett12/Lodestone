@@ -70,7 +70,7 @@ in {
       };
 
       home.packages = [
-        OpenTabletDriver
+        pkgs.OpenTabletDriver
       ];
     })
   ]);  

@@ -26,6 +26,10 @@
     self.nixosModules.jellyfin
   ];
 
+  ecosystem.display.enable = true;
+  # ecosystem.display.gnome.enable = true;
+  ecosystem.display.cosmic.enable = true;
+
   services.u9fs-client = {
     enable      = true;
     serverIP    = "100.82.185.26"; # ipv4 of Island
@@ -87,9 +91,12 @@
  services = {
 
     # Enable the Cosmic Desktop Environment
-    #displayManager.cosmic-greeter.enable = true;
-    #desktopManager.cosmic.enable = true;
-    #system76-scheduler.enable = true;
+    displayManager.cosmic-greeter.enable = true;
+    desktopManager.cosmic.enable = true;
+    system76-scheduler.enable = true;
+
+    #desktopManager.gnome.enable = true;
+    #displayManager.gdm.enable = true;
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
@@ -101,17 +108,11 @@
       lidSwitchDocked = "ignore";         # if you ever use a dock/external monitor setup
     };
     
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
+
     xserver = {
-      enable = true;
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
       wacom.enable = true;
       videoDrivers = [ "nvidia" ];
-      resolutions = [{ x = 1920; y = 1280; }];
+      # resolutions = [{ x = 1920; y = 1280; }]; # TODO - Implement for Gnome
     };
     auto-cpufreq = {
       enable = true;
@@ -127,11 +128,19 @@
       };
     };
     colord.enable = true;
-    power-profiles-daemon.enable = false; 
     thermald.enable = true;
   };
   system.stateVersion = "25.05";
-  hardware.enableRedistributableFirmware = true;
+
+  hardware = {
+    enableRedistributableFirmware = true;
+    opentabletdriver = {
+      enable = true; 
+      daemon.enable = true;
+      };
+
+  };
+
 
   systemd.targets = {
     sleep.enable = true;

@@ -7,9 +7,11 @@
     self.ecosystem.citizens.humans
     self.ecosystem.citizens.functionaries
     self.ecosystem.citizens.upgraded
+    self.ecosystem.display
 
     self.nixosModules.hosts
     self.nixosModules.plan9
+
     self.inputs.home-manager.nixosModules.home-manager
   ];
 

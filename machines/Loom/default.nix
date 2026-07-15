@@ -20,6 +20,7 @@
     self.nixosModules.frontpage
     self.nixosModules.gitea
     # nixosCosmicModule
+    self.nixosModules.academic
 
     self.nixosModules.grafana
     #self.nixosModules.localai
@@ -130,19 +131,6 @@
     };
   };
 
-xdg.configFile."cosmic/com.system76.CosmicComp/v1/outputs".text = ''
-  ({"card1-eDP-1": (
-    enabled: true,
-    mode: Some((
-      size: (w: 1920, h: 1280),
-      refresh: Some(60000),
-    )),
-    scale: 1.5,
-    transform: Normal,
-    vrr: false,
-    max_active_hint: false,
-  )})
-'';
 
   # TODO - Make a sleep module
   systemd.targets = {

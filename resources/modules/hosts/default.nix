@@ -2,6 +2,9 @@
 { ... }:
 {
   networking.extraHosts = ''
+    # PiHole ran on Locomotive
+    100.106.125.87  pihole.platatoo.com
+
     # Island services - Off temporarily. Now on Loom
     # 100.82.185.26  gitea.platatoo.com
     # 100.82.185.26  app.platatoo.com

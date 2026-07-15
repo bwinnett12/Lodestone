@@ -24,9 +24,10 @@
     };
   };
 
-  ecosystem.display.enable = false;
-
-  ecosystem.users.tarobutter.enable = true;
+  ecosystem = {
+    display.enable = false;
+    users.tarobutter.enable = true;
+  };
 
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.permittedInsecurePackages = [

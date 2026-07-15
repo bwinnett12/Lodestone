@@ -6,20 +6,20 @@
   services.pihole-ftl = {
     enable = true;
 
-	openFirewallDNS = true;        # so other devices on your network can query it
-  	openFirewallWebserver = true;  # for the admin UI
+    openFirewallDNS = true;        # so other devices on your network can query it
+      openFirewallWebserver = true;  # for the admin UI
 
-	settings = {
-      # See <https://docs.pi-hole.net/ftldns/configfile/>
+    settings = {
+        # See <https://docs.pi-hole.net/ftldns/configfile/>
 
-      # External DNS Servers quad9 and cloudflare
-      dns.upstreams = [ "9.9.9.9" "1.1.1.1" ];
+        # External DNS Servers quad9 and cloudflare
+        dns.upstreams = [ "9.9.9.9" "1.1.1.1" ];
 
-      # Optionally resolve local hosts (domain is optional)
-      dns.hosts = [ "10.0.1.10 island.lodestone"];
-    };
+        # Optionally resolve local hosts (domain is optional)
+        dns.hosts = [ "pihole.platatoo.com" ];  ## TODO -- Is this updated for Locomotive if declared as 
+      };
 
-	lists = [    # Lists can be added via URL
+    lists = [    # Lists can be added via URL
       {
         url = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt";
         type = "block";
@@ -37,9 +37,9 @@
   # nginx reverse proxy
   services.nginx = {
     enable = true;
-    virtualHosts.${config.services.grafana.settings.server.domain} = {
+    virtualHosts."${toString config.services.pihole-ftl.settings.dns.hosts}" = {
       locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}";
+          proxyPass = "http://127.0.0.1:${toString config.services.pi-hole-web.ports}";
           proxyWebsockets = true;
           extraConfig = ''
             proxy_set_header Host $host;

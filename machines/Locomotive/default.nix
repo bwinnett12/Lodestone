@@ -24,6 +24,8 @@
     };
   };
 
+  ecosystem.display.enable = false;
+
   ecosystem.users.tarobutter.enable = true;
 
   hardware.enableRedistributableFirmware = true;

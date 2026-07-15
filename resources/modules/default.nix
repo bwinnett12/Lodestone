@@ -7,7 +7,8 @@ let
   # A directory "self-publishes" (opts out of auto-nixosModules) if it contains its own exports.nix
   selfPublishes = name: builtins.pathExists (./. + "/${name}/exports.nix");
   autoDiscovered = lib.filterAttrs (name: _: !(selfPublishes name)) moduleDirs;
-
+  selfPublished    = lib.filterAttrs (name: _:   selfPublishes name)  moduleDirs;
+  
 in {
   # Auto-discovered modules go into flake.nixosModules
   flake.nixosModules = lib.mapAttrs

@@ -73,4 +73,20 @@
     raspberrypi-eeprom
 	  podman
   ];
+
+    ### Transcend drive
+  fileSystems."/storage/Tulip" = {
+
+    device = "UUID=809C-FB5D";
+    fsType = "exfat";
+    options = [
+      "defaults"
+      "nofail"
+      "x-systemd.automount"
+      "x-systemd.device-timeout=5s"
+      "gid=1000"      ## todo - Currently with "shared group"
+      "uid=1000"      # todo - Replace with tarobutter
+      "umask=0002"          # Allows group writing
+    ];
+  };
 }

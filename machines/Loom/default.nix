@@ -1,10 +1,4 @@
-{
-  pkgs,
-  lib,
-  self,
-  inputs,
-  ...
-}:
+{ pkgs, lib, self, inputs, ... }:
 { 
   imports = [
     ./hardware-configuration.nix
@@ -25,6 +19,8 @@
     self.nixosModules.grafana
     #self.nixosModules.localai
     self.nixosModules.jellyfin
+
+    self.ecosystem.roles.builder
   ];
 
   ecosystem.display.enable = true;
@@ -39,6 +35,9 @@
   };
 
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
+
+  nix.settings.extra-platforms = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   ## Profiles:
   home-manager = {

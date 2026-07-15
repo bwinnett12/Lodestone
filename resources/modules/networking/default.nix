@@ -1,4 +1,4 @@
-## resources/modules/common/networking.nix
+## resources/modules/networking/default.nix
 ## Common files used by all machines for networking
 { config, lib, pkgs, ... }: {
   services = {
@@ -9,6 +9,7 @@
         enable = true;
         addresses = true;
       };
+      allowInterfaces = lib.mkDefault [];
     };
     nginx.enable = true;
     openssh.enable = true;
@@ -31,6 +32,7 @@
       interfaces."tailscale0".allowedTCPPorts = [ 80 443 ];
     };
 
+    interfaces.eth0.wakeOnLan.enable = true;
     nameservers = [ "1.1.1.1" "8.8.8.8" "100.100.100.100" ];
     networkmanager.enable = true;
   };

@@ -31,7 +31,7 @@ sudo nixos-rebuild switch --flake .#Locomotive \
 
 
   sudo nixos-rebuild switch --flake .#Locomotive \
-  --build-host tarobutter@10.0.1.10 \
+  --build-host tarobutter@loom \
   --option sandbox false \
   --option filter-syscalls false
 
@@ -66,3 +66,8 @@ sudo nixos-rebuild boot --flake .#Loom \
   --ask-sudo-password \
   --option sandbox false \
   --option filter-syscalls false
+
+
+
+
+  Arrhenius, S. (1896). XXXI. On the influence of carbonic acid in the air upon the temperature of the ground. The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science, 41(251). https://doi.org/10.1080/14786449608620846

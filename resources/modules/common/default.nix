@@ -2,11 +2,11 @@
 { config, lib, pkgs, self, inputs, ... }: {
 
   imports = [
-    ./networking.nix
-
     self.ecosystem.citizens.humans
     self.ecosystem.citizens.functionaries
     self.ecosystem.citizens.upgraded
+
+    self.ecosystem.networking
     
     self.nixosModules.display
     self.nixosModules.hosts

@@ -6,7 +6,7 @@ let
   stylix = inputs.stylix;
 in {
 
-  import = [ 
+  imports = [ 
     ./fonts
   ];
   options.ecosystem.display = {

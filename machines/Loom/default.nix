@@ -20,6 +20,7 @@
     self.nixosModules.frontpage
     self.nixosModules.gitea
     # nixosCosmicModule
+    self.nixosModules.academic
 
     self.nixosModules.grafana
     #self.nixosModules.localai
@@ -129,6 +130,7 @@
       daemon.enable = true;
     };
   };
+
 
   # TODO - Make a sleep module
   systemd.targets = {

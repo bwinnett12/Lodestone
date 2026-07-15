@@ -31,7 +31,7 @@ sudo nixos-rebuild switch --flake .#Locomotive \
 
 
   sudo nixos-rebuild switch --flake .#Locomotive \
-  --build-host tarobutter@10.0.1.10 \
+  --build-host tarobutter@loom \
   --option sandbox false \
   --option filter-syscalls false
 

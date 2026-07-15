@@ -9,7 +9,13 @@ let
   autoDiscovered = lib.filterAttrs (name: _: !(selfPublishes name)) moduleDirs;
 
 in {
+  # Auto-discovered modules go into flake.nixosModules
   flake.nixosModules = lib.mapAttrs
     (name: _: import ./${name})
     autoDiscovered;
+
+  # Self-publishing modules wire themselves in via their own exports.nix
+  imports = lib.mapAttrsToList
+    (name: _: import ./${name}/exports.nix)
+    selfPublished;
 }

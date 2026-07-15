@@ -40,6 +40,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ### Desktop sources
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";

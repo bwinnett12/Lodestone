@@ -20,7 +20,11 @@ in {
   config = lib.mkIf cfg.enable (lib.mkMerge [
     # Common Display
     {
-
+      
+      modules = [ 
+        stylix.nixosModules.stylix
+      ];
+      stylix.enable = true;
       services = {
         xserver = { 
           enable = true; 

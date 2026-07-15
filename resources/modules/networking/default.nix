@@ -9,7 +9,7 @@
         enable = true;
         addresses = true;
       };
-      interfaces = lib.mkDefault [];
+      allowInterfaces = lib.mkDefault [];
     };
     nginx.enable = true;
     openssh.enable = true;

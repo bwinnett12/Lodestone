@@ -19,6 +19,8 @@
     self.nixosModules.grafana
     #self.nixosModules.localai
     self.nixosModules.jellyfin
+
+    self.ecosystem.roles.builder
   ];
 
   ecosystem.display.enable = true;

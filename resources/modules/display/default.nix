@@ -7,7 +7,7 @@ let
 in {
 
   imports = [ 
-    ./fonts
+    ./fonts.nix
   ];
   options.ecosystem.display = {
     enable = lib.mkEnableOption "Implement a Display manager or Window Manager";

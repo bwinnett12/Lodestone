@@ -5,7 +5,7 @@ let
   cfg = config.ecosystem.display;
   
   import = [ 
-    ./fonts
+    #./fonts
   ];
 in {
 

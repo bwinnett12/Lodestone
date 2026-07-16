@@ -3,12 +3,12 @@
 { config, lib, pkgs, inputs, ... }:
 let
   cfg = config.ecosystem.display;
-  stylix = inputs.stylix;
+  
+  import = [ 
+    #./fonts
+  ];
 in {
 
-  imports = [ 
-    ./fonts.nix
-  ];
   options.ecosystem.display = {
     enable = lib.mkEnableOption "Implement a Display manager or Window Manager";
 
@@ -20,7 +20,7 @@ in {
   config = lib.mkIf cfg.enable (lib.mkMerge [
     # Common Display
     {
-      stylix.enable = true;
+
       services = {
         xserver = { 
           enable = true; 

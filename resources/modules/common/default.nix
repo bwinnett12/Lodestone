@@ -7,10 +7,12 @@
     self.ecosystem.citizens.upgraded
 
     self.ecosystem.networking
+    self.ecosystem.power
     
     self.nixosModules.display
     self.nixosModules.hosts
     self.nixosModules.plan9
+    
 
     self.inputs.home-manager.nixosModules.home-manager
   ];

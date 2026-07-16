@@ -21,11 +21,15 @@
     self.nixosModules.jellyfin
 
     # self.ecosystem.roles.builder
+    
   ];
 
   ecosystem.display.enable = true;
   # ecosystem.display.gnome.enable = true;
   ecosystem.display.cosmic.enable = true;
+
+  ecosystem.power.enable = true;
+  ecosystem.power.shellAliases = true;
 
   services.u9fs-client = {
     enable      = true;

@@ -58,18 +58,19 @@ in {
     })
 
     # COSMIC
+    # Uses auto-cpufreq, ignore the power applet limitation
     (lib.mkIf cfg.cosmic.enable {
 
       services = {
         desktopManager.cosmic.enable = true;
         displayManager.cosmic-greeter.enable = true;
-        power-profiles-daemon.enable = lib.mkDefault true;
-        auto-cpufreq.enable = lib.mkDefault false;
+        power-profiles-daemon.enable = true;
+        # power-profiles-daemon.enable = lib.mkDefault true;
+        # auto-cpufreq.enable = lib.mkDefault false;
       };
+    })
 
       #environment.systemPackages = [
       #  pkgs.OpenTabletDriver ## TODO - Add this to a tablet module
-
-    })
   ]);  
 }

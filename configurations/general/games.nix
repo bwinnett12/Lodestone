@@ -26,7 +26,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages =
-      lib.optionals cfg.runescape [ pkgs.runelite pkgs.lutris pkgs.runescape pkgs.bolt-launcher ]
+      lib.optionals cfg.runescape [ pkgs.runelite pkgs.lutris pkgs.bolt-launcher ]
       ++ lib.optionals cfg.pokemmo [ pkgs.pokemmo-installer ]
       ++ [
         pkgs.airshipper

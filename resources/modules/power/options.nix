@@ -5,7 +5,7 @@
     shellAliases = lib.mkEnableOption "Power profile shell aliases";
 
     portable.enable  = lib.mkEnableOption "Power profile for battery-powered machines (Loom)";
-    dependent.enable = lib.mkEnableOption "Power profile for wall-powered/stationary machines (Island)";
+    stationary.enable = lib.mkEnableOption "Power profile for wall-powered/stationary machines (Island)";
     # tablet.enable  = lib.mkEnableOption "Power profile for tablets";  # add when the Tab shows up
   };
 }

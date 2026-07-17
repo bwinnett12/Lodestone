@@ -11,8 +11,8 @@ in {
       services.thermald.enable = true;
     })
 
-    # Portable-specific — only when ecosystem.power.portables.enable
-    (lib.mkIf cfg.portables.enable {
+    # Portable-specific — only when ecosystem.power.portable.enable
+    (lib.mkIf cfg.portable.enable {
 
       # Kernel parameters for better power management on i7-8650U
       # TODO - Move intel_pstate/i915 params to Loom specifically if CPU-dependent

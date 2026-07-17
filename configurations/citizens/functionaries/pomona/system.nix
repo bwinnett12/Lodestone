@@ -11,6 +11,7 @@
       ++ lib.optional (config.services.gitea.enable or false) "gitea"
       ++ lib.optional (config.services.u9fs-server.enable or false
                         || config.services.u9fs-client.enable or false) "u9fs"
-      ++ lib.optional (config.services.prometheus.enable or false) "prometheus";
+      ++ lib.optional (config.services.prometheus.enable or false) "prometheus"
+      ++ lib.optional (config.systemd.services.localai-docker.enable or false) "docker";
   };
 }

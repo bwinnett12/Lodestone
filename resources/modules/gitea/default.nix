@@ -11,13 +11,10 @@
 	postgresql = {
 	  enable = true;
 	  ensureDatabases = [ "gitea" ];
-	  ensureUsers = [{
-		name = [
-			{ name = "gitea"; ensureDBOwnership = true; }
-			{ name = "tarobutter"; }
-		];
-		ensureDBOwnership = true;
-  	  }];
+	  ensureUsers = [
+		{ name = "gitea"; ensureDBOwnership = true; }
+		{ name = "tarobutter"; }
+	  ];
 	};
 
   	# Gitea configuration

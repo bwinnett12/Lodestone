@@ -33,6 +33,7 @@ in {
         pkgs.protontricks
         pkgs.winetricks
         pkgs.steam ## TODO - REmove this, create a steam section of the gaming module
-      ];
+      ]
+    ];
   };
 }

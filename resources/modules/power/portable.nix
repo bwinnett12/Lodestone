@@ -55,7 +55,7 @@ in {
       '';
 
       environment.systemPackages = [
-        pkgs.cpupower
+        pkgs.linuxPackages.cpupower
         pkgs.brightnessctl
 
         # Charger ON profiles

@@ -3,7 +3,7 @@
   imports = [
     ./options.nix
     ./portable.nix
-    ./dependent.nix
+    ./stationary.nix
     # ./tablet.nix
   ];
 }

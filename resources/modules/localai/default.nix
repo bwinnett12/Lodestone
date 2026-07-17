@@ -20,7 +20,7 @@
       ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f /storage/shortstack/localai/configuration/localai-docker.yml up";
       ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /storage/shortstack/localai/configuration/localai-docker.yml down";
 
-      ## TODO - Switch to localai or shortstack user
+      ## TODO - Switch to configuration user
       User = "pomona";
       # Set the working directory to the directory of the compose file
       WorkingDirectory = "/storage/shortstack/localai/"; 

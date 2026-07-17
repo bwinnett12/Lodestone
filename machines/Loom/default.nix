@@ -29,7 +29,7 @@
   ecosystem.display.cosmic.enable = true;
 
   ecosystem.power.enable = true;
-  ecosystem.power.shellAliases = true;
+  ecosystem.power.portable.enable = true;
 
   services.u9fs-client = {
     enable      = true;

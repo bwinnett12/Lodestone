@@ -1,3 +1,9 @@
+# resources/modules/power/default.nix
 { ... }: {
-  imports = [ ./portable.nix ];
+  imports = [
+    ./options.nix
+    ./portable.nix
+    ./dependent.nix
+    # ./tablet.nix
+  ];
 }

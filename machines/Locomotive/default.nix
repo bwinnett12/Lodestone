@@ -10,6 +10,7 @@
     self.nixosModules.go2rtc
     self.nixosModules.prometheus
     # inputs.mailroom.nixosModules.default
+    self.nixosModules.mailroom
   ];
 
   ## Profiles:

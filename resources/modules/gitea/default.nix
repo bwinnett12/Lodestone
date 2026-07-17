@@ -12,7 +12,10 @@
 	  enable = true;
 	  ensureDatabases = [ "gitea" ];
 	  ensureUsers = [{
-		name = "gitea";
+		name = [
+			{ name = "gitea"; ensureDBOwnership = true; }
+			{ name = "tarobutter"; }
+		];
 		ensureDBOwnership = true;
   	  }];
 	};
@@ -29,8 +32,8 @@
 	  settings.server = {
 		HTTP_ADDR = "127.0.0.1";
 		HTTP_PORT = 3030;
-        DOMAIN = "gitea.platatoo.com";
-		ROOT_URL = "http://gitea.platatoo.com/";
+        DOMAIN = "git.platatoo.com";
+		ROOT_URL = "http://git.platatoo.com/";
 	  };
 	};
 	

@@ -11,6 +11,7 @@
     self.nixosModules.prometheus
     # inputs.mailroom.nixosModules.default
     self.nixosModules.mailroom
+    self.nixosModules.gitea
   ];
 
   ## Profiles:

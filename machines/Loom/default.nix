@@ -8,11 +8,10 @@
     self.nixosModules.prometheus
     self.nixosModules.anki
 
-    self.nixosModules.moonlight
+    # self.nixosModules.moonlight
     #self.nixosModules.scarlet2i2
 
     self.nixosModules.frontpage
-    self.nixosModules.gitea
     # nixosCosmicModule
     self.nixosModules.academic
 

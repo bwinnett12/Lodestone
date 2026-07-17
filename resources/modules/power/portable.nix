@@ -4,15 +4,6 @@ let
   cfg = config.ecosystem.power;
 in {
 
-  options.ecosystem.power = {
-    enable = lib.mkEnableOption "Power management";
-    shellAliases = lib.mkEnableOption "Power profile shell aliases";
-
-    portables = {
-      enable = lib.mkEnableOption "A power management profile for portables";
-    };
-  };
-
   config = lib.mkMerge [
 
     # Base power — enabled for any machine with ecosystem.power.enable

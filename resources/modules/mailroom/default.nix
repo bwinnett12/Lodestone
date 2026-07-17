@@ -5,7 +5,7 @@
   systemd.services.mailroom = {
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      User = "pamona";
+      User = "pomona";
       ExecStart = "";
     };
   };

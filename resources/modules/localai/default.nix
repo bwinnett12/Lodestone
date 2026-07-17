@@ -21,7 +21,7 @@
       ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /home/tarobutter/Lodestone/resources/modules/localai/localai-docker.yml down";
 
       ## TODO - Switch to localai or shortstack user
-      User = "tarobutter";
+      User = "pomona";
       # Set the working directory to the directory of the compose file
       WorkingDirectory = "/storage/shortstack/localai/"; 
       Restart = "on-failure";

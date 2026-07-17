@@ -17,7 +17,7 @@
     self.nixosModules.academic
 
     self.nixosModules.grafana
-    #self.nixosModules.localai
+    self.nixosModules.localai
     self.nixosModules.jellyfin
 
     # self.ecosystem.roles.builder
@@ -33,7 +33,7 @@
 
   services.u9fs-client = {
     enable      = true;
-    serverIP    = "100.82.185.26"; # ipv4 of Island
+    serverIP    = "100.106.125.87"; # ipv4 of Locomotive
     mountPoint  = "/storage/Orchard";
     port        = 4500;
   };

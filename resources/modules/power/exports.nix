@@ -1,6 +1,4 @@
-# resources/modules/common/exports.nix
-{ ... }: {
-  flake.ecosystem.power = {
-    portable = import ./portable.nix;
-  }; 
+# resources/modules/power/exports.nix
+{ self, ... }: {
+  flake.ecosystem.power = self.nixosModules.power;
 }

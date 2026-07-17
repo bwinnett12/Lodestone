@@ -13,6 +13,8 @@ let
       enable = mkEnableOption "this functionary account on this machine";
       description = mkOption { type = types.str; default = ""; };
       extraGroups = mkOption { type = types.listOf types.str; default = []; };
+      uid = mkOption { type = types.nullOr types.int; default = null; };
+
     };
   };
 in {
@@ -31,6 +33,7 @@ in {
       extraGroups = f.extraGroups;
       home = "/var/lib/${name}";
       createHome = true;
+      uid = mkIf (f.uid != null) f.uid;
     }) cfg;
 
     users.groups = mapAttrs (name: f: mkIf f.enable {}) cfg;

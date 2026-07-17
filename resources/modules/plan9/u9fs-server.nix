@@ -40,7 +40,7 @@ in {
 
     # ── Create export directory ──────────────────────────────────────────────
     systemd.tmpfiles.rules = [
-      "d ${cfg.exportPath} 0750 u9fs u9fs -"
+      "d ${cfg.exportPath} 0770 u9fs u9fs -"
     ];
 
     # ── Socket unit ──────────────────────────────────────────────────────────
@@ -91,5 +91,4 @@ in {
       jq
     ];
   };
-  # networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
 }

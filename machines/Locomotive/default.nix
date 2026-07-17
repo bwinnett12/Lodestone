@@ -29,6 +29,14 @@
     users.tarobutter.enable = true;
   };
 
+  ## TODO - move this to configuration file
+  services.u9fs-server = {
+    enable      = true;
+    tailscaleIP = "100.106.125.87"; # ipv4 of Locomotive
+    exportPath  = "/storage/Orchard";
+    port        = 4500;
+  };
+
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"

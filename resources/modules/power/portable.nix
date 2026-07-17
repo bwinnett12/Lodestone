@@ -23,6 +23,7 @@ in {
       ];
 
       # auto-cpufreq handles governor switching based on charger state
+      services.power-profiles-daemon.enable = lib.mkForce false;
       services.auto-cpufreq = {
         enable = true;
         settings = {

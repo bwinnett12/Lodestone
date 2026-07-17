@@ -129,7 +129,7 @@ in {
       security.sudo.extraRules = [{
         users = [ "tarobutter" ];
         commands = [
-          { command = "${pkgs.cpupower}/bin/cpupower"; options = [ "NOPASSWD" ]; }
+          { command = "${pkgs.linuxPackages.cpupower}/bin/cpupower"; options = [ "NOPASSWD" ]; }
           { command = "/run/current-system/sw/bin/profile-*"; options = [ "NOPASSWD" ]; }
         ];
       }];

@@ -64,7 +64,7 @@ in {
       services = {
         desktopManager.cosmic.enable = true;
         displayManager.cosmic-greeter.enable = true;
-        power-profiles-daemon.enable = true;
+        # power-profiles-daemon.enable = true;
         # power-profiles-daemon.enable = lib.mkDefault true;
         # auto-cpufreq.enable = lib.mkDefault false;
       };

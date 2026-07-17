@@ -25,7 +25,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ 
+    home.packages =
       lib.optionals cfg.runescape [ pkgs.runelite pkgs.lutris pkgs.runescape pkgs.bolt-launcher ]
       ++ lib.optionals cfg.pokemmo [ pkgs.pokemmo-installer ]
       ++ [
@@ -33,7 +33,6 @@ in {
         pkgs.protontricks
         pkgs.winetricks
         pkgs.steam ## TODO - REmove this, create a steam section of the gaming module
-      ]
-    ];
+      ];
   };
 }

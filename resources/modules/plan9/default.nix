@@ -16,7 +16,7 @@
       description  = "u9fs 9P file server user";
     };
     groups.u9fs = {
-      uid = 900;
+      gid = 900;
     };
   };
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];

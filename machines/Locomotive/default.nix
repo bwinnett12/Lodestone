@@ -12,6 +12,8 @@
     # inputs.mailroom.nixosModules.default
     self.nixosModules.mailroom
     self.nixosModules.gitea
+
+    self.nixosModules.pihole
   ];
 
   ## Profiles:

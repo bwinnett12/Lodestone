@@ -4,10 +4,11 @@
 {
   services.calibre-server = {
     enable = true;
-    group = "users";
-    user = "pomona";
+    group = "calibre";
+    user = "calibre";
     libraries = [
-        "/storage/Orchid/Media/Books"
+        #"/storage/"
+        "/storage/Tulip/Media/Books"
     ];
     openFirewall = true;
     port = 2111;
@@ -27,36 +28,51 @@
 	  };
 
     options = {
-      calibreLibrary = "/storage/Orchid/Media/Books";
+      calibreLibrary = "/storage/Tulip/Media/Books";
       enableBookUploading = true;
       enableBookConversion = true;
     };
   };
 
-	
-  users.users.pomona = {
-    description = "Roman goddess of the Orchard and Maintainer of our apps";
-    extraGroups = [
-      "input"
-      "networkmanager"
-      "systemd-journal"
-      "wheel"
-      "docker"
-      "grafana"
-      "storage-Orchid"
-      "storage-Yarrow"
-      "jellyfin"
-      "video"   # Required for hardware-accelerated transcoding
-      "render"  # Required for Intel/AMD quicksync/VA-API
-      "media"
-    ];
-
-    home = "/var/lib/pomona";
-    createHome = true;
-
-    isNormalUser = true;
-    shell = pkgs.bash;
+  ## Setup Calibre user and group
+  users = {
+    users.calibre = {
+      isSystemUser = true;
+      group = "calibre";
+      extraGroups = [
+        "storage"
+       ];
+      createHome = true;
+      home = "/var/lib/calibre";
+    };
+  groups.calibre = {};
   };
-  users.groups.pomona = {};
-
 }
+# {
+	
+#   users.users.pomona = {
+#     description = "Roman goddess of the Orchard and Maintainer of our apps";
+#     extraGroups = [
+#       "input"
+#       "networkmanager"
+#       "systemd-journal"
+#       "wheel"
+#       "docker"
+#       "grafana"
+#       "storage-Orchid"
+#       "storage-Yarrow"
+#       "jellyfin"
+#       "video"   # Required for hardware-accelerated transcoding
+#       "render"  # Required for Intel/AMD quicksync/VA-API
+#       "media"
+#     ];
+
+#     home = "/var/lib/pomona";
+#     createHome = true;
+
+#     isNormalUser = true;
+#     shell = pkgs.bash;
+#   };
+#   users.groups.pomona = {};
+
+# }

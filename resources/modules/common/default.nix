@@ -44,6 +44,8 @@
     coreutils
     fastfetch
     git
+    git-annex
+
     vim
     wget
     tree

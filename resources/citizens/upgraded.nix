@@ -32,6 +32,7 @@
     ++ lib.optional (config.users.groups ? u9fs) "u9fs"
     ++ lib.optional (config.users.groups ? uinput) "uinput"
     ++ lib.optional (config.users.groups ? rustdesk) "rustdesk"
+    ++ lib.optional (config.users.groups ? calibre) "calibre"
     ++ lib.optional (config.users.groups ? prometheus) "prometheus";
   # add new elevated groups here as new services/hardware modules introduce them —
   # this is the one place that ever needs editing when a new optional group appears

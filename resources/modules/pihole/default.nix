@@ -1,5 +1,6 @@
-#### Pi-hole
-# resources/modules/pihole/default.nix
+### resources/modules/pihole/default.nix
+### Pi-hole
+### https://wiki.nixos.org/wiki/Pi-Hole
 { config, pkgs, inputs, ... }:
 {
   # Pi-hole configuration
@@ -8,8 +9,8 @@
 
     openFirewallDNS = true;        # so other devices on your network can query it
       openFirewallWebserver = true;  # for the admin UI
-
-    settings = {
+      
+      settings = {
         # See <https://docs.pi-hole.net/ftldns/configfile/>
 
         # External DNS Servers quad9 and cloudflare

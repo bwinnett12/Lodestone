@@ -74,9 +74,11 @@
 	  podman
   ];
 
-    ### Transcend drive
-  fileSystems."/storage/Tulip" = {
+  users.groups.storage.gid = 1000;          # give the "shared group" a real name
+  users.users.tarobutter.extraGroups = [ "storage" ];
+  # add pomona, mailroom, calibre, etc. here too as they need Tulip access
 
+  fileSystems."/storage/Tulip" = {
     device = "UUID=809C-FB5D";
     fsType = "exfat";
     options = [
@@ -84,9 +86,9 @@
       "nofail"
       "x-systemd.automount"
       "x-systemd.device-timeout=5s"
-      "gid=1000"      ## todo - Currently with "shared group"
-      "uid=1000"      # todo - Replace with tarobutter
-      "umask=0002"          # Allows group writing
+      "gid=1000"
+      "uid=${toString config.users.users.tarobutter.uid}"   # resolves tarobutter's real uid
+      "umask=0002"
     ];
   };
 }

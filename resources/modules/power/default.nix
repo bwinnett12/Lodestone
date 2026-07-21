@@ -4,6 +4,7 @@
     ./options.nix
     ./portable.nix
     ./stationary.nix
+    ./cosmic-ppd-shim.nix
     # ./tablet.nix
   ];
 }

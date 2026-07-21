@@ -40,7 +40,7 @@
     enable = true;
     virtualHosts."${toString config.services.pihole-ftl.settings.dns.hosts}" = {
       locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString config.services.pi-hole-web.ports}";
+          proxyPass = "http://127.0.0.1:${toString config.services.pihole-web.ports}";
           proxyWebsockets = true;
           extraConfig = ''
             proxy_set_header Host $host;

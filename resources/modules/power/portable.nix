@@ -73,7 +73,7 @@ in {
           cpupower frequency-set -g performance
           echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo
           # If charger removed, sustain for 45s then drop to balanced-performance
-          if [ "$(cat /sys/class/power_supply/AC/online)" = "0" ]; then
+          if [ "$(cat /sys/class/power_supply/ADP1/online)" = "0" ]; then
             sleep 45 && profile-balanced-performance &
           fi
           echo "Profile: PERFORMANCE active"

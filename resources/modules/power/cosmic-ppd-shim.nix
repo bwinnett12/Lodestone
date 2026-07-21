@@ -9,6 +9,7 @@ let
     from dbus_next.aio import MessageBus
     from dbus_next.service import ServiceInterface, method, dbus_property
     from dbus_next import Variant, PropertyAccess
+    from dbus_next.constants import BusType
 
     PROFILE_MAP = {
         "power-saver": "profile-barebones",
@@ -47,7 +48,7 @@ let
             return []
 
     async def main():
-        bus = await MessageBus(bus_type=2).connect()  # SYSTEM_BUS
+        bus = await MessageBus(bus_type=BusType.SYSTEM).connect()
         bus.export("/net/hadess/PowerProfiles", PowerProfiles())
         await bus.request_name("net.hadess.PowerProfiles")
         await asyncio.get_event_loop().create_future()

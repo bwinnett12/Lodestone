@@ -3,6 +3,7 @@
 {
   environment.systemPackages = [
     pkgs.zotero
+    pkgs.libreoffice
   ];
 
 }

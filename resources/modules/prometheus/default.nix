@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   # https://nixos.org/manual/nixos/stable/#module-services-prometheus-exporters
   # https://github.com/NixOS/nixpkgs/blob/nixos-24.05/nixos/modules/services/monitoring/prometheus/exporters.nix
@@ -14,6 +14,9 @@
       "systemd"
       "tcpstat"
       "wifi"
+      "hwmon" 
+      "thermal_zone" 
+      "cpufreq"
     ];
     # You can pass extra options to the exporter using `extraFlags`, e.g.
     # to configure collectors or disable those enabled by default.
@@ -36,6 +39,10 @@
           }
         ];
       }
+
     ];
   };
+  boot.kernelModules = lib.mkIf pkgs.stdenv.hostPlatform.isx86_64 [ "coretemp" ];
+
+
 }

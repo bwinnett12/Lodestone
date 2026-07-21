@@ -6,14 +6,15 @@
 
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
     self.nixosModules.prometheus
-    self.nixosModules.anki
+    self.nixosModules.academic
+
+    # self.nixosModules.anki
 
     # self.nixosModules.moonlight
     #self.nixosModules.scarlet2i2
 
     self.nixosModules.frontpage
     # nixosCosmicModule
-    self.nixosModules.academic
 
     self.nixosModules.grafana
     self.nixosModules.localai

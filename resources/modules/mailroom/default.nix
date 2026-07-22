@@ -4,8 +4,10 @@
 
   services.mailroom = {
     enable      = true;
-    vaultPath   = "/var/lib/mailroom/vault";
+    vaultPath   = "/storage/Orchard";
     libraryRoot = "/storage/Orchard";
     llmUrl      = "http://ai.platatoo.com/";
   };
+
+  users.users.mailroom.extraGroups = [ "storage" ];
 }

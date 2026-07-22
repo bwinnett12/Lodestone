@@ -32,7 +32,7 @@
       interfaces."tailscale0".allowedTCPPorts = [ 80 443 ];
     };
 
-    interfaces.eth0.wakeOnLan.enable = true;
+    # interfaces.eth0.wakeOnLan.enable = true;
     nameservers = [ "1.1.1.1" "8.8.8.8" "100.100.100.100" ];
     networkmanager.enable = true;
   };

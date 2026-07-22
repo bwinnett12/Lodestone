@@ -87,7 +87,7 @@
       "x-systemd.automount"
       "x-systemd.device-timeout=5s"
       "gid=1000"
-      "uid=${toString config.users.users.tarobutter.uid}"   # resolves tarobutter's real uid
+      "uid=1001"   # resolves tarobutter's real uid
       "umask=0002"
     ];
   };

@@ -43,6 +43,18 @@
     port        = 4500;
   };
 
+
+  fileSystems."/var/log" = {
+    device = "/storage/Orchard/88_Logs/88.2_logs-machine/88.2-C_locomotive";
+    
+    options = [ "bind" ];
+  };
+
+
+
+
+
+
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"

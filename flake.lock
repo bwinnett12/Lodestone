@@ -241,11 +241,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782373554,
-        "narHash": "sha256-RK/EonB1eIrKGRiLJMmPPs/vEizqk+XZ4YFxjKMhjWA=",
+        "lastModified": 1784791018,
+        "narHash": "sha256-HFofkBZhKHaNqwghqWdCpu5AidUlVSiqIdGm7DCVvnc=",
         "ref": "rust",
-        "rev": "784330438fa94f893855e9ade13e4fdf94a20c90",
-        "revCount": 94,
+        "rev": "a7fdeacdd769750232499b1c436a1b5cbd7741a4",
+        "revCount": 100,
         "type": "git",
         "url": "ssh://git@github.com/bwinnett12/Mailroom.git"
       },
@@ -253,6 +253,27 @@
         "ref": "rust",
         "type": "git",
         "url": "ssh://git@github.com/bwinnett12/Mailroom.git"
+      }
+    },
+    "nix-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1784500460,
+        "narHash": "sha256-UvORnAxTRHax7RG74W8Z2t4GvIkX6AjJ5kk0QlwZomo=",
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "rev": "57a3171f94705599a2499248ca5758d5eb47c0e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LnL7",
+        "ref": "master",
+        "repo": "nix-darwin",
+        "type": "github"
       }
     },
     "nixos-cosmic": {
@@ -417,6 +438,7 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "mailroom": "mailroom",
+        "nix-darwin": "nix-darwin",
         "nixos-cosmic": "nixos-cosmic",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",

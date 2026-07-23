@@ -21,6 +21,11 @@
     };
     tmp.useTmpfs = true;
   };
+
+
+  services.journald.storage = "volatile";   # systemd journal lives in RAM, never touches disk
+  zramSwap.enable = true;                   # swap in compressed RAM instead of a disk-backed swapfile
+  fileSystems."/".options = [ "noatime" ];  # stop writing access-time metadata on every read
   
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ######## Network settings

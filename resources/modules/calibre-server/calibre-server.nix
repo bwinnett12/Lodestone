@@ -1,3 +1,4 @@
+# resources/modules/calibre-server/calibre-server.nix
 #### Calibre Server
 { config, pkgs, inputs, ... }:
 

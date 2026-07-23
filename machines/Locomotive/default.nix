@@ -19,7 +19,7 @@
   ];
 
   services.calibre-server.enable = true;  # unchanged — this stays here
-  services.calibre-web.enable = lib.mkForce false;
+  services.calibre-web.enable = false;
 
   ## Profiles:
   home-manager = {

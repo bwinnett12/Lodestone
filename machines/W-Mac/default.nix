@@ -5,7 +5,7 @@
 }: {
 
   imports = [
-    
+
   ];
   # Native ARM Linux builder — replaces Loom's QEMU-emulated aarch64 builds
   nix.linux-builder.enable = true;
@@ -24,5 +24,5 @@
   system.stateVersion = 5;
 
   # macOS-appropriate primary user (nix-darwin needs this since 24.11+)
-  system.primaryUser = "b"
+  system.primaryUser = "b";
 }

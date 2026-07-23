@@ -13,6 +13,8 @@
     self.nixosModules.mailroom
     self.nixosModules.gitea
 
+    self.nixosModules.calibre-server
+
     self.nixosModules.pihole
   ];
 

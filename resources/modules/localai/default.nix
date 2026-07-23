@@ -1,3 +1,4 @@
+# resources/modules/localai/default.nix
 #### ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
 #### Localai module through docker
 { config, pkgs, inputs, ... }:

@@ -12,14 +12,11 @@
     # inputs.mailroom.nixosModules.default
     self.nixosModules.mailroom
     self.nixosModules.gitea
-
-    self.nixosModules.calibre-server
-
     self.nixosModules.pihole
   ];
 
-  services.calibre-server.enable = true;  # unchanged — this stays here
-  services.calibre-web.enable = false;
+  #services.calibre-server.enable = true;  # unchanged — this stays here
+  # services.calibre-web.enable = false;
 
   ## Profiles:
   home-manager = {

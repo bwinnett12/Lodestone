@@ -1,5 +1,5 @@
 # resources/modules/calibre-server/default.nix
-{ config, pkgs, inputs, ... }:
+{ pkgs, inputs, lib, self, ... }:
 {
   imports = [
     ./calibre-server.nix

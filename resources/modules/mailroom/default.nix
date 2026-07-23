@@ -6,7 +6,7 @@
     enable      = true;
     vaultPath   = "/storage/Orchard";
     libraryRoot = "/storage/Orchard";
-    llmUrl      = "http://ai.platatoo.com/";
+    llmUrl      = "ai.platatoo.com/";
     summariseModel = "qwen_qwen3.5-0.8b";
   };
   users.users.mailroom.extraGroups = [ "storage" ];

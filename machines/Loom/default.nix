@@ -38,6 +38,11 @@
     port        = 4500;
   };
 
+  services.calibre-web = {
+    enable = true;
+    options.calibreLibrary = "/storage/Orchard/51_Library/51-4_Books";
+  };
+
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
 
   nix.settings.extra-platforms = [ "aarch64-linux" ];
@@ -48,7 +53,9 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit self; };
-    users.tarobutter = {
+    users.tarobutter = { lib, ... }: {
+
+      imports = [ ./home.nix ] ;
       profiles.gaming.enable = lib.mkForce true;
       profiles.communications.enable = lib.mkForce true;
       profiles.development.enable = lib.mkForce true;

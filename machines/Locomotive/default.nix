@@ -18,6 +18,9 @@
     self.nixosModules.pihole
   ];
 
+  services.calibre-server.enable = true;  # unchanged — this stays here
+  services.calibre-web.enable = lib.mkForce false;
+
   ## Profiles:
   home-manager = {
     useGlobalPkgs = true;

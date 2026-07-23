@@ -18,7 +18,7 @@
     };
 
     nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+      package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
       modesetting.enable = true;
       open = false;
       nvidiaSettings = true;

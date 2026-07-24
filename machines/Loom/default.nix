@@ -87,8 +87,9 @@
   boot = {
     kernelModules = [ "ntfs3" "ext4" "btrfs" "vfat" "exfat" ];
     kernelParams = [ "pcie_ports=compat" ];
+    kernelPackages = lib.mkForce pkgs.linuxKernel.kernels.linux_6_12;
     #kernelPackages = pkgs.linux-surface;
-    kernelPackages = pkgs.linuxPackages_6_12;
+    # kernelPackages = pkgs.linuxPackages_6_12;
     # boot.kernelPackages = lib.mkForce pkgs.linuxKernel.kernels.linux_surface_stable;  # confirm exact name
     loader = {
       efi = {

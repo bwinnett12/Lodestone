@@ -43,16 +43,11 @@
     port        = 4500;
   };
 
-
   fileSystems."/var/log" = {
-    device = "/storage/Orchard/88_Logs/88.2_logs-machine/88.2-C_locomotive";
-    
-    options = [ "bind" ];
+    device = "tmpfs";
+    fsType = "tmpfs";
+    options = [ "size=100M" "mode=0755" ];
   };
-
-
-
-
 
 
   hardware.enableRedistributableFirmware = true;

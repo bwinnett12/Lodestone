@@ -6,7 +6,7 @@
     100.106.125.87  pihole.platatoo.com
     100.106.125.87  git.platatoo.com
     100.106.125.87  grafana.platatoo.com
-    100.106.125.87  mailroom.platatoo.com
+    100.106.125.87  mail.platatoo.com
 
     # Island services - Off temporarily. Now on Loom
     # 100.82.185.26  app.platatoo.com

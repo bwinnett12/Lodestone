@@ -12,11 +12,11 @@
     # inputs.mailroom.nixosModules.default
     self.nixosModules.mailroom
     self.nixosModules.gitea
-
-    self.nixosModules.calibre-server
-
     self.nixosModules.pihole
   ];
+
+  #services.calibre-server.enable = true;  # unchanged — this stays here
+  # services.calibre-web.enable = false;
 
   ## Profiles:
   home-manager = {
@@ -42,6 +42,18 @@
     exportPath  = "/storage/Orchard";
     port        = 4500;
   };
+
+
+  fileSystems."/var/log" = {
+    device = "/storage/Orchard/88_Logs/88.2_logs-machine/88.2-C_locomotive";
+    
+    options = [ "bind" ];
+  };
+
+
+
+
+
 
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.permittedInsecurePackages = [

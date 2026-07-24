@@ -1,7 +1,6 @@
 
 # https://search.nixos.org/options: NixOS manual (`nixos-help`)
 { config, lib, pkgs, inputs, nixosCosmicModule, ... }:
-
 {
   networking = {
     hostName = "Loom";
@@ -18,7 +17,7 @@
     };
 
     nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+      package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
       modesetting.enable = true;
       open = false;
       nvidiaSettings = true;
@@ -84,6 +83,7 @@
     intel-media-driver
     nvidia-vaapi-driver
     nvidia-container-toolkit
+    surface-control
   ];
   system.stateVersion = "25.05"; # Did you read the comment?
 

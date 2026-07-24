@@ -1,53 +1,26 @@
-#### Calibre Server
-{ config, pkgs, inputs, ... }:
-
+# resources/modules/calibre-server/default.nix
+{ config, pkgs, inputs, lib, self, ... }:
 {
-  services.calibre-server = {
-    enable = true;
-    group = "calibre";
-    user = "calibre";
-    libraries = [
-        #"/storage/"
-        "/storage/Tulip/Media/Books"
-    ];
-    openFirewall = true;
-    port = 2111;
-  };
-
-  environment.systemPackages = with pkgs; [
-	  pkgs.calibre
+  imports = [
+    ./calibre-server.nix
+    ./calibre-web.nix
   ];
 
-  ## Calibre Web client
-  services.calibre-web = {
-    enable = true;
-
-    listen = {
-      ip = "0.0.0.0";
-      port = 8083;
-	  };
-
-    options = {
-      calibreLibrary = "/storage/Tulip/Media/Books";
-      enableBookUploading = true;
-      enableBookConversion = true;
-    };
-  };
-
-  ## Setup Calibre user and group
-  users = {
+  # Only create the calibre user/group where calibre-server actually runs
+  users = lib.mkIf config.services.calibre-server.enable {
     users.calibre = {
       isSystemUser = true;
       group = "calibre";
-      extraGroups = [
-        "storage"
-       ];
+      extraGroups = [ "storage" ];
       createHome = true;
       home = "/var/lib/calibre";
     };
-  groups.calibre = {};
+    groups.calibre = {};
   };
 }
+
+
+
 # {
 	
 #   users.users.pomona = {

@@ -58,5 +58,6 @@
     openssl
     rustscan
     wakeonlan
+    dnsutils
   ];
 }

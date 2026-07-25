@@ -43,13 +43,6 @@
     port        = 4500;
   };
 
-  fileSystems."/var/log" = {
-    device = "tmpfs";
-    fsType = "tmpfs";
-    options = [ "size=100M" "mode=0755" ];
-  };
-
-
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"

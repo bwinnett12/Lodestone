@@ -1,3 +1,4 @@
+## machines/Locomotive/configuration.nix
 { config, pkgs, lib, inputs, ... }:
 {
   imports =
@@ -21,6 +22,13 @@
     };
     tmp.useTmpfs = true;
   };
+
+  fileSystems."/var/log" = {
+    device = "tmpfs";
+    fsType = "tmpfs";
+    options = [ "size=100M" "mode=0755" ];
+  };
+
 
 
   services.journald.storage = "volatile";   # systemd journal lives in RAM, never touches disk

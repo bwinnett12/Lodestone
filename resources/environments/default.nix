@@ -10,7 +10,7 @@ in {
   # sibling home.nix in via home-manager.sharedModules, gated by that
   # environment's own enable option (see neovim/system.nix). This avoids
   # needing a second enable flag in the home-manager module tree.
-  flake.nixosModules = lib.mapAttrs
+  flake.ecosystem.environments = lib.mapAttrs
     (name: _: import (./. + "/${name}/system.nix"))
     environmentDirs;
 }

@@ -15,7 +15,7 @@
   services.nginx = {
     enable = true;
     virtualHosts."mail.platatoo.com" = {
-      listen = [{ addr = "100.83.209.81"; port = 80; }]; ## THis is Locomotive
+      listen = [{ addr = "100.106.125.87"; port = 80; }]; ## This is Locomotive
       locations."/" = {
           proxyPass = "http://127.0.0.1:3111";
           proxyWebsockets = true;

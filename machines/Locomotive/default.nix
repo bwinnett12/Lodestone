@@ -11,8 +11,10 @@
     self.nixosModules.prometheus
     # inputs.mailroom.nixosModules.default
     self.nixosModules.mailroom
+    self.nixosModules.homepage <- #TODO - Remove the module itself or repurpose into extending mailroom
     self.nixosModules.gitea
     self.nixosModules.pihole
+    self.nixosModules.grafana
   ];
 
   #services.calibre-server.enable = true;  # unchanged — this stays here

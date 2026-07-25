@@ -13,10 +13,8 @@
     # self.nixosModules.moonlight
     #self.nixosModules.scarlet2i2
 
-    self.nixosModules.frontpage
+    # self.nixosModules.frontpage -> Remove the module itself or repurpose to extend mailroom
     # nixosCosmicModule
-
-    self.nixosModules.grafana
     self.nixosModules.localai
     self.nixosModules.jellyfin
       ../../configurations/programming

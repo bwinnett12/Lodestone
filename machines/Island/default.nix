@@ -19,7 +19,7 @@
     self.nixosModules.gitea
     self.nixosModules.go2rtc
     self.nixosModules.grafana
-    self.nixosModules.homepage
+    # self.nixosModules.homepage <- #TODO - Remove the module itself or repurpose into extending mailroom
     self.nixosModules.jellyfin
     self.nixosModules.moonlight
     self.nixosModules.komga

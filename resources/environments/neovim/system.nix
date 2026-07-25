@@ -8,10 +8,19 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      ripgrep fd rust-analyzer nil
+      ripgrep fd nil
+      nixd nixpkgs-fmt
+      python312Packages.python-lsp-server
+      python312Packages.pylsp-mypy
+      ruff python312Packages.black
+      rust-analyzer rustc cargo rustfmt clippy
+      (rWrapper.override { packages = with rPackages; [ languageserver ]; })
+      julia-bin
     ];
     fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
 
-    home-manager.sharedModules = [ ./home.nix ];
+    home-manager.sharedModules = [ 
+      ./home.nix
+    ];
   };
 }

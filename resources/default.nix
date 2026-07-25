@@ -8,6 +8,7 @@
 		./modules
 		./modules/common/exports.nix
 		./citizens
+		./environments
 		#./hardware
 		./lib
 	];

@@ -19,6 +19,7 @@
     self.nixosModules.grafana
     self.nixosModules.localai
     self.nixosModules.jellyfin
+      ../../configurations/programming
 
     # self.ecosystem.roles.builder
     
@@ -60,8 +61,7 @@
       profiles.communications.enable = lib.mkForce true;
       profiles.development.enable = lib.mkForce true;
       # profiles.shortstack.enable = false;
-    };
-  };
+    }; };
 
   ecosystem.users.tarobutter.enable = true;
   
@@ -80,7 +80,7 @@
       "qtwebengine-5.15.19"
       "openssl-1.1.1w"
     ];
-  };
+};
 
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ####### Boot settings
@@ -97,10 +97,7 @@
         efiSysMountPoint = "/boot";
       };
       systemd-boot.enable = true;
-    };
-  };
-
-  #environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
+    }; };
 
  services = {
 
@@ -113,7 +110,7 @@
     #displayManager.gdm.enable = true;
 
     # Enable touchpad support (enabled default in most desktopManager).
-    libinput.enable = true;  # TODO - Move to table module
+    libinput.enable = true;  # TODO - Move to tablet module
     iptsd.enable = true;
 
     logind = {
@@ -121,8 +118,7 @@
         HandleLidSwitchDocked = "ignore";   # if you ever using a dock/external monitor setup
         HandleLidSwitchExternalPower = "ignore";  # plugged in at a desk → stays awake even with lid closed, useful for a 2-in-1 docked with an external display, or just running background tasks
         HandleLidSwitch = "suspend"; # closing lid while on battery → sleep, standard laptop behavior
-        };
-    };
+      }; };
 
     
 
@@ -141,8 +137,7 @@
     opentabletdriver = {
       enable = true; 
       daemon.enable = true;
-    };
-  };
+  }; };
 
 
   # TODO - Make a sleep module
@@ -152,5 +147,4 @@
     hibernate.enable = true;
     hybrid-sleep.enable = true;
   };
-
 }

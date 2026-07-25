@@ -7,6 +7,7 @@
     self.ecosystem.citizens.upgraded
 
     self.ecosystem.networking
+    self.ecosystem.environments.neovim
     self.ecosystem.power
     
     self.nixosModules.display
@@ -16,6 +17,8 @@
 
     self.inputs.home-manager.nixosModules.home-manager
   ];
+
+  
 
   i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "America/Anchorage";

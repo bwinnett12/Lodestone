@@ -20,7 +20,7 @@
     # 100.83.209.81  anki.platatoo.com
   '';
 
-  dns.hosts = [
+  services.pihole-ftl.settings.dns.hosts = [
     "100.106.125.87 pihole.platatoo.com"
     "100.106.125.87 git.platatoo.com"
     "100.106.125.87 mail.platatoo.com"

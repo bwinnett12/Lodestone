@@ -45,6 +45,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    inputs.nixvim = {
+    url = "github:nix-community/nixvim";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
     ### Desktop sources
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";

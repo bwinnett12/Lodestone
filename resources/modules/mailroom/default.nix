@@ -17,7 +17,7 @@
     virtualHosts."mail.platatoo.com" = {
       listen = [{ addr = "100.106.125.87"; port = 80; }]; ## This is Locomotive
       locations."/" = {
-          proxyPass = "http://127.0.0.1:3111";
+          proxyPass = "http://127.0.0.1:3000";
           proxyWebsockets = true;
           extraConfig = ''
             proxy_set_header Host $host;

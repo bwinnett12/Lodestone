@@ -10,7 +10,7 @@
       default = true;
       listen = [{ addr = "100.106.125.87"; port = 80; }];  # Locomotive — same machine as Mailroom # TODO - Bind this automatically
       locations."/" = {
-        proxyPass = "http://127.0.0.1:3111";
+        proxyPass = "http://127.0.0.1:3000";
         proxyWebsockets = true;
         extraConfig = ''
           proxy_set_header Host $host;

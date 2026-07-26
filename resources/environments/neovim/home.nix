@@ -7,9 +7,6 @@
     viAlias = true;
     vimAlias = true;
 
-    colorschemes.gruvbox.enable = true;
-
-
     plugins = with pkgs.vimPlugins; [
       nvim-lspconfig
       blink-cmp friendly-snippets

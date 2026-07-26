@@ -51,8 +51,8 @@
       Restart = "on-failure";
       RestartSec = "5s";
     };
-    startLimitIntervalSec = 120;
-    startLimitBurst = 20;
+    startLimitIntervalSec = lib.mkForce 120;
+    startLimitBurst = lib.mkForce 20;
   };
 
   programs.ssh.extraConfig = ''

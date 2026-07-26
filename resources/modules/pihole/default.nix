@@ -17,7 +17,7 @@
         dns.upstreams = [ "9.9.9.9" "1.1.1.1" ];
 
         # Optionally resolve local hosts (domain is optional)
-        dns.hosts = [ "pihole.platatoo.com" ];  ## TODO -- Is this updated for Locomotive if declared as 
+        # dns.hosts = [ "pihole.platatoo.com" ];  ## TODO -- Is this updated for Locomotive if declared as 
       };
 
     lists = [    # Lists can be added via URL

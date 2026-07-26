@@ -29,7 +29,7 @@
       allowedUDPPorts = [ config.services.tailscale.port ];
       checkReversePath = "loose";
       trustedInterfaces = [ "tailscale0" ];
-      interfaces."tailscale0".allowedTCPPorts = [ 80 443 ];
+      # interfaces."tailscale0".allowedTCPPorts = [ 80 443 ];
     };
 
     # interfaces.eth0.wakeOnLan.enable = true;
@@ -38,9 +38,21 @@
   };
 
 
+
+    # Any nginx vhost bound to a literal Tailscale IP races tailscaled on boot:
+  # nginx can start before the address is actually assigned, fails with
+  # EADDRNOTAVAIL, and burns through its restart budget before Tailscale
+  # finishes its handshake. Make nginx wait for tailscaled, and give it
+  # enough retries to survive that delay instead of crash-looping to death.
   systemd.services.nginx = {
-    after = [ "tailscaled.service" "network-online.target" ];
-    wants = [ "tailscaled.service" "network-online.target" ];
+    after = [ "tailscaled.service" ];
+    wants = [ "tailscaled.service" ];
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = "5s";
+    };
+    startLimitIntervalSec = 120;
+    startLimitBurst = 20;
   };
 
   programs.ssh.extraConfig = ''

@@ -49,7 +49,7 @@
     wants = [ "tailscaled.service" ];
     serviceConfig = {
       Restart = lib.mkForce "on-failure";
-      RestartSec = "5s";
+      RestartSec = lib.mkForce "5s";
     };
     startLimitIntervalSec = lib.mkForce 120;
     startLimitBurst = lib.mkForce 20;

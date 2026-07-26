@@ -49,7 +49,7 @@
         hostname = "github.com";
         user = "git";
         identityFile = "~/.ssh/id_ed25519";
-        IdentitiesOnly = true;
+        # IdentitiesOnly = true;
       };
     };
     home-manager.enable = true;

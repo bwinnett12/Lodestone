@@ -11,7 +11,7 @@ services:
       timeout: 5m
       retries: 5
     ports:
-      - 127.0.0.1:8090:8080
+      - 100.83.209.81:8090:8090
     environment:
       - DEBUG=true
     volumes:

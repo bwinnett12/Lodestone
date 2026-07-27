@@ -60,6 +60,17 @@
     }; };
 
   ecosystem.users.tarobutter.enable = true;
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      python312 = prev.python312.override {
+        packageOverrides = pyFinal: pyPrev: {
+          scipy = pyPrev.scipy.overridePythonAttrs (old: { doCheck = false; });
+        };
+      };
+    })
+  ];
+
   
   nixpkgs.config = {
     # allowUnfree = true;

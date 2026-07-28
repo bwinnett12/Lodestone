@@ -55,11 +55,6 @@
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.url = "github:NixOS/nixpkgs/9807714d6944a957c2e036f84b0ff8caf9930bc0";
     };
-    
-    linux-surface = {
-      url = "github:linux-surface/linux-surface";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     ## Darwin
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";

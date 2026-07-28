@@ -49,11 +49,11 @@
   systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];
 
   hardware.microsoft-surface.kernelVersion = "longterm";
-  hardware.microsoft-surface = {
-    ipts.enable = true;
-    surface-control.enable = true;
-    # kernelVersion = "stable"; # optional, defaults to "longterm"
-  };
+  #hardware.microsoft-surface = {
+  #  ipts.enable = true;
+  #  surface-control.enable = true;
+  #  # kernelVersion = "stable"; # optional, defaults to "longterm"
+  #};
   
   # Keep your increased swap and zramSwap settings
   swapDevices = [

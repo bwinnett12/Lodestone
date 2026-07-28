@@ -107,9 +107,6 @@
       systemd-boot.enable = true;
     }; };
 
-  microsoft-surface.ipts.enable = true;
-  microsoft-surface.surface-control.enable = true;
-
  services = {
 
     # Enable the Cosmic Desktop Environment

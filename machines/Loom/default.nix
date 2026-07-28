@@ -60,9 +60,9 @@
     }; };
 
   ecosystem.users.tarobutter.enable = true;
-
   nixpkgs = {
     overlays = [
+      inputs.linux-surface.overlays.default
       (final: prev: {
         python312 = prev.python312.override {
           packageOverrides = pyFinal: pyPrev: {

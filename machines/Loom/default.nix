@@ -142,6 +142,7 @@
 
   hardware = {
     enableRedistributableFirmware = true;
+    nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
     opentabletdriver = {
       enable = true; 
       daemon.enable = true;

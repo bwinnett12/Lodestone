@@ -89,6 +89,7 @@
     nvidia-vaapi-driver
     nvidia-container-toolkit
     surface-control
+    squeekboard
   ];
   system.stateVersion = "25.05"; # Did you read the comment?
 

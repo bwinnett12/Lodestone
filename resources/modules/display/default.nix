@@ -33,16 +33,13 @@ in {
     }
     
       # GNOME
-    (lib.mkIf cfg.gnome.enable {
+   (lib.mkIf cfg.gnome.enable (lib.mkMerge [
+    {
       services.desktopManager.gnome.enable = true;
       services.displayManager.gdm.enable = true;
-
-      # Strip GNOME's bundled app suite down to just the shell
       services.gnome.core-apps.enable = false;
       services.gnome.core-developer-tools.enable = false;
       services.gnome.games.enable = false;
-
-      # Exclude specific packages that ship even with core-apps off
       environment.gnome.excludePackages = with pkgs; [
         gnome-tour
         gnome-user-docs
@@ -51,19 +48,17 @@ in {
         gnome-contacts
         gnome-maps
         gnome-weather
-        epiphany     # web browser
-        geary        # email client
+        epiphany
+        geary
         gnome-characters
-        totem        # video player
-        # add/remove based on what you actually use
+        totem
       ];
-
-      (lib.mkIf cfg.ecosystem.power.portable.enable {
-        environment.systemPackages = with pkgs; [ 
-          gnome-wlr
-        ];
-      })
+    }
+    (lib.mkIf config.ecosystem.power.portable.enable {
+      environment.systemPackages = with pkgs; [ gnome-wlr ];
     })
+  ]))
+
 
     # COSMIC
     # Uses auto-cpufreq, ignore the power applet limitation

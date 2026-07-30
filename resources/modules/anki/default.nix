@@ -9,7 +9,7 @@
     anki-sync-server = {
       enable = true;
       baseDirectory = "/storage/shortstack/anki";
-      port = "3111";
+      port = 3111;
       users = [
         { username = "anki"; password = "666"; }
       ];

@@ -18,6 +18,7 @@
       ../../configurations/programming
 
     # self.ecosystem.roles.builder
+    self.nixosModules.calibre-web
     
   ];
 
@@ -57,10 +58,10 @@
     port        = 4500;
   };
 
-  #services.calibre-web = {
-  #  enable = true;
-  #  options.calibreLibrary = "/storage/Orchard/51_Library/51-4_Books";
-  #};
+  services.calibre-web = {
+    enable = true;
+    options.calibreLibrary = "/storage/Orchard/51_Library/51-4_Books";
+  };
 
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
 

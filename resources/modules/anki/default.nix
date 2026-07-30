@@ -10,7 +10,9 @@
       enable = true;
       baseDirectory = "/storage/shortstack/anki";
       port = "3111";
-      users = "anki";
+      users = [
+        { username = "anki"; password = "666"; }
+      ];
     };
     
     nginx = {

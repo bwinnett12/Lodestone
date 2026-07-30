@@ -21,12 +21,34 @@
     
   ];
 
-  ecosystem.display.enable = true;
-  # ecosystem.display.gnome.enable = true;
-  ecosystem.display.cosmic.enable = true;
+  ecosystem = {
+    display = {
+      enable = true;
+      gnome.enable = true; 
+      cosmic.enable = true;
+    };
 
-  ecosystem.power.enable = true;
-  ecosystem.power.portable.enable = true;
+    power = {
+      enable = true;
+      portable.enable = true;
+    };
+    users.tarobutter.enable = true;
+
+  };
+
+    ## Profiles:
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = { inherit self; };
+    users.tarobutter = { lib, ... }: {
+
+      imports = [ ./home.nix ] ;
+      profiles.gaming.enable = lib.mkForce true;
+      profiles.communications.enable = lib.mkForce true;
+      profiles.development.enable = lib.mkForce true;
+      # profiles.shortstack.enable = false;
+    }; };
 
   services.u9fs-client = {
     enable      = true;
@@ -43,23 +65,7 @@
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
 
   nix.settings.extra-platforms = [ "aarch64-linux" ];
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  ## Profiles:
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = { inherit self; };
-    users.tarobutter = { lib, ... }: {
-
-      imports = [ ./home.nix ] ;
-      profiles.gaming.enable = lib.mkForce true;
-      profiles.communications.enable = lib.mkForce true;
-      profiles.development.enable = lib.mkForce true;
-      # profiles.shortstack.enable = false;
-    }; };
-
-  ecosystem.users.tarobutter.enable = true;
   nixpkgs = {
     overlays = [
       (final: prev: {
@@ -95,6 +101,7 @@
   boot = {
     kernelModules = [ "ntfs3" "ext4" "btrfs" "vfat" "exfat" ];
     kernelParams = [ "pcie_ports=compat" ];
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
     # kernelPackages = lib.mkForce pkgs.linuxPackages_6_12;
     # kernelPackages = pkgs.linux-surface;
     # kernelPackages = pkgs.linuxPackages_6_12;
@@ -107,7 +114,7 @@
       systemd-boot.enable = true;
     }; };
 
- services = {
+   services = {
 
     # Enable the Cosmic Desktop Environment
     #displayManager.cosmic-greeter.enable = true;

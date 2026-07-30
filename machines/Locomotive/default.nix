@@ -8,6 +8,7 @@
     ./configuration.nix
 
     self.nixosModules.go2rtc
+    self.nixosModules.anki
     self.nixosModules.prometheus
     # inputs.mailroom.nixosModules.default
     self.nixosModules.mailroom

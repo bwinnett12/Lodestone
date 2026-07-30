@@ -9,9 +9,9 @@
       description = "LocalAI via Docker Compose";
 
       # Wait for network and your storage mount to be ready
-      after = [ "network.target" "docker.service" ];
+      after = [ "network.target" "docker.service" "tailscaled.service" ];
       
-      requires = [ "docker.service" ];
+      requires = [ "docker.service"  "tailscaled.service" ];
       wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {

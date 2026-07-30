@@ -34,27 +34,35 @@ in {
     
       # GNOME
     (lib.mkIf cfg.gnome.enable {
+      services.desktopManager.gnome.enable = true;
+      services.displayManager.gdm.enable = true;
 
-      services = {
-        xserver.desktopManager.gnome.enable = true;
-        xserver.displayManager.gdm.enable = true;
-        power-profiles-daemon.enable = lib.mkDefault false;
-        auto-cpufreq = { 
-          enable = true;
-          settings = {
-            battery = {
-              governor = "powersave";
-              turbo = "never";
-            };
-            charger = {
-              governor = "performance";
-              turbo = "auto";
-            };
-          };
-        };
-      };
+      # Strip GNOME's bundled app suite down to just the shell
+      services.gnome.core-apps.enable = false;
+      services.gnome.core-developer-tools.enable = false;
+      services.gnome.games.enable = false;
 
-      environment.systemPackages = [ ];
+      # Exclude specific packages that ship even with core-apps off
+      environment.gnome.excludePackages = with pkgs; [
+        gnome-tour
+        gnome-user-docs
+        gnome-photos
+        gnome-music
+        gnome-contacts
+        gnome-maps
+        gnome-weather
+        epiphany     # web browser
+        geary        # email client
+        gnome-characters
+        totem        # video player
+        # add/remove based on what you actually use
+      ];
+
+      (lib.mkIf cfg.ecosystem.power.portable.enable {
+        environment.systemPackages = with pkgs; [ 
+          gnome-wlr
+        ];
+      })
     })
 
     # COSMIC

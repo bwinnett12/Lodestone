@@ -5,4 +5,8 @@
     listen.ip = "0.0.0.0";
     listen.port = 8083;
   };
+
+  environment.systemPackages = with pkgs; [
+    xournalpp
+  ];
 }

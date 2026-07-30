@@ -11,7 +11,6 @@
         #"/storage/"
         "/storage/Tulip/Media/Books"
     ];
-    fsType = "none";
     openFirewall = true;
     port = 2111;
   };

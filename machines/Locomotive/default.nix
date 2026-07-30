@@ -16,6 +16,7 @@
     self.nixosModules.gitea
     self.nixosModules.pihole
     self.nixosModules.grafana
+    self.nixosModules.calibre-server
   ];
 
   services.calibre-server.enable = true;

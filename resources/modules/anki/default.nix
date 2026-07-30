@@ -8,7 +8,7 @@
 
     anki-sync-server = {
       enable = true;
-      baseDirectory = "/storage/shortstack/anki";
+      # baseDirectory = "/storage/shortstack/anki";
       port = 3111;
       users = [
         { username = "anki"; password = "666"; }
@@ -31,6 +31,11 @@
         };
       };
     };
+  };
+
+  fileSystems."/storage/shortstack/anki" = {
+    device = "/var/lib/anki-sync-server";
+    options = [ "bind" ];
   };
 
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 3111 ];

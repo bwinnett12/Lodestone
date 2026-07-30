@@ -36,6 +36,7 @@
   fileSystems."/storage/shortstack/anki" = {
     device = "/var/lib/anki-sync-server";
     options = [ "bind" ];
+    fsType = "none";
   };
 
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 3111 ];

@@ -25,7 +25,7 @@
     display = {
       enable = true;
       gnome.enable = true; 
-      cosmic.enable = true;
+      # cosmic.enable = true;
     };
 
     power = {

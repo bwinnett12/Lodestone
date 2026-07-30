@@ -54,9 +54,6 @@ in {
         totem
       ];
     }
-    (lib.mkIf config.ecosystem.power.portable.enable {
-      environment.systemPackages = with pkgs; [ gnome-wlr ];
-    })
   ]))
 
 

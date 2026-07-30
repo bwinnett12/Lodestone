@@ -47,7 +47,6 @@
     users.anki = {
       isSystemUser = true;
       group = "anki";
-      extraGroups = [ "docker" "wheel" ];
       createHome = true;
       home = "/var/lib/anki";
     };

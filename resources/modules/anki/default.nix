@@ -8,6 +8,7 @@
 
     anki-sync-server = {
       enable = true;
+      address = "127.0.0.1";
       # baseDirectory = "/storage/shortstack/anki";
       port = 3111;
       users = [

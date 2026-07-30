@@ -17,7 +17,7 @@
     self.nixosModules.grafana
   ];
 
-  #services.calibre-server.enable = true;  # unchanged — this stays here
+  services.calibre-server.enable = true;
   # services.calibre-web.enable = false;
 
   ## Profiles:

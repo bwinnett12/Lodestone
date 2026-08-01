@@ -1,6 +1,9 @@
 # resources/modules/mailroom/default.nix
 { inputs, ... }: {
-  imports = [ inputs.mailroom.nixosModules.default ];
+  imports = [ 
+    inputs.mailroom.nixosModules.default 
+    ./homepage.nix
+  ];
 
   services.mailroom = {
     enable      = true;

@@ -1,6 +1,7 @@
 ## resources/modules/networking/default.nix
 ## Common files used by all machines for networking
 { config, lib, pkgs, ... }: {
+  
   services = {
     avahi = {
       enable = true;

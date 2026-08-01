@@ -6,7 +6,8 @@
     self.ecosystem.citizens.functionaries
     self.ecosystem.citizens.upgraded
 
-    self.ecosystem.networking
+    self.ecosystem.networking.common
+    self.ecosystem.networking.hosts
     self.ecosystem.environments.neovim
     self.ecosystem.power
 

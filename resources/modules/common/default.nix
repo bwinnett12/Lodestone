@@ -9,11 +9,11 @@
     self.ecosystem.networking
     self.ecosystem.environments.neovim
     self.ecosystem.power
+
+    self.ecosystem.storage.u9fs
+    self.ecosystem.storage.drives
     
     self.nixosModules.display
-    self.nixosModules.hosts
-    self.nixosModules.plan9
-    
 
     self.inputs.home-manager.nixosModules.home-manager
     self.inputs.sops-nix.nixosModules.sops

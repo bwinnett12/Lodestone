@@ -91,17 +91,17 @@
   users.users.tarobutter.extraGroups = [ "storage" ];
   # add pomona, mailroom, calibre, etc. here too as they need Tulip access
 
-  fileSystems."/storage/Tulip" = {
-    device = "UUID=809C-FB5D";
-    fsType = "exfat";
-    options = [
-      "defaults"
-      "nofail"
-      "x-systemd.automount"
-      "x-systemd.device-timeout=5s"
-      "gid=1000"
-      "uid=1001"   # resolves tarobutter's real uid
-      "umask=0002"
-    ];
-  };
+  #fileSystems."/storage/Tulip" = {
+  #  device = "UUID=809C-FB5D";
+  #  fsType = "exfat";
+  #  options = [
+  #    "defaults"
+  #    "nofail"
+  #    "x-systemd.automount"
+  #    "x-systemd.device-timeout=5s"
+  #    "gid=1000"
+  #    "uid=1001"   # resolves tarobutter's real uid
+  #    "umask=0002"
+  #  ];
+  #};
 }

@@ -43,7 +43,7 @@
   services.u9fs-server = {
     enable      = true;
     tailscaleIP = "100.106.125.87"; # ipv4 of Locomotive
-    exportPath  = "/storage/Orchard";
+    exportPath = "/storage/Tulip/Orchard";
     port        = 4500;
   };
 

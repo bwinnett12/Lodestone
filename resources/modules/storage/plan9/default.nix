@@ -19,5 +19,4 @@
       gid = 900;
     };
   };
-  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 4500 ];
 }

@@ -14,6 +14,7 @@ let
       shell = mkOption { type = types.package; default = pkgs.bash; };
       extraGroups = mkOption { type = types.listOf types.str; default = []; };
       upgraded = mkEnableOption "grant this user all elevated groups available on this machine";
+      uid = mkOption { type = types.nullOr types.int; default = null; };
       homeManagerModule = mkOption {
         type = types.path;
         description = "Path to this user's HM entry module";
@@ -33,6 +34,7 @@ in {
       isNormalUser = true;
       inherit (u) description shell;
       extraGroups = u.extraGroups ++ lib.optionals u.upgraded config.ecosystem.upgradedGroups;
+      uid = mkIf (f.uid != null) f.uid;
     }) cfg;
 
     home-manager.users = mapAttrs

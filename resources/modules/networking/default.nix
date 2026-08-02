@@ -1,7 +1,6 @@
 ## resources/modules/networking/default.nix
 ## Common files used by all machines for networking
 { config, lib, pkgs, ... }: {
-  
   services = {
     avahi = {
       enable = true;
@@ -30,17 +29,13 @@
       allowedUDPPorts = [ config.services.tailscale.port ];
       checkReversePath = "loose";
       trustedInterfaces = [ "tailscale0" ];
-      # interfaces."tailscale0".allowedTCPPorts = [ 80 443 ];
     };
 
-    # interfaces.eth0.wakeOnLan.enable = true;
     nameservers = [ "1.1.1.1" "8.8.8.8" "100.100.100.100" ];
     networkmanager.enable = true;
   };
 
-
-
-    # Any nginx vhost bound to a literal Tailscale IP races tailscaled on boot:
+  # Any nginx vhost bound to a literal Tailscale IP races tailscaled on boot:
   # nginx can start before the address is actually assigned, fails with
   # EADDRNOTAVAIL, and burns through its restart budget before Tailscale
   # finishes its handshake. Make nginx wait for tailscaled, and give it

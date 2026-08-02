@@ -6,7 +6,7 @@ let
 
   fsOptions = fsType: mode:
     {
-      exfat = [ "uid=1000" "gid=1000" "umask=0002" ];
+      exfat = [ "uid=1500" "gid=1000" "umask=0002" ];
       ext4  = [ ];
       btrfs = [ "compress=zstd" ];
     }.${fsType}

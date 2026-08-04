@@ -10,6 +10,8 @@
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   #### Nvidia settings
   hardware = {
+        enableRedistributableFirmware = true;
+    microsoft-surface.kernelVersion = "longterm";
     # Enable graphic card
     graphics = {
       enable = true;
@@ -17,7 +19,7 @@
     };
 
     nvidia = {
-      # package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
+      package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
       modesetting.enable = true;
       open = false;
       nvidiaSettings = true;
@@ -33,12 +35,16 @@
       };
     };
     nvidia-container-toolkit.enable = true;
+
+    opentabletdriver = {
+      enable = true; 
+      daemon.enable = true;
+    };
   };
 
   powerManagement.cpuFreqGovernor = "powersave";  # or "schedutil"
 
   # TLP or auto-cpufreq for more nuanced control
-
   fonts.fontconfig.subpixel.rgba = "none";  # for HiDPI, subpixel is counterproductive
 
   virtualisation.docker = {
@@ -48,13 +54,6 @@
 
   systemd.services.docker.path = [ pkgs.nvidia-container-toolkit ];
 
-  hardware.microsoft-surface.kernelVersion = "longterm";
-  #hardware.microsoft-surface = {
-  #  ipts.enable = true;
-  #  surface-control.enable = true;
-  #  # kernelVersion = "stable"; # optional, defaults to "longterm"
-  #};
-  
   # Keep your increased swap and zramSwap settings
   swapDevices = [
     { device = "/swapfile"; size = 8192; } # Or 16384 for 16GB
@@ -79,7 +78,7 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-    vlc
+    vlc  # TODO - Add this to a user configuration file
     libinput
     libcamera
     libcamera-qcam
@@ -89,7 +88,6 @@
     nvidia-vaapi-driver
     nvidia-container-toolkit
     surface-control
-    squeekboard
   ];
   system.stateVersion = "25.05"; # Did you read the comment?
 

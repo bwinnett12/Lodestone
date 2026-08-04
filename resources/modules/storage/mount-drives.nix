@@ -54,7 +54,7 @@ let
   };
 
 in {
-  users.groups.storage = {};
+  users.groups.storage.gid = 1000;          # give the "shared group" a real name
 
   services.udev.extraRules = udevRules;
 
@@ -63,6 +63,4 @@ in {
   ) known;
 
   systemd.services = lib.listToAttrs (map mkSharedFixupUnit shared);
-
-  users.users.tarobutter.extraGroups = [ "storage" ];
 }

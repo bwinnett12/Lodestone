@@ -14,11 +14,10 @@
     self.nixosModules.gitea
     self.nixosModules.pihole
     self.nixosModules.grafana
-    self.nixosModules.calibre-server
     self.ecosystem.monitoring
   ];
 
-  services.calibre-server.enable = true;
+  services.calibre-server.enable = true;  # TODO - Add this to a server configuration file
   # services.calibre-web.enable = false;
 
   ## Profiles:
@@ -38,8 +37,8 @@
     users.tarobutter.enable = true;
   };
 
-  ## TODO - move this to configuration file
-  services.u9fs-server = {
+  
+  services.u9fs-server = { ## TODO - move this to server configuration file
     enable      = true;
     tailscaleIP = "100.106.125.87"; # ipv4 of Locomotive
     exportPath = "/storage/Tulip/Orchard";

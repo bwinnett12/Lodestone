@@ -12,8 +12,7 @@
     self.nixosModules.localai
     self.nixosModules.jellyfin
 
-      ../../configurations/programming
-
+    ../../configurations/programming
     # self.ecosystem.roles.builder
     
   ];
@@ -30,7 +29,6 @@
       portable.enable = true;
     };
     users.tarobutter.enable = true;
-
   };
 
     ## Profiles:
@@ -47,14 +45,14 @@
       # profiles.shortstack.enable = false;
     }; };
 
-  services.u9fs-client = {
+  services.u9fs-client = { # TODO - Add this to a user configuration file
     enable      = true;
     serverIP    = "100.106.125.87"; # ipv4 of Locomotive
     mountPoint  = "/storage/Orchard";
     port        = 4500;
   };
 
-  services.calibre-web = {
+  services.calibre-web = {  # TODO - Add this to a user configuration file
     enable = true;
     options.calibreLibrary = "/storage/Orchard/51_Library/51-4_Books";
   };
@@ -143,14 +141,6 @@
     thermald.enable = true;
   };
   system.stateVersion = "25.05";
-
-  hardware = {
-    enableRedistributableFirmware = true;
-    nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
-    opentabletdriver = {
-      enable = true; 
-      daemon.enable = true;
-  }; };
 
 
   # TODO - Make a sleep module

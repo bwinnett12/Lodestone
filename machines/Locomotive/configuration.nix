@@ -6,14 +6,6 @@
       # <nixos-hardware/raspberry-pi/4>
     ];
 
-  #services.mailroom = {
-  #  enable      = true;
-  #  llmUrl      = "http://island.tail4b1127.ts.net:8090";
-  #  vaultPath   = "";
-  #  libraryRoot = "/storage/Library";
-  #  listenAddr  = "0.0.0.0:3000";
-  #};
-
   boot = {
     kernel.sysctl."net.ipv4.ip_forward" = 1;
     loader = {
@@ -23,17 +15,20 @@
     tmp.useTmpfs = true;
   };
 
-  fileSystems."/var/log" = {
-    device = "tmpfs";
-    fsType = "tmpfs";
-    options = [ "size=100M" "mode=0755" ];
+  ## Stop writing logs and metadata on read
+  fileSystems = { 
+    "/".options = [ "noatime" ];  # stop writing access-time metadata on every read
+    "/var/log" = {
+      device = "tmpfs";
+      fsType = "tmpfs";
+      options = [ "size=100M" "mode=0755" ];
+    };
   };
 
 
 
   services.journald.storage = "volatile";   # systemd journal lives in RAM, never touches disk
   zramSwap.enable = true;                   # swap in compressed RAM instead of a disk-backed swapfile
-  fileSystems."/".options = [ "noatime" ];  # stop writing access-time metadata on every read
   
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   ######## Network settings
@@ -87,8 +82,6 @@
 	  podman
   ];
 
-  users.groups.storage.gid = 1000;          # give the "shared group" a real name
-  users.users.tarobutter.extraGroups = [ "storage" ];
   # add pomona, mailroom, calibre, etc. here too as they need Tulip access
 
   #fileSystems."/storage/Tulip" = {

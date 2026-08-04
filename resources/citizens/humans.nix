@@ -34,7 +34,10 @@ in {
       isNormalUser = true;
       inherit (u) description shell;
       extraGroups = u.extraGroups ++ lib.optionals u.upgraded config.ecosystem.upgradedGroups;
-      uid = mkIf (u.uid != null) u.uid;
+      uid = mkOption {
+        type = types.nullOr types.int;
+        default = (import ../citizens/uids.nix).humans.${name}.uid or null;
+      };
     }) cfg;
 
     home-manager.users = mapAttrs

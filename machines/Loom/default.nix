@@ -17,8 +17,6 @@
     # self.ecosystem.roles.builder
     
   ];
-  services.calibre-web.enable = true;
-
 
   ecosystem = {
     display = {

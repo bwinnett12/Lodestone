@@ -14,6 +14,8 @@
         enabled = true;
         org_role = "Viewer";
       };
+
+      security.secret_key = "$__file{/var/lib/grafana/secrets/secret_key}";
     };
 
     provision = {

@@ -1,10 +1,10 @@
 # resources/modules/calibre-server/calibre-server.nix
 #### Calibre Server
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   services.calibre-server = {
-    enable = true;
+    enable = lib.mkDefault false;
     group = "calibre";
     user = "calibre";
     libraries = [

@@ -7,20 +7,18 @@
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
     # self.nixosModules.prometheus
     self.nixosModules.academic
-
-    # self.nixosModules.anki
-
-    # self.nixosModules.moonlight
     #self.nixosModules.scarlet2i2
     # nixosCosmicModule
     self.nixosModules.localai
     self.nixosModules.jellyfin
+
       ../../configurations/programming
 
     # self.ecosystem.roles.builder
-    self.nixosModules.calibre-web
     
   ];
+  services.calibre-web.enable = true;
+
 
   ecosystem = {
     display = {

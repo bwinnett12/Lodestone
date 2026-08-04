@@ -44,7 +44,7 @@
     port        = 4500;
   };
 
-  systemd.journald.extraConfig = ''
+  services.journald.extraConfig = ''
     Storage=persistent
   '';
 

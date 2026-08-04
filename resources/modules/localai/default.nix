@@ -22,7 +22,7 @@
       ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f /storage/shortstack/localai/configuration/localai-docker.yml down";
 
       ## TODO - Switch to configuration user
-      User = "pomona";
+      User = "localai";
       # Set the working directory to the directory of the compose file
       WorkingDirectory = "/storage/shortstack/localai/"; 
       Restart = "on-failure";
@@ -33,7 +33,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’
   users.users.localai = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "storage" ];
     packages = with pkgs; [ tree ];
   };
 

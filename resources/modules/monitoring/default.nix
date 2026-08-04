@@ -1,9 +1,8 @@
 # resources/modules/power/default.nix
 { ... }: {
   imports = [
-    ./options.nix
-    ./portable.nix
-    ./stationary.nix
+    ./grafana.nix
+    ./prometheus.nix
     # ./cosmic-ppd-shim.nix
     # ./tablet.nix
   ];

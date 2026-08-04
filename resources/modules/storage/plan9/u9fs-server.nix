@@ -57,6 +57,8 @@ in {
           Accept       = "yes";
           # Spawn one u9fs process per accepted connection.
         };
+        after = [ "tailscaled.service" ];
+        requires = [ "tailscaled.service" ];
       };
 
       # ── Service template ─────────────────────────────────────────────────────

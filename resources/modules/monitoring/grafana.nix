@@ -18,19 +18,21 @@ services.grafana = {
 	enable = true;
 	settings = {
 		server = {
-		http_addr = "127.0.0.1";
-		http_port = 3000;
-		domain = "grafana.platatoo.com";
-		root_url = "http://grafana.platatoo.com/";
+      http_addr = "127.0.0.1";
+      http_port = 3000;
+      domain = "grafana.platatoo.com";
+      root_url = "http://grafana.platatoo.com/";
 		};
 
 		auth.anonymous = {
-		enabled = true;
-		org_role = "Viewer";
+      enabled = true;
+      org_role = "Viewer";
 		};
+
+    security.secret_key = "$__file{/var/lib/grafana/secrets/secret_key}";
 	};
 
-	provision = {
+    provision = {
       enable = true;
       datasources.settings.datasources = [
         {

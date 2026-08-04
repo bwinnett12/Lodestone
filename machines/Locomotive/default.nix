@@ -44,6 +44,10 @@
     port        = 4500;
   };
 
+  systemd.journald.extraConfig = ''
+    Storage=persistent
+  '';
+
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"

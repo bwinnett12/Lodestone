@@ -34,7 +34,7 @@ in {
       isNormalUser = true;
       inherit (u) description shell;
       extraGroups = u.extraGroups ++ lib.optionals u.upgraded config.ecosystem.upgradedGroups;
-      uid = mkIf (f.uid != null) u.uid;
+      uid = mkIf (u.uid != null) u.uid;
     }) cfg;
 
     home-manager.users = mapAttrs

@@ -14,18 +14,23 @@ let
   ];
 in
 {
-  services.grafana = {
-    enable = true;
-    settings = {
-      server = {
-        http_addr = "127.0.0.1";
-        http_port = 3000;
-        domain = "grafana.platatoo.com";
-        root_url = "http://grafana.platatoo.com/";
-      };
-    };
+services.grafana = {
+	enable = true;
+	settings = {
+		server = {
+		http_addr = "127.0.0.1";
+		http_port = 3000;
+		domain = "grafana.platatoo.com";
+		root_url = "http://grafana.platatoo.com/";
+		};
 
-    provision = {
+		auth.anonymous = {
+		enabled = true;
+		org_role = "Viewer";
+		};
+	};
+
+	provision = {
       enable = true;
       datasources.settings.datasources = [
         {

@@ -24,7 +24,7 @@ services.grafana = {
       root_url = "http://grafana.platatoo.com/";
 		};
 
-		auth.anonymous = {
+		"auth.anonymous" = {
       enabled = true;
       org_role = "Viewer";
 		};

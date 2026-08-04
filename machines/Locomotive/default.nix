@@ -9,14 +9,13 @@
 
     self.nixosModules.go2rtc
     self.nixosModules.anki
-    self.nixosModules.prometheus
-    # inputs.mailroom.nixosModules.default
     self.nixosModules.mailroom
     # self.nixosModules.homepage # <- #TODO Remove the module itself or repurpose into extending mailroom
     self.nixosModules.gitea
     self.nixosModules.pihole
     self.nixosModules.grafana
     self.nixosModules.calibre-server
+    self.ecosystem.monitoring
   ];
 
   services.calibre-server.enable = true;

@@ -5,7 +5,7 @@
     ./configuration.nix
 
     inputs.nixos-hardware.nixosModules.microsoft-surface-common
-    self.nixosModules.prometheus
+    # self.nixosModules.prometheus
     self.nixosModules.academic
 
     # self.nixosModules.anki

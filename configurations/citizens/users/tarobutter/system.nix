@@ -5,6 +5,6 @@
     extraGroups = [ "networkmanager" "systemd-journal" "wheel" "docker" "input" "video" "render" "storage" ];
     homeManagerModule = ./home.nix;
     upgraded = true;
-    uid = 1500;
+    uid = 1000;
   };
 }

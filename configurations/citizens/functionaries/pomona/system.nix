@@ -4,7 +4,7 @@
 
   ecosystem.functionaries.pomona = {
     enable = true;
-    uid = 1501;
+    uid = 1500;
     description = "Maintainer of Apps and Roman goddess of Orchards";
     extraGroups = [ "systemd-journal" ] ++
 	       lib.optional (config.services.localai.enable or false) "localai"

@@ -13,7 +13,6 @@
     # self.nixosModules.homepage # <- #TODO Remove the module itself or repurpose into extending mailroom
     self.nixosModules.gitea
     self.nixosModules.pihole
-    self.nixosModules.grafana
     self.ecosystem.monitoring
   ];
 

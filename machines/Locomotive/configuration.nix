@@ -47,15 +47,23 @@
         5900  # 5900 -x11vnc
         1984  # 1984 - go2rtc
       ];
-      trustedInterfaces = [ "tailscale0"  "eth0" ];
+      trustedInterfaces = [ "tailscale0" "eth0" ];
     };
 
     hostName = "Locomotive";
-    interfaces.eth0.useDHCP = true;
+
+    interfaces.eth0 = {
+      useDHCP = false;
+      ipv4.addresses = [{
+        address = "192.168.99.1";
+        prefixLength = 24;
+      }];
+    };
+
     nat = {
       enable = true;
       internalInterfaces = [ "eth0" ];
-      externalInterface = "wlan0"; # or wherever the Pi gets its internet
+      externalInterface = "wlan0";
     };
   };
 

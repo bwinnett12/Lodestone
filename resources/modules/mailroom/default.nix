@@ -56,21 +56,13 @@
     "d /etc/ssl/private 0700 root root -"
   ];
 
-  # Auto-generate cert for Mailroom only
   systemd.services."mailroom-tls-cert" = {
     description = "Generate self-signed TLS cert for Mailroom";
     wantedBy = [ "multi-user.target" ];
     before = [ "nginx.service" ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = ''
-        bash -c 'if [ ! -f /etc/ssl/certs/mailroom-tailscale.crt ]; then
-          ${pkgs.openssl}/bin/openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
-            -keyout /etc/ssl/private/mailroom-tailscale.key \
-            -out /etc/ssl/certs/mailroom-tailscale.crt \
-            -subj "/CN=locomotive.tail4b1127.ts.net" 2>/dev/null
-        fi'
-      '';
+      ExecStart = "${pkgs.bash}/bin/bash -c 'if [ ! -f /etc/ssl/certs/mailroom-tailscale.crt ]; then ${pkgs.openssl}/bin/openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/ssl/private/mailroom-tailscale.key -out /etc/ssl/certs/mailroom-tailscale.crt -subj \"/CN=locomotive.tail4b1127.ts.net\" 2>/dev/null; fi'";
       RemainAfterExit = true;
     };
   };

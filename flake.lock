@@ -264,11 +264,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785710130,
-        "narHash": "sha256-kijW9vsfbUAGRGPhGPWxKpHWiz0/Ns/tU5yUbCcyH4I=",
+        "lastModified": 1787782589,
+        "narHash": "sha256-7mXSvrceq4j5D/TByZdYPT5lSCNYX/SniUw4UJgJyp8=",
         "ref": "rust",
-        "rev": "3326ed9e432d745f085d5acfe0cfadd134064a67",
-        "revCount": 106,
+        "rev": "200d75f76db1a00e93065510007da89c2e6a7fce",
+        "revCount": 107,
         "type": "git",
         "url": "ssh://git@github.com/bwinnett12/Mailroom.git"
       },

@@ -13,7 +13,7 @@
     # self.nixosModules.homepage # <- #TODO Remove the module itself or repurpose into extending mailroom
     self.nixosModules.gitea
     self.nixosModules.pihole
-    self.ecosystem.monitoring
+    # self.ecosystem.monitoring
   ];
 
   services.calibre-server.enable = true;  # TODO - Add this to a server configuration file

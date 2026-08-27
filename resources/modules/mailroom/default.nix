@@ -18,6 +18,7 @@
   services.nginx = {
     enable = true;
     virtualHosts."mail.platatoo.com" = {
+      default = true;
       listen = [{ addr = "100.106.125.87"; port = 80; }];
       locations."/" = {
         proxyPass = "http://127.0.0.1:8095";

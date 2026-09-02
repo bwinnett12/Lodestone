@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏠 Estate Cameras</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .header {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            color: white;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .tailscale-info {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+            color: white;
+            font-size: 0.95em;
+        }
+
+        .tailscale-info code {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        .cameras-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+        }
+
+        .camera-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .camera-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .card-video {
+            background: #000;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 0.9em;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .card-links {
+            padding: 15px 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            background: #f8f9fa;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 14px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: background 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+        }
+
+        .btn.secondary {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .btn.secondary:hover {
+            background: #dee2e6;
+        }
+
+        .device-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            max-width: 1200px;
+            margin: 0 auto 20px 0;
+            color: white;
+            font-size: 1.6em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            font-size: 1.8em;
+        }
+
+        .controls {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.2s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer {
+            max-width: 1200px;
+            margin: 60px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .cameras-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏠 Estate Cameras</h1>
+        <p>Live view of your personal infrastructure</p>
+    </div>
+
+    <div class="tailscale-info">
+        🔒 Accessing via Tailscale: <code>100.106.125.87</code> or <code>locomotive.tail4b1127.ts.net</code> — All traffic encrypted through private mesh network
+    </div>
+
+    <div class="controls">
+        <button class="control-btn" onclick="pauseAll()">⏸ Pause All Streams</button>
+        <button class="control-btn" onclick="resumeAll()">▶ Resume All Streams</button>
+        <button class="control-btn" onclick="window.open('/dashboard', '_blank')">📊 Full Dashboard</button>
+    </div>
+
+    <!-- LOCOMOTIVE SECTION -->
+    <div class="device-section">
+        <div class="section-title">
+            <span class="section-icon">🚂</span>
+            Locomotive
+        </div>
+
+        <div class="cameras-grid">
+            <div class="camera-card">
+                <div class="card-header">Front Camera</div>
+                <div class="card-video">
+                    <span>Connect via RTSP or go2rtc dashboard</span>
+                </div>
+                <div class="card-links">
+                    <a href="rtsp://100.106.125.87:8554/camera_front" class="btn">RTSP Stream</a>
+                    <a href="http://100.106.125.87:1984?url=rtsp://127.0.0.1:8554/camera_front" class="btn secondary" target="_blank">View in Dashboard</a>
+                </div>
+            </div>
+
+            <div class="camera-card">
+                <div class="card-header">Rear Camera</div>
+                <div class="card-video">
+                    <span>Connect via RTSP or go2rtc dashboard</span>
+                </div>
+                <div class="card-links">
+                    <a href="rtsp://100.106.125.87:8554/camera_rear" class="btn">RTSP Stream</a>
+                    <a href="http://100.106.125.87:1984?url=rtsp://127.0.0.1:8554/camera_rear" class="btn secondary" target="_blank">View in Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOOM SECTION -->
+    <div class="device-section">
+        <div class="section-title">
+            <span class="section-icon">🧵</span>
+            Loom
+        </div>
+
+        <div class="cameras-grid">
+            <div class="camera-card">
+                <div class="card-header">Front Camera</div>
+                <div class="card-video">
+                    <span>Connect via RTSP or go2rtc dashboard</span>
+                </div>
+                <div class="card-links">
+                    <a href="rtsp://loom.tail4b1127.ts.net:8554/camera_front" class="btn">RTSP Stream</a>
+                    <a href="http://loom.tail4b1127.ts.net:1984?url=rtsp://127.0.0.1:8554/camera_front" class="btn secondary" target="_blank">View in Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ISLAND SECTION (Future) -->
+    <div class="device-section" style="opacity: 0.5;">
+        <div class="section-title">
+            <span class="section-icon">🏝️</span>
+            Island <span style="font-size: 0.6em; opacity: 0.8;">(Coming Soon)</span>
+        </div>
+
+        <div class="cameras-grid">
+            <div class="camera-card">
+                <div class="card-header">GPU Camera</div>
+                <div class="card-video" style="color: #999;">
+                    <span>Awaiting Island to come back online...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+            <strong>Direct RTSP access:</strong> Copy any RTSP link above to VLC, ffplay, or other media players
+        </p>
+        <p style="margin-top: 15px;">
+            <a href="http://100.106.125.87:1984" style="color: rgba(255, 255, 255, 0.9);" target="_blank">
+                Full go2rtc Dashboard →
+            </a>
+        </p>
+    </div>
+
+    <script>
+        function pauseAll() {
+            document.querySelectorAll('video').forEach(video => {
+                video.pause();
+            });
+            console.log('All streams paused');
+        }
+
+        function resumeAll() {
+            document.querySelectorAll('video').forEach(video => {
+                video.play().catch(e => console.log('Play error:', e));
+            });
+            console.log('All streams resumed');
+        }
+
+        // Health check: verify streams are available
+        async function checkStreamHealth() {
+            try {
+                const locomotiveResp = await fetch('http://100.106.125.87:1984/api/streams').catch(() => null);
+                const loomResp = await fetch('http://loom.tail4b1127.ts.net:1984/api/streams').catch(() => null);
+
+                if (locomotiveResp?.ok) console.log('✓ Locomotive: Online');
+                else console.warn('✗ Locomotive: Unreachable');
+
+                if (loomResp?.ok) console.log('✓ Loom: Online');
+                else console.warn('✗ Loom: Unreachable');
+            } catch (e) {
+                console.warn('Health check failed:', e);
+            }
+        }
+
+        // Check health on load and every 60 seconds
+        document.addEventListener('DOMContentLoaded', checkStreamHealth);
+        setInterval(checkStreamHealth, 60000);
+    </script>
+</body>
+</html>

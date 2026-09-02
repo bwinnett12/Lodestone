@@ -25,8 +25,6 @@
     };
   };
 
-
-
   services.journald.storage = "volatile";   # systemd journal lives in RAM, never touches disk
   zramSwap.enable = true;                   # swap in compressed RAM instead of a disk-backed swapfile
   

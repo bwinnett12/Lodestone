@@ -4,16 +4,16 @@
 
 let
   dashboardHTML = builtins.readFile ./camera-dashboard.html;
-  
-  # Create an HTML file in the Nix store
   htmlFile = pkgs.writeText "camera-dashboard.html" dashboardHTML;
 
 in
 {
-  services.nginx.virtualHosts."_" = {
-    listen = [ { addr = "0.0.0.0"; port = 80; } ];
+  # Firewall rule for this module
+  networking.firewall.allowedTCPPorts = [ 8075 ];
 
-    ## Serve the HTML file
+  services.nginx.virtualHosts."_" = {
+    listen = [ { addr = "0.0.0.0"; port = 8075; } ];
+    
     locations."/" = {
       alias = "${htmlFile}";
       extraConfig = ''
@@ -22,7 +22,6 @@ in
       '';
     };
 
-    ## Proxy streams from Locomotive
     locations."~/^/locomotive/(?<stream>.*)$" = {
       proxyPass = "http://127.0.0.1:8554/$stream";
       proxyWebsockets = true;
@@ -31,7 +30,6 @@ in
       '';
     };
 
-    ## Proxy streams from Loom
     locations."~/^/loom/(?<stream>.*)$" = {
       proxyPass = "http://loom.tail4b1127.ts.net:8554/$stream";
       proxyWebsockets = true;
@@ -40,7 +38,6 @@ in
       '';
     };
 
-    ## Go2rtc dashboard
     locations."/dashboard" = {
       proxyPass = "http://127.0.0.1:1984/";
       proxyWebsockets = true;
@@ -49,7 +46,6 @@ in
       '';
     };
 
-    ## Logging
     extraConfig = ''
       access_log /var/log/nginx/live_platatoo_access.log;
       error_log /var/log/nginx/live_platatoo_error.log;

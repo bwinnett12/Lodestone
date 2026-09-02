@@ -65,5 +65,7 @@
     btrfs-progs
     lsof
     usbutils
+
+    smartmontools
   ];
 }

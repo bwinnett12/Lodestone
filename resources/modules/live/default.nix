@@ -18,13 +18,17 @@ in
     locations."~/^/locomotive/(?<stream>.*)$" = {
       proxyPass = "http://127.0.0.1:8554/$stream";
       proxyWebsockets = true;
-      proxySetHeaders.Connection = "upgrade";
+      extraConfig = ''
+        proxy_set_header Connection "upgrade";
+      '';
     };
 
     locations."~/^/loom/(?<stream>.*)$" = {
       proxyPass = "http://loom.tail4b1127.ts.net:8554/$stream";
       proxyWebsockets = true;
-      proxySetHeaders.Connection = "upgrade";
+      extraConfig = ''
+        proxy_set_header Connection "upgrade";
+      '';
     };
 
     locations."/dashboard" = {

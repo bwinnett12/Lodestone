@@ -30,7 +30,9 @@ in
     locations."/dashboard" = {
       proxyPass = "http://127.0.0.1:1984/";
       proxyWebsockets = true;
-      proxySetHeaders.Host = "127.0.0.1:1984";
+      extraConfig = ''
+        proxy_set_header Host "127.0.0.1:1984";
+      '';
     };
 
     extraConfig = ''

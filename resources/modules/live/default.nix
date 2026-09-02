@@ -4,22 +4,18 @@
 
 let
   dashboardHTML = builtins.readFile ./camera-dashboard.html;
-  htmlFile = pkgs.writeText "camera-dashboard.html" dashboardHTML;
+  htmlDir = pkgs.writeTextDir "index.html" dashboardHTML;
 
 in
 {
-  # Firewall rule for this module
   networking.firewall.allowedTCPPorts = [ 8075 ];
 
   services.nginx.virtualHosts."_" = {
     listen = [ { addr = "0.0.0.0"; port = 8075; } ];
     
     locations."/" = {
-      alias = "${htmlFile}";
-      extraConfig = ''
-        types { text/html html; }
-        default_type text/html;
-      '';
+      root = "${htmlDir}";
+      index = "index.html";
     };
 
     locations."~/^/locomotive/(?<stream>.*)$" = {

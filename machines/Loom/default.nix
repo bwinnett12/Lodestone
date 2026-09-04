@@ -9,7 +9,7 @@
     self.nixosModules.academic
     #self.nixosModules.scarlet2i2
     # nixosCosmicModule
-    self.nixosModules.localai
+    # self.nixosModules.localai
     self.nixosModules.jellyfin
 
     ../../configurations/programming

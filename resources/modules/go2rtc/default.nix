@@ -10,6 +10,7 @@
 
     settings = {
       api.listen = ":1984"; # The local control dashboard web port
+      api.cors = "*";
 
       streams = {
         locomotive_stream = [

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🏠 Estate Cameras</title>
+    <script src="https://cdn.jsdelivr.net/npm/webrtc-adapter@8.2.2/out/adapter.js"></script>
     <style>
         * {
             margin: 0;
@@ -16,6 +17,14 @@
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             min-height: 100vh;
             padding: 30px 20px;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+            display: block;
         }
 
         .header {
@@ -81,18 +90,64 @@
             padding: 15px 20px;
             font-size: 1.3em;
             font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+
+        .status-badge.live {
+            background: rgba(34, 197, 94, 0.4);
+            color: #22c55e;
+        }
+
+        .status-badge.loading {
+            background: rgba(59, 130, 246, 0.4);
+            color: #3b82f6;
+        }
+
+        .status-badge.offline {
+            background: rgba(239, 68, 68, 0.4);
+            color: #ef4444;
         }
 
         .card-video {
             background: #000;
             width: 100%;
             aspect-ratio: 16 / 9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 0.9em;
-            border-bottom: 1px solid #e9ecef;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-video video {
+            width: 100%;
+            height: 100%;
+        }
+
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         .card-links {
@@ -196,6 +251,12 @@
             .section-title {
                 font-size: 1.3em;
             }
+
+            .card-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -206,52 +267,57 @@
     </div>
 
     <div class="tailscale-info">
-        🔒 Accessing via Tailscale: <code>100.106.125.87</code> or <code>locomotive.tail4b1127.ts.net</code> — All traffic encrypted through private mesh network
+        🔒 Accessing via Tailscale: <code>100.106.125.87:8075</code> or <code>locomotive.tail4b1127.ts.net:8075</code> — All traffic encrypted through private mesh network
     </div>
 
     <div class="controls">
         <button class="control-btn" onclick="pauseAll()">⏸ Pause All Streams</button>
         <button class="control-btn" onclick="resumeAll()">▶ Resume All Streams</button>
-        <button class="control-btn" onclick="window.open('/dashboard', '_blank')">📊 Full Dashboard</button>
+        <button class="control-btn" onclick="window.open('http://locomotive.tail4b1127.ts.net:1984', '_blank')">📊 Full Dashboard</button>
     </div>
 
     <!-- LOCOMOTIVE SECTION -->
-    <div class="camera-card">
-    <div class="card-header">Front Camera</div>
-    <div class="card-video">
-        <span>Connect via go2rtc dashboard</span>
-    </div>
-    <div class="card-links">
-        <a href="http://locomotive.tail4b1127.ts.net:1984/stream.html?src=locomotive_stream" class="btn" target="_blank">Watch Stream</a>
-    </div>
-    </div>
-
-    <div class="camera-card">
-    <div class="card-header">Rear Camera</div>
-    <div class="card-video">
-        <span>Connect via go2rtc dashboard</span>
-    </div>
-    <div class="card-links">
-        <a href="http://locomotive.tail4b1127.ts.net:1984/stream.html?src=locomotive_stream" class="btn" target="_blank">Watch Stream</a>
-    </div>
-    </div>
-
-    <!-- LOOM SECTION -->
     <div class="device-section">
         <div class="section-title">
-            <span class="section-icon">🧵</span>
-            Loom
+            <span class="section-icon">🚂</span>
+            Locomotive
         </div>
 
         <div class="cameras-grid">
             <div class="camera-card">
-                <div class="card-header">Front Camera</div>
+                <div class="card-header">
+                    <span>Camera Stream</span>
+                    <span class="status-badge loading" id="locomotive-status">Loading...</span>
+                </div>
                 <div class="card-video">
-                    <span>Connect via RTSP or go2rtc dashboard</span>
+                    <video id="locomotive-stream" playsinline autoplay muted></video>
+                    <div class="loading-spinner" id="locomotive-spinner"></div>
                 </div>
                 <div class="card-links">
-                    <a href="rtsp://loom.tail4b1127.ts.net:8554/camera_front" class="btn">RTSP Stream</a>
-                    <a href="http://loom.tail4b1127.ts.net:1984?url=rtsp://127.0.0.1:8554/camera_front" class="btn secondary" target="_blank">View in Dashboard</a>
+                    <a href="http://locomotive.tail4b1127.ts.net:1984" class="btn secondary" target="_blank">Full Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOOM SECTION (Offline) -->
+    <div class="device-section" style="opacity: 0.6;">
+        <div class="section-title">
+            <span class="section-icon">🧵</span>
+            Loom <span style="font-size: 0.6em; opacity: 0.8;">(Offline)</span>
+        </div>
+
+        <div class="cameras-grid">
+            <div class="camera-card">
+                <div class="card-header">
+                    <span>Camera Stream</span>
+                    <span class="status-badge offline">Offline</span>
+                </div>
+                <div class="card-video" style="justify-content: center; align-items: center;">
+                    <span style="color: #999;">Awaiting Loom to come back online...</span>
+                </div>
+                <div class="card-links">
+                    <p style="color: #999; font-size: 0.9em;">Loom is currently offline. Will be available once machine is back online.</p>
                 </div>
             </div>
         </div>
@@ -266,26 +332,102 @@
 
         <div class="cameras-grid">
             <div class="camera-card">
-                <div class="card-header">GPU Camera</div>
-                <div class="card-video" style="color: #999;">
-                    <span>Awaiting Island to come back online...</span>
+                <div class="card-header">
+                    <span>GPU Camera</span>
+                    <span class="status-badge offline">Coming Soon</span>
+                </div>
+                <div class="card-video" style="justify-content: center; align-items: center;">
+                    <span style="color: #999;">Awaiting Island to come back online...</span>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="footer">
-        <p>
-            <strong>Direct RTSP access:</strong> Copy any RTSP link above to VLC, ffplay, or other media players
-        </p>
+        <p>Live WebRTC streams with low-latency playback</p>
         <p style="margin-top: 15px;">
-            <a href="http://100.106.125.87:1984" style="color: rgba(255, 255, 255, 0.9);" target="_blank">
+            <a href="http://locomotive.tail4b1127.ts.net:1984" style="color: rgba(255, 255, 255, 0.9);" target="_blank">
                 Full go2rtc Dashboard →
             </a>
         </p>
     </div>
 
     <script>
+        // WebRTC configuration
+        const rtcConfig = {
+            iceServers: [
+                { urls: ['stun:stun.l.google.com:19302'] },
+                { urls: ['stun:stun1.l.google.com:19302'] }
+            ]
+        };
+
+        // Stream configuration
+        const streams = [
+            {
+                id: 'locomotive-stream',
+                name: 'locomotive_stream',
+                host: 'locomotive.tail4b1127.ts.net',
+                port: 1984,
+                statusId: 'locomotive-status',
+                spinnerId: 'locomotive-spinner'
+            }
+        ];
+
+        // Initialize WebRTC connection for a stream
+        async function initializeStream(config) {
+            const video = document.getElementById(config.id);
+            const statusBadge = document.getElementById(config.statusId);
+            const spinner = document.getElementById(config.spinnerId);
+
+            try {
+                const pc = new RTCPeerConnection(rtcConfig);
+
+                // Handle remote stream
+                pc.ontrack = (event) => {
+                    console.log(`✓ ${config.name}: Stream received`);
+                    video.srcObject = event.streams[0];
+                    statusBadge.textContent = '🔴 Live';
+                    statusBadge.className = 'status-badge live';
+                    spinner.style.display = 'none';
+                };
+
+                // Handle connection state changes
+                pc.onconnectionstatechange = () => {
+                    console.log(`${config.name} connection state:`, pc.connectionState);
+                    if (pc.connectionState === 'failed' || pc.connectionState === 'disconnected') {
+                        statusBadge.textContent = 'Reconnecting...';
+                        statusBadge.className = 'status-badge loading';
+                        spinner.style.display = 'block';
+                    }
+                };
+
+                // Request stream from go2rtc
+                const response = await fetch(
+                    `http://${config.host}:${config.port}/api/webrtc?src=${config.name}`,
+                    {
+                        method: 'POST',
+                        body: JSON.stringify(await pc.createOffer())
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const answer = await response.json();
+                await pc.setRemoteDescription(new RTCSessionDescription(answer));
+
+                console.log(`✓ ${config.name}: WebRTC initialized`);
+            } catch (error) {
+                console.error(`✗ ${config.name}: ${error.message}`);
+                statusBadge.textContent = 'Connection Failed';
+                statusBadge.className = 'status-badge offline';
+                spinner.style.display = 'none';
+                video.style.display = 'none';
+            }
+        }
+
+        // Control functions
         function pauseAll() {
             document.querySelectorAll('video').forEach(video => {
                 video.pause();
@@ -300,24 +442,26 @@
             console.log('All streams resumed');
         }
 
-        // Health check: verify streams are available
+        // Initialize all streams on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🎥 Estate Cameras Dashboard Initializing...');
+            streams.forEach(config => {
+                setTimeout(() => initializeStream(config), 100);
+            });
+        });
+
+        // Health check
         async function checkStreamHealth() {
             try {
-                const locomotiveResp = await fetch('http://100.106.125.87:1984/api/streams').catch(() => null);
-                const loomResp = await fetch('http://loom.tail4b1127.ts.net:1984/api/streams').catch(() => null);
-
-                if (locomotiveResp?.ok) console.log('✓ Locomotive: Online');
-                else console.warn('✗ Locomotive: Unreachable');
-
-                if (loomResp?.ok) console.log('✓ Loom: Online');
-                else console.warn('✗ Loom: Unreachable');
+                const resp = await fetch('http://locomotive.tail4b1127.ts.net:1984/api/streams');
+                if (resp.ok) {
+                    console.log('✓ Locomotive: Online');
+                }
             } catch (e) {
-                console.warn('Health check failed:', e);
+                console.warn('✗ Health check failed');
             }
         }
 
-        // Check health on load and every 60 seconds
-        document.addEventListener('DOMContentLoaded', checkStreamHealth);
         setInterval(checkStreamHealth, 60000);
     </script>
 </body>

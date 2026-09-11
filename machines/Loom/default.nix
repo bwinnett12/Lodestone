@@ -97,6 +97,7 @@
     kernelModules = [ "ntfs3" "ext4" "btrfs" "vfat" "exfat" ];
     kernelParams = [ "pcie_ports=compat" ];
     binfmt.emulatedSystems = [ "aarch64-linux" ];
+    supportedFilesystems = [ "ntfs" ];
     # kernelPackages = lib.mkForce pkgs.linuxPackages_6_12;
     # kernelPackages = pkgs.linux-surface;
     # kernelPackages = pkgs.linuxPackages_6_12;

@@ -22,11 +22,12 @@ let
   # Drives where any member of `storage` group gets access at the mount root
   shared = [ 
     "Hydrangea"
-    "Orchid"
-    "Tulip"
-    "Yarrow"
     "Lilac"
     "Nettle"
+    "Orchid"
+    "Snapdragon"
+    "Tulip"
+    "Yarrow"
     ];
 
   hotplugDrives = lib.filterAttrs (_: d: d.mode == "hotplug") known;

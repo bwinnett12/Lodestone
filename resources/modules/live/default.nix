@@ -47,4 +47,10 @@ in
       error_log /var/log/nginx/live_platatoo_error.log;
     '';
   };
+
+
+  environment.systemPackages = with pkgs; [ 
+    v4l-utils
+  ];
+  
 }

@@ -20,7 +20,11 @@
           # Track 2: Use the native go2rtc ALSA hook to pull the USB mic directly
           # This automatically crawls the system for the Snowball and transcodes it to Opus
           "alsa:default#audio=opus"
-        ];
+        ]; 
+          # Add DSLR stream
+          dslr_stream = [
+            "ffmpeg:device?video=/dev/video1#video=h264"
+          ];
       };
     };
   };

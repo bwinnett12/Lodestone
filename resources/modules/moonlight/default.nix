@@ -24,6 +24,7 @@
 
   environment.systemPackages = with pkgs; [
     gnome-randr
+    ffmpeg
   ];
 
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 47984 47989 48010 47990 ];

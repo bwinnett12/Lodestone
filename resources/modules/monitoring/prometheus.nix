@@ -43,6 +43,4 @@
     ];
   };
   boot.kernelModules = lib.mkIf pkgs.stdenv.hostPlatform.isx86_64 [ "coretemp" ];
-
-
 }

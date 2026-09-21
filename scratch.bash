@@ -122,3 +122,16 @@ curl -v -X POST http://ai.platatoo.com/v1/chat/completions \
       ],
       "tool_choice": "auto"
     }'
+
+
+
+
+
+# List all video devices with details
+v4l2-ctl --list-devices
+
+# Try probing the HDMI device directly
+ffprobe -hide_banner /dev/video1 2>&1 | head -20
+
+# Check device formats and capabilities
+v4l2-ctl -d /dev/video1 --list-formats

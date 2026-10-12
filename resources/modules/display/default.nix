@@ -53,6 +53,7 @@ in {
         gnome-characters
         totem
       ];
+      environment.systemPackages = [ pkgs.nautilus ];
     }
   ]))
 

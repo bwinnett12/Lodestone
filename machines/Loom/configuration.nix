@@ -7,6 +7,11 @@
     useDHCP = false;
   };
 
+  networking.networkmanager.wifi.powersave = false;
+  boot.extraModprobeConfig = ''
+    options mwifiex disable_auto_ds=1
+  '';
+
   ## ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ -!!- ~~~~~ ##
   #### Nvidia settings
   hardware = {
@@ -42,7 +47,7 @@
     };
   };
 
-  powerManagement.cpuFreqGovernor = "powersave";  # or "schedutil"
+  # powerManagement.cpuFreqGovernor = "powersave";  # or "schedutil"
 
   # TLP or auto-cpufreq for more nuanced control
   fonts.fontconfig.subpixel.rgba = "none";  # for HiDPI, subpixel is counterproductive

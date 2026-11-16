@@ -53,7 +53,7 @@
   };
 
   services.calibre-web = {  # TODO - Add this to a user configuration file
-    enable = true;
+    enable = false;
     options.calibreLibrary = "/storage/Orchard/51_Library/51-4_Books";
   };
 

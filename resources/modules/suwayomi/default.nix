@@ -27,8 +27,8 @@
   };
  };
 
-   # TODO - Bake this into the service
-   environment.systemPackages = with pkgs; [
-      suwayomi-server
-    ];
+  # TODO - Bake this into the service
+  environment.systemPackages = with pkgs; [
+    suwayomi-server
+  ];
 }

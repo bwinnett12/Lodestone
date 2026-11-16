@@ -5,7 +5,6 @@
 {
   # nginx reverse proxy
   services = {
-
     anki-sync-server = {
       enable = true;
       address = "127.0.0.1";
@@ -29,10 +28,7 @@
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
               proxy_set_header X-Forwarded-Proto $scheme;
             '';
-        };
-      };
-    };
-  };
+        }; }; }; };
 
   fileSystems."/storage/shortstack/anki" = {
     device = "/var/lib/anki-sync-server";
@@ -44,13 +40,12 @@
 
   ## Setup Anki user
   users = {
+    groups.anki = {};
+    
     users.anki = {
       isSystemUser = true;
       group = "anki";
       createHome = true;
       home = "/var/lib/anki";
-    };
-    groups.anki = {};
-  };
-
+    }; };
 }

@@ -20,7 +20,7 @@
     self.nixosModules.grafana
     # self.nixosModules.homepage <- #TODO - Remove the module itself or repurpose into extending mailroom
     self.nixosModules.jellyfin
-    self.nixosModules.moonlight
+    # self.nixosModules.moonlight
     self.nixosModules.komga
     self.nixosModules.localai
     # self.nixosModules.plan9

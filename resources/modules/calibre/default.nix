@@ -8,15 +8,15 @@
 
   # Only create the calibre user/group where calibre-server actually runs
   users = lib.mkIf config.services.calibre-server.enable {
+
+    groups.calibre = {};
     users.calibre = {
       isSystemUser = true;
       group = "calibre";
       extraGroups = [ "storage" ];
       createHome = true;
       home = "/var/lib/calibre";
-    };
-    groups.calibre = {};
-  };
+  }; };
 }
 
 

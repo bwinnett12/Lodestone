@@ -1,5 +1,6 @@
 # resources/modules/go2rtc/default.nix
 #### WebRTC
+## #TODO Should this be part of a greater monitoring / live section?
 { config, pkgs, inputs, ... }:
 
 {
@@ -13,6 +14,8 @@
       api.cors = "*";
 
       streams = {
+
+        ## #TODO Grab the device by the ID (Some intrinsic part to the device)
         locomotive_stream = [
           # Track 1: The Webcam video stream handled cleanly
           "ffmpeg:device?video=/dev/video0#video=h264"
@@ -21,10 +24,12 @@
           # This automatically crawls the system for the Snowball and transcodes it to Opus
           "alsa:default#audio=opus"
         ]; 
-          # Add DSLR stream
-          dslr_stream = [
-            "ffmpeg:device?video=/dev/video0&input_format=mjpeg&video_size=1920x1080&framerate=50#video=h264"
-          ];
+
+        # DSLR Camera stream
+        ## #TODO Grab the device by the ID (Some intrinsic part to the device)
+        dslr_stream = [
+          "ffmpeg:device?video=/dev/video0&input_format=mjpeg&video_size=1920x1080&framerate=50#video=h264"
+        ];
       };
     };
   };

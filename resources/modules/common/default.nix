@@ -19,12 +19,8 @@
     self.inputs.home-manager.nixosModules.home-manager
     self.inputs.sops-nix.nixosModules.sops
 
-
     self.nixosModules.calibre
-
   ];
-
-  
 
   i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "America/Anchorage";
@@ -67,5 +63,6 @@
     usbutils
 
     smartmontools
+    psmisc
   ];
 }

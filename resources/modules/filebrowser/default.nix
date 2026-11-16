@@ -23,6 +23,5 @@
       database = "/var/lib/filebrowser/database.db";
       root = "/storage/Orchid/tmep"; # Directly open to your storage
       log = "stdout";
-    };
-  };
+  }; };
 }

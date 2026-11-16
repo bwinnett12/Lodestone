@@ -46,7 +46,7 @@
     }; };
 
   services.u9fs-client = { # TODO - Add this to a user configuration file
-    enable      = true;
+    enable      = false;
     serverIP    = "100.106.125.87"; # ipv4 of Locomotive
     mountPoint  = "/storage/Orchard";
     port        = 4500;
